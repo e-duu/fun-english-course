@@ -7,7 +7,7 @@
   @include('includes.style')
   <title>@yield('title')</title>
 </head>
-<body class="overflow-x-hidden">
+<body class="overflow-x-hidden bg-[#fff563]">
   {{-- Navbar --}}
   @include('includes.navbar')
   
