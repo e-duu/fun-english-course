@@ -21,21 +21,21 @@ class Payment extends Model
 
     public function users()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function programs()
     {
-        return $this->belongsTo(Program::class);
+        return $this->belongsTo(Program::class, 'program_id', 'id');
     }
 
     public function levels()
     {
-        return $this->belongsTo(Level::class);
+        return $this->belongsTo(Level::class, 'level_id', 'id');
     }
 
     public function recipients()
     {
-        return $this->belongsTo(Recipient::class);
+        return $this->belongsTo(Recipient::class, 'recipient_id', 'id');
     }
 }

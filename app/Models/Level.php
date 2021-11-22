@@ -13,11 +13,17 @@ class Level extends Model
         'name',
         'program_id',
     ];
+    
+    public function payments()
+    {
+        return $this->hasMany(Payment::class, 'id', 'level_id');
+    }
 
     public function lessons()
     {
         return $this->hasMany(Lesson::class);
     }
+
 
     public function programs()
     {

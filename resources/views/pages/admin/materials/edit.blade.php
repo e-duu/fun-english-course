@@ -16,7 +16,7 @@
 
     <label class="block mt-4 text-sm">
       <span class="text-gray-700 dark:text-gray-400">Content</span>
-      <textarea id="editor" name="content" value="{{ $data->content }}"></textarea>
+      <textarea id="editor" name="content" value="{{ $data->content }}">{{ $data->content }}</textarea>
     </label>
 
     <label class="block text-sm mt-4">

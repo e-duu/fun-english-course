@@ -38,7 +38,7 @@ class RecipientController extends Controller
     {
         $data = $request->all();
         Recipient::create($data);
-        return back()->route('recipient.all');
+        return redirect()->route('recipient.all');
     }
 
     /**
@@ -76,7 +76,7 @@ class RecipientController extends Controller
         $data = $request->all();
         $item = Recipient::findorfail($id);
         $item->update($data);
-        return back()->route('recipient.all');
+        return redirect()->route('recipient.all');
     }
 
     /**

@@ -6,77 +6,68 @@
   Create Payments
 @endsection
 @section('content')
-  <form action="#" method="POST" class="px-4 py-3 bg-white rounded-lg shadow-md dark:bg-gray-800">
+  <form action="{{ route('payment.store') }}" method="POST" class="px-4 py-3 bg-white rounded-lg shadow-md dark:bg-gray-800" enctype="multipart/form-data">
+    @csrf
 
     <label class="block mt-4 text-sm">
       <span class="text-gray-700 dark:text-gray-400">
         Student Name
       </span>
       <select name="user_id" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
-        <option value="1" >Ramadhan Tri</option>
-        <option value="1" >Septian</option>
-        <option value="1" >Faiz Rizky</option>
-        <option value="1" >Mujiono</option>
+        @foreach ($users as $user)
+          <option value="{{ $user->id }}" >{{ $user->name }}</option>
+        @endforeach
       </select>
     </label>
+
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mt-5 mx-7">
+      <div class="grid grid-cols-1">
+        <label class="block mt-4 text-sm">
+          <span class="text-gray-700 dark:text-gray-400">
+            Program
+          </span>
+          <select name="program_id" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
+            @foreach ($programs as $program)
+              <option value="{{ $program->id }}" >{{ $program->name }}</option>
+            @endforeach
+          </select>
+        </label>
+      </div>
+
+      <div class="grid grid-cols-1">
+        <label class="block mt-4 text-sm">
+          <span class="text-gray-700 dark:text-gray-400">
+            Level
+          </span>
+          <select name="level_id" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
+            @foreach ($levels as $level)
+              <option value="{{ $level->id }}" >{{ $level->name }}</option>
+            @endforeach
+          </select>
+        </label>
+      </div>
+    </div>
     
-    <label class="block mt-4 text-sm">
-      <span class="text-gray-700 dark:text-gray-400">
-        Program
-      </span>
-      <select name="program_id" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
-        <option value="1" >English For Children</option>
-        <option value="1" >English For Teens</option>
-        <option value="1" >English For Business</option>
-        <option value="1" >English Conversation</option>
-        <option value="1" >English Test Preparation</option>
-        <option value="1" >Text / Exams</option>
-      </select>
-    </label>
-
-    <label class="block mt-4 text-sm">
-      <span class="text-gray-700 dark:text-gray-400">
-        Level
-      </span>
-      <select name="level_id" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
-        <option value="1" >EFC Starter</option>
-        <option value="1" >EFC Beginner I - Level 1</option>
-        <option value="1" >EFC Beginner I - Level 2</option>
-        <option value="1" >EFC Beginner I - Level 3</option>
-        <option value="1" >EFC Elementary I - Level 1</option>
-        <option value="1" >EFC Elementary I - Level 2</option>
-        <option value="1" >EFC Elementary I - Level 3</option>
-        <option value="1" >EFC Elementary II - Level 1</option>
-        <option value="1" >EFC Elementary II - Level 2</option>
-        <option value="1" >EFC Elementary II - Level 3</option>
-      </select>
-    </label>
-
     <label class="block mt-4 text-sm">
       <span class="text-gray-700 dark:text-gray-400">
         Recipient Bank
       </span>
       <select name="recipient_id" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
-        <option value="1" >BANK RAKYAT INDONESIA - 002</option>
-        <option value="1" >BANK MANDIRI - 008</option>
-        <option value="1" >BANK NEGARA INDONESIA (BNI46) - 008</option>
-        <option value="1" >BANK TABUNGAN NEGARA - 200</option>
-        <option value="1" >BPD KALIMANTAN TENGAH -	125</option>
-        <option value="1" >BPD SULAWESI SELATAN DAN SULAWESI BARAT -	126</option>
-        <option value="1" >BPD SULAWESI UTARA DAN  GORONTALO -	127</option>
-        <option value="1" >BBANK NTB SYARIAH	- 128</option>
-        <option value="1" >BPD MALUKU DAN MALUKU UTARA -	131</option>
+        @foreach ($recipients as $recipient)
+          <option value="{{ $recipient->id }}" >{{ $recipient->name }}</option>
+        @endforeach
       </select>
     </label>
 
     <label class="block text-sm" style="margin-top: 20px">
       <span class="text-gray-700 dark:text-gray-400">Amount</span>
-      <input type="text" name="amount" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" placeholder="Jane Doe"/>
+      <input type="number" name="amount" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" placeholder="3"/>
     </label>
 
     <label class="block text-sm" style="margin-top: 20px">
       <span class="text-gray-700 dark:text-gray-400">Payment Receipt</span>
-      <input type="file" name="evidence" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" placeholder="Jane Doe"/>
+      <input type="file" name="evidence" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"/>
     </label>
 
     <label class="block mt-4 text-sm">

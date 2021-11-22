@@ -85,6 +85,7 @@ Route::prefix('material')->group(function () {
     Route::get('/all', [MaterialController::class, 'index'])->name('material.all');
     Route::get('/create/{id}', [MaterialController::class, 'create'])->name('material.create');
     Route::post('/create', [MaterialController::class, 'store'])->name('material.store');
+    Route::get('/show/{id}', [MaterialController::class, 'show'])->name('material.show');
     Route::get('/edit/{id}', [MaterialController::class, 'edit'])->name('material.edit');
     Route::post('/edit/{id}', [MaterialController::class, 'update'])->name('material.update');
     Route::delete('/edit/{id}', [MaterialController::class, 'destroy'])->name('material.delete');
@@ -94,6 +95,7 @@ Route::prefix('payment')->group(function () {
     Route::get('/all', [PaymentController::class, 'index'])->name('payment.all');
     Route::get('/create', [PaymentController::class, 'create'])->name('payment.create');
     Route::post('/create', [PaymentController::class, 'store'])->name('payment.store');
+    Route::get('/show/{id}', [PaymentController::class, 'show'])->name('payment.show');
     Route::get('/edit/{id}', [PaymentController::class, 'edit'])->name('payment.edit');
     Route::post('/edit/{id}', [PaymentController::class, 'update'])->name('payment.update');
     Route::delete('/edit/{id}', [PaymentController::class, 'destroy'])->name('payment.delete');

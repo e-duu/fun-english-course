@@ -21,110 +21,47 @@
 	  </thead>
 	  <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-darker">
 
-		<tr class="text-gray-700 dark:text-gray-400">
-			<td class="px-4 py-3 text-sm">
-				Desy Andriani
-			</td>
-		  <td class="px-4 py-3 text-sm">
-				English For Children
-		  </td>
-		  <td class="px-4 py-3 text-sm">
-				EFC Beginner I - Level 1
-		  </td>
-		  <td class="px-4 py-3 text-sm">
-				Bank Rakyat Indonesia ( BRI )
-		  </td>
-		  <td class="px-4 py-3 text-sm">
-				3
-		  </td>
-		  <td class="px-4 py-3">
-			<div class="flex items-center space-x-4 text-sm">
-			  <a href="{{-- route('recipient.edit', $item->id) --}}" class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
-				<i class=" fas fa-eye"></i>
-			  </a>
-			  <a href="{{-- route('recipient.edit', $item->id) --}}" class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
-				<i class=" fas fa-edit"></i>
-			  </a>
-			  <form action="{{-- route('user.delete', $item->id) --}}" method="POST" class="d-inline">
-				@csrf
-				@method('DELETE')
-				<button class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
-				  <i class="fas fa-trash"></i>
-				</button>
-			  </form>
-			</div>
-		  </td>
-		</tr>
-		
-		<tr class="text-gray-700 dark:text-gray-400">
-			<td class="px-4 py-3 text-sm">
-				Desy Andriani
-			</td>
-		  <td class="px-4 py-3 text-sm">
-				English For Children
-		  </td>
-		  <td class="px-4 py-3 text-sm">
-				EFC Beginner I - Level 1
-		  </td>
-		  <td class="px-4 py-3 text-sm">
-				Bank Rakyat Indonesia ( BRI )
-		  </td>
-		  <td class="px-4 py-3 text-sm">
-				3
-		  </td>
-		  <td class="px-4 py-3">
-			<div class="flex items-center space-x-4 text-sm">
-			  <a href="{{-- route('recipient.edit', $item->id) --}}" class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
-				<i class=" fas fa-eye"></i>
-			  </a>
-			  <a href="{{-- route('recipient.edit', $item->id) --}}" class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
-				<i class=" fas fa-edit"></i>
-			  </a>
-			  <form action="{{-- route('user.delete', $item->id) --}}" method="POST" class="d-inline">
-				@csrf
-				@method('DELETE')
-				<button class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
-				  <i class="fas fa-trash"></i>
-				</button>
-			  </form>
-			</div>
-		  </td>
-		</tr>
-
-		<tr class="text-gray-700 dark:text-gray-400">
-			<td class="px-4 py-3 text-sm">
-				Desy Andriani
-			</td>
-		  <td class="px-4 py-3 text-sm">
-				English For Children
-		  </td>
-		  <td class="px-4 py-3 text-sm">
-				EFC Beginner I - Level 1
-		  </td>
-		  <td class="px-4 py-3 text-sm">
-				Bank Rakyat Indonesia ( BRI )
-		  </td>
-		  <td class="px-4 py-3 text-sm">
-				3
-		  </td>
-		  <td class="px-4 py-3">
-			<div class="flex items-center space-x-4 text-sm">
-			  <a href="{{-- route('recipient.edit', $item->id) --}}" class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
-				<i class=" fas fa-eye"></i>
-			  </a>
-			  <a href="{{-- route('recipient.edit', $item->id) --}}" class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
-				<i class=" fas fa-edit"></i>
-			  </a>
-			  <form action="{{-- route('user.delete', $item->id) --}}" method="POST" class="d-inline">
-				@csrf
-				@method('DELETE')
-				<button class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
-				  <i class="fas fa-trash"></i>
-				</button>
-			  </form>
-			</div>
-		  </td>
-		</tr>
+			@forelse ($data as $item)
+				<tr class="text-gray-700 dark:text-gray-400">
+					<td class="px-4 py-3 text-sm">
+						{{ $item->users->name }}
+					</td>
+					<td class="px-4 py-3 text-sm">
+						{{ $item->programs->name }}
+					</td>
+					<td class="px-4 py-3 text-sm">
+						{{ $item->levels->name }}
+					</td>
+					<td class="px-4 py-3 text-sm">
+						{{ $item->recipients->name }}
+					</td>
+					<td class="px-4 py-3 text-sm">
+						{{ $item->amount }}
+					</td>
+					<td class="px-4 py-3">
+						<div class="flex items-center space-x-4 text-sm">
+							<a href="{{ route('payment.show', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+								<i class=" fas fa-eye"></i>
+								<p>Detail</p>
+							</a>
+							<a href="{{ route('payment.edit', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+								<i class=" fas fa-edit"></i>
+								<p>Edit</p>
+							</a>
+							<form action="{{ route('payment.delete', $item->id) }}" method="POST" class="d-inline">
+								@csrf
+								@method('DELETE')
+								<button class="flex-col px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+									<i class="fas fa-trash"></i>
+									<p>Delete</p>
+								</button>
+							</form>
+						</div>
+					</td>
+				</tr>
+			@empty
+					
+			@endforelse
 		
 	  </tbody>
 	</table>

@@ -16,7 +16,6 @@
         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-100 bg-gray-50 dark:text-gray-100 dark:bg-darker">
             <th class="px-4 py-3">Thumbnail</th>
             <th class="px-4 py-3">Material Name</th>
-            <th class="px-4 py-3">Content</th>
             <th class="px-4 py-3">Actions</th>
         </tr>
       </thead>
@@ -30,19 +29,22 @@
             <td class="px-4 py-3 text-sm">
               {{ $item->title }}
             </td>
-            <td class="px-4 py-3 text-sm">
-                {{ $item->content }}
-            </td>
             <td class="px-4 py-3">
               <div class="flex items-center space-x-4 text-sm">
-                <a href="{{ route('material.edit', $item->id) }}" class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                <a href="{{ route('material.show', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                  <i class=" fas fa-eye"></i>
+                  <p>Detail</p>
+                </a>
+                <a href="{{ route('material.edit', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
                   <i class=" fas fa-edit"></i>
+                  <p>Edit</p>
                 </a>
                 <form action="{{ route('material.delete', $item->id) }}" method="POST" class="d-inline">
                   @csrf
                   @method('DELETE')
-                  <button class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                  <button class="flex-col px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
                     <i class="fas fa-trash"></i>
+                    <p>Delete</p>
                   </button>
                 </form>
               </div>

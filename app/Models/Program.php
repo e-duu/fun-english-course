@@ -15,7 +15,7 @@ class Program extends Model
 
     public function payments()
     {
-        return $this->hasMany(Payment::class);
+        return $this->hasMany(Payment::class, 'id', 'program_id');
     }
 
     public function levels()

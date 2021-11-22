@@ -43,6 +43,18 @@ class MaterialController extends Controller
         return redirect()->route('lesson.show', $request->lesson_id);
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $data = Material::findorfail($id);
+        return view('pages.admin.materials.detail', compact('data'));
+    }
+
 
     /**
      * Show the form for editing the specified resource.

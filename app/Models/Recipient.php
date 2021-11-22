@@ -16,6 +16,6 @@ class Recipient extends Model
 
     public function payments()
     {
-        return $this->hasMany(Payment::class);
+        return $this->hasMany(Payment::class, 'id', 'recipient_id');
     }
 }
