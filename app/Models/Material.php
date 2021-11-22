@@ -10,7 +10,9 @@ class Material extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'title',
+        'content',
+        'photo',
         'lesson_id',
     ];
 

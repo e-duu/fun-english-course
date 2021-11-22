@@ -3,11 +3,11 @@
   Fun English Course | Lesson Detail
 @endsection
 @section('sub-title')
-  Detail Lessons - Lesson 1
+  Detail Lessons - {{ $data->name }}
 @endsection
 @section('content')
 
-<a href="{{ route('lesson.create') }}" style="background-color: blueviolet" class="px-5 py-2 rounded-md font-semibold text-white">Add Material</a>
+<a href="{{ route('material.create', $data->id) }}" style="background-color: blueviolet" class="px-5 py-2 rounded-md font-semibold text-white">Add Material</a>
 
 <div class="w-full overflow-hidden rounded-lg shadow-xs mt-4">
   <div class="w-full overflow-x-auto">
@@ -22,23 +22,23 @@
       </thead>
       <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-darker">
 
-        @forelse ($collection as $item)
+        @forelse ($data->materials as $item)
           <tr class="text-gray-700 dark:text-gray-400">
             <td class="px-4 py-3">
-                <img src="{{ asset('https://9kyhf3crb4ah2d0m726aoc6x-wpengine.netdna-ssl.com/wp-content/uploads/2020/03/block_webinar_recordedsession_livestream_centerv4_4x.png') }}" class="rounded-full shadow-md" style="width: 50px;" alt="material photo / thumbnail">
+                <img src="{{ asset('storage/' . $item->photo) }}" class="rounded-full shadow-md" style="width: 50px;" alt="material photo">
             </td>
             <td class="px-4 py-3 text-sm">
-              Greetings I
+              {{ $item->title }}
             </td>
             <td class="px-4 py-3 text-sm">
-                https://www.youtube.com/embed/dTwj7PhpY9M
+                {{ $item->content }}
             </td>
             <td class="px-4 py-3">
               <div class="flex items-center space-x-4 text-sm">
-                <a href="{{-- route('recipient.edit', $item->id) --}}" class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                <a href="{{ route('material.edit', $item->id) }}" class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
                   <i class=" fas fa-edit"></i>
                 </a>
-                <form action="{{-- route('user.delete', $item->id) --}}" method="POST" class="d-inline">
+                <form action="{{ route('material.delete', $item->id) }}" method="POST" class="d-inline">
                   @csrf
                   @method('DELETE')
                   <button class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
@@ -49,7 +49,13 @@
             </td>
           </tr>
         @empty
-            
+          <tr>
+            <td colspan="4" class="text-center text-gray-500 px-4 py-3">
+              <p>
+                Data is empty..
+              </p>
+            </td>
+          </tr>
         @endforelse
 
       </tbody>

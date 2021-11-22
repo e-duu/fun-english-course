@@ -17,7 +17,7 @@ class CreateMaterialsTable extends Migration
             $table->id();
             $table->string('title');
             $table->text('content');
-            $table->string('photo');
+            $table->text('photo');
             $table->integer('lesson_id');
             $table->timestamps();
         });

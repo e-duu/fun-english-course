@@ -1,7 +1,9 @@
 <header class="bg-[#fff563]">
   <div class="container-fluid px-20">
     <div class="flex justify-between items-center py-5">
-      <img src="{{ asset('/images/logo.png') }}" class="w-80" alt="fun english course logo">
+      <a href="https://funenglishcourse.com/" target="_blank">
+        <img src="{{ asset('/images/logo.png') }}" class="w-80" alt="fun english course logo">
+      </a>
       <img src="{{ asset('/images/edge-logo.png') }}" class="w-28" alt="edge logo">
     </div>
   </div>

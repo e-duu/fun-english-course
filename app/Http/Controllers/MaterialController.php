@@ -37,7 +37,8 @@ class MaterialController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        $data = request()->all();
+        $data['photo'] = $request->file('photo')->store('assets/materials', 'public');
         Material::create($data);
         return redirect()->route('lesson.show', $request->lesson_id);
     }
@@ -65,7 +66,9 @@ class MaterialController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        Material::find($id)->update($data);
+        $data['photo'] = $request->file('photo')->store('assets/materials', 'public');
+        $item = Material::findOrFail($id);
+        $item->update($data);
 
         return redirect()->route('lesson.show', $request->lesson_id);
     }
@@ -74,12 +77,20 @@ class MaterialController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\
      */
     public function destroy($id)
     {
-        $data = Material::find($id);
+        $data = Material::findorfail($id);
         $data->delete();
+        $this->removeImage($data->image);
         return back();
+    }
+
+    public function removeImage($image)
+    {
+        if (file_exists($image)) {
+            unlink('storage/' . $image);
+        }
     }
 }
