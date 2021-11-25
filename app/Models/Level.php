@@ -24,7 +24,6 @@ class Level extends Model
         return $this->hasMany(Lesson::class);
     }
 
-
     public function programs()
     {
         return $this->belongsTo(Program::class);

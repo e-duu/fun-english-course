@@ -59,9 +59,9 @@ class PaymentController extends Controller
      */
     public function show($id)
     {
-        $data = Payment::finorfail($id);
+        $data = Payment::findorfail($id);
 
-        return view('pages.admin.payments.create', compact('data'));
+        return view('pages.admin.payments.detail', compact('data'));
     }
 
     /**

@@ -19,19 +19,20 @@
           <li class="splide__slide flex justify-center items-center relative">
             <img class="w-full h-screen" src="{{ asset('/images/sliderhome.jpg') }}">
             <div class="absolute px-4 py-6 space-y-6 bg-white rounded-md dark:bg-darker">
-              <a href="{{ url('/') }}" class="flex justify-center tracking-wider">
+              <a href="https://funenglishcourse.com/" target="_blank" class="flex justify-center tracking-wider">
                 <img src="{{ asset('/images/logo.png') }}" style="width: 250px;" alt="fun english course logo">
               </a>
               <h1 class="text-2xl font-bold text-center" style="color: rebeccapurple">Login</h1>
-              <form action="#" class="space-y-6">
-                <input class="w-full px-4 py-2 border rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring focus:ring-primary-100 dark:focus:ring-primary-darker" type="text" name="username" placeholder="Username"required />
+              <form action="{{ route('authenticate') }}" method="POST" class="space-y-6">
+                @csrf
+                @method('POST')
+                <input class="w-full px-4 py-2 border rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring focus:ring-primary-100 dark:focus:ring-primary-darker" type="email" name="email" id="email" placeholder="Email" required/>
         
-                <input class="w-full px-4 py-2 border rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring focus:ring-primary-100 dark:focus:ring-primary-darker" type="password" name="password" placeholder="Password" required/>
-                <div>
-                  <button type="submit" class="w-full px-4 py-2 font-medium text-center text-white transition-colors duration-200 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 dark:focus:ring-offset-darker" style="background-color: rebeccapurple">
-                    Login
-                  </button>
-                </div>
+                <input class="w-full px-4 py-2 border rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring focus:ring-primary-100 dark:focus:ring-primary-darker" type="password" name="password" id="password" placeholder="Password" required/>
+
+                <button type="submit" class="w-full px-4 py-2 font-medium text-center text-white transition-colors duration-200 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 dark:focus:ring-offset-darker" style="background-color: rebeccapurple">
+                  Login
+                </button>
               </form>
             </div>
           </li>
@@ -39,14 +40,16 @@
           <li class="splide__slide flex justify-center items-center relative">
             <img class="w-full h-screen" src="{{ asset('/images/sliderhome2.jpg') }}">
             <div class="absolute px-4 py-6 space-y-6 bg-white rounded-md dark:bg-darker">
-              <a href="{{ url('/') }}" class="flex justify-center tracking-wider">
+              <a href="https://funenglishcourse.com/" target="_blank" class="flex justify-center tracking-wider">
                 <img src="{{ asset('/images/logo.png') }}" style="width: 250px;" alt="fun english course logo">
               </a>
               <h1 class="text-2xl font-bold text-center" style="color: rebeccapurple">Login</h1>
-              <form action="#" class="space-y-6">
-                <input class="w-full px-4 py-2 border rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring focus:ring-primary-100 dark:focus:ring-primary-darker" type="text" name="username" placeholder="Username"required />
+              <form action="{{ route('authenticate') }}" method="POST" class="space-y-6">
+                @csrf
+                @method('POST')
+                <input class="w-full px-4 py-2 border rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring focus:ring-primary-100 dark:focus:ring-primary-darker" type="email" name="email" id="email" placeholder="Email"required />
         
-                <input class="w-full px-4 py-2 border rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring focus:ring-primary-100 dark:focus:ring-primary-darker" type="password" name="password" placeholder="Password" required/>
+                <input class="w-full px-4 py-2 border rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring focus:ring-primary-100 dark:focus:ring-primary-darker" type="password" name="password" id="password" placeholder="Password" required/>
                 <div>
                   <button type="submit" class="w-full px-4 py-2 font-medium text-center text-white transition-colors duration-200 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 dark:focus:ring-offset-darker" style="background-color: rebeccapurple">
                     Login
@@ -55,7 +58,6 @@
               </form>
             </div>
           </li>
-          
         </ul>
       </div>
     </div>

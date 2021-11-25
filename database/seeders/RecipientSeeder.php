@@ -20,7 +20,7 @@ class RecipientSeeder extends Seeder
         $recipients = [
              [
             'name' => 'Bank Rakyat Indonesia (BRI)',
-            'code' => 002,
+            'code' => '002',
         ],
         [
             'name' => 'Bank Mandiri',

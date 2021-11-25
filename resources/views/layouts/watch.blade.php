@@ -10,13 +10,8 @@
   <title>@yield('title')</title>
 </head>
 <body class="overflow-x-hidden">
-  <div class="grid grid-cols-12 gap-16 2xl:gap-28">
-    <div class="col-span-3">
-      {{-- Sidebar --}}
-      @include('includes.sidebar')
-    </div>
 
-    <div class="col-span-9">
+    <div>
       {{-- Page Content --}}
       @yield('content')
     </div>

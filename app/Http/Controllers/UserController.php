@@ -50,7 +50,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = User::findorfail($id);
+        return view('pages.admin.users.detail', compact('data'));
     }
 
     /**

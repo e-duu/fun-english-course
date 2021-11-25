@@ -4,14 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Lesson;
 use App\Models\Material;
-use Illuminate\Http\Request;
 
 class WatchController extends Controller
 {
-    public function index()
+  /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function index($lessonId, $materialId)
     {
-        $lessons = Lesson::all();
-        $materials = Material::all();
-        return view('pages.watch');
+      $materials = Material::where('lesson_id', $lessonId)->find($materialId);
+      $lessons = Lesson::find($lessonId);
+      return view('pages.watch', compact('materials', 'lessons'));
     }
+
 }

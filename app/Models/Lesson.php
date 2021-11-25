@@ -23,4 +23,9 @@ class Lesson extends Model
     {
         return $this->hasMany(Material::class);
     }
+
+    public function material_details()
+    {
+        return $this->hasMany(Material::class, 'id', 'lesson_id');
+    }
 }

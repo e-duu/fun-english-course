@@ -8,56 +8,54 @@
       <div class="bg-blue-600 rounded-t-lg py-6 mb-5">
         <h1 class="text-white text-center font-bold text-2xl">Payment Confirmation</h1>
       </div>
+
+      <form action="{{ route('payment.store') }}" method="POST" enctype="multipart/form-data">
+      @csrf
       
       <div class="grid grid-cols-1 mt-5 mx-7">
         <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Student's Name</label>
-        <input name="name" class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" type="lock" placeholder="Student's Name" />
+        <select name="user_id" class="py-2 px-3 rounded-lg border-2 bg-white border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
+          <option selected>-- choose student --</option>
+          @foreach ($users as $user)
+            <option value="{{ $user->id }}" >{{ $user->name }}</option>
+          @endforeach
+        </select>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7">
         <div class="grid grid-cols-1">
           <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Student's Program</label>
-          <select class="py-2 px-3 rounded-lg border-2 bg-white border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
-            <option selected>-- choose program --</option>
-            <option>English For Childrens</option>
-            <option>English For Teens (Adults)</option>
-            <option>English For Business</option>
-            <option>English Conversations</option>
-            <option>English Test Preparations</option>
-            <option>Test / Exams</option>
+          <select name="program_id" class="py-2 px-3 rounded-lg border-2 bg-white border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
+            @foreach ($programs as $program)
+              <option value="{{ $program->id }}" >{{ $program->name }}</option>
+            @endforeach
           </select>
         </div>
 
         <div class="grid grid-cols-1">
           <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Student's Level</label>
-          <select class="py-2 px-3 rounded-lg border-2 bg-white border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
+          <select name="level_id" class="py-2 px-3 rounded-lg border-2 bg-white border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
             <option selected>-- choose level --</option>
-            <option>EFC Starter</option>
-            <option>EFC Beginner I - Level 1</option>
-            <option>EFC Beginner I - Level 2</option>
-            <option>EFC Beginner I - Level 3</option>
-            <option>EFC Elementary I - Level 1</option>
-            <option>EFC Elementary I - Level 2</option>
-            <option>EFC Elementary I - Level 3</option>
-            <option>EFC Elementary II - Level 1</option>
-            <option>EFC Elementary II - Level 2</option>
-            <option>EFC Elementary II - Level 3</option>
+            @foreach ($levels as $level)
+              <option value="{{ $level->id }}" >{{ $level->name }}</option>
+            @endforeach
           </select>
         </div>
       </div>
 
       <div class="grid grid-cols-1 mt-5 mx-7">
         <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Recipient Bank</label>
-        <select class="py-2 px-3 rounded-lg border-2 bg-white border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
+        <select name="recipient_id" class="py-2 px-3 rounded-lg border-2 bg-white border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
           <option selected>-- choose bank --</option>
-          <option>BANK RAKYAT INDONESIA - 002</option>
-          <option>BANK MANDIRI - 008</option>
+          @foreach ($recipients as $recipient)
+            <option value="{{ $recipient->id }}" >{{ $recipient->name }}</option>
+          @endforeach
         </select>
       </div>
 
       <div class="grid grid-cols-1 mt-5 mx-7">
         <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Amount</label>
-        <input name="amount" class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" type="text" placeholder="Amount" />
+        <input name="amount" class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" type="number" placeholder="Amount" />
       </div>
 
       <div class="grid grid-cols-1 mt-5 mx-7">
@@ -82,6 +80,8 @@
       <div class='flex items-center justify-center pt-10'>
         <button class='w-full bg-blue-600 hover:bg-blue-700 rounded-b-lg shadow-xl font-bold text-xl text-white transition-colors duration-100 py-5' type="submit">Submit</button>
       </div>
+
+    </form>
 
     </div>
   </div>

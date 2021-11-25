@@ -20,4 +20,9 @@ class Material extends Model
     {
         return $this->belongsTo(Lesson::class);
     }
+
+    public function lesson_details()
+    {
+        return $this->belongsTo(Lesson::class, 'lesson_id', 'id');
+    }
 }

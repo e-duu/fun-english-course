@@ -20,7 +20,7 @@
 	  </thead>
 	  <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-darker">
 
-			@foreach ($data as $item)
+			@forelse ($data as $item)
 				<tr class="text-gray-700 dark:text-gray-400">
 					<td class="px-4 py-3">
 						<img src="{{ asset('/storage/' . $item->photo) }}" style="width: 70px;" class="rounded-full" alt="profile photo">
@@ -55,7 +55,15 @@
 					</div>
 					</td>
 				</tr>
-			@endforeach
+			@empty
+				<tr>
+					<td colspan="5" class="text-center text-gray-500 px-4 py-3">
+						<p>
+							Data is empty..
+						</p>
+					</td>
+				</tr>
+			@endforelse
 
 	  </tbody>
 	</table>
