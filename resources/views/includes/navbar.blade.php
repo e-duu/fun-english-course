@@ -10,8 +10,8 @@
   <nav class="flex justify-end bg-[rgb(244,182,1)] py-7">
     <ul class="flex space-x-20 px-20">
       <li class="font-bold text-white text-xl"><a href="https://funenglishcourse.com/" target="_blank">HOME</a></li>
-      <li class="font-bold text-white text-xl"><a href="{{ url('/resource') }}">LEARNING RESOURCES</a></li>
-      <li class="font-bold text-white text-xl"><a href="{{ url('/payment') }}">PAYMENT</a></li>
+      <li class="font-bold text-white text-xl"><a href="{{ route('resource') }}">LEARNING RESOURCES</a></li>
+      <li class="font-bold text-white text-xl"><a href="{{ url('payment') }}">PAYMENT</a></li>
     </ul>
   </nav>
   <div class="py-2 bg-blue-600"></div>

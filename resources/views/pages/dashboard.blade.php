@@ -21,7 +21,7 @@
             >
               Payments
             </h6>
-            <span class="text-xl font-semibold">30,000</span>
+            <span class="text-xl font-semibold">{{ $paymentCount }}</span>
           </div>
           <div>
             <span>
@@ -51,7 +51,7 @@
             >
               Programs
             </h6>
-            <span class="text-xl font-semibold">20,516</span>
+            <span class="text-xl font-semibold">{{ $programCount }}</span>
           </div>
           <div>
             <span>
@@ -81,7 +81,7 @@
             >
               Students
             </h6>
-            <span class="text-xl font-semibold">45,021</span>
+            <span class="text-xl font-semibold">{{ $studentCount }}</span>
           </div>
           <div>
             <span>
@@ -111,7 +111,7 @@
             >
               Teachers
             </h6>
-            <span class="text-xl font-semibold">50,021</span>
+            <span class="text-xl font-semibold">{{ $teacherCount }}</span>
           </div>
           <div>
             <span>

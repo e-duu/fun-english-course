@@ -13,11 +13,12 @@ class WatchController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function index($lessonId, $materialId)
+    public function index($id)
     {
-      $materials = Material::where('lesson_id', $lessonId)->find($materialId);
-      $lessons = Lesson::find($lessonId);
-      return view('pages.watch', compact('materials', 'lessons'));
+      $material = Material::find($id);
+      $next = Lesson::where('level_id', $material->lesson->level_id)->orderBy('id', 'desc')->get();
+      $lessons = Lesson::where('level_id', $material->lesson->level_id)->get();
+      return view('pages.watch', compact('material', 'lessons', 'next'));
     }
 
 }

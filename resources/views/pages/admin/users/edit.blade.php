@@ -30,15 +30,15 @@
       </span>
       <div class="mt-2">
         <label class="inline-flex items-center text-gray-600 dark:text-gray-400">
-          <input type="radio" class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" name="role" value="admin" />
+          <input type="radio" class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" name="role" value="admin" {{ ($data->role == 'admin' ? 'checked' : '') }} />
           <span class="ml-2">Admin</span>
         </label>
         <label class="inline-flex items-center ml-6 text-gray-600 dark:text-gray-400">
-          <input type="radio" class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" name="role" value="teacher"/>
+          <input type="radio" class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" name="role" value="teacher" {{ ($data->role == 'teacher' ? 'checked' : '') }}/>
           <span class="ml-2">Teacher</span>
         </label>
         <label class="inline-flex items-center ml-6 text-gray-600 dark:text-gray-400">
-          <input type="radio" class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" name="role" value="student"/>
+          <input type="radio" class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" name="role" value="student" {{ ($data->role == 'student' ? 'checked' : '') }}/>
           <span class="ml-2">Student</span>
         </label>
       </div>

@@ -16,7 +16,7 @@ class Material extends Model
         'lesson_id',
     ];
 
-    public function lessons()
+    public function lesson()
     {
         return $this->belongsTo(Lesson::class);
     }

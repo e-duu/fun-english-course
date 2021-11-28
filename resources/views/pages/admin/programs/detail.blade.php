@@ -15,6 +15,7 @@ Detail Programs - {{ $data->name }}
       <thead>
         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-100 bg-gray-50 dark:text-gray-100 dark:bg-darker">
             <th class="px-4 py-3">Level Name</th>
+            <th class="px-4 py-3">Slug</th>
             <th class="px-4 py-3">Actions</th>
         </tr>
       </thead>
@@ -24,6 +25,9 @@ Detail Programs - {{ $data->name }}
           <tr class="text-gray-700 dark:text-gray-400">
             <td class="px-4 py-3 text-sm">
               {{ $item->name }}
+            </td>
+            <td class="px-4 py-3 text-sm">
+              {{ $item->slug }}
             </td>
             <td class="px-4 py-3">
               <div class="flex items-center space-x-4 text-sm">

@@ -11,9 +11,16 @@
 </head>
 <body class="overflow-x-hidden">
 
-    <div>
-      {{-- Page Content --}}
-      @yield('content')
+    <div class="grid grid-cols-4 ">
+      <div class="col-span-1">
+        {{-- Sidebar --}}
+        @include('includes.sidebar')
+      </div>
+
+      <div class="col-span-3">
+        {{-- Page Content --}}
+        @yield('content')
+      </div>
     </div>
 
   {{-- Script --}}

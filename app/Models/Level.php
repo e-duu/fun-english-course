@@ -11,6 +11,7 @@ class Level extends Model
 
     protected $fillable = [
         'name',
+        'slug',
         'program_id',
     ];
     
@@ -24,7 +25,7 @@ class Level extends Model
         return $this->hasMany(Lesson::class);
     }
 
-    public function programs()
+    public function program()
     {
         return $this->belongsTo(Program::class);
     }

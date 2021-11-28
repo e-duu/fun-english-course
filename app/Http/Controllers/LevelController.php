@@ -5,18 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Level;
 use App\Models\Program;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class LevelController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        // 
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -38,6 +30,7 @@ class LevelController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        $data['slug'] = Str::slug($request->name);
         Level::create($data);
         return redirect()->route('program.show', $request->program_id);
     }
@@ -76,6 +69,7 @@ class LevelController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
+        $data['slug'] = Str::slug($request->name);
         Level::find($id)->update($data);
 
         return redirect()->route('program.show', $request->program_id);

@@ -1,6 +1,6 @@
 @extends('layouts.dash')
 @section('title')
-  Fun English Course | Payment Create
+  Fun English Course | Payment Creates
 @endsection
 @section('sub-title')
   Create Payments

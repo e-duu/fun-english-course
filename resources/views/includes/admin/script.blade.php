@@ -2,15 +2,6 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/31.0.0/classic/ckeditor.js"></script>
 <script src="/js/script.js"></script>
 <script>
-  ClassicEditor
-    .create( document.querySelector( '#editor' ) )
-    .then( editor => {
-      console.log( editor );
-    } )
-    .catch( error => {
-      console.error( error );
-    } );
-    
   const setup = () => {
     const getTheme = () => {
       if (window.localStorage.getItem('dark')) {

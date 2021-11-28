@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
           'name' => 'Admin',
           'username' => 'admin',
           'email' => 'admin@admin',
-          'password' => 'admin123',
+          'password' => '1234',
           'role' => 'admin',
           'photo' => "{{ asset('/images/avatar-1.jpg') }}",
         ],

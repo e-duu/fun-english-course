@@ -13,13 +13,8 @@
       @csrf
       
       <div class="grid grid-cols-1 mt-5 mx-7">
-        <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Student's Name</label>
-        <select name="user_id" class="py-2 px-3 rounded-lg border-2 bg-white border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
-          <option selected>-- choose student --</option>
-          @foreach ($users as $user)
-            <option value="{{ $user->id }}" >{{ $user->name }}</option>
-          @endforeach
-        </select>
+        <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Student Name</label>
+        <input name="name" class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" type="text" value="{{ Auth::user()->name }}" disabled />
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7">

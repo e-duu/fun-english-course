@@ -14,7 +14,7 @@ class Lesson extends Model
         'level_id',
     ];
 
-    public function levels()
+    public function level()
     {
         return $this->belongsTo(Level::class);
     }

@@ -72,7 +72,7 @@ class PaymentController extends Controller
      */
     public function edit($id)
     {
-        $payments = Payment::finorfail($id);
+        $payments = Payment::findorfail($id);
         $users = User::all();
         $programs = Program::all();
         $levels = Level::all();

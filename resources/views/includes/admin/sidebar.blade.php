@@ -6,7 +6,7 @@
       <!-- Program -->
       <div>
         <!-- active & hover classes 'bg-primary-100 dark:bg-primary' -->
-        <a href="{{ url('/dashboard') }}" class="flex items-center p-2 text-gray-500 transition-colors rounded-md dark:text-light hover:bg-primary-100 dark:hover:bg-primary" role="button">
+        <a href="{{ route('dashboard') }}" class="flex items-center p-2 text-gray-500 transition-colors rounded-md dark:text-light hover:bg-primary-100 dark:hover:bg-primary" role="button">
           <span>
             <i class="fas fa-paw"></i>
           </span>

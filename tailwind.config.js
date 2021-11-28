@@ -94,5 +94,7 @@ module.exports = {
        overflow: ['hover'],
      },
    },
-   plugins: [],
+   plugins: [
+    require('@tailwindcss/typography'),
+   ],
   }
