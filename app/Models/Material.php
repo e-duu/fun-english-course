@@ -13,6 +13,7 @@ class Material extends Model
         'title',
         'content',
         'photo',
+        'is_accessible_by_student',
         'lesson_id',
     ];
 

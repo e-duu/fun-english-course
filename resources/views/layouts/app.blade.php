@@ -18,6 +18,8 @@
   @include('includes.footer')
 
   {{-- Script --}}
+  @stack('before-script')
   @include('includes.script')
+  @stack('after-script')
 </body>
 </html>

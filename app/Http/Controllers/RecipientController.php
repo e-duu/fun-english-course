@@ -36,6 +36,15 @@ class RecipientController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|max:255',
+            'code' => 'required',
+        ],
+        [
+            'name.required' => 'please input recipient name',
+            'code.required' => 'please input recipient code',
+        ]);
+        
         $data = $request->all();
         Recipient::create($data);
         return redirect()->route('recipient.all');
@@ -61,7 +70,7 @@ class RecipientController extends Controller
     public function edit($id)
     {
         $data = Recipient::findorfail($id);
-        return view('pages.admin.recipients.index');
+        return view('pages.admin.recipients.edit', compact('data'));
     }
 
     /**
@@ -73,6 +82,15 @@ class RecipientController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required|max:255',
+            'code' => 'required',
+        ],
+        [
+            'name.required' => 'please input recipient name',
+            'code.required' => 'please input recipient code',
+        ]);
+        
         $data = $request->all();
         $item = Recipient::findorfail($id);
         $item->update($data);

@@ -12,8 +12,10 @@ use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\RecipientController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ExerciseController;
+use App\Http\Controllers\LevelUserController;
 use App\Http\Controllers\PaymentPageController;
-
+use App\Http\Controllers\QuestionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,9 +47,11 @@ Route::middleware(['auth'])->group(function ()
 	
 	// Payment
 	Route::get('/payment', [PaymentPageController::class, 'index'])->name('payment');
+	Route::post('/payment/store', [PaymentPageController::class, 'store'])->name('payment.post');
 	
 	// Watch Material
 	Route::get('/watch/{id}', [WatchController::class, 'index'])->name('watch');
+	Route::get('/exercise/{id}', [WatchController::class, 'exercise'])->name('exercise');
 
 	// Logout
 	Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -64,7 +68,11 @@ Route::middleware(['auth'])->group(function ()
 				Route::get('/show/{id}', [UserController::class, 'show'])->name('user.show');
 				Route::get('/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
 				Route::post('/edit/{id}', [UserController::class, 'update'])->name('user.update');
-				Route::delete('/edit/{id}', [UserController::class, 'destroy'])->name('user.delete');
+				Route::delete('/delete/{id}', [UserController::class, 'destroy'])->name('user.delete');
+				Route::get('template-user', [UserController::class, 'template'])->name('template-user');
+				Route::post('file-import-user', [UserController::class, 'fileImport'])->name('file-import-user');
+				Route::get('/enroll/{id}', [LevelUserController::class, 'enroll'])->name('user.enroll');
+				Route::post('/enroll/store', [LevelUserController::class, 'store'])->name('enroll.store');
 		});
 
 		Route::prefix('program')->group(function () {
@@ -74,7 +82,7 @@ Route::middleware(['auth'])->group(function ()
 				Route::get('/show/{id}', [ProgramController::class, 'show'])->name('program.show');
 				Route::get('/edit/{id}', [ProgramController::class, 'edit'])->name('program.edit');
 				Route::post('/edit/{id}', [ProgramController::class, 'update'])->name('program.update');
-				Route::delete('/edit/{id}', [ProgramController::class, 'destroy'])->name('program.delete');
+				Route::delete('/delete/{id}', [ProgramController::class, 'destroy'])->name('program.delete');
 		});
 
 		Route::prefix('level')->group(function () {
@@ -84,7 +92,7 @@ Route::middleware(['auth'])->group(function ()
 				Route::get('/show/{id}', [LevelController::class, 'show'])->name('level.show');
 				Route::get('/edit/{id}', [LevelController::class, 'edit'])->name('level.edit');
 				Route::post('/edit/{id}', [LevelController::class, 'update'])->name('level.update');
-				Route::delete('/edit/{id}', [LevelController::class, 'destroy'])->name('level.delete');
+				Route::delete('/delete/{id}', [LevelController::class, 'destroy'])->name('level.delete');
 		});
 
 		Route::prefix('lesson')->group(function () {
@@ -94,7 +102,7 @@ Route::middleware(['auth'])->group(function ()
 				Route::get('/show/{id}', [LessonController::class, 'show'])->name('lesson.show');
 				Route::get('/edit/{id}', [LessonController::class, 'edit'])->name('lesson.edit');
 				Route::post('/edit/{id}', [LessonController::class, 'update'])->name('lesson.update');
-				Route::delete('/edit/{id}', [LessonController::class, 'destroy'])->name('lesson.delete');
+				Route::delete('/delete/{id}', [LessonController::class, 'destroy'])->name('lesson.delete');
 		});
 
 		Route::prefix('material')->group(function () {
@@ -104,7 +112,7 @@ Route::middleware(['auth'])->group(function ()
 				Route::get('/show/{id}', [MaterialController::class, 'show'])->name('material.show');
 				Route::get('/edit/{id}', [MaterialController::class, 'edit'])->name('material.edit');
 				Route::post('/edit/{id}', [MaterialController::class, 'update'])->name('material.update');
-				Route::delete('/edit/{id}', [MaterialController::class, 'destroy'])->name('material.delete');
+				Route::delete('/delete/{id}', [MaterialController::class, 'destroy'])->name('material.delete');
 		});
 
 		Route::prefix('payment')->group(function () {
@@ -114,7 +122,7 @@ Route::middleware(['auth'])->group(function ()
 				Route::get('/show/{id}', [PaymentController::class, 'show'])->name('payment.show');
 				Route::get('/edit/{id}', [PaymentController::class, 'edit'])->name('payment.edit');
 				Route::post('/edit/{id}', [PaymentController::class, 'update'])->name('payment.update');
-				Route::delete('/edit/{id}', [PaymentController::class, 'destroy'])->name('payment.delete');
+				Route::delete('/delete/{id}', [PaymentController::class, 'destroy'])->name('payment.delete');
 		});
 
 		Route::prefix('recipient')->group(function () {
@@ -123,7 +131,27 @@ Route::middleware(['auth'])->group(function ()
 				Route::post('/create', [RecipientController::class, 'store'])->name('recipient.store');
 				Route::get('/edit/{id}', [RecipientController::class, 'edit'])->name('recipient.edit');
 				Route::post('/edit/{id}', [RecipientController::class, 'update'])->name('recipient.update');
-				Route::delete('/edit/{id}', [RecipientController::class, 'destroy'])->name('recipient.delete');
+				Route::delete('/delete/{id}', [RecipientController::class, 'destroy'])->name('recipient.delete');
+		});
+		
+		Route::prefix('exercise')->group(function () {
+				Route::get('/all', [ExerciseController::class, 'index'])->name('exercise.all');
+				Route::get('/create{id}', [ExerciseController::class, 'create'])->name('exercise.create');
+				Route::post('/create', [ExerciseController::class, 'store'])->name('exercise.store');
+				Route::get('/show/{id}', [ExerciseController::class, 'show'])->name('exercise.show');
+				Route::get('/edit/{id}', [ExerciseController::class, 'edit'])->name('exercise.edit');
+				Route::post('/edit/{id}', [ExerciseController::class, 'update'])->name('exercise.update');
+				Route::delete('/delete/{id}', [ExerciseController::class, 'destroy'])->name('exercise.delete');
+		});
+
+		Route::prefix('question')->group(function () {
+				Route::get('/all', [QuestionController::class, 'index'])->name('question.all');
+				Route::get('/create/{id}', [QuestionController::class, 'create'])->name('question.create');
+				Route::post('/create', [QuestionController::class, 'store'])->name('question.store');
+				Route::get('/show/{id}', [QuestionController::class, 'show'])->name('question.show');
+				Route::get('/edit/{id}', [QuestionController::class, 'edit'])->name('question.edit');
+				Route::post('/edit/{id}', [QuestionController::class, 'update'])->name('question.update');
+				Route::delete('/delete/{id}', [questionController::class, 'destroy'])->name('question.delete');
 		});
 		
 	});

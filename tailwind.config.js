@@ -12,16 +12,6 @@ module.exports = {
    ],
    darkMode: 'class', // or 'media' or false
    theme: {
-    themeVariants: ['dark'],
-      customForms: (theme) => ({
-        default: {
-          'input, textarea': {
-            '&::placeholder': {
-              color: theme('colors.gray.400'),
-            },
-          },
-        },
-    }),
     extend: {
       fontFamily: {
         sans: ['cairo', ...defaultTheme.fontFamily.sans],
@@ -95,6 +85,6 @@ module.exports = {
      },
    },
    plugins: [
-    require('@tailwindcss/typography'),
+    require('@tailwindcss/forms')
    ],
   }

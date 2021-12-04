@@ -3,15 +3,20 @@
   <div class="flex-col my-12">
     @foreach ($lessons as $lesson)
       @if ($lesson->materials->count() != NULL)
-        <h1 class="text-lg text-gray-800 font-semibold 2xl:text-xl">{{ $lesson->name }}</h1> 
+        <h1 class="text-lg text-gray-800 font-semibold 2xl:text-xl mt-5">{{ $lesson->name }}</h1> 
         @foreach ($lesson->materials as $material)
-          <a href="{{ route('watch', $material->id) }}" class="flex justify-between items-center space-x-2 py-4 px-3 hover:bg-blue-600 hover:text-white transition-all duration-200 rounded-md mt-3 {{ (request()->is('watch/' . $material->id )) ? 'bg-blue-600 text-white' : 'bg-blue-100 text-blue-800' }}">
-            <p>{{ $material->title }}</p>
+          @unless (auth()->user()->role === 'student' && !$material->is_accessible_by_student)
+            <a href="{{ route('watch', $material->id) }}" class="flex justify-between items-center space-x-2 py-4 px-3 hover:bg-blue-600 hover:text-white transition-all duration-200 rounded-md mt-3 {{ (request()->is('watch/' . $material->id )) ? 'bg-blue-600 text-white' : 'bg-blue-100 text-blue-800' }}">
+              <p>{{ $material->title }}</p>
+            </a>
+          @endunless
+        @endforeach
+        @foreach ($lesson->exercises as $exercise)
+          <a href="{{ route('exercise', $exercise->id) }}" class="flex justify-between items-center space-x-2 py-4 px-3 hover:bg-blue-600 hover:text-white transition-all duration-200 rounded-md mt-3 {{ (request()->is('exercise/' . $exercise->id )) ? 'bg-blue-600 text-white' : 'bg-blue-100 text-blue-800' }}">
+            <p>{{ $exercise->title }}</p>
           </a>
         @endforeach
       @endif
     @endforeach
-      
-      
   </div>
 </div>

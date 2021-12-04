@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Level;
+use App\Models\Material;
 use App\Models\Payment;
 use App\Models\Program;
 use App\Models\Recipient;
@@ -45,9 +46,33 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'user_id' => 'required|integer',
+            'program_id' => 'required|integer',
+            'level_id' => 'required|integer',
+            'recipient_id' => 'required|integer',
+            'amount' => 'required|integer',
+            'evidence' => 'required',
+            'note' => 'required',
+        ],
+        [
+            'user_id.required' => 'please select user',
+            'program_id.required' => 'please select program',
+            'level_id.required' => 'please select level',
+            'reciepient_id.required' => 'please select recipient bank',
+            'amount.required' => 'please input amount',
+            'evidence.required' => 'please input payment reciept',
+            'note.required' => 'please input notes',
+        ]);
+        
         $data = request()->all();
-        $data['evidence'] = $request->file('evidence')->store('assets/payments', 'public');
-        Payment::create($data);
+        $image = $request->file('photo_file');
+        $new_name_image = time() . '.' .  $image->getClientOriginalExtension();
+        $image->move(public_path('payments'), $new_name_image);
+        $request->merge([
+            'evidence' => $new_name_image
+        ]);
+        User::create($data);
         return redirect()->route('payment.all');
     }
 
@@ -78,7 +103,7 @@ class PaymentController extends Controller
         $levels = Level::all();
         $recipients = Recipient::all();
 
-        return view('pages.admin.payments.create', compact('payments', 'users', 'programs', 'levels', 'recipients'));
+        return view('pages.admin.payments.edit', compact('payments', 'users', 'programs', 'levels', 'recipients'));
     }
 
     /**
@@ -90,10 +115,39 @@ class PaymentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->all();
-        $data['evidence'] = $request->file('evidence')->store('assets/payments', 'public');
-        $item = Payment::findOrFail($id);
+        $rules = [
+            'user_id' => 'required|integer',
+            'program_id' => 'required|integer',
+            'level_id' => 'required|integer',
+            'recipient_id' => 'required|integer',
+            'amount' => 'required|integer',
+            'note' => 'required',
+        ];
+
+        $item = Payment::find($id);
+
+        if (!empty($request->photo_file)) {
+            $image = $request->file('photo_file');
+            $new_name_image = time() . '.' .  $image->getClientOriginalExtension();
+            $image->move(public_path('payments'), $new_name_image);
+            $request->merge([
+                'evidence' => $new_name_image
+            ]);
+            
+            $img_path = public_path('payments/' . $item->evidence);
+            if (file_exists($img_path)) {
+                unlink($img_path);
+            }
+
+            $data = $request->all();
+        } else {
+            $data = $request->except('evidence');
+        }
+
+        $request->validate($rules);
+
         $item->update($data);
+        
         return redirect()->route('payment.all');
     }
 

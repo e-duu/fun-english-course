@@ -29,6 +29,13 @@ class LevelController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|max:255',
+        ],
+        [
+            'name.required' => 'please input level name',
+        ]);
+        
         $data = $request->all();
         $data['slug'] = Str::slug($request->name);
         Level::create($data);
@@ -68,6 +75,13 @@ class LevelController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required|max:255',
+        ],
+        [
+            'name.required' => 'please input level name',
+        ]);
+        
         $data = $request->all();
         $data['slug'] = Str::slug($request->name);
         Level::find($id)->update($data);

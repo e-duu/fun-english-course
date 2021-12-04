@@ -37,6 +37,13 @@ class LessonController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|max:255',
+        ],
+        [
+            'name.required' => 'please input lesson name',
+        ]);
+        
         $data = $request->all();
         Lesson::create($data);
         return redirect()->route('level.show', $request->level_id);
@@ -75,6 +82,13 @@ class LessonController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required|max:255',
+        ],
+        [
+            'name.required' => 'please input lesson name',
+        ]);
+        
         $data = $request->all();
         Lesson::find($id)->update($data);
 

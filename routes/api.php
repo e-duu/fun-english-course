@@ -17,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/payment', [PaymentPageController::class, 'index'])->name('payment');
+Route::get('/payment/{programs_id}', [PaymentPageController::class, 'levels'])->name('payment');

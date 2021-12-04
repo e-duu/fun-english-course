@@ -6,7 +6,49 @@
   List Users
 @endsection
 @section('content')
-<div class="w-full overflow-hidden rounded-lg shadow-xs">
+
+{{-- Modal Upload --}}
+<div x-data="{ showModal : false }">
+	<!-- Button -->
+	<button @click="showModal = !showModal" class="px-4 py-2 text-sm bg-[blueviolet] rounded-md transition-colors duration-150 ease-linear text-white focus:outline-none focus:ring-0 font-semibold hover:bg-purple-700">Upload User</button>
+
+	<!-- Modal Background -->
+	<div x-show="showModal" class="fixed text-gray-500 flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0" x-transition:enter="transition ease duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+			<!-- Modal -->
+			<div x-show="showModal" class="bg-white rounded-xl shadow-2xl p-6 w-3/6 mx-10" @click.away="showModal = false" x-transition:enter="transition ease duration-100 transform" x-transition:enter-start="opacity-0 scale-90 translate-y-1" x-transition:enter-end="opacity-100 scale-100 translate-y-0" x-transition:leave="transition ease duration-100 transform" x-transition:leave-start="opacity-100 scale-100 translate-y-0" x-transition:leave-end="opacity-0 scale-90 translate-y-1">
+					<!-- Title -->
+					<span class="font-bold block text-2xl mb-3">Upload Users </span>
+					<div class="border-b border-gray-500 mb-5"></div>
+					<!-- Some beer 🍺 -->
+					<form action="{{ route('file-import-user') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+						@method('POST')
+            <div class='flex items-center justify-center w-full'>
+              <label class='flex flex-col border-4 border-dashed rounded-md w-full h-32 hover:bg-gray-100 hover:border-purple-300 group transition-colors duration-200'>
+                  <div class='flex flex-col items-center justify-center pt-7'>
+                    <svg class="w-10 h-10 text-purple-400 group-hover:text-purple-600 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    <p class='lowercase text-sm text-gray-400 group-hover:text-purple-600 pt-1 tracking-wider'>Select the file</p>
+                  </div>
+                <input name="file" type='file' class="hidden" />
+              </label>
+						</div>
+						<div class="border-b border-gray-500 my-5"></div>
+
+					<!-- Buttons -->
+					<div class="text-right space-x-5 mt-5">
+							<button type="button" @click="showModal = !showModal" class="px-4 py-2 text-sm bg-red-600 rounded-md transition-colors duration-150 ease-linear text-white focus:outline-none focus:ring-0 font-semibold hover:bg-red-700">Cancel</button>
+
+							<a href="{{ route('template-user') }}" class="px-4 py-[5px] text-sm bg-purple-600 rounded-md transition-colors duration-150 ease-linear text-white focus:outline-none focus:ring-0 font-semibold hover:bg-purple-700">Download Template</a>
+							
+							<button class="px-4 py-2 text-sm bg-purple-600 rounded-md transition-colors duration-150 ease-linear text-white focus:outline-none focus:ring-0 font-semibold hover:bg-purple-700">Sumbit</button>
+						</form>
+					</div>
+			</div>
+	</div>
+</div>
+
+{{-- Content --}}
+<div class="w-full overflow-hidden rounded-lg shadow-xs mt-5">
 	<div class="w-full overflow-x-auto">
 	<table class="w-full whitespace-no-wrap">
 	  <thead>
@@ -23,7 +65,7 @@
 			@forelse ($data as $item)
 				<tr class="text-gray-700 dark:text-gray-400">
 					<td class="px-4 py-3">
-						<img src="{{ asset('/storage/' . $item->photo) }}" style="width: 70px;" class="rounded-full" alt="profile photo">
+						<img src="{{ asset('/users/' . $item->photo) }}" style="width: 70px;" class="rounded-full" alt="profile photo">
 					</td>
 					<td class="px-4 py-3 text-sm">
 						{{ $item->name }}
@@ -36,6 +78,10 @@
 					</td>
 					<td class="px-4 py-3">
 					<div class="flex items-center space-x-4 text-sm">
+						<a href="{{ route('user.enroll', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+							<i class=" fas fa-eye"></i>
+							<p>Enroll</p>
+						</a>
 						<a href="{{ route('user.show', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
 							<i class=" fas fa-eye"></i>
 							<p>Detail</p>
@@ -67,100 +113,6 @@
 
 	  </tbody>
 	</table>
-	</div>
-	<div class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
-	  <span class="flex items-center col-span-3">
-		  Showing 21-30 of 100
-	  </span>
-	  <span class="col-span-2"></span>
-	  <!-- Pagination -->
-	  <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
-		  <nav aria-label="Table navigation">
-		  <ul class="inline-flex items-center">
-			  <li>
-			  <button
-				  class="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple"
-				  aria-label="Previous"
-			  >
-				  <svg
-				  class="w-4 h-4 fill-current"
-				  aria-hidden="true"
-				  viewBox="0 0 20 20"
-				  >
-				  <path
-					  d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-					  clip-rule="evenodd"
-					  fill-rule="evenodd"
-				  ></path>
-				  </svg>
-			  </button>
-			  </li>
-			  <li>
-			  <button
-				  class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
-			  >
-				  1
-			  </button>
-			  </li>
-			  <li>
-			  <button
-				  class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
-			  >
-				  2
-			  </button>
-			  </li>
-			  <li>
-			  <button
-				  class="px-3 py-1 text-white transition-colors duration-150 bg-purple-600 border border-r-0 border-purple-600 rounded-md focus:outline-none focus:shadow-outline-purple"
-			  >
-				  3
-			  </button>
-			  </li>
-			  <li>
-			  <button
-				  class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
-			  >
-				  4
-			  </button>
-			  </li>
-			  <li>
-			  <span class="px-3 py-1">...</span>
-			  </li>
-			  <li>
-			  <button
-				  class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
-			  >
-				  8
-			  </button>
-			  </li>
-			  <li>
-			  <button
-				  class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
-			  >
-				  9
-			  </button>
-			  </li>
-			  <li>
-			  <button
-				  class="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple"
-				  aria-label="Next"
-			  >
-				  <svg
-				  class="w-4 h-4 fill-current"
-				  aria-hidden="true"
-				  viewBox="0 0 20 20"
-				  >
-				  <path
-					  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-					  clip-rule="evenodd"
-					  fill-rule="evenodd"
-				  ></path>
-				  </svg>
-			  </button>
-			  </li>
-		  </ul>
-		  </nav>
-	  </span>
 	</div>
 </div>
 @endsection

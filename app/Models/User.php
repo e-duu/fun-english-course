@@ -35,4 +35,9 @@ class User extends Authenticatable
         return $this->hasMany(Payment::class, 'id', 'user_id');
     }
 
+    public function levels()
+    {
+        return $this->belongsToMany(Level::class);  
+    }
+
 }

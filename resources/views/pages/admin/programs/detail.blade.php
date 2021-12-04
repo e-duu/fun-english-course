@@ -7,7 +7,7 @@ Detail Programs - {{ $data->name }}
 @endsection
 @section('content')
 
-<a href="{{ route('level.create', $data->id) }}" style="background-color: blueviolet" class="px-5 py-2 rounded-md font-semibold text-white">Add Level</a>
+<a href="{{ route('level.create', $data->id) }}" class="px-5 py-1 bg-[blueviolet] rounded-md font-semibold text-white">Add Level</a>
 
 <div class="w-full overflow-hidden rounded-lg shadow-xs mt-4">
   <div class="w-full overflow-x-auto">

@@ -37,9 +37,24 @@ class MaterialController extends Controller
      */
     public function store(Request $request)
     {
-        $data = request()->all();
-        $data['photo'] = $request->file('photo')->store('assets/materials', 'public');
-        Material::create($data);
+        $request->validate([
+            'title' => 'required|max:255',
+            'content' => 'required',
+            'photo_file' => 'required',
+        ],
+        [
+            'title.required' => 'please input material title',
+            'content.required' => 'please input material content',
+            'photo_file.required' => 'please input material photo',
+        ]);
+        
+        $image = $request->file('photo_file');
+        $new_name_image = time() . '.' .  $image->getClientOriginalExtension();
+        $image->move(public_path('materials'), $new_name_image);
+        $request->merge([
+            'photo' => $new_name_image
+        ]);
+        Material::create($request->all());
         return redirect()->route('lesson.show', $request->lesson_id);
     }
 
@@ -77,11 +92,35 @@ class MaterialController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->all();
-        $data['photo'] = $request->file('photo')->store('assets/materials', 'public');
-        $item = Material::findOrFail($id);
-        $item->update($data);
+        $rules = [
+            'title' => 'required',
+            'content' => 'required',
+        ];
 
+        $item = Material::find($id);
+
+        if (!empty($request->photo_file)) {
+            $image = $request->file('photo_file');
+            $new_name_image = time() . '.' .  $image->getClientOriginalExtension();
+            $image->move(public_path('materials'), $new_name_image);
+            $request->merge([
+                'photo' => $new_name_image
+            ]);
+            
+            $img_path = public_path('materials/' . $item->photo);
+            if (file_exists($img_path)) {
+                unlink($img_path);
+            }
+
+            $data = $request->all();
+        } else {
+            $data = $request->except('photo');
+        }
+
+        $request->validate($rules);
+
+        $item->update($data);
+        
         return redirect()->route('lesson.show', $request->lesson_id);
     }
 
@@ -99,10 +138,6 @@ class MaterialController extends Controller
         return back();
     }
 
-    public function removeImage($image)
-    {
-        if (file_exists($image)) {
-            unlink('storage/' . $image);
-        }
-    }
 }
+
+// auth()->user()->levels()->where()->get()

@@ -36,6 +36,13 @@ class ProgramController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|max:255',
+        ],
+        [
+            'name.required' => 'please input program name',
+        ]);
+        
         $data = $request->all();
         Program::create($data);
         return redirect()->route('program.all');
@@ -74,6 +81,13 @@ class ProgramController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required|max:255',
+        ],
+        [
+            'name.required' => 'please input program name',
+        ]);
+        
         $data = $request->all();
         Program::find($data);
         $item = Program::findorfail($id);

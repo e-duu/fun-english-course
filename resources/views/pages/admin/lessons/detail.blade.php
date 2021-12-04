@@ -7,7 +7,9 @@
 @endsection
 @section('content')
 
-<a href="{{ route('material.create', $data->id) }}" style="background-color: blueviolet" class="px-5 py-2 rounded-md font-semibold text-white">Add Material</a>
+<a href="{{ route('material.create', $data->id) }}" class="px-5 py-1 bg-[blueviolet] rounded-md font-semibold text-white mr-3">Add Material</a>
+
+<a href="{{ route('exercise.create', $data->id) }}" class="px-5 py-1 bg-[blueviolet] rounded-md font-semibold text-white">Add Exercise</a>
 
 <div class="w-full overflow-hidden rounded-lg shadow-xs mt-4">
   <div class="w-full overflow-x-auto">
@@ -24,7 +26,7 @@
         @forelse ($data->materials as $item)
           <tr class="text-gray-700 dark:text-gray-400">
             <td class="px-4 py-3">
-                <img src="{{ asset('storage/' . $item->photo) }}" class="rounded-full shadow-md" style="width: 50px;" alt="material photo">
+                <img src="{{ asset('/materials/' . $item->photo) }}" class="rounded-full shadow-md" style="width: 50px;" alt="material photo">
             </td>
             <td class="px-4 py-3 text-sm">
               {{ $item->title }}
@@ -59,6 +61,37 @@
             </td>
           </tr>
         @endforelse
+
+        @foreach ($data->exercises as $exercise)
+          <tr class="text-gray-700 dark:text-gray-400">
+            <td class="px-4 py-3">
+                <img src="{{ asset('/exercises/' . $exercise->photo) }}" class="rounded-full shadow-md" style="width: 50px;" alt="material photo">
+            </td>
+            <td class="px-4 py-3 text-sm">
+              {{ $exercise->title }}
+            </td>
+            <td class="px-4 py-3">
+              <div class="flex exercises-center space-x-4 text-sm">
+                <a href="{{ route('exercise.show', $exercise->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                  <i class="fas fa-eye"></i>
+                  <p>Detail</p>
+                </a>
+                <a href="{{ route('exercise.edit', $exercise->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                  <i class=" fas fa-edit"></i>
+                  <p>Edit</p>
+                </a>
+                <form action="{{ route('exercise.delete', $exercise->id) }}" method="POST" class="d-inline">
+                  @csrf
+                  @method('DELETE')
+                  <button class="flex-col px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                    <i class="fas fa-trash"></i>
+                    <p>Delete</p>
+                  </button>
+                </form>
+              </div>
+            </td>
+          </tr>
+        @endforeach
 
       </tbody>
     </table>
