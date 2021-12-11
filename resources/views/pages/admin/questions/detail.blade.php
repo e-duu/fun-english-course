@@ -7,7 +7,7 @@
 @endsection
 @section('content')
   <div class="flex-col">
-    <div class="bg-white shadow-md p-6 text-left rounded-lg flex justify-between space-x-8">
+    <div class="bg-white shadow-md p-6 text-left rounded-lg flex space-x-8">
       <div class="flex-col space-y-3">
         <p class="text-lg"><b> Question :</b> &nbsp;&nbsp; {{ $data->question }}</p>
         <p class="text-lg"><b> A . :</b> &nbsp;&nbsp; {{ $data->a }}</p>

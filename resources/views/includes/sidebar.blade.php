@@ -1,8 +1,8 @@
 <div class="flex-col p-10 bg-white h-[665px] 2xl:h-[835px] overflow-y-auto">
-  <a href="{{ url('/') }}" class="text-gray-800 hover:text-blue-600 transition-colors duration-200 font-bold text-xl"><i class="fas fa-arrow-left text-lg mb-20"></i> &nbsp; Back to Home</a>
+  <a href="{{ route('resource') }}" class="text-gray-800 hover:text-blue-600 transition-colors duration-200 font-bold text-xl"><i class="fas fa-arrow-left text-lg mb-20"></i> &nbsp; Back to Home</a>
   <div class="flex-col my-12">
     @foreach ($lessons as $lesson)
-      @if ($lesson->materials->count() != NULL)
+      @if ($lesson->exercises->count() || $lesson->materials->count() != null)
         <h1 class="text-lg text-gray-800 font-semibold 2xl:text-xl mt-5">{{ $lesson->name }}</h1> 
         @foreach ($lesson->materials as $material)
           @unless (auth()->user()->role === 'student' && !$material->is_accessible_by_student)
@@ -20,3 +20,4 @@
     @endforeach
   </div>
 </div>
+  

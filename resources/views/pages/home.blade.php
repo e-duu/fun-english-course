@@ -33,13 +33,23 @@
                 <div class="shadow-lg">
                   <h2 class="bg-[rgb(1,131,215)] pl-4 py-3 text-white text-2xl rounded-t-sm font-bold">{{ $program->name }}</h2>
                   <div class="bg-blue-100 py-3 flex-col rounded-b-sm">
-                    @foreach ($program->levels()->whereHas('users', fn ($q) => $q->where('users.id', auth()->user()->id))->get() as $programLevel)
-                    <a href="{{ route('resource.detail', $programLevel->slug) }}">
-                      <li class="pl-4 py-3 text-xl my-1 items-center hover:text-white hover:bg-blue-400 transition-colors duration-100">
-                      {{ $programLevel->name }}
-                      </li>
-                    </a>
-                  @endforeach
+                    @if (auth()->user()->role === 'admin')
+                      @foreach ($program->levels()->get() as $programLevel)
+                        <a href="{{ route('resource.detail', $programLevel->slug) }}">
+                          <li class="pl-14 py-3 text-xl my-1 items-center hover:text-white hover:bg-blue-400 transition-colors duration-100">
+                            {{ $programLevel->name }}
+                          </li>
+                        </a>
+                      @endforeach
+                    @else
+                      @foreach ($program->levels()->whereHas('users', fn ($q) => $q->where('users.id', auth()->user()->id))->get() as $programLevel)
+                        <a href="{{ route('resource.detail', $programLevel->slug) }}">
+                          <li class="pl-4 py-3 text-xl my-1 items-center hover:text-white hover:bg-blue-400 transition-colors duration-100">
+                          {{ $programLevel->name }}
+                          </li>
+                        </a>
+                      @endforeach
+                    @endif
                   </div>
                 </div>
               </div>

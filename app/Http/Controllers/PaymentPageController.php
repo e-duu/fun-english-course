@@ -30,9 +30,13 @@ class PaymentPageController extends Controller
      */
     public function store(Request $request)
     {
-        $data = request()->all();
-        $data['evidence'] = $request->file('evidence')->store('assets/payments', 'public');
-        Payment::create($data);
+        $image = $request->file('photo_file');
+        $new_name_image = time() . '.' .  $image->getClientOriginalExtension();
+        $image->move(public_path('payments'), $new_name_image);
+        $request->merge([
+            'evidence' => $new_name_image
+        ]);
+        Payment::create($request->all());
         return redirect()->route('resource');
     }
 }

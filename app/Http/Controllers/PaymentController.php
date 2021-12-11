@@ -19,7 +19,7 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        $data = Payment::all();
+        $data = Payment::paginate(5);
         return view('pages.admin.payments.index', compact('data'));
     }
 
@@ -52,7 +52,6 @@ class PaymentController extends Controller
             'level_id' => 'required|integer',
             'recipient_id' => 'required|integer',
             'amount' => 'required|integer',
-            'evidence' => 'required',
             'note' => 'required',
         ],
         [
@@ -61,18 +60,16 @@ class PaymentController extends Controller
             'level_id.required' => 'please select level',
             'reciepient_id.required' => 'please select recipient bank',
             'amount.required' => 'please input amount',
-            'evidence.required' => 'please input payment reciept',
             'note.required' => 'please input notes',
         ]);
         
-        $data = request()->all();
         $image = $request->file('photo_file');
         $new_name_image = time() . '.' .  $image->getClientOriginalExtension();
         $image->move(public_path('payments'), $new_name_image);
         $request->merge([
             'evidence' => $new_name_image
         ]);
-        User::create($data);
+        Payment::create($request->all());
         return redirect()->route('payment.all');
     }
 

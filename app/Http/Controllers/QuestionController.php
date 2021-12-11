@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Exercise;
 use App\Models\Question;
+use App\Models\QuestionUser;
+use App\Models\Score;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Symfony\Component\Console\Question\Question as QuestionQuestion;
 
 class QuestionController extends Controller
 {
@@ -15,7 +19,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $data = Question::all();
+        $data = Question::paginate(5);
         return view('pages.admin.questions.index', compact('data'));
     }
 
@@ -133,4 +137,5 @@ class QuestionController extends Controller
 
         return back();
     }
+
 }

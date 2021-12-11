@@ -14,7 +14,7 @@ class RecipientController extends Controller
      */
     public function index()
     {
-        $data = Recipient::all();
+        $data = Recipient::paginate(5);
         return view('pages.admin.recipients.index', compact('data'));
     }
 

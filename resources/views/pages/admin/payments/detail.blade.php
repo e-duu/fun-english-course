@@ -7,8 +7,8 @@
 @endsection
 @section('content')
   <div class="flex-col">
-    <div class="bg-white shadow-md p-6 text-left rounded-lg flex justify-between space-x-8">
-      <img src="{{ asset('/storage/' . $data->evidence) }}" alt="payment reciept" style="max-width: 400px;" class="rounded-md">
+    <div class="bg-white shadow-md p-6 text-left rounded-lg flex space-x-8">
+      <img src="{{ asset('/payments/' . $data->evidence) }}" alt="payment reciept" style="max-width: 400px;" class="rounded-md">
       <div class="flex-col space-y-3">
         <p class="text-lg"><b> Student :</b> &nbsp;&nbsp; {{ $data->users->name }}</p>
         <p class="text-lg"><b> Reciepent :</b> &nbsp;&nbsp; {{ $data->recipients->name }}</p>

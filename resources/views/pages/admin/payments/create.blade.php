@@ -90,8 +90,8 @@
 
     <label class="block text-sm mt-4">
       <span class="text-gray-700 dark:text-gray-400">Payment Reciept</span>
-      <input type="file" name="evidence" class="border w-full mt-1 text-sm rounded-md border-gray-400 py-1 px-2 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray" value="{{ old('evidence') }}" />
-      @error('evidence')
+      <input type="file" name="photo_file" class="border w-full mt-1 text-sm rounded-md border-gray-400 py-1 px-2 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray" value="{{ old('photo_file') }}" />
+      @error('photo_file')
         <div class="mt-2 text-[red]">
           <i class="fas fa-dot-circle"></i> {{ $message }}
         </div>

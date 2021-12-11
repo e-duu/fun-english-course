@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Exercise;
 use App\Models\Lesson;
+use App\Models\Question;
+use App\Models\Score;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ExerciseController extends Controller
 {
@@ -133,5 +136,36 @@ class ExerciseController extends Controller
         $data->delete();
         $this->removeImage($data->image);
         return back();
+    }
+
+    public function score(Request $request, $id)
+    {
+        $answer = $request->input('answer');
+        
+        $correct_answer = null;
+        $wrong_answer = null;
+
+        foreach ($answer as $key => $value) {
+            $check = Question::where('id','=', $key)->where('answer','=',$value)->get();
+            $correct = count($check);
+            
+            if($correct){
+                $correct_answer++;
+            } else {
+                $wrong_answer++;
+            }
+        }
+
+        $total_question = Exercise::find($id)->questions()->count(); 
+        
+        $score = $total_question / $correct_answer * 100;
+
+        Score::create([
+            'user_id' => Auth::user()->id,
+            'score' => $score,
+        ]);
+
+        return redirect()->route('score');
+        
     }
 }

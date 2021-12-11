@@ -24,4 +24,21 @@ class LevelUserController extends Controller
         User::find($request->user_id)->levels()->attach($request->level_id);
         return redirect()->route('user.all');
     }
+
+    public function manyEnroll()
+    {
+        $users = User::where('role', '!=', 'admin' )->get();
+        $levels = Level::all();
+
+        return view('pages.admin.enroll ', compact('users', 'levels'));
+    }    
+
+    public function manyEnrollStore(Request $request)
+    {
+        foreach ($request->levels as $levelId) {
+            Level::find($levelId)->users()->attach($request->users);
+        }
+        
+        return redirect()->route('user.all');
+    }
 }

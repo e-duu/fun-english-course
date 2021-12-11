@@ -17,7 +17,14 @@ class UserController extends Controller
      */
     public function index()
     {
-        $data = User::all();
+        $data = new User();
+        
+        if (request()->get('role') && request()->get('role') != null) {
+            $data = $data->where('role', '=', request()->get('role'));
+        }
+
+        $data = $data->paginate(5);
+        
         return view('pages.admin.users.index', compact('data'));
     }
 
@@ -183,5 +190,10 @@ class UserController extends Controller
     public function template()
     {
         return Excel::download(new UsersTemplate, 'input-users.xlsx');
+    }
+
+    public function filterReset()
+    {
+        return redirect()->route('user.all');
     }
 }

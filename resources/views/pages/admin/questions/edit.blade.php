@@ -31,14 +31,14 @@
     $answers = [$a, $b, $c, $d] ;
   @endphp
 
-  <form action="{{ route('recipient.update', $data->id) }}" method="POST" class="px-4 py-3 bg-white rounded-lg shadow-md dark:bg-gray-800">
+  <form action="{{ route('question.update', $data->id) }}" method="POST" class="px-4 py-3 bg-white rounded-lg shadow-md dark:bg-gray-800">
     @csrf
 
     <label class="block mt-4 text-sm">
       <span class="text-gray-700 dark:text-gray-400">Question</span>
       <textarea name="question" class="block w-full mt-1 text-sm rounded-md border-gray-400 dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-textarea focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" rows="3" placeholder="Enter some long content."
       >{{ $data->question }}</textarea>
-      @error('note')
+      @error('question')
         <div class="mt-1 text-sm text-[red]">
           <i class="fas fa-dot-circle text-xs"></i> {{ $message }}
         </div>
@@ -57,7 +57,7 @@
     <label class="flex items-center space-x-2 text-sm mt-4">
       <div class="text-gray-700 dark:text-gray-400 text-md font-semibold">B&nbsp;. </div>
       <input value="{{ $data->b }}" type="text" name="b" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md border-gray-400" placeholder="Input answer here.."/>
-      @error('a')
+      @error('b')
         <div class="mt-2" style="color: rgb(255, 35, 35);">
           <i class="fas fa-dot-circle"></i> {{ $message }}
         </div>
@@ -66,7 +66,7 @@
     <label class="flex items-center space-x-2 text-sm mt-4">
       <div  class="text-gray-700 dark:text-gray-400 text-md font-semibold">C&nbsp;. </div>
       <input value="{{ $data->c }}" type="text" name="c" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md border-gray-400" placeholder="Input answer here.."/>
-      @error('a')
+      @error('c')
         <div class="mt-2" style="color: rgb(255, 35, 35);">
           <i class="fas fa-dot-circle"></i> {{ $message }}
         </div>
@@ -76,7 +76,7 @@
     <label class="flex items-center space-x-2 text-sm mt-4">
       <div class="text-gray-700 dark:text-gray-400 text-md font-semibold">D&nbsp;. </div>
       <input value="{{ $data->d }}" type="text" name="d" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md border-gray-400" placeholder="Input answer here.."/>
-      @error('a')
+      @error('d')
         <div class="mt-2" style="color: rgb(255, 35, 35);">
           <i class="fas fa-dot-circle"></i> {{ $message }}
         </div>

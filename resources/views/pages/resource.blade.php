@@ -17,13 +17,23 @@
               <div class="shadow-lg">
                 <h2 class="bg-[rgb(1,131,215)] pl-4 py-3 text-white text-2xl rounded-t-sm font-bold">{{ $program->name }}</h2>
                 <div class="bg-blue-100 py-3 rounded-b-sm">
-                  @foreach ($program->levels()->whereHas('users', fn ($q) => $q->where('users.id', auth()->user()->id))->get() as $programLevel)
-                    <a href="{{ route('resource.detail', $programLevel->slug) }}">
-                      <li class="pl-4 py-3 text-xl my-1 items-center hover:text-white hover:bg-blue-400 transition-colors duration-100">
-                      {{ $programLevel->name }}
-                      </li>
-                    </a>
-                  @endforeach
+                  @if (auth()->user()->role === 'admin')
+                    @foreach ($program->levels()->get() as $programLevel)
+                      <a href="{{ route('resource.detail', $programLevel->slug) }}">
+                        <li class="pl-4 py-3 text-xl my-1 items-center hover:text-white hover:bg-blue-400 transition-colors duration-100">
+                          {{ $programLevel->name }}
+                        </li>
+                      </a>
+                    @endforeach
+                  @else
+                    @foreach ($program->levels()->whereHas('users', fn ($q) => $q->where('users.id', auth()->user()->id))->get() as $programLevel)
+                      <a href="{{ route('resource.detail', $programLevel->slug) }}">
+                        <li class="pl-4 py-3 text-xl my-1 items-center hover:text-white hover:bg-blue-400 transition-colors duration-100">
+                        {{ $programLevel->name }}
+                        </li>
+                      </a>
+                    @endforeach
+                  @endif
                 </div>
               </div>
             </div>
@@ -41,7 +51,7 @@
         </header>
         <main>
           @foreach ($lessons as $lesson)
-            @if ($lesson->materials->count() != NULL)
+            @if ($lesson->exercises->count() || $lesson->materials->count() != null)
               <div class="my-10">
                 <div class="shadow-lg">
                   <h2 class="bg-[rgb(1,131,215)] pl-4 py-3 text-white text-2xl rounded-t-sm font-bold">{{ $lesson->name }}</h2>
@@ -55,7 +65,7 @@
                       @endunless
                     @endforeach
                     @foreach ($lesson->exercises as $exercise)
-                      <a href="{{ route('watch', $exercise->id) }}" class="flex items-center space-x-5 py-3 text-[rgb(1,131,215)] hover:text-white hover:bg-blue-400 transition-colors duration-150 pl-20">
+                      <a href="{{ route('exercise', $exercise->id) }}" class="flex items-center space-x-5 py-3 text-[rgb(1,131,215)] hover:text-white hover:bg-blue-400 transition-colors duration-150 pl-20">
                         <img src="{{ asset('/exercises/' . $exercise->photo) }}" class="rounded-full w-16 shadow-md" alt="lesson thumbnail / photo">
                         <h3 class="text-2xl font-bold">{{ $exercise->title }}</h3>
                       </a>

@@ -16,6 +16,6 @@ class DashboardController extends Controller
         $programCount = Program::count();
         $paymentCount = Payment::count();
 
-        return view('pages.dashboard', compact('studentCount', 'teacherCount' ,'programCount', 'paymentCount'));
+        return view('pages.admin.dashboard', compact('studentCount', 'teacherCount' ,'programCount', 'paymentCount'));
     }
 }

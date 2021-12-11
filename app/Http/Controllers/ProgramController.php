@@ -14,7 +14,7 @@ class ProgramController extends Controller
      */
     public function index()
     {
-        $data = Program::all();
+        $data = Program::paginate(5);
         return view('pages.admin.programs.index', compact('data'));
     }
 

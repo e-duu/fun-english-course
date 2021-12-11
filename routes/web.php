@@ -41,7 +41,7 @@ Route::middleware(['auth'])->group(function ()
 
 	// Home
 	Route::get('/', [ResourceController::class, 'index'])->name('resource');
-
+	
 	// Resource
 	Route::get('/resource/{slug}', [ResourceController::class, 'detail'])->name('resource.detail');
 	
@@ -52,6 +52,9 @@ Route::middleware(['auth'])->group(function ()
 	// Watch Material
 	Route::get('/watch/{id}', [WatchController::class, 'index'])->name('watch');
 	Route::get('/exercise/{id}', [WatchController::class, 'exercise'])->name('exercise');
+	
+	// Score
+	Route::get('/score', [WatchController::class, 'score'])->name('score');
 
 	// Logout
 	Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -71,8 +74,11 @@ Route::middleware(['auth'])->group(function ()
 				Route::delete('/delete/{id}', [UserController::class, 'destroy'])->name('user.delete');
 				Route::get('template-user', [UserController::class, 'template'])->name('template-user');
 				Route::post('file-import-user', [UserController::class, 'fileImport'])->name('file-import-user');
+				Route::get('/reset', [UserController::class, 'filterReset'])->name('user.reset');
 				Route::get('/enroll/{id}', [LevelUserController::class, 'enroll'])->name('user.enroll');
 				Route::post('/enroll/store', [LevelUserController::class, 'store'])->name('enroll.store');
+				Route::get('/manyEnroll', [LevelUserController::class, 'manyEnroll'])->name('manyEnroll');
+				Route::post('/manyEnroll/store', [LevelUserController::class, 'manyEnrollStore'])->name('manyEnroll.store');
 		});
 
 		Route::prefix('program')->group(function () {
@@ -86,7 +92,6 @@ Route::middleware(['auth'])->group(function ()
 		});
 
 		Route::prefix('level')->group(function () {
-				Route::get('/all', [LevelController::class, 'index'])->name('level.all');
 				Route::get('/create/{id}', [LevelController::class, 'create'])->name('level.create');
 				Route::post('/create', [LevelController::class, 'store'])->name('level.store');
 				Route::get('/show/{id}', [LevelController::class, 'show'])->name('level.show');
@@ -96,7 +101,6 @@ Route::middleware(['auth'])->group(function ()
 		});
 
 		Route::prefix('lesson')->group(function () {
-				Route::get('/all', [LessonController::class, 'index'])->name('lesson.all');
 				Route::get('/create/{id}', [LessonController::class, 'create'])->name('lesson.create');
 				Route::post('/create', [LessonController::class, 'store'])->name('lesson.store');
 				Route::get('/show/{id}', [LessonController::class, 'show'])->name('lesson.show');
@@ -106,7 +110,6 @@ Route::middleware(['auth'])->group(function ()
 		});
 
 		Route::prefix('material')->group(function () {
-				Route::get('/all', [MaterialController::class, 'index'])->name('material.all');
 				Route::get('/create/{id}', [MaterialController::class, 'create'])->name('material.create');
 				Route::post('/create', [MaterialController::class, 'store'])->name('material.store');
 				Route::get('/show/{id}', [MaterialController::class, 'show'])->name('material.show');
@@ -142,18 +145,18 @@ Route::middleware(['auth'])->group(function ()
 				Route::get('/edit/{id}', [ExerciseController::class, 'edit'])->name('exercise.edit');
 				Route::post('/edit/{id}', [ExerciseController::class, 'update'])->name('exercise.update');
 				Route::delete('/delete/{id}', [ExerciseController::class, 'destroy'])->name('exercise.delete');
+				Route::post('/score/{id}', [ExerciseController::class, 'score'])->name('score.store');
 		});
 
 		Route::prefix('question')->group(function () {
-				Route::get('/all', [QuestionController::class, 'index'])->name('question.all');
 				Route::get('/create/{id}', [QuestionController::class, 'create'])->name('question.create');
 				Route::post('/create', [QuestionController::class, 'store'])->name('question.store');
 				Route::get('/show/{id}', [QuestionController::class, 'show'])->name('question.show');
 				Route::get('/edit/{id}', [QuestionController::class, 'edit'])->name('question.edit');
 				Route::post('/edit/{id}', [QuestionController::class, 'update'])->name('question.update');
-				Route::delete('/delete/{id}', [questionController::class, 'destroy'])->name('question.delete');
-		});
-		
+				Route::delete('/delete/{id}', [QuestionController::class, 'destroy'])->name('question.delete');
+			});
+			
 	});
 
 });

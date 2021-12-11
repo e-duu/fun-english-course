@@ -40,4 +40,9 @@ class User extends Authenticatable
         return $this->belongsToMany(Level::class);  
     }
 
+    public function scores()
+    {
+        return $this->hasMany(Score::class);  
+    }
+
 }

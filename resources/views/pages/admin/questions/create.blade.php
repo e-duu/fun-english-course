@@ -38,7 +38,7 @@
       <span class="text-gray-700 dark:text-gray-400">Question</span>
       <textarea name="question" class="block w-full mt-1 text-sm rounded-md border-gray-400 dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-textarea focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" rows="3" placeholder="Enter some long content."
       ></textarea>
-      @error('note')
+      @error('question')
         <div class="mt-1 text-sm text-[red]">
           <i class="fas fa-dot-circle text-xs"></i> {{ $message }}
         </div>

@@ -80,7 +80,7 @@
 
     <label class="block text-sm" style="margin-top: 20px">
       <span class="text-gray-700 dark:text-gray-400">Amount</span>
-      <input type="number" name="amount" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md border-gray-400" placeholder="3"/>
+      <input value="{{  }}" type="number" name="amount" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md border-gray-400" placeholder="3"/>
       @error('amount')
         <div class="mt-1 text-sm text-[red]">
           <i class="fas fa-dot-circle text-xs"></i> {{ $message }}
