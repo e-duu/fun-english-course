@@ -1,4 +1,4 @@
-<div class="flex-col p-10 bg-white h-[665px] 2xl:h-[835px] overflow-y-auto">
+<div class="flex-col p-10 bg-white h-screen sm:h-[665px] 2xl:h-[835px] overflow-y-auto hidden sm:block">
   <a href="{{ route('resource') }}" class="text-gray-800 hover:text-blue-600 transition-colors duration-200 font-bold text-xl"><i class="fas fa-arrow-left text-lg mb-20"></i> &nbsp; Back to Home</a>
   <div class="flex-col my-12">
     @foreach ($lessons as $lesson)

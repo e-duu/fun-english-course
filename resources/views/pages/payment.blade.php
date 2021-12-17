@@ -3,10 +3,10 @@
     Fun English Course - Payment
 @endsection
 @section('content')
-  <div class="container-fluid px-20 mt-16">
+    <div class="container-fluid px-7 sm:px-20 mt-10 sm:mt-16">
     <div class="grid bg-gray-50 rounded-lg mx-auto shadow-xl w-11/12 md:w-9/12 lg:w-1/2">
-      <div class="bg-blue-600 rounded-t-lg py-6 mb-5">
-        <h1 class="text-white text-center font-bold text-2xl">Payment Confirmation</h1>
+      <div class="bg-blue-600 rounded-t-lg py-3 sm:py-6 sm:mb-5">
+        <h1 class="text-white text-center font-bold text-lg sm:text-2xl">Payment Confirmation</h1>
       </div>
           <form id="payments" action="{{ route('payment.post') }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -21,7 +21,6 @@
               <div class="grid grid-cols-1">
                 <label class="uppercase md:text-sm text-xs text-gray-600 font-semibold">Student's Program</label>
                 <select @change="setPrograms(programs_id)" v-model="programs_id" name="program_id" class="py-2 px-3 rounded-lg border-2 bg-white border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
-                  <option value="" selected>Chooosee</option>
                   @foreach ($programs as $program)
                     <option value="{{ $program->id }}">{{ $program->name }}</option>
                   @endforeach
@@ -71,7 +70,7 @@
             </div>
       
             <div class='flex items-center justify-center pt-10'>
-              <button class='w-full bg-blue-600 hover:bg-blue-700 rounded-b-lg shadow-xl font-bold text-xl text-white transition-colors duration-100 py-5' type="submit">Submit</button>
+              <button class='w-full bg-blue-600 hover:bg-blue-700 rounded-b-lg shadow-xl font-bold text-md sm:text-xl text-white transition-colors duration-100 py-3 sm:py-5' type="submit">Submit</button>
             </div>
       
           </form>

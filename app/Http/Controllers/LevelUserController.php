@@ -21,7 +21,7 @@ class LevelUserController extends Controller
 
     public function store(Request $request)
     {
-        User::find($request->user_id)->levels()->attach($request->level_id);
+        User::find($request->user_id)->levels()->syncWithoutDetaching($request->level_id);
         return redirect()->route('user.all');
     }
 
@@ -36,7 +36,7 @@ class LevelUserController extends Controller
     public function manyEnrollStore(Request $request)
     {
         foreach ($request->levels as $levelId) {
-            Level::find($levelId)->users()->attach($request->users);
+            Level::find($levelId)->users()->syncWithoutDetaching($request->users);
         }
         
         return redirect()->route('user.all');

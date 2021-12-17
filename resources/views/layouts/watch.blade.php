@@ -11,13 +11,13 @@
 </head>
 <body class="overflow-x-hidden">
 
-    <div class="grid grid-cols-4 ">
-      <div class="col-span-1">
+    <div class="grid grid-cols-4">
+      <div class="hidden sm:block col-span-1">
         {{-- Sidebar --}}
         @include('includes.sidebar')
       </div>
 
-      <div class="col-span-3">
+      <div class="col-span-4 sm:col-span-3">
         {{-- Page Content --}}
         @yield('content')
       </div>
