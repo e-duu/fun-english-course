@@ -158,7 +158,7 @@ class ExerciseController extends Controller
 
         $total_question = Exercise::find($id)->questions()->count(); 
         
-        $score = $total_question / $correct_answer * 100;
+        $score = $correct_answer / $total_question * 100;
 
         Score::create([
             'user_id' => Auth::user()->id,

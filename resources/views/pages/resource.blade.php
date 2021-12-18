@@ -3,14 +3,14 @@
     Fun English Course - Learning Resources
 @endsection
 @section('content')
-  <div class="container-fluid px-10 sm:px-20 mt-10 sm:mt-16">
+  <div class="container-fluid px-4 sm:px-20 mt-10 sm:mt-16">
     <div class="grid grid-cols-12 sm:gap-14 items-start">
       <aside class="col-span-0 sm:col-span-4 h-full bg-blue-200 flex-col py-8 rounded-sm hidden sm:block">
         <div class="px-14">
           <img src="{{ asset('/users/' . Auth::user()->photo) }}" class="w-60 mx-auto rounded-md shadow-md" alt="user profile photo">
           <h3 class="text-center py-3 text-black font-bold text-2xl mt-5 bg-blue-100 rounded-sm shadow-lg">{{ auth()->check() ? auth()->user()->name : 'Please login first' }}</h3>
         </div>
-        <h2 class="bg-[rgb(244,182,1)] mt-14 mb-10 pl-6 smy-3 text-2xl font-bold">LEARNING RESOURCES</h2>
+        <h2 class="bg-[rgb(244,182,1)] mt-14 mb-10 pl-6 py-3 text-2xl font-bold">LEARNING RESOURCES</h2>
         @foreach ($programs as $program)
           @if ($program->levels->count() != NULL)
             <div class="px-6 my-8">

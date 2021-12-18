@@ -232,7 +232,7 @@
         <!-- active & hover classes 'bg-primary-100 dark:bg-primary' -->
         <a href="{{ route('manyEnroll') }}" class="flex items-center p-2 text-gray-500 transition-colors rounded-md dark:text-light hover:bg-primary-100 dark:hover:bg-primary" role="button">
           <span>
-            <i class="fas fa-paw"></i>
+            <i class="fas fa-cart-plus"></i>
           </span>
           <span class="ml-2 text-sm"> Multiple Enroll </span>
         </a>

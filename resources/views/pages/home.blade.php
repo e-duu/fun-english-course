@@ -3,7 +3,7 @@
     Fun English Course - Learning Resources
 @endsection
 @section('content')
-  <div class="container-fluid px-10 sm:px-20 mt-10 sm:mt-16">
+  <div class="container-fluid px-4 sm:px-20 mt-10 sm:mt-16">
     <div class="grid grid-cols-12 sm:gap-14 items-start">
       <aside class="col-span-0 sm:col-span-4 h-full bg-blue-200 flex-col py-8 rounded-sm hidden sm:block">
         <div class="px-14">

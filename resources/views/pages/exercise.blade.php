@@ -29,22 +29,22 @@
 
           <div class="ml-5">
             <label class="flex my-2 items-center dark:text-gray-400 mr-4">
-              <input name="answer[{{ $item->id }}]" id="{{ $item->id }}a" type="radio" class="text-blue-600 form-radio focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray" value="a" />
+              <input name="answer[{{ $item->id }}]" id="{{ $item->id }}a" type="radio" class="text-blue-600 form-radio focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray" value="a" required />
               <span class="text-xs sm:text-lg ml-2"><strong>A.</strong> {{ $item->a }}</span>
             </label>
             
             <label class="flex my-2 items-center dark:text-gray-400 mr-4">
-              <input name="answer[{{ $item->id }}]" id="{{ $item->id }}b" type="radio" class="text-blue-600 form-radio focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray" value="b" />
+              <input name="answer[{{ $item->id }}]" id="{{ $item->id }}b" type="radio" class="text-blue-600 form-radio focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray" value="b" required />
               <span class="text-xs sm:text-lg ml-2"><strong>B.</strong> {{ $item->b }}</span>
             </label>
             
             <label class="flex my-2 items-center dark:text-gray-400 mr-4">
-              <input name="answer[{{ $item->id }}]" id="{{ $item->id }}c" type="radio" class="text-blue-600 form-radio focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray" value="c" />
+              <input name="answer[{{ $item->id }}]" id="{{ $item->id }}c" type="radio" class="text-blue-600 form-radio focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray" value="c" required />
               <span class="text-xs sm:text-lg ml-2"><strong>C.</strong> {{ $item->c }}</span>
             </label>
             
             <label class="flex my-2 items-center dark:text-gray-400 mr-4">
-              <input name="answer[{{ $item->id }}]" id="{{ $item->id }}d" type="radio" class="text-blue-600 form-radio focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray" value="d" />
+              <input name="answer[{{ $item->id }}]" id="{{ $item->id }}d" type="radio" class="text-blue-600 form-radio focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray" value="d" required />
               <span class="text-xs sm:text-lg ml-2"><strong>D.</strong> {{ $item->d }}</span>
             </label>
 

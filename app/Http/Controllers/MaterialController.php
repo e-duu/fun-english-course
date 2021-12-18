@@ -39,12 +39,12 @@ class MaterialController extends Controller
     {
         $request->validate([
             'title' => 'required|max:255',
-            'content' => 'required',
+            'content' => 'required|url',
             'photo_file' => 'required',
         ],
         [
             'title.required' => 'please input material title',
-            'content.required' => 'please input material content',
+            'content.required' => 'material content must be filled with url',
             'photo_file.required' => 'please input material photo',
         ]);
         
@@ -94,7 +94,7 @@ class MaterialController extends Controller
     {
         $rules = [
             'title' => 'required',
-            'content' => 'required',
+            'content' => 'required|url',
         ];
 
         $item = Material::find($id);
@@ -136,6 +136,13 @@ class MaterialController extends Controller
         $data->delete();
         $this->removeImage($data->image);
         return back();
+    }
+    
+    public function removeImage($image)
+    {
+        if (file_exists($image)) {
+            unlink('materials/' . $image);
+        }
     }
 
 }
