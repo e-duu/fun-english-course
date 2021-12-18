@@ -138,6 +138,13 @@ class ExerciseController extends Controller
         return back();
     }
 
+    public function removeImage($image)
+    {
+        if (file_exists($image)) {
+            unlink('/exercises/' . $image);
+        }
+    }
+
     public function score(Request $request, $id)
     {
         $answer = $request->input('answer');

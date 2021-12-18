@@ -166,7 +166,7 @@ class UserController extends Controller
     public function removeImage($image)
     {
         if (file_exists($image)) {
-            unlink('users/' . $image);
+            unlink('/users/' . $image);
         }
     }
 
