@@ -51,30 +51,56 @@
         </header>
         <main>
           @foreach ($lessons as $lesson)
-          @foreach ($lesson->materials as $item)
-          @endforeach
-            @if ($lesson->exercises->count() || $lesson->materials->count() != null && $item->is_accessible_by_student)
-              <div class="mt-5 sm:mt-10">
-                <div class="shadow-lg">
-                  <h2 class="bg-[rgb(1,131,215)] pl-2 sm:pl-4 py-2 sm:py-3 text-white text-lg sm:text-2xl rounded-t-sm font-bold">{{ $lesson->name }}</h2>
-                  <div class="bg-blue-100 py-2 sm:py-3 flex-col rounded-b-sm">
-                    @foreach ($lesson->materials as $material)
-                      @unless (auth()->user()->role === 'student' && !$material->is_accessible_by_student)
-                        <a href="{{ route('watch', $material->id) }}" class="flex items-center space-x-3 sm:space-x-5 py-2 sm:py-3 text-[rgb(1,131,215)] hover:text-white hover:bg-blue-400 transition-colors duration-150 px-4 sm:px-20">
-                          <img src="{{ asset('/materials/' . $material->photo) }}" class="rounded-full w-10 sm:w-16 shadow-md" alt="lesson thumbnail / photo">
-                          <h3 class="text-sm sm:text-2xl font-bold">{{ $material->title }}</h3>
+            @foreach ($lesson->materials as $item)
+            @endforeach
+            @if (auth()->user()->role === 'admin')
+              @if ($lesson->exercises->count() || $lesson->materials->count() != null)
+                <div class="mt-5 sm:mt-10">
+                  <div class="shadow-lg">
+                    <h2 class="bg-[rgb(1,131,215)] pl-2 sm:pl-4 py-2 sm:py-3 text-white text-lg sm:text-2xl rounded-t-sm font-bold">{{ $lesson->name }}</h2>
+                    <div class="bg-blue-100 py-2 sm:py-3 flex-col rounded-b-sm">
+                      @foreach ($lesson->materials as $material)
+                        @unless (auth()->user()->role === 'student' && !$material->is_accessible_by_student)
+                          <a href="{{ route('watch', $material->id) }}" class="flex items-center space-x-3 sm:space-x-5 py-2 sm:py-3 text-[rgb(1,131,215)] hover:text-white hover:bg-blue-400 transition-colors duration-150 px-4 sm:px-20">
+                            <img src="{{ asset('/materials/' . $material->photo) }}" class="rounded-full w-10 sm:w-16 shadow-md" alt="lesson thumbnail / photo">
+                            <h3 class="text-sm sm:text-2xl font-bold">{{ $material->title }}</h3>
+                          </a>
+                        @endunless
+                      @endforeach
+                      @foreach ($lesson->exercises as $exercise)
+                        <a href="{{ route('exercise', $exercise->id) }}" class="flex items-center space-x-3 sm:space-x-5 py-2 sm:py-3 text-[rgb(1,131,215)] hover:text-white hover:bg-blue-400 transition-colors duration-150 px-4 sm:px-20">
+                          <img src="{{ asset('/exercises/' . $exercise->photo) }}" class="rounded-full w-10 sm:w-16 shadow-md" alt="lesson thumbnail / photo">
+                          <h3 class="text-sm sm:text-2xl font-bold">{{ $exercise->title }}</h3>
                         </a>
-                      @endunless
-                    @endforeach
-                    @foreach ($lesson->exercises as $exercise)
-                      <a href="{{ route('exercise', $exercise->id) }}" class="flex items-center space-x-3 sm:space-x-5 py-2 sm:py-3 text-[rgb(1,131,215)] hover:text-white hover:bg-blue-400 transition-colors duration-150 px-4 sm:px-20">
-                        <img src="{{ asset('/exercises/' . $exercise->photo) }}" class="rounded-full w-10 sm:w-16 shadow-md" alt="lesson thumbnail / photo">
-                        <h3 class="text-sm sm:text-2xl font-bold">{{ $exercise->title }}</h3>
-                      </a>
-                    @endforeach
+                      @endforeach
+                    </div>
                   </div>
                 </div>
-              </div>
+              @endif
+            @else
+              @if ($lesson->exercises->count() || $lesson->materials->count() != null && $item->is_accessible_by_student)
+                <div class="mt-5 sm:mt-10">
+                  <div class="shadow-lg">
+                    <h2 class="bg-[rgb(1,131,215)] pl-2 sm:pl-4 py-2 sm:py-3 text-white text-lg sm:text-2xl rounded-t-sm font-bold">{{ $lesson->name }}</h2>
+                    <div class="bg-blue-100 py-2 sm:py-3 flex-col rounded-b-sm">
+                      @foreach ($lesson->materials as $material)
+                        @unless (auth()->user()->role === 'student' && !$material->is_accessible_by_student)
+                          <a href="{{ route('watch', $material->id) }}" class="flex items-center space-x-3 sm:space-x-5 py-2 sm:py-3 text-[rgb(1,131,215)] hover:text-white hover:bg-blue-400 transition-colors duration-150 px-4 sm:px-20">
+                            <img src="{{ asset('/materials/' . $material->photo) }}" class="rounded-full w-10 sm:w-16 shadow-md" alt="lesson thumbnail / photo">
+                            <h3 class="text-sm sm:text-2xl font-bold">{{ $material->title }}</h3>
+                          </a>
+                        @endunless
+                      @endforeach
+                      @foreach ($lesson->exercises as $exercise)
+                        <a href="{{ route('exercise', $exercise->id) }}" class="flex items-center space-x-3 sm:space-x-5 py-2 sm:py-3 text-[rgb(1,131,215)] hover:text-white hover:bg-blue-400 transition-colors duration-150 px-4 sm:px-20">
+                          <img src="{{ asset('/exercises/' . $exercise->photo) }}" class="rounded-full w-10 sm:w-16 shadow-md" alt="lesson thumbnail / photo">
+                          <h3 class="text-sm sm:text-2xl font-bold">{{ $exercise->title }}</h3>
+                        </a>
+                      @endforeach
+                    </div>
+                  </div>
+                </div>
+              @endif
             @endif
           @endforeach
         </main>
