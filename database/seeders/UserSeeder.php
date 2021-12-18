@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
           'email' => 'desy@gmail.com',
           'password' => '1234',
           'role' => 'admin',
-          'photo' => "1638542338.jpeg",
+          'photo' => "1638542390.jpg",
         ],
         [
           'name' => 'Admin',
@@ -32,7 +32,7 @@ class UserSeeder extends Seeder
           'email' => 'admin@admin',
           'password' => '1234',
           'role' => 'admin',
-          'photo' => "admin.jpg",
+          'photo' => "1638542390.jpg",
         ],
         [
           'name' => 'Teacher',
@@ -40,7 +40,7 @@ class UserSeeder extends Seeder
           'email' => 'teacher@teacher',
           'password' => '1234',
           'role' => 'teacher',
-          'photo' => "1638542338.jpeg",
+          'photo' => "1638542390.jpg",
         ],
         [
           'name' => 'Student',
@@ -48,7 +48,7 @@ class UserSeeder extends Seeder
           'email' => 'student@student',
           'password' => '1234',
           'role' => 'student',
-          'photo' => "1638542338.jpeg",
+          'photo' => "1638542390.jpg",
         ],
       
       ];

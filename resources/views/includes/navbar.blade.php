@@ -7,12 +7,12 @@
       <img src="{{ asset('/images/edge-logo.png') }}" class="w-14 sm:w-28" alt="edge logo">
     </div>
   </div>
-  <nav class="flex justify-between sm:justify-end bg-[rgb(244,182,1)] py-3 sm:py-7">
-    <ul class="flex space-x-3 sm:space-x-20 items-center px-6 sm:px-20">
+  <nav class="flex justify-between relative sm:justify-end bg-[rgb(244,182,1)] py-3 sm:py-7">
+    <ul class="flex space-x-3 sm:space-x-20 sm:mr-32 items-center px-6 sm:px-20">
       <li class="font-bold text-white text-xs sm:text-xl"><a href="https://funenglishcourse.com/" target="_blank">HOME</a></li>
       <li class="font-bold text-white text-xs sm:text-xl"><a href="{{ route('resource') }}">LEARNING RESOURCES</a></li>
       <li class="font-bold text-white text-xs sm:text-xl"><a href="{{ url('payment') }}">PAYMENT</a></li>
-      <li>
+      <li class="absolute right-4 top-1 sm:top-5 sm:right-20">
         <div x-data="{ dropdownOpen: false }" class="relative">
           <button @click="dropdownOpen = !dropdownOpen" class="relative z-10 ml-8 sm:ml-0">
             <img src="{{ asset('/users/' . Auth::user()->photo) }}" alt="user profile photo" class="w-8 sm:w-12 rounded-full">

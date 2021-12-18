@@ -106,14 +106,6 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function update(Request $request, $id)
-    // {
-    //     $data = $request->all();
-    //     $data['photo'] = $request->file('photo')->store('assets/users', 'public');
-    //     $item = User::findOrFail($id);
-    //     $item->update($data);
-    //     return redirect()->route('user.all');
-    // }
 
     public function update(Request $request, $id)
     {
