@@ -19,7 +19,6 @@ class DatabaseSeeder extends Seeder
             LevelSeeder::class,
             LessonSeeder::class,
             MaterialSeeder::class,
-            PaymentSeeder::class,
             RecipientSeeder::class,
         ]);
     }

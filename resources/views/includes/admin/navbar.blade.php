@@ -360,7 +360,7 @@
           class="block transition-opacity duration-200 rounded-full dark:opacity-75 dark:hover:opacity-100 focus:outline-none focus:ring dark:focus:opacity-100"
         >
           <span class="sr-only">User menu</span>
-          <img class="w-10 h-10 rounded-full" src="{{ asset('/images/avatar.jpg') }}" alt="Ahmed Kamel" />
+          <img class="w-10 h-10 rounded-full" src="{{ asset('/users/' . auth()->user()->photo) }}" alt="Ahmed Kamel" />
         </button>
 
         <!-- User dropdown menu -->
@@ -388,8 +388,12 @@
           <a
             href="{{ route('logout') }}"
             role="menuitem"
+            onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
             class="block px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-100 dark:text-light dark:hover:bg-primary"
           >
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+              @csrf
+            </form>
             Logout
           </a>
         </div>
@@ -463,7 +467,7 @@
           class="block transition-opacity duration-200 rounded-full dark:opacity-75 dark:hover:opacity-100 focus:outline-none focus:ring dark:focus:opacity-100"
         >
           <span class="sr-only">User menu</span>
-          <img class="w-10 h-10 rounded-full" src="{{ asset('/users/' . auth()->user()->photo) }}" alt="Ahmed Kamel" />
+          <img class="w-10 h-10 rounded-full" src="{{ asset('/users/' . auth()->user()->photo) }}" alt="User photo" />
         </button>
 
         <!-- User dropdown menu -->
@@ -491,8 +495,12 @@
           <a
             href="{{ route('logout') }}"
             role="menuitem"
+            onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
             class="block px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-100 dark:text-light dark:hover:bg-primary"
           >
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+              @csrf
+            </form>
             Logout
           </a>
         </div>

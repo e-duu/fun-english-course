@@ -17,12 +17,14 @@
       <div class="splide__track">
         <ul class="splide__list">
           <li class="splide__slide flex justify-center items-center relative">
-            <img class="w-full h-screen" src="{{ asset('/images/sliderhome.jpg') }}">
-            <div class="absolute px-4 py-6 space-y-6 bg-white rounded-md dark:bg-darker">
+            <div class="container-fluid">
+              <img class="w-screen h-screen" src="{{ asset('/images/sliderhome.jpg') }}">
+            </div>
+            <div class="absolute px-4 py-6 space-y-6 mx-5 sm:mx-0 bg-white rounded-md dark:bg-darker">
               <a href="https://funenglishcourse.com/" target="_blank" class="flex justify-center tracking-wider">
                 <img src="{{ asset('/images/logo.png') }}" style="width: 250px;" alt="fun english course logo">
               </a>
-              <h1 class="text-2xl font-bold text-center" style="color: rebeccapurple">Login</h1>
+              <h1 class="text-2xl font-bold text-center text-purple-700">Login</h1>
               <form action="{{ route('authenticate') }}" method="POST" class="space-y-6">
                 @csrf
                 @method('POST')
@@ -38,8 +40,10 @@
           </li>
 
           <li class="splide__slide flex justify-center items-center relative">
-            <img class="w-full h-screen" src="{{ asset('/images/sliderhome2.jpg') }}">
-            <div class="absolute px-4 py-6 space-y-6 bg-white rounded-md dark:bg-darker">
+            <div class="container-fluid">
+              <img class="w-screen h-screen" src="{{ asset('/images/sliderhome2.jpg') }}">
+            </div>
+            <div class="absolute px-4 py-6 space-y-6 mx-5 sm:mx-0 bg-white rounded-md dark:bg-darker">
               <a href="https://funenglishcourse.com/" target="_blank" class="flex justify-center tracking-wider">
                 <img src="{{ asset('/images/logo.png') }}" style="width: 250px;" alt="fun english course logo">
               </a>
