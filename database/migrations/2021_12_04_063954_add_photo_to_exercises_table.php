@@ -26,7 +26,7 @@ class AddPhotoToExercisesTable extends Migration
     public function down()
     {
         Schema::table('exercises', function (Blueprint $table) {
-            //
+            $table->string('photo');
         });
     }
 }

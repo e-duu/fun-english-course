@@ -12,6 +12,7 @@ class Exercise extends Model
     protected $fillable = [
         'title',
         'photo',
+        'description',
         'lesson_id',
     ];
 

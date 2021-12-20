@@ -12,7 +12,7 @@
       <div class="flex-col space-y-3">
         <p class="text-lg"><b> Title :</b> &nbsp;&nbsp; {{ $data->title }}</p>
         <p class="text-lg"><b> Lesson :</b> &nbsp;&nbsp; {{ $data->lesson_details->name }}</p>
-        <p class="text-lg"><b> Content :</b> &nbsp;&nbsp; {!! $data->content !!}</p>
+        <p class="text-lg"><b> Description :</b> &nbsp;&nbsp; {!! $data->description !!}</p>
       </div>
     </div>
   </div>

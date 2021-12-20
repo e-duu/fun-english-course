@@ -39,12 +39,10 @@ class MaterialController extends Controller
     {
         $request->validate([
             'title' => 'required|max:255',
-            'content' => 'required|url',
             'photo_file' => 'required',
         ],
         [
             'title.required' => 'please input material title',
-            'content.required' => 'material content must be filled with url',
             'photo_file.required' => 'please input material photo',
         ]);
         
@@ -94,7 +92,6 @@ class MaterialController extends Controller
     {
         $rules = [
             'title' => 'required',
-            'content' => 'required|url',
         ];
 
         $item = Material::find($id);

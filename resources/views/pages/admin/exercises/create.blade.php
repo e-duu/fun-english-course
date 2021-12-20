@@ -13,17 +13,22 @@
       <span class="text-gray-700 dark:text-gray-400">Exercise Title</span>
       <input type="text" name="title" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md border-gray-400" placeholder="Greetings I - Multiple Choices"/>
       @error('title')
-        <div class="mt-2" style="color: rgb(255, 35, 35);">
+        <div class="mt-2 text-red-600">
           <i class="fas fa-dot-circle"></i> {{ $message }}
         </div>
       @enderror
     </label>
 
     <label class="block text-sm mt-4">
+      <span class="text-gray-700 dark:text-gray-400">Description</span>
+      <textarea name="description" id="editor" ></textarea>
+    </label>
+
+    <label class="block text-sm mt-4">
       <span class="text-gray-700 dark:text-gray-400">Photo</span>
       <input name="photo_file" value="{{ old('photo_file') }}" type="file" class="border w-full mt-1 text-sm rounded-md border-gray-400 py-1 px-2 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray" />
-      @error('photo')
-        <div class="mt-2" style="color: rgb(255, 35, 35);">
+      @error('photo_file')
+        <div class="mt-2 text-red-600">
           <i class="fas fa-dot-circle"></i> {{ $message }}
         </div>
       @enderror
@@ -35,5 +40,18 @@
 
   </form>
 @endsection
+@push('after-script')
+  <script src="https://cdn.ckeditor.com/ckeditor5/31.1.0/classic/ckeditor.js"></script>
+  <script>
+    ClassicEditor
+      .create( document.querySelector( '#editor' ))
+      .then( editor => {
+              console.log( editor );
+      })
+      .catch( error => {
+              console.error( error );
+      });
+  </script>
+@endpush
 
 

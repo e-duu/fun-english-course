@@ -72,7 +72,7 @@ Route::middleware(['auth'])->group(function ()
 				Route::get('/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
 				Route::post('/edit/{id}', [UserController::class, 'update'])->name('user.update');
 				Route::delete('/delete/{id}', [UserController::class, 'destroy'])->name('user.delete');
-				Route::get('template-user', [UserController::class, 'template'])->name('template-user');
+				Route::get('template-user', [UserController::class, 'template'])->name('template.user');
 				Route::post('file-import-user', [UserController::class, 'fileImport'])->name('file-import-user');
 				Route::get('/reset', [UserController::class, 'filterReset'])->name('user.reset');
 				Route::get('/enroll/{id}', [LevelUserController::class, 'enroll'])->name('user.enroll');

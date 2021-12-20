@@ -31,6 +31,11 @@
     </label>
 
     <label class="block text-sm mt-4">
+      <span class="text-gray-700 dark:text-gray-400">Description</span>
+      <textarea name="description" id="editor">{{ $data->description }}</textarea>
+    </label>
+
+    <label class="block text-sm mt-4">
       <span class="text-gray-700 dark:text-gray-400">Photo</span>
       <input type="file" name="photo_file" class="border w-full mt-1 text-sm rounded-md border-gray-400 py-1 px-2 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray" value="{{ old('photo_file') }}" />
     </label>
@@ -62,5 +67,18 @@
 
   </form>
 @endsection
+@push('after-script')
+  <script src="https://cdn.ckeditor.com/ckeditor5/31.1.0/classic/ckeditor.js"></script>
+  <script>
+    ClassicEditor
+      .create( document.querySelector( '#editor' ))
+      .then( editor => {
+              console.log( editor );
+      })
+      .catch( error => {
+              console.error( error );
+      });
+  </script>
+@endpush
 
 

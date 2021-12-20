@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use phpDocumentor\Reflection\Types\Nullable;
 
 class CreateExercisesTable extends Migration
 {
@@ -16,6 +17,7 @@ class CreateExercisesTable extends Migration
         Schema::create('exercises', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->text('description')->nullable();
             $table->integer('lesson_id');
             $table->timestamps();
         });

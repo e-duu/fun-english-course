@@ -7,9 +7,11 @@
 @endsection
 @section('content')
 
-<a href="{{ route('material.create', $data->id) }}" class="px-5 py-1 bg-[blueviolet] rounded-md font-semibold text-white mr-3">Add Material</a>
+<a href="{{ route('material.create', $data->id) }}" class="px-5 py-1 bg-[blueviolet] rounded-md font-semibold text-white">Add Material</a>
 
-<a href="{{ route('exercise.create', $data->id) }}" class="px-5 py-1 bg-[blueviolet] rounded-md font-semibold text-white">Add Exercise</a>
+<a href="{{ route('exercise.create', $data->id) }}" class="px-5 py-1 bg-[blueviolet] rounded-md font-semibold text-white  mx-2">Add Exercise</a>
+
+<a href="{{ route('exercise.create', $data->id) }}" class="px-5 py-1 bg-[blueviolet] rounded-md font-semibold text-white">Download File</a>
 
 <div class="w-full overflow-hidden rounded-lg shadow-xs mt-4">
   <div class="w-full overflow-x-auto">
