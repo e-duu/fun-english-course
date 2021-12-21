@@ -13,32 +13,33 @@
       <span class="text-gray-700 dark:text-gray-400">Title</span>
       <input type="text" value="{{ old('title') }}" name="title" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md border-gray-400" placeholder="Lesson 1 Greetings - Presentation"/>
       @error('title')
-        <div class="mt-2" style="color: rgb(255, 35, 35);">
+        <div class="mt-2 text-red-600">
           <i class="fas fa-dot-circle"></i> {{ $message }}
         </div>
       @enderror
     </label>
 
     <label class="block text-sm mt-4">
-      <span class="text-gray-700 dark:text-gray-400">Content</span>
+      <div class="flex justify-between">
+        <span class="text-gray-700 dark:text-gray-400">Description</span>
+        <span class="text-sm">Optional, must be fill with link</span>
+      </div>
       <input type="text" name="content" value="{{ old('content') }}" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md border-gray-400" placeholder="https://docs.google.com/presentation"/>
-      @error('content')
-        <div class="mt-2" style="color: rgb(255, 35, 35);">
-          <i class="fas fa-dot-circle"></i> {{ $message }}
-        </div>
-      @enderror
     </label>
 
-    <label class="block text-sm mt-4">
-      <span class="text-gray-700 dark:text-gray-400">Description</span>
-      <textarea name="description" id="editor" ></textarea>
+    <label class="block text-sm mt-4 prose max-w-full">
+      <div class="flex justify-between">
+        <span class="text-gray-700 dark:text-gray-400">Description</span>
+        <span class="text-sm">Optional</span>
+      </div>
+      <textarea name="description" id="editor" rows="40"></textarea>
     </label>
 
     <label class="block text-sm mt-4">
       <span class="text-gray-700 dark:text-gray-400">Photo</span>
       <input name="photo_file" value="{{ old('photo') }}" type="file" class="border w-full mt-1 text-sm rounded-md border-gray-400 py-1 px-2 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray" />
-      @error('photo')
-        <div class="mt-2" style="color: rgb(255, 35, 35);">
+      @error('photo_file')
+        <div class="mt-2 text-red-600">
           <i class="fas fa-dot-circle"></i> {{ $message }}
         </div>
       @enderror
@@ -58,7 +59,7 @@
           <span class="ml-2">No</span>
         </label>
         @error('is_accessible_by_student')
-          <div class="mt-2" style="color: rgb(255, 35, 35);">
+          <div class="mt-2 text-red-600">
             <i class="fas fa-dot-circle"></i> {{ $message }}
           </div>
         @enderror
@@ -71,18 +72,31 @@
 
   </form>
 @endsection
-@push('after-script')
+  @push('after-script')
   <script src="https://cdn.ckeditor.com/ckeditor5/31.1.0/classic/ckeditor.js"></script>
   <script>
     ClassicEditor
-      .create( document.querySelector( '#editor' ))
-      .then( editor => {
-              console.log( editor );
-      })
+      .create( document.querySelector( '#editor' ), {
+          toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
+          heading: {
+              options: [
+                  { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                  { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                  { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
+              ]
+          }
+      } )
       .catch( error => {
               console.error( error );
       });
   </script>
+@endpush
+@push('after-style')
+    <style>
+      .ck-editor__editable_inline {
+        min-height: 200px;
+      }
+    </style>
 @endpush
 
 

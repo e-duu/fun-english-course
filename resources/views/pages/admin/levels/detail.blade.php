@@ -7,7 +7,12 @@
 @endsection
 @section('content')
 
-<a href="{{ route('lesson.create', $data->id) }}" class="px-5 py-1 bg-[blueviolet] rounded-md font-semibold text-white">Add Lesson</a>
+
+<div class="flex justify-between items-center">
+  <a href="{{ route('lesson.create', $data->id) }}" class="px-5 py-1 bg-[blueviolet] rounded-md font-semibold text-white">Add Lesson</a>
+  
+  <a href="{{ route('program.show', $data->program->id) }}" class="px-5 py-1 bg-yellow-400 rounded-md font-semibold text-white">Back to Level</a>
+</div>
 
 <div class="w-full overflow-hidden rounded-lg shadow-xs mt-4">
   <div class="w-full overflow-x-auto">
@@ -20,7 +25,7 @@
       </thead>
       <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-darker">
 
-        @forelse ($data->lessons as $item)
+        @forelse ($lessons as $item)
           <tr class="text-gray-700 dark:text-gray-400">
             <td class="px-4 py-3 text-sm">
               {{ $item->name }}
@@ -60,9 +65,9 @@
     </table>
   </div>
   <div class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
-    {{-- <div class="text-center w-[1000px] 2xl:w-[1335px] ">
-			{{ $data->links() }}
-		</div> --}}
+    <div class="text-center w-[1000px] 2xl:w-[1335px] ">
+			{{ $lessons->links() }}
+		</div>
   </div>
 </div>
 @endsection

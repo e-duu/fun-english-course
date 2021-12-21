@@ -13,6 +13,13 @@
         <a href="{{ $next }}" class="bg-blue-600 hover:shadow-lg transition-shadow duration-200 text-white rounded-md px-3 sm:px-6 py-2 sm:py-2 text-xs sm:text-lg">Next Material</a>
       @endif
     </div>
-    <iframe class="w-full h-[215px] sm:h-[460px] 2xl:h-[620px] rounded-md" src="{{ $material->content }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    @if ($material->description)
+      <div class="bg-white mt-5 px-3 sm:px-6 py-3 sm:py-6 mb-5 rounded-md shadow-md prose sm:max-w-full">
+        {!! $material->description !!}
+      </div>
+    @endif
+    @if ($material->content)
+      <iframe class="mt-4 sm:mt-7 mb-10 w-full h-[215px] sm:h-[460px] 2xl:h-[620px] rounded-md" src="{{ $material->content }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    @endif
   </div>
 @endsection

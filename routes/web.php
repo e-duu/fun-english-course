@@ -12,6 +12,7 @@ use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\RecipientController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DownloadableController;
 use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\LevelUserController;
 use App\Http\Controllers\PaymentPageController;
@@ -52,6 +53,7 @@ Route::middleware(['auth'])->group(function ()
 	// Watch Material
 	Route::get('/watch/{id}', [WatchController::class, 'index'])->name('watch');
 	Route::get('/exercise/{id}', [WatchController::class, 'exercise'])->name('exercise');
+	Route::get('/downloadable/{id}', [WatchController::class, 'downloadable'])->name('downloadable');
 	
 	// Score
 	Route::get('/score', [WatchController::class, 'score'])->name('score');
@@ -135,6 +137,16 @@ Route::middleware(['auth'])->group(function ()
 				Route::get('/edit/{id}', [RecipientController::class, 'edit'])->name('recipient.edit');
 				Route::post('/edit/{id}', [RecipientController::class, 'update'])->name('recipient.update');
 				Route::delete('/delete/{id}', [RecipientController::class, 'destroy'])->name('recipient.delete');
+		});
+
+		Route::prefix('downloadable')->group(function () {
+				Route::get('/all', [DownloadableController::class, 'index'])->name('downloadable.all');
+				Route::get('/create{id}', [DownloadableController::class, 'create'])->name('downloadable.create');
+				Route::post('/create', [DownloadableController::class, 'store'])->name('downloadable.store');
+				Route::get('/show/{id}', [DownloadableController::class, 'show'])->name('downloadable.show');
+				Route::get('/edit/{id}', [DownloadableController::class, 'edit'])->name('downloadable.edit');
+				Route::post('/edit/{id}', [DownloadableController::class, 'update'])->name('downloadable.update');
+				Route::delete('/delete/{id}', [DownloadableController::class, 'destroy'])->name('downloadable.delete');
 		});
 		
 		Route::prefix('exercise')->group(function () {

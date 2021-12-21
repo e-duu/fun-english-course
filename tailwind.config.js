@@ -1,6 +1,7 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
 const colors = require('tailwindcss/colors')
 const plugin = require('tailwindcss/plugin')
+const prose = require('@tailwindcss/typography')
 const Color = require('color')
 
 module.exports = {
@@ -85,6 +86,7 @@ module.exports = {
      },
    },
    plugins: [
-    require('@tailwindcss/forms')
+    require('@tailwindcss/forms'),
+    prose
    ],
   }

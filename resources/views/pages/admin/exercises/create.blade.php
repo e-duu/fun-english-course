@@ -19,7 +19,7 @@
       @enderror
     </label>
 
-    <label class="block text-sm mt-4">
+    <label class="block text-sm mt-4 prose max-w-full">
       <span class="text-gray-700 dark:text-gray-400">Description</span>
       <textarea name="description" id="editor" ></textarea>
     </label>
@@ -44,14 +44,27 @@
   <script src="https://cdn.ckeditor.com/ckeditor5/31.1.0/classic/ckeditor.js"></script>
   <script>
     ClassicEditor
-      .create( document.querySelector( '#editor' ))
-      .then( editor => {
-              console.log( editor );
-      })
+      .create( document.querySelector( '#editor' ), {
+          toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
+          heading: {
+              options: [
+                  { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                  { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                  { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
+              ]
+          }
+      } )
       .catch( error => {
               console.error( error );
       });
   </script>
+@endpush
+@push('after-style')
+    <style>
+      .ck-editor__editable_inline {
+        min-height: 200px;
+      }
+    </style>
 @endpush
 
 

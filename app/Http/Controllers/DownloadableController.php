@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Exercise;
+use App\Models\Downloadable;
 use App\Models\Lesson;
-use App\Models\Question;
-use App\Models\Score;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class ExerciseController extends Controller
+class DownloadableController extends Controller
 {
     /**
      * Show the form for creating a new resource.
@@ -19,7 +16,7 @@ class ExerciseController extends Controller
     public function create($id)
     {
         $data = Lesson::findOrFail($id);
-        return view('pages.admin.exercises.create', compact('data'));
+        return view('pages.admin.downloadables.create', compact('data'));
     }
 
     /**
@@ -32,21 +29,32 @@ class ExerciseController extends Controller
     {
         $request->validate([
             'title' => 'required|max:255',
+            'description' => 'required',
+            'download_file' => 'required',
             'photo_file' => 'required',
         ],
         [
-            'title.required' => 'please input exercise title',
-            'photo_file.required' => 'please input exercise photo',
+            'title.required' => 'please input downloadable file title',
+            'description.required' => 'please input downloadable file description',
+            'download_file.required' => 'please input downloadable file content',
+            'photo_file.required' => 'please input downloadable file photo',
         ]);
         
         $image = $request->file('photo_file');
         $new_name_image = time() . '.' .  $image->getClientOriginalExtension();
-        $image->move(public_path('exercises'), $new_name_image);
+        $image->move(public_path('downloadables'), $new_name_image);
         $request->merge([
             'photo' => $new_name_image
         ]);
 
-        Exercise::create($request->all());
+        $content = $request->file('download_file');
+        $new_name_content = time() . '.' .  $content->getClientOriginalExtension();
+        $content->move(public_path('downloadables'), $new_name_content);
+        $request->merge([
+            'file' => $new_name_content
+        ]);
+
+        Downloadable::create($request->all());
         return redirect()->route('lesson.show', $request->lesson_id);
     }
 
@@ -58,8 +66,8 @@ class ExerciseController extends Controller
      */
     public function show($id)
     {
-        $data = Exercise::findOrFail($id);
-        return view('pages.admin.exercises.detail', compact('data'));
+        $data = Downloadable::findOrFail($id);
+        return view('pages.admin.downloadables.detail', compact('data'));
     }
 
     /**
@@ -70,8 +78,8 @@ class ExerciseController extends Controller
      */
     public function edit($id)
     {
-        $data = Exercise::findOrFail($id);
-        return view('pages.admin.exercises.edit', compact('data'));
+        $data = Downloadable::findOrFail($id);
+        return view('pages.admin.downloadables.edit', compact('data'));
     }
 
     /**
@@ -85,19 +93,20 @@ class ExerciseController extends Controller
     {
         $rules = [
             'title' => 'required',
+            'description' => 'required',
         ];
 
-        $item = Exercise::find($id);
+        $item = Downloadable::find($id);
 
         if (!empty($request->photo_file)) {
             $image = $request->file('photo_file');
             $new_name_image = time() . '.' .  $image->getClientOriginalExtension();
-            $image->move(public_path('exercises'), $new_name_image);
+            $image->move(public_path('downloadables'), $new_name_image);
             $request->merge([
                 'photo' => $new_name_image
             ]);
             
-            $img_path = public_path('exercises/' . $item->photo);
+            $img_path = public_path('downloadables/' . $item->photo);
             if (file_exists($img_path)) {
                 unlink($img_path);
             }
@@ -105,6 +114,19 @@ class ExerciseController extends Controller
             $data = $request->all();
         } else {
             $data = $request->except('photo');
+        }
+
+        if (!empty($request->download_file)) {
+            $content = $request->file('download_file');
+            $new_name_content = time() . '.' .  $content->getClientOriginalExtension();
+            $content->move(public_path('downloadables'), $new_name_content);
+            $request->merge([
+                'file' => $new_name_content
+            ]);
+
+            $data = $request->all();
+        } else {
+            $data = $request->except('file');
         }
 
         $request->validate($rules);
@@ -122,47 +144,8 @@ class ExerciseController extends Controller
      */
     public function destroy($id)
     {
-        $data = Exercise::findorfail($id);
+        $data = Downloadable::findorfail($id);
         $data->delete();
-        $this->removeImage($data->image);
         return back();
-    }
-
-    public function removeImage($image)
-    {
-        if (file_exists($image)) {
-            unlink('/exercises/' . $image);
-        }
-    }
-
-    public function score(Request $request, $id)
-    {
-        $answer = $request->input('answer');
-        
-        $correct_answer = null;
-        $wrong_answer = null;
-
-        foreach ($answer as $key => $value) {
-            $check = Question::where('id','=', $key)->where('answer','=',$value)->get();
-            $correct = count($check);
-            
-            if($correct){
-                $correct_answer++;
-            } else {
-                $wrong_answer++;
-            }
-        }
-
-        $total_question = Exercise::find($id)->questions()->count(); 
-        
-        $score = $correct_answer / $total_question * 100;
-
-        Score::create([
-            'user_id' => Auth::user()->id,
-            'score' => $score,
-        ]);
-
-        return redirect()->route('score');
-        
     }
 }

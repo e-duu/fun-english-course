@@ -18,7 +18,10 @@
         <a href="{{ $next }}" class="bg-blue-600 hover:shadow-lg transition-shadow duration-200 text-white rounded-md px-3 sm:px-6 py-2 sm:py-2 text-xs sm:text-lg">Next Material</a>
       @endif
     </div>
-    <div class="flex-col bg-white px-3 sm:px-6 pt-3 sm:pt-6 pb-20 mb-10 rounded-md shadow-md">
+    <div class="bg-white mt-5 px-3 sm:px-6 py-3 sm:py-6 mb-10 rounded-md shadow-md">
+      {!! $exercise->description !!}
+    </div>
+    <div class="flex-col bg-white mt-5 px-3 sm:px-6 pt-3 sm:pt-6 pb-20 mb-10 rounded-md shadow-md">
       <form class="ml-5 mt-5 flex-col relative" action="{{ route('score.store', $exercise->id) }}" method="POST">
         @csrf
         @method('POST')
