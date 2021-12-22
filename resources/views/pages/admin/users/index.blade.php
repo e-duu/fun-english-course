@@ -36,14 +36,19 @@
 							<div class="border-b border-gray-500 my-5"></div>
 
 						<!-- Buttons -->
-						<div class="flex-col sm:flex-row sm:justify-end text-center sm:text-right space-y-2 sm:space-x-2 mt-5">
+						<div class="flex-col sm:flex-row sm:justify-end text-center sm:text-right space-y-2 sm:space-y-0 sm:space-x-2 mt-5">
 								<button type="button" @click="showModal = !showModal" class="w-full sm:w-auto sm:px-4 py-2 text-xs sm:text-sm bg-red-600 rounded-md transition-colors duration-150 ease-linear text-white focus:outline-none focus:ring-0 font-semibold hover:bg-red-700">Cancel</button>
 
-								<button formaction="{{ route('template.user') }}" class="w-full sm:w-auto sm:px-4 py-2 text-xs sm:text-sm bg-purple-600 rounded-md transition-colors duration-150 ease-linear text-white focus:outline-none focus:ring-0 font-semibold hover:bg-purple-700">Download Template</button>
+								<a href="{{ route('template.user') }}" class="w-full sm:w-auto sm:px-4 py-2 sm:py-1 text-xs sm:text-sm bg-purple-600 rounded-md transition-colors duration-150 ease-linear text-white focus:outline-none focus:ring-0 font-semibold hover:bg-purple-700">Download Template</a>
 
 								<button type="submit" class="w-full sm:w-auto sm:px-4 py-2 text-xs sm:text-sm bg-purple-600 rounded-md transition-colors duration-150 ease-linear text-white focus:outline-none focus:ring-0 font-semibold hover:bg-purple-700">Sumbit</button>
-							</form>
-						</div>
+						</form>
+
+						<form class="block sm:hidden" method="GET">
+							@method('GET')
+							<button formaction="{{ route('template.user') }}" class="w-full sm:w-auto sm:px-4 py-2 text-xs sm:text-sm bg-purple-600 rounded-md transition-colors duration-150 ease-linear text-white focus:outline-none focus:ring-0 font-semibold hover:bg-purple-700">Download Template</button>
+						</form>
+					</div>
 				</div>
 		</div>
 	</div>
