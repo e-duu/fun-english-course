@@ -11,7 +11,7 @@
 
     <label class="block text-sm mt-4">
       <span class="text-gray-700 dark:text-gray-400">Downloadable File Title</span>
-      <input type="text" name="title" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md border-gray-400" placeholder="Greetings I - Downloadable Excel" value="{{ $data->title }}"/>
+      <input type="text" name="title" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md border-gray-400" placeholder="Greetings I - Downloadable Excel" value="{{ $data->title }}"/>
       @error('title')
         <div class="mt-2 text-red-600">
           <i class="fas fa-dot-circle"></i> {{ $message }}
@@ -26,7 +26,7 @@
 
     <label class="block text-sm mt-4">
       <span class="text-gray-700 dark:text-gray-400">Photo</span>
-      <input name="photo_file" value="{{ old('photo_file') }}" type="file" class="border w-full mt-1 text-sm rounded-md border-gray-400 py-1 px-2 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray" value="{{ $data->photo }}" />
+      <input name="photo_file" value="{{ old('photo_file') }}" type="file" class="border w-full mt-1 text-sm rounded-md border-gray-400 py-1 px-2 dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray" value="{{ $data->photo }}" />
       @error('photo_file')
         <div class="mt-2 text-red-600">
           <i class="fas fa-dot-circle"></i> {{ $message }}
@@ -36,7 +36,7 @@
     
     <label class="block text-sm mt-4">
       <span class="text-gray-700 dark:text-gray-400">Downloadable File Content</span>
-      <input name="download_file" value="{{ old('download_file') }}" type="file" class="border w-full mt-1 text-sm rounded-md border-gray-400 py-1 px-2 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray" value="{{ $data->file }}" />
+      <input name="download_file" value="{{ old('download_file') }}" type="file" class="border w-full mt-1 text-sm rounded-md border-gray-400 py-1 px-2 dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray" value="{{ $data->file }}" />
       @error('download_file')
         <div class="mt-2 text-red-600">
           <i class="fas fa-dot-circle"></i> {{ $message }}
@@ -50,15 +50,15 @@
       </span>
       <div class="mt-2">
         <label class="inline-flex items-center text-gray-600 dark:text-gray-400">
-          <input type="radio" class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" name="accessible_by" value="teacher" {{ ($data->accessible_by == 'teacher' ? 'checked' : '') }}/>
+          <input type="radio" class="text-blue-600 form-radio focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray" name="accessible_by" value="teacher" {{ ($data->accessible_by == 'teacher' ? 'checked' : '') }}/>
           <span class="ml-2">Teacher</span>
         </label>
         <label class="inline-flex items-center ml-6 text-gray-600 dark:text-gray-400">
-          <input type="radio" class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" name="accessible_by" value="student" {{ ($data->accessible_by == 'student' ? 'checked' : '') }}/>
+          <input type="radio" class="text-blue-600 form-radio focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray" name="accessible_by" value="student" {{ ($data->accessible_by == 'student' ? 'checked' : '') }}/>
           <span class="ml-2">Student</span>
         </label>
         <label class="inline-flex items-center ml-6 text-gray-600 dark:text-gray-400">
-          <input type="radio" class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" name="accessible_by" value="all" {{ ($data->accessible_by == 'all' ? 'checked' : '') }}/>
+          <input type="radio" class="text-blue-600 form-radio focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray" name="accessible_by" value="all" {{ ($data->accessible_by == 'all' ? 'checked' : '') }}/>
           <span class="ml-2">Teacher & Student</span>
         </label>
         @error('accessible_by')
@@ -71,7 +71,7 @@
     
     <input type="hidden" name="lesson_id" value="{{ $data->lesson_id }}">
     
-    <button class="mt-4 bg-purple-600 py-2 px-7 rounded-md text-white">Sumbit</button>
+    <button class="mt-4 bg-blue-600 py-2 px-7 rounded-md text-white">Sumbit</button>
 
   </form>
 @endsection
