@@ -21,7 +21,7 @@
 
     <label class="block text-sm mt-4 prose max-w-full">
       <span class="text-gray-700 dark:text-gray-400">Description</span>
-      <textarea name="description" id="editor" >{{ $data->description }}"</textarea>
+      <textarea name="description" id="editor">{{ $data->description }}</textarea>
     </label>
 
     <label class="block text-sm mt-4">
@@ -50,15 +50,15 @@
       </span>
       <div class="mt-2">
         <label class="inline-flex items-center text-gray-600 dark:text-gray-400">
-          <input type="radio" class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" name="is_accessible_by_student" value="teacher" {{ ($data->accessible_by == 'teacher' ? 'checked' : '') }}/>
+          <input type="radio" class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" name="accessible_by" value="teacher" {{ ($data->accessible_by == 'teacher' ? 'checked' : '') }}/>
           <span class="ml-2">Teacher</span>
         </label>
         <label class="inline-flex items-center ml-6 text-gray-600 dark:text-gray-400">
-          <input type="radio" class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" name="is_accessible_by_student" value="student" {{ ($data->accessible_by == 'student' ? 'checked' : '') }}/>
+          <input type="radio" class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" name="accessible_by" value="student" {{ ($data->accessible_by == 'student' ? 'checked' : '') }}/>
           <span class="ml-2">Student</span>
         </label>
         <label class="inline-flex items-center ml-6 text-gray-600 dark:text-gray-400">
-          <input type="radio" class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" name="is_accessible_by_student" value="student" {{ ($data->accessible_by == 'student_teacher' ? 'checked' : '') }}/>
+          <input type="radio" class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" name="accessible_by" value="all" {{ ($data->accessible_by == 'all' ? 'checked' : '') }}/>
           <span class="ml-2">Teacher & Student</span>
         </label>
         @error('accessible_by')
