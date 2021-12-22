@@ -38,4 +38,26 @@ class Lesson extends Model
     {
         return $this->hasMany(Material::class, 'id', 'lesson_id');
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::deleting(function ($model) {
+            $model->materials()->each(function ($material) {
+                $material->delete();
+            });
+
+            $model->exercises()->each(function ($exercise) {
+                $exercise->delete();
+            });
+            
+            $model->downloadables()->each(function ($downloadable) {
+                $downloadable->delete();
+            });
+
+            $model->material_details()->each(function ($material_detail) {
+                $material_detail->delete();
+            });
+        });
+    }
 }

@@ -22,4 +22,17 @@ class Program extends Model
     {
         return $this->hasMany(Level::class);
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::deleting(function ($model) {
+            $model->levels()->each(function ($level) {
+                $level->delete();
+            });
+            $model->payments()->each(function ($payment) {
+                $payment->delete();
+            });
+        });
+    }
 }

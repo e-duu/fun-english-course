@@ -52,14 +52,14 @@ class UserController extends Controller
             'email' => 'required|email|unique:users,email',
             'role' => 'required',
             'password' => 'required|min:6|max:16',
-            'photo' => 'required'
+            'photo_file' => 'required'
         ],
         [
             'name.required' => 'please input your name',
             'username.required' => 'username has been already exist',
             'email.required' => 'email has been already exist',
             'role.required' => 'please select the role',
-            'photo.required' => 'please insert your profile photo',
+            'photo_file.required' => 'please insert your profile photo',
             'password.required' => 'password must be at least 6 characters',
 
         ]);

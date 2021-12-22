@@ -18,4 +18,14 @@ class Recipient extends Model
     {
         return $this->hasMany(Payment::class, 'id', 'recipient_id');
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::deleting(function ($model) {
+            $model->payments()->each(function ($payment) {
+                $payment->delete();
+            });
+        });
+    }
 }
