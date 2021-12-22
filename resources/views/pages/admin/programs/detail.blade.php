@@ -7,7 +7,11 @@ Detail Programs - {{ $data->name }}
 @endsection
 @section('content')
 
-<a href="{{ route('level.create', $data->id) }}" class="px-5 py-1 bg-[blueviolet] rounded-md font-semibold text-white">Add Level</a>
+<div class="flex justify-between">
+  <a href="{{ route('level.create', $data->id) }}" class="px-5 py-1 bg-[blueviolet] rounded-md font-semibold text-white">Add Level</a>
+  
+  <a href="{{ route('program.all') }}" class="px-5 py-1 bg-yellow-400 rounded-md font-semibold text-white">Back to Program</a>
+</div>
 
 <div class="w-full overflow-hidden rounded-lg shadow-xs mt-4">
   <div class="w-full overflow-x-auto">
@@ -21,7 +25,7 @@ Detail Programs - {{ $data->name }}
       </thead>
       <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-darker">
 
-        @forelse ($data->levels as $item)
+        @forelse ($levels as $item)
           <tr class="text-gray-700 dark:text-gray-400">
             <td class="px-4 py-3 text-sm">
               {{ $item->name }}
@@ -64,7 +68,9 @@ Detail Programs - {{ $data->name }}
     </table>
   </div>
   <div class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
-    
-  </div>
+		<div class="text-center w-auto sm:w-[565px] md:w-[980px] 2xl:w-[1335px] ">
+			{{ $levels->links() }}
+		</div>
+	</div>
 </div>
 @endsection

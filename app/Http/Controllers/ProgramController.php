@@ -57,7 +57,8 @@ class ProgramController extends Controller
     public function show($id)
     {
         $data = Program::findorfail($id);
-        return view('pages.admin.programs.detail', compact('data'));
+        $levels = $data->levels()->paginate(5);
+        return view('pages.admin.programs.detail', compact('data', 'levels'));
     }
 
     /**

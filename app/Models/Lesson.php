@@ -29,6 +29,11 @@ class Lesson extends Model
         return $this->hasMany(Exercise::class);
     }
 
+    public function downloadables()
+    {
+        return $this->hasMany(Downloadable::class);
+    }
+
     public function material_details()
     {
         return $this->hasMany(Material::class, 'id', 'lesson_id');

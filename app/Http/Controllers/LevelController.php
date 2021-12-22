@@ -51,7 +51,8 @@ class LevelController extends Controller
     public function show($id)
     {
         $data = Level::findorfail($id);
-        return view('pages.admin.levels.detail', compact('data'));
+        $lessons = $data->lessons()->paginate(5);
+        return view('pages.admin.levels.detail', compact('data', 'lessons'));
     }
 
     /**
