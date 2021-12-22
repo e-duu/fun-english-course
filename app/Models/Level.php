@@ -34,4 +34,17 @@ class Level extends Model
     {
         return $this->belongsToMany(User::class);
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::deleting(function ($model) {
+            $model->lessons()->each(function ($lesson) {
+                $lesson->delete();
+            });
+            $model->payments()->each(function ($payment) {
+                $payment->delete();
+            });
+        });
+    }
 }

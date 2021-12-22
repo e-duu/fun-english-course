@@ -25,4 +25,14 @@ class Exercise extends Model
     {
         return $this->belongsTo(Lesson::class);
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::deleting(function ($model) {
+            $model->questions()->each(function ($question) {
+                $question->delete();
+            });
+        });
+    }
 }

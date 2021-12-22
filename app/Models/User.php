@@ -42,7 +42,20 @@ class User extends Authenticatable
 
     public function scores()
     {
-        return $this->hasMany(Score::class);  
+        return $this->hasMany(Score::class);
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::deleting(function ($model) {
+            $model->scores()->each(function ($score) {
+                $score->delete();
+            });
+            $model->payments()->each(function ($payment) {
+                $payment->delete();
+            });
+        });
     }
 
 }

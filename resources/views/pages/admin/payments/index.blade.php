@@ -23,16 +23,16 @@
 			@forelse ($data as $item)
 				<tr class="text-gray-700 dark:text-gray-400">
 					<td class="px-4 py-3 text-sm">
-						{{ $item->users->name }}
+						{{ $item->users?->name }}
 					</td>
 					<td class="px-4 py-3 text-sm">
-						{{ $item->programs->name }}
+						{{ $item->programs?->name }}
 					</td>
 					<td class="px-4 py-3 text-sm">
-						{{ $item->levels->name }}
+						{{ $item->levels?->name }}
 					</td>
 					<td class="px-4 py-3 text-sm">
-						{{ $item->recipients->name }}
+						{{ $item->recipients?->name }}
 					</td>
 					<td class="px-4 py-3">
 						<div class="flex items-center space-x-4 text-sm">
