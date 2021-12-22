@@ -17,7 +17,7 @@ class CreateDownloadablesTable extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->enum('accessible_by', ['student', 'teacher', 'student_teacher']);
+            $table->enum('accessible_by', ['student', 'teacher', 'all']);
             $table->string('photo');
             $table->string('file');
             $table->integer('lesson_id');

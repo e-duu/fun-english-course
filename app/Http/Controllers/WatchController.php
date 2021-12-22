@@ -53,14 +53,14 @@ class WatchController extends Controller
         ->orderBy('id')
         ->first();
 
-      $nextMaterial = $exercise->lesson
-        ->exercises()
+      $nextDownloadable = $exercise->lesson
+        ->downloadables()
         ->first();
 
       if ($nextExercise) {
         $next = route('exercise', $nextExercise->id);
       } else if ($nextExercise) {
-        $next = route('watch', $nextMaterial->id);
+        $next = route('downloadable', $nextDownloadable->id);
       } else {
         $next = null;
       }

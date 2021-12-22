@@ -7,7 +7,13 @@
 @endsection
 @section('content')
 
-<a href="{{ route('question.create', $data->id) }}" class="px-5 py-1 bg-[blueviolet] rounded-md font-semibold text-white">Add Question</a>
+
+
+<div class="flex justify-between">
+  <a href="{{ route('question.create', $data->id) }}" class="px-5 py-1 bg-[blueviolet] rounded-md font-semibold text-white">Add Question</a>
+  
+  <a href="{{ route('lesson.show', $data->lesson->id) }}" class="px-5 py-1 bg-yellow-400 rounded-md font-semibold text-white">Back to Lesson</a>
+</div>
 
 <div class="w-full overflow-hidden rounded-lg shadow-xs mt-4">
   <div class="w-full overflow-x-auto">

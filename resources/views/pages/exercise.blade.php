@@ -8,8 +8,8 @@
       $incerement = 1;
   @endphp
   
-  <div class="flex-col mx-auto px-8 sm:px-32">
-    <div class="flex justify-between items-center mt-20 mb-7">
+  <div class="flex-col mx-auto px-8 sm:px-32 h-screen">
+    <div class="flex justify-between items-center mt-8 sm:mt-20 mb-7">
       <div class="flex-col">
         <h1 class="font-bold text-md sm:text-2xl text-gray-800">{{ $exercise->lesson->name }}</h1>
         <p class="text-gray-800 mt-1 sm:mt-2 text-xs sm:text-lg">{{ $exercise->title }}</p>
