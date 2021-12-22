@@ -7,7 +7,7 @@
 @endsection
 @section('content')
   <form class="mb-5 relative h-5">
-    <button formaction="{{ route('program.all') }}" class="px-5 py-1 bg-yellow-400 rounded-md font-semibold text-white sm:absolute sm:right-0 w-full sm:w-auto">Back to Program</button>
+    <button formaction="{{ route('user.all') }}" class="px-5 py-1 bg-yellow-400 rounded-md font-semibold text-white sm:absolute sm:right-0 w-full sm:w-auto">Back to User</button>
   </form>
   <div class="bg-white shadow-md p-6 text-left rounded-lg sm:flex space-x-8">
     <img src="{{ asset('/users/' . $data->photo) }}" alt="user profile photo" class="w-60 sm:w-96 rounded-md">

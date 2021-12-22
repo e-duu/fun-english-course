@@ -80,7 +80,7 @@
 
     <label class="block text-sm" style="margin-top: 20px">
       <span class="text-gray-700 dark:text-gray-400">Amount</span>
-      <input value="{{  }}" type="number" name="amount" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md border-gray-400" placeholder="3"/>
+      <input value="{{ $payments->amount }}" type="number" name="amount" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md border-gray-400" placeholder="3"/>
       @error('amount')
         <div class="mt-1 text-sm text-[red]">
           <i class="fas fa-dot-circle text-xs"></i> {{ $message }}
@@ -101,7 +101,7 @@
     <label class="block mt-4 text-sm">
       <span class="text-gray-700 dark:text-gray-400">Notes</span>
       <textarea name="note" class="block w-full mt-1 text-sm rounded-md border-gray-400 dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-textarea focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" rows="3" placeholder="Enter some long content."
-      ></textarea>
+      >{{ $payments->notes }}</textarea>
       @error('note')
         <div class="mt-1 text-sm text-[red]">
           <i class="fas fa-dot-circle text-xs"></i> {{ $message }}
