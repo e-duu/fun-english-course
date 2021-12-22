@@ -10,7 +10,7 @@
     <button formaction="{{ route('payment.all') }}" class="px-5 py-1 bg-yellow-400 rounded-md font-semibold text-white sm:absolute sm:right-0 w-full sm:w-auto">Back to Payment</button>
   </form>
   <div class="flex-col">
-    <div class="bg-white shadow-md p-6 text-left rounded-lg flex-col sm:flex-row space-x-8">
+    <div class="bg-white shadow-md p-6 text-left rounded-lg sm:flex space-x-8">
       <img src="{{ asset('/payments/' . $data->evidence) }}" alt="payment reciept" class="w-60 sm:w-96 rounded-md">
       <div class="flex-col space-y-3">
         <p class="text-sm sm:text-lg"><b> Student :</b> &nbsp;&nbsp; {{ $data->users->name }}</p>
