@@ -21,7 +21,7 @@
 
     <label class="block text-sm mt-4">
       <div class="flex justify-between">
-        <span class="text-gray-700 dark:text-gray-400">Description</span>
+        <span class="text-gray-700 dark:text-gray-400">Content</span>
         <span class="text-sm">Optional, must be fill with link</span>
       </div>
       <input type="text" name="content" value="{{ old('content') }}" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md border-gray-400" placeholder="https://docs.google.com/presentation"/>

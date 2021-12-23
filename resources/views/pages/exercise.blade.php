@@ -28,6 +28,10 @@
         @foreach ($exercise->questions as $item)
           <h1 class="text-sm sm:text-lg mt-4 sm:mt-5"><strong>{{ $incerement++ }}.</strong> {{ $item->question }}</h1>
 
+          @if ($item->photo)
+            <img src="{{ asset('questions/' . $item->photo) }}" class="my-4 rounded-md" alt="question photo">
+          @endif
+
           <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
 
           <div class="ml-5">

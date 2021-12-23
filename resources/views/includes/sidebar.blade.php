@@ -9,7 +9,7 @@
   </button>
 </nav>
 
-<div class="flex-col p-10 bg-white h-full overflow-y-auto hidden fixed sm:static sm:block z-40 sm:z-0" id="sidebar">
+<div class="flex-col p-10 bg-white h-screen sm:h-[200%] hidden fixed sm:static sm:block z-40 sm:z-0" id="sidebar">
   <a href="{{ route('resource') }}" class="text-gray-800 hover:text-blue-600 transition-colors duration-200 font-bold text-sm sm:text-xl"><i class="fas fa-arrow-left text-lg mb-8 sm:mb-20"></i> &nbsp; Back to Home</a>
   <div class="flex-col my-12">
     @foreach ($lessons as $lesson)

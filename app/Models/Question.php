@@ -16,6 +16,7 @@ class Question extends Model
         'c',
         'd',
         'answer',
+        'photo',
         'exercise_id'
     ];
 
