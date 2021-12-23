@@ -24,7 +24,7 @@
               <a href="https://funenglishcourse.com/" target="_blank" class="flex justify-center tracking-wider">
                 <img src="{{ asset('/images/logo.png') }}" style="width: 250px;" alt="fun english course logo">
               </a>
-              <h1 class="text-2xl font-bold text-center text-purple-700">Login</h1>
+              <h1 class="text-2xl font-bold text-center text-blue-700">Login</h1>
               <form action="{{ route('authenticate') }}" method="POST" class="space-y-6">
                 @csrf
                 @method('POST')
@@ -32,7 +32,7 @@
         
                 <input class="w-full px-4 py-2 border-gray-300 rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring focus:ring-primary-100 dark:focus:ring-primary-darker" type="password" name="password" id="password" placeholder="Password" required/>
 
-                <button type="submit" class="w-full px-4 py-2 font-medium text-center text-white transition-colors duration-200 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 dark:focus:ring-offset-darker" style="background-color: rebeccapurple">
+                <button type="submit" class="w-full px-4 py-2 font-medium text-center text-white transition-colors duration-200 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 dark:focus:ring-offset-darker bg-blue-600">
                   Login
                 </button>
               </form>
@@ -47,7 +47,7 @@
               <a href="https://funenglishcourse.com/" target="_blank" class="flex justify-center tracking-wider">
                 <img src="{{ asset('/images/logo.png') }}" style="width: 250px;" alt="fun english course logo">
               </a>
-              <h1 class="text-2xl font-bold text-center" style="color: rebeccapurple">Login</h1>
+              <h1 class="text-2xl font-bold text-center text-blue-600">Login</h1>
               <form action="{{ route('authenticate') }}" method="POST" class="space-y-6">
                 @csrf
                 @method('POST')
@@ -55,7 +55,7 @@
         
                 <input class="w-full px-4 py-2 border-gray-300 rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring focus:ring-primary-100 dark:focus:ring-primary-darker" type="password" name="password" id="password" placeholder="Password" required/>
                 <div>
-                  <button type="submit" class="w-full px-4 py-2 font-medium text-center text-white transition-colors duration-200 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 dark:focus:ring-offset-darker" style="background-color: rebeccapurple">
+                  <button type="submit" class="w-full px-4 py-2 font-medium text-center text-white transition-colors duration-200 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 dark:focus:ring-offset-darker bg-blue-600">
                     Login
                   </button>
                 </div>

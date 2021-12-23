@@ -10,7 +10,7 @@
 
 
 <div class="flex justify-between">
-  <a href="{{ route('question.create', $data->id) }}" class="px-5 py-1 bg-[blueviolet] rounded-md font-semibold text-white">Add Question</a>
+  <a href="{{ route('question.create', $data->id) }}" class="px-5 py-1 bg-blue-600 rounded-md font-semibold text-white">Add Question</a>
   
   <a href="{{ route('lesson.show', $data->lesson->id) }}" class="px-5 py-1 bg-yellow-400 rounded-md font-semibold text-white">Back to Lesson</a>
 </div>
@@ -33,18 +33,18 @@
             </td>
             <td class="px-4 py-3">
               <div class="flex items-center space-x-4 text-sm">
-                <a href="{{ route('question.show', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                <a href="{{ route('question.show', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
                   <i class=" fas fa-eye"></i>
                   <p>Detail</p>
                 </a>
-                <a href="{{ route('question.edit', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                <a href="{{ route('question.edit', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
                   <i class=" fas fa-edit"></i>
                   <p>Edit</p>
                 </a>
                 <form action="{{ route('question.delete', $item->id) }}" method="POST" class="d-inline">
                   @csrf
                   @method('DELETE')
-                  <button class="flex-col px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                  <button class="flex-col px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
                     <i class="fas fa-trash"></i>
                     <p>Delete</p>
                   </button>

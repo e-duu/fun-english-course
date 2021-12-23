@@ -36,7 +36,7 @@
 
     <label class="block mt-4 text-sm">
       <span class="text-gray-700 dark:text-gray-400">Question</span>
-      <textarea name="question" class="block w-full mt-1 text-sm rounded-md border-gray-400 dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-textarea focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" rows="3" placeholder="Enter some long content."
+      <textarea name="question" class="block w-full mt-1 text-sm rounded-md border-gray-400 dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-textarea focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray" rows="3" placeholder="Enter some long content."
       ></textarea>
       @error('question')
         <div class="mt-1 text-sm text-[red]">
@@ -47,7 +47,7 @@
     
     <label class="flex items-center space-x-2 text-sm mt-4">
       <div class="text-gray-700 dark:text-gray-400 text-md font-semibold">A&nbsp;. </div>
-      <input type="text" name="a" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md border-gray-400" placeholder="Input answer here.."/>
+      <input type="text" name="a" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md border-gray-400" placeholder="Input answer here.."/>
       @error('a')
         <div class="mt-2" style="color: rgb(255, 35, 35);">
           <i class="fas fa-dot-circle"></i> {{ $message }}
@@ -57,7 +57,7 @@
 
     <label class="flex items-center space-x-2 text-sm mt-4">
       <div class="text-gray-700 dark:text-gray-400 text-md font-semibold">B&nbsp;. </div>
-      <input type="text" name="b" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md border-gray-400" placeholder="Input answer here.."/>
+      <input type="text" name="b" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md border-gray-400" placeholder="Input answer here.."/>
       @error('b')
         <div class="mt-2" style="color: rgb(255, 35, 35);">
           <i class="fas fa-dot-circle"></i> {{ $message }}
@@ -67,7 +67,7 @@
 
     <label class="flex items-center space-x-2 text-sm mt-4">
       <div class="text-gray-700 dark:text-gray-400 text-md font-semibold">C&nbsp;. </div>
-      <input type="text" name="c" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md border-gray-400" placeholder="Input answer here.."/>
+      <input type="text" name="c" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md border-gray-400" placeholder="Input answer here.."/>
       @error('c')
         <div class="mt-2" style="color: rgb(255, 35, 35);">
           <i class="fas fa-dot-circle"></i> {{ $message }}
@@ -77,7 +77,7 @@
 
     <label class="flex items-center space-x-2 text-sm mt-4">
       <div class="text-gray-700 dark:text-gray-400 text-md font-semibold">D&nbsp;. </div>
-      <input type="text" name="d" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md border-gray-400" placeholder="Input answer here.."/>
+      <input type="text" name="d" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md border-gray-400" placeholder="Input answer here.."/>
       @error('d')
         <div class="mt-2" style="color: rgb(255, 35, 35);">
           <i class="fas fa-dot-circle"></i> {{ $message }}
@@ -92,7 +92,7 @@
       <div class="mt-2">
         @foreach ($answers as $answer)
           <label class="inline-flex items-center text-gray-600 dark:text-gray-400 mr-4">
-            <input type="radio" class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" name="answer" value="{{ $answer['value'] }}" />
+            <input type="radio" class="text-blue-600 form-radio focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray" name="answer" value="{{ $answer['value'] }}" />
             <span class="ml-2 font-semibold">{{ $answer['name'] }}</span>
           </label>
         @endforeach
@@ -101,7 +101,7 @@
 
     <input type="hidden" name="exercise_id" value="{{ $data->id }}">
     
-    <button class="mt-4 bg-purple-600 py-2 px-7 rounded-md text-white">Sumbit</button>
+    <button class="mt-4 bg-blue-600 py-2 px-7 rounded-md text-white">Sumbit</button>
 
   </form>
 @endsection

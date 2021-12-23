@@ -17,7 +17,7 @@
           <span class="text-gray-700 dark:text-gray-400">
             Program
           </span>
-          <select @change="setPrograms(programs_id)" v-model="programs_id" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray rounded-md border-gray-400 -600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
+          <select @change="setPrograms(programs_id)" v-model="programs_id" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray rounded-md border-gray-400 -600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
             @foreach ($programs as $program)
               <option value="{{ $program->id }}" >{{ $program->name }}</option>
             @endforeach
@@ -35,7 +35,7 @@
           <span class="text-gray-700 dark:text-gray-400">
             Level
           </span>
-          <select name="level_id" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray rounded-md border-gray-400 -600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
+          <select name="level_id" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray rounded-md border-gray-400 -600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
             <option v-for="level in selectedLevels" :value="level.id" >@{{ level.name }}</option>
           </select>
           @error('level_id')
@@ -47,7 +47,7 @@
       </div>
     </div>
     
-    <button class="mt-4 bg-purple-600 py-2 px-7 rounded-md text-white">Sumbit</button>
+    <button class="mt-4 bg-blue-600 py-2 px-7 rounded-md text-white">Sumbit</button>
 
   </form>
 @endsection
