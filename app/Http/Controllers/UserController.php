@@ -67,7 +67,7 @@ class UserController extends Controller
 
         $image = $request->file('photo_file');
         $new_name_image = time() . '.' .  $image->getClientOriginalExtension();
-        $image->move(public_path('materials'), $new_name_image);
+        $image->move(public_path('users'), $new_name_image);
         $request->merge([
             'photo' => $new_name_image
         ]);
