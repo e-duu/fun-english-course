@@ -55,23 +55,23 @@ class UserController extends Controller
             'photo_file' => 'required'
         ],
         [
-            'name.required' => 'please input your name',
+            'name.required' => 'please input user name',
             'username.required' => 'username has been already exist',
-            'email.required' => 'email has been already exist',
+            'email.required' => 'please input user email',
+            'email.unique' => 'email has been already exist',
             'role.required' => 'please select the role',
             'photo_file.required' => 'please insert your profile photo',
             'password.required' => 'password must be at least 6 characters',
 
         ]);
 
-        $data = request()->all();
         $image = $request->file('photo_file');
         $new_name_image = time() . '.' .  $image->getClientOriginalExtension();
-        $image->move(public_path('users'), $new_name_image);
+        $image->move(public_path('materials'), $new_name_image);
         $request->merge([
             'photo' => $new_name_image
         ]);
-        User::create($data);
+        User::create($request->all());
         return redirect()->route('user.all');
     }
 
