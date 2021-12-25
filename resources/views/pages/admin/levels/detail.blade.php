@@ -9,7 +9,7 @@
 
 
 <div class="flex justify-between items-center">
-  <a href="{{ route('lesson.create', $data->id) }}" class="px-5 py-1 bg-[blueviolet] rounded-md font-semibold text-white">Add Lesson</a>
+  <a href="{{ route('lesson.create', $data->id) }}" class="px-5 py-1 bg-blue-600 rounded-md font-semibold text-white">Add Lesson</a>
   
   <a href="{{ route('program.show', $data->program->id) }}" class="px-5 py-1 bg-yellow-400 rounded-md font-semibold text-white">Back to Level</a>
 </div>

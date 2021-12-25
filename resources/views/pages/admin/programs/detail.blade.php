@@ -8,7 +8,7 @@ Detail Programs - {{ $data->name }}
 @section('content')
 
 <div class="flex justify-between">
-  <a href="{{ route('level.create', $data->id) }}" class="px-5 py-1 bg-[blueviolet] rounded-md font-semibold text-white">Add Level</a>
+  <a href="{{ route('level.create', $data->id) }}" class="px-5 py-1 bg-blue-600 rounded-md font-semibold text-white">Add Level</a>
   
   <a href="{{ route('program.all') }}" class="px-5 py-1 bg-yellow-400 rounded-md font-semibold text-white">Back to Program</a>
 </div>

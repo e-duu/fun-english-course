@@ -11,7 +11,7 @@
   </form>
   <div class="flex-col">
     <div class="bg-white shadow-md p-6 text-left rounded-lg sm:flex space-x-8">
-      <img src="{{ asset('/materials/' . $data->photo) }}" alt="payment reciept" class="w-60 sm:w-96 rounded-md">
+      <img src="{{ asset('/materials/' . $data->photo) }}" alt="material photo" class="w-60 sm:w-96 rounded-md">
       <div class="flex-col space-y-3">
         <p class="text-sm sm:text-lg"><b> Title :</b> &nbsp;&nbsp; {{ $data->title }}</p>
         <p class="text-sm sm:text-lg"><b> Lesson :</b> &nbsp;&nbsp; {{ $data->lesson_details->name }}</p>

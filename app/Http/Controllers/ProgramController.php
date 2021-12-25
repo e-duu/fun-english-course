@@ -105,7 +105,6 @@ class ProgramController extends Controller
     public function destroy($id)
     {
         $data = Program::findorfail($id);
-        $data->levels()->delete();
         $data->delete();
         return back();
     }

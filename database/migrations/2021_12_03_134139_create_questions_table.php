@@ -21,6 +21,7 @@ class CreateQuestionsTable extends Migration
             $table->text('c');
             $table->text('d');
             $table->enum('answer', ['a', 'b', 'c', 'd'] );
+            $table->string('photo')->nullable();
             $table->timestamps();
         });
     }

@@ -49,19 +49,27 @@ class QuestionController extends Controller
             'c' => 'required',
             'd' => 'required',
             'answer' => 'required',
-            'exercise_id' => 'required'
+            'photo_file' => 'required',
+            'exercise_id' => 'required',
+        ],
+        [
+            'question.required' => 'please input your name',
+            'a.required' => 'please input the answer',
+            'b.required' => 'please input the answer',
+            'c.required' => 'please input the answer',
+            'd.required' => 'please input the answer',
+            'answer.required' => 'please select the correct answer',
+            'photo_file.required' => 'please insert your question photo',
+
         ]);
 
-        Question::create([
-            'question' => $request->question,
-            'a' => $request->a,
-            'b' => $request->b,
-            'c' => $request->c,
-            'd' => $request->d,
-            'answer' => $request->answer,
-            'exercise_id' => $request->exercise_id
+        $image = $request->file('photo_file');
+        $new_name_image = time() . '.' .  $image->getClientOriginalExtension();
+        $image->move(public_path('questions'), $new_name_image);
+        $request->merge([
+            'photo' => $new_name_image
         ]);
-
+        Question::create($request->all());
         return redirect()->route('exercise.show', $request->exercise_id);
     }
 
@@ -98,28 +106,39 @@ class QuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $rules = [
             'question' => 'required',
             'a' => 'required',
             'b' => 'required',
             'c' => 'required',
             'd' => 'required',
             'answer' => 'required',
-            'exercise_id' => 'required'
-        ]);
+        ];
 
-        $data = Question::findOrFail($id);
+        $item = Question::find($id);
+
+        if (!empty($request->photo_file)) {
+            $image = $request->file('photo_file');
+            $new_name_image = time() . '.' .  $image->getClientOriginalExtension();
+            $image->move(public_path('questions'), $new_name_image);
+            $request->merge([
+                'photo' => $new_name_image
+            ]);
+            
+            $img_path = public_path('questions/' . $item->photo);
+            if (file_exists($img_path)) {
+                unlink($img_path);
+            }
+
+            $data = $request->all();
+        } else {
+            $data = $request->except('photo');
+        }
+
+        $request->validate($rules);
+
+        $item->update($data);
         
-        $data->update([
-            'question' => $request->question,
-            'a' => $request->a,
-            'b' => $request->b,
-            'c' => $request->c,
-            'd' => $request->d,
-            'answer' => $request->answer,
-            'exercise_id' => $request->exercise_id
-        ]);
-
         return redirect()->route('exercise.show', $request->exercise_id);
     }
 
