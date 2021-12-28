@@ -4,7 +4,7 @@
     <div class="flex-col text-center sm:text-left mt-5 sm:mt-0 2xl:-ml-48">
       <h1 class="text-lg sm:text-2xl text-white font-bold">Fun English Course</h1>
       <p class="text-white text-md sm:text-xl">
-        <i class="fas fa-phone-alt my-3"></i> &nbsp; 082151744421
+        <i class="fas fa-phone-alt my-3"></i> &nbsp; 0812 8888 2780
       </p>
       <p class="text-white text-md sm:text-xl">
         <i class="fas fa-envelope-open-text"></i> &nbsp; info@funenglishcourse.com
