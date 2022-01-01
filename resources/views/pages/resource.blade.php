@@ -53,8 +53,6 @@
           @foreach ($lessons as $lesson)
             @foreach ($lesson->materials as $item)
             @endforeach
-            @foreach ($lesson->downloadables as $download)
-            @endforeach
             @if (auth()->user()->role === 'admin')
               @if ($lesson->exercises->count() || $lesson->materials->count() != null || $lesson->downloadables->count() != null)
                 <div class="mt-5 sm:mt-10">
@@ -104,6 +102,8 @@
                           <img src="{{ asset('/exercises/' . $exercise->photo) }}" class="rounded-full w-10 sm:w-16 shadow-md" alt="lesson thumbnail / photo">
                           <h3 class="text-sm sm:text-2xl font-bold">{{ $exercise->title }}</h3>
                         </a>
+                      @endforeach
+                      @foreach ($lesson->downloadables as $download)
                       @endforeach
                       @if (auth()->user()->role === 'teacher' && $download->accessible_by === 'teacher' || auth()->user()->role == 'student' && $download->accessible_by === 'student' || $download->accessible_by === 'all')
                         @foreach ($lesson->downloadables as $downloadable)
