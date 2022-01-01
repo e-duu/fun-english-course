@@ -53,6 +53,8 @@
           @foreach ($lessons as $lesson)
             @foreach ($lesson->materials as $item)
             @endforeach
+            @foreach ($lesson->downloadables as $download)
+            @endforeach
             @if (auth()->user()->role === 'admin')
               @if ($lesson->exercises->count() || $lesson->materials->count() != null || $lesson->downloadables->count() != null)
                 <div class="mt-5 sm:mt-10">
@@ -103,9 +105,7 @@
                           <h3 class="text-sm sm:text-2xl font-bold">{{ $exercise->title }}</h3>
                         </a>
                       @endforeach
-                      @foreach ($lesson->downloadables as $download)
-                      @endforeach
-                      @if (auth()->user()->role === 'teacher' && $download->accessible_by === 'teacher' || auth()->user()->role == 'student' && $download->accessible_by === 'student' || $download->accessible_by === 'all')
+                      @if (auth()->user()->role === 'teacher' && $downloadable->accessible_by === 'teacher' || auth()->user()->role == 'student' && $downloadable->accessible_by === 'student' || $downloadable->accessible_by === 'all')
                         @foreach ($lesson->downloadables as $downloadable)
                           <a href="{{ route('downloadable', $downloadable->id) }}" class="flex items-center space-x-3 sm:space-x-5 py-2 sm:py-3 text-[rgb(1,131,215)] hover:text-white hover:bg-blue-400 transition-colors duration-150 px-4 sm:px-20">
                             <img src="{{ asset('/downloadables/' . $downloadable->photo) }}" class="rounded-full w-10 sm:w-16 shadow-md" alt="lesson thumbnail / photo">
