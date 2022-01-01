@@ -105,13 +105,15 @@
                           <h3 class="text-sm sm:text-2xl font-bold">{{ $exercise->title }}</h3>
                         </a>
                       @endforeach
-                      @if (auth()->user()->role === 'teacher' && $download->accessible_by === 'teacher' || auth()->user()->role == 'student' && $download->accessible_by === 'student' || $download->accessible_by === 'all')
-                        @foreach ($lesson->downloadables as $downloadable)
-                          <a href="{{ route('downloadable', $downloadable->id) }}" class="flex items-center space-x-3 sm:space-x-5 py-2 sm:py-3 text-[rgb(1,131,215)] hover:text-white hover:bg-blue-400 transition-colors duration-150 px-4 sm:px-20">
-                            <img src="{{ asset('/downloadables/' . $downloadable->photo) }}" class="rounded-full w-10 sm:w-16 shadow-md" alt="lesson thumbnail / photo">
-                            <h3 class="text-sm sm:text-2xl font-bold">{{ $downloadable->title }}</h3>
-                          </a>
-                        @endforeach
+                      @if ($lesson->downloadables()->count() != null)
+                        @if (auth()->user()->role == 'teacher' && $download->accessible_by == 'teacher' || auth()->user()->role == 'student' && $download->accessible_by == 'student' || $download->accessible_by == 'all')
+                          @foreach ($lesson->downloadables as $downloadable)
+                            <a href="{{ route('downloadable', $downloadable->id) }}" class="flex items-center space-x-3 sm:space-x-5 py-2 sm:py-3 text-[rgb(1,131,215)] hover:text-white hover:bg-blue-400 transition-colors duration-150 px-4 sm:px-20">
+                              <img src="{{ asset('/downloadables/' . $downloadable->photo) }}" class="rounded-full w-10 sm:w-16 shadow-md" alt="lesson thumbnail / photo">
+                              <h3 class="text-sm sm:text-2xl font-bold">{{ $downloadable->title }}</h3>
+                            </a>
+                          @endforeach
+                        @endif
                       @endif
                     </div>
                   </div>
