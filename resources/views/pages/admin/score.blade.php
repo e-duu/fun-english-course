@@ -26,15 +26,17 @@
             <td class="px-4 py-3 text-sm">
               {{ $item->user->name }}
             </td>
-            <td class="px-4 py-3 text-sm">
-              {{ $item->exercise->lesson->level->program->name }}
-            </td>
-            <td class="px-4 py-3 text-sm">
-              {{ $item->exercise->lesson->level->name }}
-            </td>
-            <td class="px-4 py-3 text-sm">
-              {{ $item->exercise->title }}
-            </td>
+            @if ($item->exercise->lesson->level->program->name)
+              <td class="px-4 py-3 text-sm">
+                {{ $item->exercise->lesson->level->program->name }}
+              </td>
+              <td class="px-4 py-3 text-sm">
+                {{ $item->exercise->lesson->level->name }}
+              </td>
+              <td class="px-4 py-3 text-sm">
+                {{ $item->exercise->title }}
+              </td>
+            @endif
             <td class="px-4 py-3 text-sm">
               {{ $item->score }} / 100
             </td>
