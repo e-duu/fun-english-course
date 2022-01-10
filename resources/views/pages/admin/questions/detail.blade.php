@@ -11,7 +11,9 @@
   </form>
   <div class="flex-col">
     <div class="bg-white shadow-md p-6 text-left rounded-lg sm:flex space-x-8">
-      <img src="{{ asset('/questions/' . $data->photo) }}" alt="question photo" class="w-60 sm:w-96 rounded-md">
+      @if ($data->photo)
+        <img src="{{ asset('/questions/' . $data->photo) }}" alt="question photo" class="w-60 sm:w-96 rounded-md">
+      @endif
       <div class="flex-col space-y-3">
         <p class="text-sm sm:text-lg"><b> Question :</b> &nbsp;&nbsp; {{ $data->question }}</p>
         <p class="text-sm sm:text-lg"><b> A . :</b> &nbsp;&nbsp; {{ $data->a }}</p>

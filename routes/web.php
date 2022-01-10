@@ -66,6 +66,10 @@ Route::middleware(['auth'])->group(function ()
 		// Dashboard
 		Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+		// Score
+		Route::get('/score/all', [ExerciseController::class, 'score_all'])->name('score.all');
+		Route::delete('/delete/{id}', [ExerciseController::class, 'score_delete'])->name('score.delete');
+
 		Route::prefix('user')->group(function () {
 				Route::get('/all', [UserController::class, 'index'])->name('user.all');
 				Route::get('/create', [UserController::class, 'create'])->name('user.create');

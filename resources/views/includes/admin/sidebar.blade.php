@@ -230,11 +230,22 @@
       <!-- Program -->
       <div>
         <!-- active & hover classes 'bg-primary-100 dark:bg-primary' -->
-        <a href="{{ route('manyEnroll') }}" class="flex items-center p-2 text-gray-500 transition-colors rounded-md dark:text-light hover:bg-primary-100 dark:hover:bg-primary" role="button">
+        <a href="{{ route('manyEnroll') }}" class="flex items-center py-2 px-2 text-gray-500 transition-colors rounded-md dark:text-light hover:bg-primary-100 dark:hover:bg-primary" role="button">
           <span>
             <i class="fas fa-cart-plus"></i>
           </span>
           <span class="ml-2 text-sm"> Multiple Enroll </span>
+        </a>
+      </div>
+
+      <!-- Program -->
+      <div>
+        <!-- active & hover classes 'bg-primary-100 dark:bg-primary' -->
+        <a href="{{ route('score.all') }}" class="flex items-center py-2 px-3 text-gray-500 transition-colors rounded-md dark:text-light hover:bg-primary-100 dark:hover:bg-primary" role="button">
+          <span>
+            <i class="fas fa-list-alt"></i>
+          </span>
+          <span class="ml-2 text-sm"> Exercise Results </span>
         </a>
       </div>
 

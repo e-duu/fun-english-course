@@ -49,7 +49,6 @@ class QuestionController extends Controller
             'c' => 'required',
             'd' => 'required',
             'answer' => 'required',
-            'photo_file' => 'required',
             'exercise_id' => 'required',
         ],
         [
@@ -59,17 +58,22 @@ class QuestionController extends Controller
             'c.required' => 'please input the answer',
             'd.required' => 'please input the answer',
             'answer.required' => 'please select the correct answer',
-            'photo_file.required' => 'please insert your question photo',
-
         ]);
 
-        $image = $request->file('photo_file');
-        $new_name_image = time() . '.' .  $image->getClientOriginalExtension();
-        $image->move(public_path('questions'), $new_name_image);
-        $request->merge([
-            'photo' => $new_name_image
-        ]);
-        Question::create($request->all());
+        if (!empty($request->photo_file)) {
+            $image = $request->file('photo_file');
+            $new_name_image = time() . '.' .  $image->getClientOriginalExtension();
+            $image->move(public_path('questions'), $new_name_image);
+            $request->merge([
+                'photo' => $new_name_image
+            ]);
+            
+            $data = $request->all();
+        } else {
+            $data = $request->except('photo');
+        }
+        
+        Question::create($data);
         return redirect()->route('exercise.show', $request->exercise_id);
     }
 
