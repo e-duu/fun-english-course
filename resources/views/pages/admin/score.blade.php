@@ -26,7 +26,7 @@
             <td class="px-4 py-3 text-sm">
               {{ $item->user->name }}
             </td>
-            @if ($item->exercise->lesson->level->program->name)
+            @if ($item->exercise)
               <td class="px-4 py-3 text-sm">
                 {{ $item->exercise->lesson->level->program->name }}
               </td>
