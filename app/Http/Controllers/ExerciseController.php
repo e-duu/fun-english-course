@@ -146,7 +146,7 @@ class ExerciseController extends Controller
             $check = Question::where('id','=', $key)->where('answer','=',$value)->get();
             $correct = count($check);
             
-            if($correct){
+            if ($correct) {
                 $correct_answer++;
             } else {
                 $wrong_answer++;
@@ -159,10 +159,29 @@ class ExerciseController extends Controller
 
         Score::create([
             'user_id' => Auth::user()->id,
+            'exercise_id' => $request->exercise_id,
             'score' => $score,
         ]);
 
         return redirect()->route('score');
-        
+    }
+
+    public function score_all()
+    {
+        $data = Score::paginate(5);
+        return view('pages.admin.score', compact('data'));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\
+     */
+    public function score_delete($id)
+    {
+        $data = Score::findorfail($id);
+        $data->delete();
+        return back();
     }
 }

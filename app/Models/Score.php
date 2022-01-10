@@ -11,6 +11,7 @@ class Score extends Model
 
     protected $fillable = [
         'score',
+        'exercise_id',
         'user_id',
     ];
 
@@ -22,5 +23,10 @@ class Score extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function exercise()
+    {
+        return $this->belongsTo(Exercise::class);
     }
 }

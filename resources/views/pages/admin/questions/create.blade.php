@@ -102,11 +102,6 @@
     <label class="block text-sm mt-4">
       <span class="text-gray-700 dark:text-gray-400">Question Photo</span>
       <input type="file" name="photo_file" class="border w-full mt-1 text-sm rounded-md border-gray-400 py-1 px-2 dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray" value="{{ old('photo_file') }}" />
-      @error('photo_file')
-        <div class="mt-2 text-[red]">
-          <i class="fas fa-dot-circle"></i> {{ $message }}
-        </div>
-      @enderror
     </label>
 
     <input type="hidden" name="exercise_id" value="{{ $data->id }}">

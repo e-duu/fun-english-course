@@ -21,6 +21,11 @@ class Exercise extends Model
         return $this->hasMany(Question::class);
     }
 
+    public function scores()
+    {
+        return $this->hasMany(Score::class);
+    }
+
     public function lesson()
     {
         return $this->belongsTo(Lesson::class);
@@ -32,6 +37,9 @@ class Exercise extends Model
         static::deleting(function ($model) {
             $model->questions()->each(function ($question) {
                 $question->delete();
+            });
+            $model->scores()->each(function ($score) {
+                $score->delete();
             });
         });
     }
