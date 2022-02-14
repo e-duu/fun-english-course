@@ -41,7 +41,7 @@
 
 								<a href="{{ route('template.user') }}" class="hidden sm:inline w-full sm:w-auto sm:px-4 py-2 sm:py-1 text-xs sm:text-sm bg-blue-600 rounded-md transition-colors duration-150 ease-linear text-white focus:outline-none focus:ring-0 font-semibold hover:bg-blue-700">Download Template</a>
 
-								<button type="submit" class="w-full sm:w-auto sm:px-4 py-2 text-xs sm:text-sm bg-blue-600 rounded-md transition-colors duration-150 ease-linear text-white focus:outline-none focus:ring-0 font-semibold hover:bg-blue-700">Sumbit</button>
+								<button type="submit" class="w-full sm:w-auto sm:px-4 py-2 text-xs sm:text-sm bg-blue-600 rounded-md transition-colors duration-150 ease-linear text-white focus:outline-none focus:ring-0 font-semibold hover:bg-blue-700">Submit</button>
 						</form>
 
 						<form class="block sm:hidden" method="GET">

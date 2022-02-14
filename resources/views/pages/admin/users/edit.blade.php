@@ -69,7 +69,7 @@
       <input type="file" name="photo_file" class="border w-full mt-1 text-sm border-gray-400 py-1 px-2  dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md" />
     </label>
     
-    <button class="mt-4 bg-blue-600 py-2 px-7 rounded-md text-white">Sumbit</button>
+    <button class="mt-4 bg-blue-600 py-2 px-7 rounded-md text-white">Submit</button>
 
   </form>
 @endsection
