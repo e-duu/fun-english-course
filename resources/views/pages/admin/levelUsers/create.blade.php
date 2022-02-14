@@ -47,7 +47,7 @@
       </div>
     </div>
     
-    <button class="mt-4 bg-blue-600 py-2 px-7 rounded-md text-white">Sumbit</button>
+    <button class="mt-4 bg-blue-600 py-2 px-7 rounded-md text-white">Submit</button>
 
   </form>
 @endsection
