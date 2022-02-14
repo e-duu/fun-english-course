@@ -15,6 +15,7 @@
 			<th class="px-4 py-3">Program</th>
 			<th class="px-4 py-3">Level</th>
 			<th class="px-4 py-3">Recipient Bank</th>
+			<th class="px-4 py-3">Time</th>
 			<th class="px-4 py-3">Actions</th>
 		</tr>
 	  </thead>
@@ -33,6 +34,9 @@
 					</td>
 					<td class="px-4 py-3 text-sm">
 						{{ $item->recipients?->name }}
+					</td>
+					<td class="px-4 py-3 text-sm">
+						{{ $item->created_at }}
 					</td>
 					<td class="px-4 py-3">
 						<div class="flex items-center space-x-4 text-sm">
@@ -57,7 +61,7 @@
 				</tr>
 			@empty
 				<tr>
-					<td colspan="5" class="text-center text-gray-500 px-4 py-3">
+					<td colspan="6" class="text-center text-gray-500 px-4 py-3">
 						<p>
 							Data is empty..
 						</p>

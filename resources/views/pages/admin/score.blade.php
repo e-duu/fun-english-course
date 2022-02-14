@@ -16,6 +16,7 @@
             <th class="px-4 py-3">Level</th>
             <th class="px-4 py-3">Exercise</th>
             <th class="px-4 py-3">Result</th>
+            <th class="px-4 py-3">Time</th>
             <th class="px-4 py-3">Action</th>
         </tr>
       </thead>
@@ -39,6 +40,9 @@
               {{ $item->score }} / 100
             </td>
             <td class="px-4 py-3 text-sm">
+              {{ $item->created_at }}
+            </td>
+            <td class="px-4 py-3 text-sm">
               <form action="{{ route('score.delete', $item->id) }}" method="POST" class="d-inline">
 								@csrf
 								@method('DELETE')
@@ -51,7 +55,7 @@
           </tr>
         @empty
           <tr>
-            <td colspan="6" class="text-center text-gray-500 px-4 py-3">
+            <td colspan="7" class="text-center text-gray-500 px-4 py-3">
               <p>
                 Data is empty..
               </p>

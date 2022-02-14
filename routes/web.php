@@ -83,6 +83,7 @@ Route::middleware(['auth'])->group(function ()
 				Route::get('/reset', [UserController::class, 'filterReset'])->name('user.reset');
 				Route::get('/enroll/{id}', [LevelUserController::class, 'enroll'])->name('user.enroll');
 				Route::post('/enroll/store', [LevelUserController::class, 'store'])->name('enroll.store');
+				Route::post('/enroll/delete', [LevelUserController::class, 'delete'])->name('enroll.delete');
 				Route::get('/manyEnroll', [LevelUserController::class, 'manyEnroll'])->name('manyEnroll');
 				Route::post('/manyEnroll/store', [LevelUserController::class, 'manyEnrollStore'])->name('manyEnroll.store');
 		});
