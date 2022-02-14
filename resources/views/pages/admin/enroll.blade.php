@@ -31,6 +31,6 @@
         @endforeach
       </div>  
     </div>  
-    <button class="mt-6 bg-blue-600 py-2 w-full rounded-md text-white">Sumbit</button>
+    <button class="mt-6 bg-blue-600 py-2 w-full rounded-md text-white">Submit</button>
   </form>
 @endsection

@@ -61,10 +61,10 @@
         
       },
       data: {
-        programs: @json($programs ),
+        programs: @json($programs),
         levels: @json($levels),
         selectedLevels: null,
-        programs_id: 1,
+        programs_id: null,
       },
       methods: {
         setPrograms(id) {

@@ -16,11 +16,55 @@
       <p class="text-sm sm:text-lg"><b> Username :</b> &nbsp;&nbsp; {{ $data->username }}</p>
       <p class="text-sm sm:text-lg"><b> Role :</b> &nbsp;&nbsp; {{ $data->role }}</p>
       <p class="text-sm sm:text-lg"><b> Email :</b> &nbsp;&nbsp; {{ $data->email }}</p>
-      <p class="text-sm sm:text-lg"><b> Enroll in Levels :</b> &nbsp;&nbsp; 
-        @foreach ($data->levels as $level)
-            {{ $level->name }},&nbsp;
-        @endforeach
-      </p>
+      <p class="text-sm sm:text-lg"><b> Enroll in Levels :</b></p>
+
+      <div class="w-full overflow-hidden rounded-lg shadow-xs">
+        <div class="w-full overflow-x-auto">
+          <table class="w-full whitespace-no-wrap">
+            <thead>
+              <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                  <th class="px-4 py-3">Program Name</th>
+                  <th class="px-4 py-3">Level Name</th>
+                  <th class="px-4 py-3">Actions</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-darker">
+      
+              @forelse ($data->levels as $level)
+                <tr class="text-gray-700 dark:text-gray-400">
+                  <td class="px-4 py-3 text-sm">
+                    {{ $level->program->name  }}
+                  </td>
+                  <td class="px-4 py-3 text-sm">
+                    {{ $level->name  }}
+                  </td>
+                  <td class="px-4 py-3">
+                    <div class="flex items-center space-x-4 text-sm">
+                      <form action="{{ route('enroll.delete', $level->id) }}" method="POST" class="d-inline">
+                        @csrf
+                        @method('POST')
+                        <button class="flex-col px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                          <i class="fas fa-trash"></i>
+                          <p>Un - Enroll</p>
+                        </button>
+                      </form>
+                    </div>
+                  </td>
+                </tr>
+              @empty
+                <tr>
+                  <td colspan="2" class="text-center text-gray-500 px-4 py-3">
+                    <p>
+                      Data is empty..
+                    </p>
+                  </td>
+                </tr>
+              @endforelse
+      
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 @endsection
