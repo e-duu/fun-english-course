@@ -28,7 +28,7 @@ class LevelUserController extends Controller
     public function delete(Request $request)
     {
         User::find($request->user_id)->levels()->detach($request->level_id);
-        return redirect()->route('user.all');
+        return redirect()->back();
     }
 
     public function manyEnroll()
