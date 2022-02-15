@@ -43,6 +43,8 @@
                       <form action="{{ route('enroll.delete', $level->id) }}" method="POST" class="d-inline">
                         @csrf
                         @method('POST')
+                        <input type="hidden" name="user_id" value="{{ request('id') }}">
+                        <input type="hidden" name="level_id" value="{{ $level->id }}">
                         <button class="flex-col px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
                           <i class="fas fa-trash"></i>
                           <p>Un - Enroll</p>
