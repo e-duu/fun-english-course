@@ -36,9 +36,11 @@ Route::middleware(['guest'])->group(function ()
 });
 
 
-
 Route::middleware(['auth'])->group(function ()
 {
+
+	// Midtrans Snap
+	Route::resource('orders', OrderController::class)->only(['index', 'show']);
 
 	// Home
 	Route::get('/', [ResourceController::class, 'index'])->name('resource');
