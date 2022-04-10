@@ -6,7 +6,7 @@
   Create Spps
 @endsection
 @section('content')
-  <form action="{{ route('spp.store') }}" method="POST" class="px-4 py-3 bg-white rounded-lg shadow-md dark:bg-gray-800">
+  <form action="{{ route('recipient.store') }}" method="POST" class="px-4 py-3 bg-white rounded-lg shadow-md dark:bg-gray-800">
     @csrf
 
     <label class="block mt-4 text-sm">
@@ -14,7 +14,7 @@
         Student Name
       </span>
       <select name="user_id" class="block w-full mt-1 text-sm rounded-md border-gray-400  dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
-        @foreach ($users as $user)
+      @foreach ($users as $user)
           <option value="{{ $user->id }}">{{ $user->name }}</option>
         @endforeach
       </select>
@@ -24,7 +24,7 @@
         </div>
       @enderror
     </label>
-
+    
     <label class="block mt-4 text-sm">
       <span class="text-gray-700 dark:text-gray-400">
         Student Name
@@ -59,7 +59,7 @@
         </div>
       @enderror
     </label>
-
+    
     <button class="mt-4 bg-blue-600 py-2 px-7 rounded-md text-white">Submit</button>
 
   </form>

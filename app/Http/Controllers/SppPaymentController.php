@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SppMonth;
+use App\Models\SppPayment;
 use Illuminate\Http\Request;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
@@ -39,19 +40,52 @@ class SppPaymentController extends Controller
 
     public function capturePayment(Request $request)
     {
-        $data = json_decode($request->getContent(), true);
-        $orderId = $data['orderId'];
+        //
+    }
 
-        // Init Paypal
-        $provider = new PayPalClient;
-        $provider->setApiCredentials(config('paypal'));
-        $token = $provider->getAccessToken();
-        $provider->getAccessToken($token);
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
 
-        $result = $provider->capturePaymentOrder($orderId);
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $data = SppPayment::findOrFail($id);
+        return view('pages.admin.sppPayments.edit', compact('data'));
+    }
 
-        // Update to Database
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
 
-        return response()->json($result);
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
     }
 }

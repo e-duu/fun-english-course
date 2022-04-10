@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SppMonth;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SppController extends Controller
@@ -15,7 +16,8 @@ class SppController extends Controller
 
     public function create()
     {
-        return view('pages.admin.spps.create');
+        $users = User::where('role', 'student')->get();
+        return view('pages.admin.spps.create', compact('users'));
     }
 
     public function store(Request $request)
@@ -33,20 +35,21 @@ class SppController extends Controller
 
         $data = $request->all();
         SppMonth::create($data);
-        return redirect()->route('');
+        return redirect()->route('spp.all');
     }
 
     public function edit($id)
     {
         $data = SppMonth::findOrFail($id);
-        return view('', compact('data'));
+        $users = User::where('role', 'student')->get();
+        return view('pages.admin.spps.edit', compact('users', 'data'));
     }
 
     public function update(Request $request, $id)
     {
         $request->validate([
-            'month' => 'required|max:255',
-            'price' => 'required',
+            'month' => 'required',
+            'price' => 'required|max:255',
             'user_id' => 'required',
         ],
         [
@@ -58,7 +61,7 @@ class SppController extends Controller
         $data = $request->all();
         $item = SppMonth::findorfail($id);
         $item->update($data);
-        return redirect()->route('');
+        return redirect()->route('spp.all');
     }
 
     public function destroy($id)
