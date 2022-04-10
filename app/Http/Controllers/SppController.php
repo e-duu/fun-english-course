@@ -26,7 +26,7 @@ class SppController extends Controller
     public function create()
     {
         $users = User::all();
-        return view('pages.admin.spps.create', compact('users$users'));
+        return view('pages.admin.spps.create', compact('users'));
     }
 
     /**
