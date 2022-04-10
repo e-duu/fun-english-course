@@ -37,7 +37,7 @@ class MootaController extends Controller
             'account_holder.required' => 'please input lesson account holder name',
             'webhook_url.required' => 'please input webhook url',
         ]);
-        
+
         $data = $request->all();
         $moota = Moota::create($data);
         return redirect()->route('moota', $moota->id);

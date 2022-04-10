@@ -187,16 +187,13 @@ Route::middleware(['auth'])->group(function ()
 		Route::prefix('spp')->group(function () {
 			Route::get('/all', [SppController::class, 'index'])->name('spp.all');
 			Route::get('/create', [SppController::class, 'create'])->name('spp.create');
-			Route::post('/create', [SppController::class, 'store'])->name('spp.store');
+			Route::post('/store', [SppController::class, 'store'])->name('spp.store');
 			Route::get('/show/{id}', [SppController::class, 'show'])->name('spp.show');
 			Route::get('/edit/{id}', [SppController::class, 'edit'])->name('spp.edit');
-			Route::post('/edit/{id}', [SppController::class, 'update'])->name('spp.update');
+			Route::post('/update/{id}', [SppController::class, 'update'])->name('spp.update');
 			Route::delete('/delete/{id}', [SppController::class, 'destroy'])->name('spp.delete');
 		});
 
 	});
 
 });
-
-// Test
-Route::get('spp', [SppPaymentController::class, 'index']);

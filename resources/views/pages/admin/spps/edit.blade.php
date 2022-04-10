@@ -6,7 +6,7 @@
   Edit Recipients
 @endsection
 @section('content')
-  <form action="{{ route('recipient.update', $data->id) }}" method="POST" class="px-4 py-3 bg-white rounded-lg shadow-md dark:bg-gray-800">
+  <form action="{{ route('spp.update', $data->id) }}" method="POST" class="px-4 py-3 bg-white rounded-lg shadow-md dark:bg-gray-800">
     @csrf
 
     <label class="block mt-4 text-sm">
@@ -24,24 +24,24 @@
         </div>
       @enderror
     </label>
-    
+
     <label class="block mt-4 text-sm">
       <span class="text-gray-700 dark:text-gray-400">
         Student Name
       </span>
       <select name="month" class="block w-full mt-1 text-sm rounded-md border-gray-400  dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
-        <option value="1" >January</option>
-        <option value="2" >February</option>
-        <option value="3" >March</option>
-        <option value="4" >April</option>
-        <option value="5" >May</option>
-        <option value="6" >June</option>
-        <option value="7" >July</option>
-        <option value="8" >August</option>
-        <option value="9" >September</option>
-        <option value="10" >October</option>
-        <option value="11" >November</option>
-        <option value="12" >December</option>
+        <option value="1" {{$data->month == '1' ? 'selected' : ''}}>January</option>
+        <option value="2" {{$data->month == '2' ? 'selected' : ''}}>February</option>
+        <option value="3" {{$data->month == '3' ? 'selected' : ''}}>March</option>
+        <option value="4" {{$data->month == '4' ? 'selected' : ''}}>April</option>
+        <option value="5" {{$data->month == '5' ? 'selected' : ''}}>May</option>
+        <option value="6" {{$data->month == '6' ? 'selected' : ''}}>June</option>
+        <option value="7" {{$data->month == '7' ? 'selected' : ''}}>July</option>
+        <option value="8" {{$data->month == '8' ? 'selected' : ''}}>August</option>
+        <option value="9" {{$data->month == '9' ? 'selected' : ''}}>September</option>
+        <option value="10" {{$data->month == '10' ? 'selected' : ''}}>October</option>
+        <option value="11" {{$data->month == '11' ? 'selected' : ''}}>November</option>
+        <option value="12" {{$data->month == '12' ? 'selected' : ''}}>December</option>
       </select>
       @error('month')
         <div class="mt-1 text-sm text-[red]">
@@ -59,7 +59,7 @@
         </div>
       @enderror
     </label>
-    
+
     <button class="mt-4 bg-blue-600 py-2 px-7 rounded-md text-white">Submit</button>
 
   </form>

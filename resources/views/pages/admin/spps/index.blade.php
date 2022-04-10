@@ -22,10 +22,34 @@
         @forelse ($data as $item)
           <tr class="text-gray-700 dark:text-gray-400">
             <td class="px-4 py-3 text-sm">
-              {{ $item->user_id }}
+              {{ $item->student->name }}
             </td>
             <td class="px-4 py-3 text-sm">
-              {{ $item->month }}
+              @if ($item->month == 1)
+                  January
+              @elseif ($item->month == 2)
+                  February
+              @elseif ($item->month == 3)
+                  March
+              @elseif ($item->month == 4)
+                  April
+              @elseif ($item->month == 5)
+                  May
+              @elseif ($item->month == 6)
+                  June
+              @elseif ($item->month == 7)
+                  July
+              @elseif ($item->month == 8)
+                  August
+              @elseif ($item->month == 9)
+                  September
+              @elseif ($item->month == 10)
+                  October
+              @elseif ($item->month == 11)
+                  November
+              @elseif ($item->month == 12)
+                  December
+              @endif
             </td>
             <td class="px-4 py-3 text-sm">
               {{'Rp '.number_format($item->price) }}
