@@ -40,7 +40,7 @@ class MootaController extends Controller
             // 'account_number' => 'please input rekening bank',
             'webhook_url.required' => 'please input webhook url',
         ]);
-        
+
         $data = $request->all();
         $moota = Moota::create($data);
         return redirect()->route('moota', $moota->id);

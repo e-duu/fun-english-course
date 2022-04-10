@@ -18,6 +18,7 @@ use App\Http\Controllers\LevelUserController;
 use App\Http\Controllers\MootaController;
 use App\Http\Controllers\PaymentPageController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\SppController;
 use App\Http\Controllers\SppPaymentController;
 
 /*
@@ -49,7 +50,11 @@ Route::middleware(['auth'])->group(function ()
 
 	// Payment
 	Route::get('/payment', [PaymentPageController::class, 'index'])->name('payment');
-	Route::post('/payment/store', [PaymentPageController::class, 'store'])->name('payment.post');
+	Route::post('/payment/store', [PaymentPageController::class, 'store'])->name('payment.store');
+
+	// Spp Payment
+	Route::get('/spp-payment/{id}', [PaymentPageController::class, 'sppPayment'])->name('spp-payment');
+	Route::post('/payment/store', [PaymentPageController::class, 'sppPaymentStore'])->name('spp-payment.store');
 
 	// Watch Material
 	Route::get('/watch/{id}', [WatchController::class, 'index'])->name('watch');
@@ -61,6 +66,9 @@ Route::middleware(['auth'])->group(function ()
 
 	// Logout
 	Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+	// Dashboard Student
+	Route::get('/dashboard-student', [DashboardController::class, 'dashboardUser'])->name('dashboard.user');
 
 	Route::prefix('admin')->group(function () {
 
@@ -179,11 +187,18 @@ Route::middleware(['auth'])->group(function ()
 				Route::get('/edit/{id}', [QuestionController::class, 'edit'])->name('question.edit');
 				Route::post('/edit/{id}', [QuestionController::class, 'update'])->name('question.update');
 				Route::delete('/delete/{id}', [QuestionController::class, 'destroy'])->name('question.delete');
-        });
+		});
+
+		Route::prefix('spp')->group(function () {
+			Route::get('/all', [SppController::class, 'index'])->name('spp.all');
+			Route::get('/create', [SppController::class, 'create'])->name('spp.create');
+			Route::post('/store', [SppController::class, 'store'])->name('spp.store');
+			Route::get('/show/{id}', [SppController::class, 'show'])->name('spp.show');
+			Route::get('/edit/{id}', [SppController::class, 'edit'])->name('spp.edit');
+			Route::post('/update/{id}', [SppController::class, 'update'])->name('spp.update');
+			Route::delete('/delete/{id}', [SppController::class, 'destroy'])->name('spp.delete');
+		});
 
 	});
 
 });
-
-// Test
-Route::get('spp', [SppPaymentController::class, 'index']);

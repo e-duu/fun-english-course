@@ -20,6 +20,11 @@ class Level extends Model
         return $this->hasMany(Payment::class, 'id', 'level_id');
     }
 
+    public function sppMonths()
+    {
+        return $this->hasMany(SppMonth::class, 'id', 'level_id');
+    }
+
     public function lessons()
     {
         return $this->hasMany(Lesson::class);

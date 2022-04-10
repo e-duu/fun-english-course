@@ -9,7 +9,7 @@
         <h1 class="text-white text-center font-bold text-lg sm:text-2xl">Payment Confirmation</h1>
       </div>
         {{-- NOTE : PAYMENT MANUALLY --}}
-        <form id="payments" action="{{ route('payment.post') }}" method="POST" enctype="multipart/form-data">
+        <form id="payments" action="{{ route('payment.store') }}" method="POST" enctype="multipart/form-data">
           @csrf
           
           <div class="grid grid-cols-1 mt-5 mx-7">
@@ -75,22 +75,6 @@
           </div>
         </form>
     </div>
-
-    <div class="rounded-lg mx-auto w-11/12 md:w-9/12 lg:w-1/2 mt-12">
-      {{-- NOTE : PAYMENT BY MOOTA --}}
-      <a href="{{ route('dashboard') }}">
-        <div class="rounded-full py-4 bg-blue-600 text-white font-bold text-xl text-center">Moota</div>
-      </a>
-
-      <h3 class="text-black font-medium text-center text-lg my-2">Or</h3>
-      
-      {{-- NOTE : PAYMENT BY PAYPAL --}}
-      <div id="smart-button-container">
-       <div style="text-align: center;">
-         <div id="paypal-button-container"></div>
-       </div>
-     </div>
-    </div>
   </div>
 @endsection
 
@@ -117,43 +101,6 @@
         }
       },
     });
-  </script>
-  <script src="https://www.paypal.com/sdk/js?client-id=sb&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
-  <script>
-    function initPayPalButton() {
-      paypal.Buttons({
-        style: {
-          shape: 'pill',
-          layout: 'horizontal',
-          label: 'paypal',
-          tagline: false
-        },
-
-        createOrder: function(data, actions) {
-          return actions.order.create({
-            purchase_units: [{"amount":{"currency_code":"USD","value":1}}]
-          });
-        },
-
-        onApprove: function(data, actions) {
-          return actions.order.capture().then(function(orderData) {
-            
-            // Full available details
-            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-
-            // Show a success message within this page, e.g.
-            const element = document.getElementById('paypal-button-container');
-            element.innerHTML = '';
-            element.innerHTML = '<h3>Thank you for your payment!</h3>';
-          });
-        },
-
-        onError: function(err) {
-          console.log(err);
-        }
-      }).render('#paypal-button-container');
-    }
-    initPayPalButton();
   </script>
 @endpush
 
