@@ -15,7 +15,8 @@ class SppController extends Controller
      */
     public function index()
     {
-        return view('pages.admin.spps.index');
+        $data = SppMonth::all();
+        return view('pages.admin.spps.index', compact(('data')));
     }
 
     /**
@@ -37,7 +38,20 @@ class SppController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'month' => 'required',
+            'price' => 'required',
+            'user_id' => 'required',
+        ],
+        [
+            'month.required' => 'please input recipient month',
+            'price.required' => 'please input recipient price',
+            'user_id.required' => 'please input recipient user_id',
+        ]);
+        
+        $data = $request->all();
+        SppMonth::create($data);
+        return redirect()->route('spp.all');
     }
 
     /**

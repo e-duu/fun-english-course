@@ -63,6 +63,9 @@ Route::middleware(['auth'])->group(function ()
 	// Logout
 	Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+	// Dashboard Student
+	Route::get('/dashboard-student', [DashboardController::class, 'dashboardUser'])->name('dashboard.user');
+
 	Route::prefix('admin')->group(function () {
 
 		// Dashboard

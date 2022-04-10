@@ -15,40 +15,51 @@
       <table class="w-full whitespace-no-wrap">
         <thead>
         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-          <th class="px-4 py-3">Photo</th>
-          <th class="px-4 py-3">Name</th>
-          <th class="px-4 py-3">Email</th>
-          <th class="px-4 py-3">Role</th>
+          <th class="px-4 py-3">Student Name</th>
+          <th class="px-4 py-3">Month</th>
+          <th class="px-4 py-3">Price</th>
           <th class="px-4 py-3">Actions</th>
         </tr>
         </thead>
         <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-darker">
-          <tr class="text-gray-700 dark:text-gray-400">
-            <td class="px-4 py-3">
-              <img src="{{ asset('/users/' . $data->photo) }}" style="width: 70px;" class="rounded-full" alt="profile photo">
-            </td>
-            <td class="px-4 py-3 text-sm">
-              {{ $data->name }}
-            </td>
-            <td class="px-4 py-3 text-sm">
-              {{ $data->email }}
-            </td>
-            <td class="px-4 py-3 text-sm">
-              {{ $data->role }}
-            </td>
-            <td class="px-4 py-3">
-            <div class="flex items-center space-x-4 text-sm">
-              <a href="{{ route('user.show', $data->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
-                <i class=" fas fa-eye"></i>
-                <p>Detail</p>
-              </a>
-              <a href="{{ route('payment', $data->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
-                <i class="fas fa-cart-plus"></i>
-                <p>Pay</p>
-              </a>
-            </div>
-            </td>
-          </tr>
+          @forelse ($data as $item)
+            <tr class="text-gray-700 dark:text-gray-400">
+              <td class="px-4 py-3 text-sm">
+                {{ $item->user_id }}
+              </td>
+              <td class="px-4 py-3 text-sm">
+                {{ $item->month }}
+              </td>
+              <td class="px-4 py-3 text-sm">
+                {{'Rp '.number_format($item->price) }}
+              </td>
+              <td class="px-4 py-3">
+                <div class="flex items-center space-x-4 text-sm">
+                  <a href="{{ route('spp.edit', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                    <i class=" fas fa-edit"></i>
+                    <p>Edit</p>
+                  </a>
+                  <form action="{{ route('spp.delete', $item->id) }}" method="POST" class="d-inline">
+                    @csrf
+                    @method('DELETE')
+                    <button class="flex-col px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                      <i class="fas fa-trash"></i>
+                      <p>Delete</p>
+                    </button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+          @empty
+            <tr>
+              <td colspan="4" class="text-center text-gray-500 px-4 py-3">
+                <p>
+                  Data is empty..
+                </p>
+              </td>
+            </tr>
+          @endforelse
+
         </tbody>
       </table>
       </div>
