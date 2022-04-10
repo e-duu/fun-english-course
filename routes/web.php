@@ -83,6 +83,7 @@ Route::middleware(['auth'])->group(function ()
 		// Moota
 		Route::get('/moota/setting', [MootaController::class, 'create'])->name('moota');
 		Route::post('moota/create', [MootaController::class, 'store'])->name('moota.store');
+		Route::get('/moota/get-bank', [MootaController::class, 'getListBank'])->name('moota.get-bank');
 
 
 		Route::prefix('user')->group(function () {
