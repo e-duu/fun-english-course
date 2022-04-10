@@ -1,12 +1,12 @@
 @extends('layouts.dash')
 @section('title')
-  Fun English Course | Spp Create
+  Fun English Course | Recipient Edit
 @endsection
 @section('sub-title')
-  Create Spps
+  Edit Recipients
 @endsection
 @section('content')
-  <form action="{{ route('spp.store') }}" method="POST" class="px-4 py-3 bg-white rounded-lg shadow-md dark:bg-gray-800">
+  <form action="{{ route('recipient.update', $data->id) }}" method="POST" class="px-4 py-3 bg-white rounded-lg shadow-md dark:bg-gray-800">
     @csrf
 
     <label class="block mt-4 text-sm">
@@ -14,8 +14,8 @@
         Student Name
       </span>
       <select name="user_id" class="block w-full mt-1 text-sm rounded-md border-gray-400  dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
-      @foreach ($users as $user)
-          <option value="{{ $user->id }}">{{ $user->name }}</option>
+        @foreach ($users as $user)
+          <option value="{{ $user->id }}" {{ $user->id == $data->user_id ? 'selected' : '' }}>{{ $user->name }}</option>
         @endforeach
       </select>
       @error('user_id')
@@ -52,7 +52,7 @@
 
     <label class="block text-sm mt-4">
       <span class="text-gray-700 dark:text-gray-400">Price</span>
-      <input type="number" name="price" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md border-gray-400" placeholder="30000"/>
+      <input type="number" name="price" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md border-gray-400" placeholder="30000" value="{{ $data->price }}"/>
       @error('price')
         <div class="mt-1 text-sm text-[red]">
           <i class="fas fa-dot-circle text-xs"></i> {{ $message }}

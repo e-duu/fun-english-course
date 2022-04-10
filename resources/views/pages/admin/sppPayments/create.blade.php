@@ -6,7 +6,7 @@
   Create Spps
 @endsection
 @section('content')
-  <form action="{{ route('spp.store') }}" method="POST" class="px-4 py-3 bg-white rounded-lg shadow-md dark:bg-gray-800">
+  <form action="{{ route('recipient.store') }}" method="POST" class="px-4 py-3 bg-white rounded-lg shadow-md dark:bg-gray-800">
     @csrf
 
     <label class="block mt-4 text-sm">

@@ -61,7 +61,7 @@ class SppController extends Controller
     {
         $users = User::all();
         $data = SppMonth::findOrFail($id);
-        return view('pages.admin.spps.create', compact('users', 'data'));
+        return view('pages.admin.spps.edit', compact('users', 'data'));
     }
 
     /**
