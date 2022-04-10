@@ -15,6 +15,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DownloadableController;
 use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\LevelUserController;
+use App\Http\Controllers\MootaController;
 use App\Http\Controllers\PaymentPageController;
 use App\Http\Controllers\QuestionController;
 
@@ -39,11 +40,11 @@ Route::middleware(['guest'])->group(function ()
 Route::middleware(['auth'])->group(function ()
 {
 
-	// Midtrans Snap
-	Route::resource('orders', OrderController::class)->only(['index', 'show']);
-
 	// Home
 	Route::get('/', [ResourceController::class, 'index'])->name('resource');
+
+	// Dashboard User 
+	Route::get('/dashboard/user', [DashboardController::class, 'dashboardUser'])->name('dashboard.user');
 	
 	// Resource
 	Route::get('/resource/{slug}', [ResourceController::class, 'detail'])->name('resource.detail');
@@ -71,6 +72,11 @@ Route::middleware(['auth'])->group(function ()
 		// Score
 		Route::get('/score/all', [ExerciseController::class, 'score_all'])->name('score.all');
 		Route::delete('/delete/{id}', [ExerciseController::class, 'score_delete'])->name('score.delete');
+
+		// Moota
+		Route::get('/moota/setting', [MootaController::class, 'create'])->name('moota');
+		Route::post('moota/create', [MootaController::class, 'store'])->name('moota.store');
+
 
 		Route::prefix('user')->group(function () {
 				Route::get('/all', [UserController::class, 'index'])->name('user.all');

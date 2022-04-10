@@ -6,6 +6,7 @@ use App\Models\Payment;
 use App\Models\Program;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -17,5 +18,11 @@ class DashboardController extends Controller
         $paymentCount = Payment::count();
 
         return view('pages.admin.dashboard', compact('studentCount', 'teacherCount' ,'programCount', 'paymentCount'));
+    }
+
+    public function dashboardUser()
+    {
+        $data = Auth::user();
+        return view('pages.dashboard', compact('data'));
     }
 }

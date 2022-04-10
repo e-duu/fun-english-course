@@ -12,7 +12,7 @@
     <!-- Content -->
     <div class="mt-2">
       <!-- State cards -->
-      <div class="grid grid-cols-1 gap-8 p-4 lg:grid-cols-2 xl:grid-cols-4" style="margin-bottom: 350px;">
+      <div class="grid grid-cols-1 gap-8 p-4 lg:grid-cols-2 xl:grid-cols-4">
         <!-- Value card -->
         <div class="flex items-center justify-between p-4 bg-white rounded-md dark:bg-darker">
           <div>
