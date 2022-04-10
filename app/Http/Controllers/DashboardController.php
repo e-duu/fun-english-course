@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Payment;
 use App\Models\Program;
+use App\Models\SppMonth;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +23,8 @@ class DashboardController extends Controller
 
     public function dashboardUser()
     {
-        $data = Auth::user();
+        $auth = Auth::user()->id;
+        $data = SppMonth::where('user_id', $auth)->get();
         return view('pages.dashboard', compact('data'));
     }
 }
