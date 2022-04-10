@@ -141,7 +141,7 @@
             <span aria-hidden="true">
               <i class="fas fa-credit-card"></i>
             </span>
-            <span class="ml-2 text-sm"> Payments </span>
+            <span class="ml-2 text-sm"> Spps </span>
             <span aria-hidden="true" class="ml-auto">
               <!-- active class 'rotate-180' -->
               <svg
@@ -164,14 +164,14 @@
               role="menuitem"
               class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
             >
-              List Payment
+              List Spp
             </a>
             <a
               href="{{ route('spp.create') }}"
               role="menuitem"
               class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
             >
-              Create Payment
+              Create Spp
             </a>
           </div>
         </div>

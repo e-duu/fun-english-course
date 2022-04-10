@@ -183,7 +183,7 @@ Route::middleware(['auth'])->group(function ()
 
 		Route::prefix('spp')->group(function () {
 			Route::get('/all', [SppController::class, 'index'])->name('spp.all');
-			Route::get('/create{id}', [SppController::class, 'create'])->name('spp.create');
+			Route::get('/create', [SppController::class, 'create'])->name('spp.create');
 			Route::post('/create', [SppController::class, 'store'])->name('spp.store');
 			Route::get('/show/{id}', [SppController::class, 'show'])->name('spp.show');
 			Route::get('/edit/{id}', [SppController::class, 'edit'])->name('spp.edit');
