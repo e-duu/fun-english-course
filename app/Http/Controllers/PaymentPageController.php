@@ -7,7 +7,6 @@ use App\Models\Payment;
 use App\Models\Program;
 use App\Models\Recipient;
 use App\Models\SppMonth;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 class PaymentPageController extends Controller
@@ -46,7 +45,6 @@ class PaymentPageController extends Controller
         return view('pages.sppPayment', compact('data'));
     }
 
-
     /**
      * Store a newly created resource in storage.
      *
@@ -57,5 +55,11 @@ class PaymentPageController extends Controller
     {
         Payment::create($request->all());
         return redirect()->route('resource');
+    }
+
+    public function sppPaymentDetail($id)
+    {
+        $data = SppMonth::findOrFail($id);
+        return view('pages.sppPaymentDetail', compact('data'));
     }
 }

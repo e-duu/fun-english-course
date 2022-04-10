@@ -75,7 +75,7 @@
 
     <div class="rounded-lg mx-auto w-11/12 md:w-9/12 lg:w-1/2 mt-12">
       {{-- NOTE : PAYMENT BY MOOTA --}}
-      <a href="{{ route('dashboard') }}">
+      <a href="{{ route('spp-payment-detail', $data->id) }}">
         <div class="rounded-full py-4 bg-blue-600 text-white font-bold text-xl text-center">
           Next
         </div>
