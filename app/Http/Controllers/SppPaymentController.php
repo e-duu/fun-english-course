@@ -9,7 +9,7 @@ use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
 class SppPaymentController extends Controller
 {
-    public function createPayment($id)
+    public function createPayment()
     {
         // Init PayPal
         $provider = new PayPalClient;
@@ -18,24 +18,26 @@ class SppPaymentController extends Controller
         $provider->getAccessToken($token);
 
         // From Database
-        $data = SppMonth::findOrFail($id);
+        // $data = SppMonth::findOrFail($id);
 
         // Purchase Units
-        $price = $data->price;
-        $description = '$'.$data->price.' spp price';
+        // $price = $data->price;
+        // $description = '$'.$data->price.' spp price';
 
-        $provider->createOrder([
+        $item = $provider->createOrder([
             'intent' => 'CAPTURE',
             'purchase_units' => [
                 [
                     'amount' => [
                         'currency_code' => 'USD',
-                        'value' => $price
+                        'value' => 10.00
                     ],
-                    'description' => $description,
+                    'description' => 'yoi',
                 ],
             ],
         ]);
+
+        return response()->json($item);
     }
 
     public function capturePayment(Request $request)
