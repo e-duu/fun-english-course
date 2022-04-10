@@ -24,6 +24,22 @@
         </div>
       @enderror
     </label>
+    
+    <label class="block mt-4 text-sm">
+      <span class="text-gray-700 dark:text-gray-400">
+        Level
+      </span>
+      <select name="level_id" class="block w-full mt-1 text-sm rounded-md border-gray-400  dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
+        @foreach ($user->levels as $level)
+          <option value="{{ $level->id }}">{{ $level->name }}</option>
+        @endforeach
+      </select>
+      @error('level_id')
+        <div class="mt-1 text-sm text-[red]">
+          <i class="fas fa-dot-circle text-xs"></i> {{ $message }}
+        </div>
+      @enderror
+    </label>
 
     <label class="block mt-4 text-sm">
       <span class="text-gray-700 dark:text-gray-400">

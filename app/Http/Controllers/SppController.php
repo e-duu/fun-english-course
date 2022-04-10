@@ -26,11 +26,13 @@ class SppController extends Controller
             'month' => 'required|max:255',
             'price' => 'required',
             'user_id' => 'required',
+            'level_id' => 'required',
         ],
         [
             'month.required' => 'please input recipient month',
             'price.required' => 'please input recipient price',
             'user_id.required' => 'please input recipient student',
+            'level_id.required' => 'please input recipient student',
         ]);
 
         $data = $request->all();
@@ -51,11 +53,13 @@ class SppController extends Controller
             'month' => 'required',
             'price' => 'required|max:255',
             'user_id' => 'required',
+            'level_id' => 'required',
         ],
         [
             'month.required' => 'please input recipient month',
             'price.required' => 'please input recipient price',
             'user_id.required' => 'please input recipient student',
+            'level_id.required' => 'please input recipient student',
         ]);
 
         $data = $request->all();

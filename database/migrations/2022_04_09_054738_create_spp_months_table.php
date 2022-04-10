@@ -18,6 +18,7 @@ class CreateSppMonthsTable extends Migration
             $table->integer('month');
             $table->bigInteger('price');
             $table->foreignId('user_id');
+            $table->foreignId('level_id');
             $table->timestamps();
         });
     }
