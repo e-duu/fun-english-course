@@ -17,6 +17,7 @@ use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\LevelUserController;
 use App\Http\Controllers\PaymentPageController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\SppPaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,19 +45,19 @@ Route::middleware(['auth'])->group(function ()
 
 	// Home
 	Route::get('/', [ResourceController::class, 'index'])->name('resource');
-	
+
 	// Resource
 	Route::get('/resource/{slug}', [ResourceController::class, 'detail'])->name('resource.detail');
-	
+
 	// Payment
 	Route::get('/payment', [PaymentPageController::class, 'index'])->name('payment');
 	Route::post('/payment/store', [PaymentPageController::class, 'store'])->name('payment.post');
-	
+
 	// Watch Material
 	Route::get('/watch/{id}', [WatchController::class, 'index'])->name('watch');
 	Route::get('/exercise/{id}', [WatchController::class, 'exercise'])->name('exercise');
 	Route::get('/downloadable/{id}', [WatchController::class, 'downloadable'])->name('downloadable');
-	
+
 	// Score
 	Route::get('/score', [WatchController::class, 'score'])->name('score');
 
@@ -64,7 +65,7 @@ Route::middleware(['auth'])->group(function ()
 	Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 	Route::prefix('admin')->group(function () {
-			
+
 		// Dashboard
 		Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -155,7 +156,7 @@ Route::middleware(['auth'])->group(function ()
 				Route::post('/edit/{id}', [DownloadableController::class, 'update'])->name('downloadable.update');
 				Route::delete('/delete/{id}', [DownloadableController::class, 'destroy'])->name('downloadable.delete');
 		});
-		
+
 		Route::prefix('exercise')->group(function () {
 				Route::get('/all', [ExerciseController::class, 'index'])->name('exercise.all');
 				Route::get('/create{id}', [ExerciseController::class, 'create'])->name('exercise.create');
@@ -174,8 +175,11 @@ Route::middleware(['auth'])->group(function ()
 				Route::get('/edit/{id}', [QuestionController::class, 'edit'])->name('question.edit');
 				Route::post('/edit/{id}', [QuestionController::class, 'update'])->name('question.update');
 				Route::delete('/delete/{id}', [QuestionController::class, 'destroy'])->name('question.delete');
-			});
-			
+        });
+
 	});
 
 });
+
+// Test
+Route::get('spp', [SppPaymentController::class, 'index']);
