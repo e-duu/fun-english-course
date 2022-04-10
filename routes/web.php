@@ -18,6 +18,7 @@ use App\Http\Controllers\LevelUserController;
 use App\Http\Controllers\MootaController;
 use App\Http\Controllers\PaymentPageController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\SppController;
 use App\Http\Controllers\SppPaymentController;
 
 /*
@@ -178,7 +179,17 @@ Route::middleware(['auth'])->group(function ()
 				Route::get('/edit/{id}', [QuestionController::class, 'edit'])->name('question.edit');
 				Route::post('/edit/{id}', [QuestionController::class, 'update'])->name('question.update');
 				Route::delete('/delete/{id}', [QuestionController::class, 'destroy'])->name('question.delete');
-        });
+		});
+
+		Route::prefix('spp')->group(function () {
+			Route::get('/all', [SppController::class, 'index'])->name('spp.all');
+			Route::get('/create{id}', [SppController::class, 'create'])->name('spp.create');
+			Route::post('/create', [SppController::class, 'store'])->name('spp.store');
+			Route::get('/show/{id}', [SppController::class, 'show'])->name('spp.show');
+			Route::get('/edit/{id}', [SppController::class, 'edit'])->name('spp.edit');
+			Route::post('/edit/{id}', [SppController::class, 'update'])->name('spp.update');
+			Route::delete('/delete/{id}', [SppController::class, 'destroy'])->name('spp.delete');
+		});
 
 	});
 
