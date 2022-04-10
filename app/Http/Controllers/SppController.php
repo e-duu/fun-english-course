@@ -9,12 +9,13 @@ class SppController extends Controller
 {
     public function index()
     {
-        return view('');
+        $data = SppMonth::paginate(5);
+        return view('pages.admin.spps.index', compact('data'));
     }
 
     public function create()
     {
-        return view('');
+        return view('pages.admin.spps.create');
     }
 
     public function store(Request $request)

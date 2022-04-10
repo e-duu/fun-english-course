@@ -15,8 +15,10 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DownloadableController;
 use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\LevelUserController;
+use App\Http\Controllers\MootaController;
 use App\Http\Controllers\PaymentPageController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\SppController;
 use App\Http\Controllers\SppPaymentController;
 
 /*
@@ -39,9 +41,6 @@ Route::middleware(['guest'])->group(function ()
 
 Route::middleware(['auth'])->group(function ()
 {
-
-	// Midtrans Snap
-	Route::resource('orders', OrderController::class)->only(['index', 'show']);
 
 	// Home
 	Route::get('/', [ResourceController::class, 'index'])->name('resource');
@@ -72,6 +71,11 @@ Route::middleware(['auth'])->group(function ()
 		// Score
 		Route::get('/score/all', [ExerciseController::class, 'score_all'])->name('score.all');
 		Route::delete('/delete/{id}', [ExerciseController::class, 'score_delete'])->name('score.delete');
+
+		// Moota
+		Route::get('/moota/setting', [MootaController::class, 'create'])->name('moota');
+		Route::post('moota/create', [MootaController::class, 'store'])->name('moota.store');
+
 
 		Route::prefix('user')->group(function () {
 				Route::get('/all', [UserController::class, 'index'])->name('user.all');
@@ -175,7 +179,17 @@ Route::middleware(['auth'])->group(function ()
 				Route::get('/edit/{id}', [QuestionController::class, 'edit'])->name('question.edit');
 				Route::post('/edit/{id}', [QuestionController::class, 'update'])->name('question.update');
 				Route::delete('/delete/{id}', [QuestionController::class, 'destroy'])->name('question.delete');
-        });
+		});
+
+		Route::prefix('spp')->group(function () {
+			Route::get('/all', [SppController::class, 'index'])->name('spp.all');
+			Route::get('/create', [SppController::class, 'create'])->name('spp.create');
+			Route::post('/store', [SppController::class, 'store'])->name('spp.store');
+			Route::get('/show/{id}', [SppController::class, 'show'])->name('spp.show');
+			Route::get('/edit/{id}', [SppController::class, 'edit'])->name('spp.edit');
+			Route::post('/update/{id}', [SppController::class, 'update'])->name('spp.update');
+			Route::delete('/delete/{id}', [SppController::class, 'destroy'])->name('spp.delete');
+		});
 
 	});
 
