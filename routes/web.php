@@ -180,6 +180,3 @@ Route::middleware(['auth'])->group(function ()
 	});
 
 });
-
-// Test
-Route::get('spp', [SppPaymentController::class, 'index']);
