@@ -1,20 +1,19 @@
-@extends('layouts.dash')
-@section('title')
-  Fun English Course | Spp Details
-@endsection
-@section('sub-title')
-  Detail Spp
-@endsection
-@section('content')
-  <form class="mb-5 relative h-5">
-    <button formaction="{{ route('dashboard.user') }}" class="px-5 py-1 bg-yellow-400 rounded-md font-semibold text-white sm:absolute sm:right-0 w-full sm:w-auto">Back to Spp</button>
-  </form>
-  <div class="grid bg-gray-50 rounded-lg mx-auto shadow-xl w-11/12 sm:w-full">
-    <div class="bg-[rgb(244,182,1)] flex justify-between px-10 items-center rounded-t-lg py-3 sm:py-6 sm:mb-5">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  @include('includes.style')
+  <title>Document</title>
+</head>
+<body>
+  <div class="grid bg-gray-50 rounded-lg mx-auto w-full">
+    <div class="bg-[rgb(244,182,1)] flex justify-between px-20 items-center rounded-t-lg py-3 sm:py-6 sm:mb-5">
       <img src="{{ asset('/images/logo.png') }}" class="mx-auto sm:mx-0 w-32 sm:w-48" alt="fun english course logo">
       <img src="{{ asset('/images/edge-logo.png') }}" class="w-16 hidden sm:block" alt="edge logo">
     </div>
-    <div class="flex-col mx-10">
+    <div class="flex-col mx-20">
       <div class="grid grid-cols-2 my-4 items-center">
         <p class="text-md text-gray-700">Student Name</p>
         <p class="font-semibold text-lg text-gray-700 text-right">
@@ -82,17 +81,15 @@
         </p>
       </div>
     </div>
-    <div class='w-full bg-[rgb(244,182,1)] rounded-b-lg shadow-xl font-bold text-md text-white transition-colors duration-100 py-3 sm:py-5 grid grid-cols-2 px-10 mt-10 items-center'>
+    <div class='w-full bg-[rgb(244,182,1)] rounded-b-lg font-bold text-md text-white transition-colors duration-100 py-3 sm:py-5 grid grid-cols-2 px-10 mt-10 items-center'>
       <div class=''>Total<br>Payment</div>
       <div class='font-semibold text-2xl text-white text-right'>
         {{'Rp. '.number_format($data->price) }}
       </div>
     </div>
   </div>
-@endsection
-
-@push('after-script')
   <script>
-    window.print();
+    window.print()
   </script>
-@endpush
+</body>
+</html>
