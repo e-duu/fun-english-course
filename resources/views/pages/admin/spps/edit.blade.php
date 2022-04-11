@@ -41,9 +41,6 @@
         @enderror
     </label>
 
-    {{-- Coba --}}
-    <input type="hidden" value="unpaid" name="status">
-
     <label class="block mt-4 text-sm">
       <span class="text-gray-700 dark:text-gray-400">
         Month
@@ -67,6 +64,23 @@
           <i class="fas fa-dot-circle text-xs"></i> {{ $message }}
         </div>
       @enderror
+    </label>
+
+    <label class="block mt-4 text-sm">
+        <span class="text-gray-700 dark:text-gray-400">
+          Status
+        </span>
+        <select name="status" class="block w-full mt-1 text-sm rounded-md border-gray-400  dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
+            <option value="paid" {{ $data->status == 'paid' ? 'selected' : '' }}>Paid</option>
+            <option value="unpaid" {{ $data->status == 'unpaid' ? 'selected' : '' }}>Unpaid</option>
+            <option value="paid_manually" {{ $data->status == 'paid_manually' ? 'selected' : '' }}>Paid Manually</option>
+            <option value="failed" {{ $data->status == 'failed' ? 'selected' : '' }}>Failed</option>
+        </select>
+        @error('status')
+          <div class="mt-1 text-sm text-[red]">
+            <i class="fas fa-dot-circle text-xs"></i> {{ $message }}
+          </div>
+        @enderror
     </label>
 
     <label class="block text-sm mt-4">
