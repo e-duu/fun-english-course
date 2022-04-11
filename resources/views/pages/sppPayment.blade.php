@@ -59,10 +59,16 @@
           </p>
         </div>
         <div class="grid grid-cols-2 my-4 items-center">
-            <p class="text-md text-gray-700">Status</p>
-            <p class="font-semibold text-lg @if($data->status == 'paid' || $data->status == 'paid_manually') text-green-500 @else text-red-500 @endif text-right">
-              {{ $data->status }}
-            </p>
+          <p class="text-md text-gray-700">Status</p>
+          <p class="font-semibold text-lg uppercase @if($data->status == 'paid' || $data->status == 'paid_manually') text-green-500 @else text-red-500 @endif text-right">
+            @if ($data->status == 'paid')
+              PAID
+            @elseif ($data->status == 'paid_manually')
+              PAID(Manually)
+            @elseif ($data->status == 'unpaid')
+              UNPAID
+            @endif
+          </p>
         </div>
         <div class="grid grid-cols-2 my-4 items-center">
           <p class="text-md text-gray-700">Price Amount</p>
@@ -104,7 +110,7 @@
 @endsection
 
 @push('after-script')
-<script src="https://www.paypal.com/sdk/js?client-id=sb&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=AQyuDo4zlYjzWRDR9Qml4fd9xqx36ytYwAJ3DGSgQsR7mjN4vnX0QhDHqbHppR2xCZW56SFyIcPmMpjK&currency=USD" data-sdk-integration-source="button-factory"></script>
 <script>
   function initPayPalButton() {
     paypal.Buttons({

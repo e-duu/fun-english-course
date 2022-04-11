@@ -17,7 +17,7 @@ class SppPaymentBankController extends Controller
                     "account_number": "123124",
                     "date": "2019-11-10 14:33:01",
                     "description": "TRSF E-BANKING CR 11/10 124123 MOOTA CO",
-                    "amount": 400267,
+                    "amount": 200944,
                     "type": "CR",
                     "balance": 520000,
                     "updated_at": "2019-11-10 14:33:01",

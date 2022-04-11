@@ -97,4 +97,10 @@ class SppController extends Controller
         $data->delete();
         return back();
     }
+
+    public function sppInvoice($id)
+    {
+        $data = SppMonth::findOrFail($id);
+        return view('pages.invoice', compact('data'));
+    }
 }
