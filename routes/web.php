@@ -55,6 +55,7 @@ Route::middleware(['auth'])->group(function ()
 	// Spp Payment
 	Route::get('/spp-payment/{id}', [PaymentPageController::class, 'sppPayment'])->name('spp-payment');
 	Route::post('/payment/store', [PaymentPageController::class, 'sppPaymentStore'])->name('spp-payment.store');
+	Route::get('/spp-payment-detail/{id}', [PaymentPageController::class, 'sppPaymentDetail'])->name('spp-payment-detail');
 
 	// Watch Material
 	Route::get('/watch/{id}', [WatchController::class, 'index'])->name('watch');
@@ -82,6 +83,7 @@ Route::middleware(['auth'])->group(function ()
 		// Moota
 		Route::get('/moota/setting', [MootaController::class, 'create'])->name('moota');
 		Route::post('moota/create', [MootaController::class, 'store'])->name('moota.store');
+		Route::get('/moota/get-bank', [MootaController::class, 'getListBank'])->name('moota.get-bank');
 
 
 		Route::prefix('user')->group(function () {

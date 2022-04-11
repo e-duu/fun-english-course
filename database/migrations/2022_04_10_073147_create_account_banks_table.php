@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMootasTable extends Migration
+class CreateAccountBanksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateMootasTable extends Migration
      */
     public function up()
     {
-        Schema::create('mootas', function (Blueprint $table) {
+        Schema::create('account_banks', function (Blueprint $table) {
             $table->id();
-            $table->text('api_key');
-            $table->string('webhook_url');
+            $table->string('account_name');
+            $table->string('account_number');
+            $table->string('type');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateMootasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mootas');
+        Schema::dropIfExists('account_banks');
     }
 }

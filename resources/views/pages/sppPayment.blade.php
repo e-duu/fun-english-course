@@ -79,6 +79,7 @@
       </div>
     </div>
 
+<<<<<<< HEAD
     @if ($data->status != 'paid')
       <div class="rounded-lg mx-auto w-11/12 md:w-9/12 lg:w-1/2 mt-12">
         {{-- NOTE : PAYMENT BY MOOTA --}}
@@ -89,6 +90,15 @@
         </a>
 
         <h3 class="text-black font-medium text-center text-lg my-4">Or</h3>
+=======
+    <div class="rounded-lg mx-auto w-11/12 md:w-9/12 lg:w-1/2 mt-12">
+      {{-- NOTE : PAYMENT BY MOOTA --}}
+      <a href="{{ route('spp-payment-detail', $data->id) }}">
+        <div class="rounded-full py-4 bg-blue-600 text-white font-bold text-xl text-center">
+          Next
+        </div>
+      </a>
+>>>>>>> 338343b803990f82363ab2d17e336a8b1d6581f9
 
         {{-- NOTE : PAYMENT BY PAYPAL --}}
         <div id="smart-button-container">
