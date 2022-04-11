@@ -27,11 +27,9 @@
               <p class="font-semibold text-lg text-gray-700">
                 {{ $bank->account_name }}
               </p>
-              <p class="text-xl font-bold text-gray-800">
-                {{ $bank->account_number }}
-              </p>
+              <input id="copyText" class="border-0 bg-transparent text-xl font-bold text-gray-800 -ml-3" type="text" value="{{ $bank->account_number }}" disabled>
             </div>
-            <a href="#" class="text-blue-600 font-semibold text-lg">Copy</a>
+            <button id="copyBtn" class="text-blue-600 font-semibold text-lg">Copy</button>
           </div>
           @empty
           <p class="text-xl font-bold text-gray-800">
@@ -63,20 +61,22 @@
               <p class="font-semibold text-gray-500">
                 Total Payment
               </p>
-              <p class="text-3xl font-bold text-gray-800">
                 @php
-                    $price = substr($data->price, 0, -3);
+                    // $price = substr($data->price, 0, -3);
+                    $price = $data->price + $data->code;
                 @endphp
+              {{-- <p class="text-3xl font-bold text-gray-800">
                 Rp. {{ $price }}.<span class="text-blue-600">{{ $data->code }}</span>
-              </p>
+              </p> --}}
+              <input id="copyTextPrice" class="border-0 bg-transparent text-3xl font-bold text-gray-800 -ml-3" type="text" value="Rp. {{ number_format($price,0,'.','.') }}" disabled>
               <p class="text-red-500 font-semibold">
                 *Transfer up to the last 3 digits
               </p>
               <p class="text-gray-500 font-semibold">
-                Unique code nominal still goes to the PPOB deposit
+                Unique code nominal still goes to the bone
               </p>
             </div>
-            <a href="#" class="text-blue-600 font-semibold text-lg">Copy</a>
+            <button id="copyBtnPrice" class="text-blue-600 font-semibold text-lg -ml-10">Copy</button>
           </div>
         </div>
 
@@ -126,5 +126,36 @@
     }).render('#paypal-button-container');
   }
   initPayPalButton();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+  const copyBtn = document.getElementById('copyBtn');
+  const copyText = document.getElementById("copyText");
+  const copyBtnPrice = document.getElementById('copyBtnPrice')
+  const copyTextPrice = document.getElementById('copyTextPrice')
+  
+  // NOTE : COPY TO CLIPBOARD
+  copyBtn.onclick = () => {
+    copyText.select();    // Selects the text inside the input
+    navigator.clipboard.writeText(copyText.value);
+      Swal.fire({         //displays a pop up with sweetalert
+        icon: 'success',
+        title: 'Text copied to clipboard',
+        showConfirmButton: false,
+        timer: 1000
+    });
+  }
+
+  // NOTE : COPY TO CLIPBOARD PRICE
+  copyBtnPrice.onclick = () => {
+    copyTextPrice.select();    // Selects the text inside the input
+    navigator.clipboard.writeText(copyTextPrice.value);
+      Swal.fire({         //displays a pop up with sweetalert
+        icon: 'success',
+        title: 'Text copied to clipboard',
+        showConfirmButton: false,
+        timer: 1000
+    });
+  }
 </script>
 @endpush

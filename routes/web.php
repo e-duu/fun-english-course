@@ -57,6 +57,7 @@ Route::middleware(['auth'])->group(function ()
 	Route::get('/spp-payment/{id}', [PaymentPageController::class, 'sppPayment'])->name('spp-payment');
 	Route::post('/payment/store', [PaymentPageController::class, 'sppPaymentStore'])->name('spp-payment.store');
 	Route::get('/spp-payment-detail/{id}', [PaymentPageController::class, 'sppPaymentDetail'])->name('spp-payment-detail');
+	Route::get('/spp-payment-success', [PaymentPageController::class, 'sppPaymentSuccess'])->name('spp-payment-success');
 
 	// api notif push webhoox
 	Route::get('/notification-payment-bank/success', [SppPaymentBankController::class, 'index'])->name('cek-notif-transfer');
