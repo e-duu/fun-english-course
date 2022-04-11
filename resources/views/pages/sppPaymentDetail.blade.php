@@ -26,11 +26,9 @@
               <p class="font-semibold text-lg text-gray-700">
                 PT Edukasi Diversitas Global Exelsia
               </p>
-              <p class="text-xl font-bold text-gray-800">
-                140 001 848 1383
-              </p>
+              <input id="copyText" class="border-0 bg-transparent text-xl font-bold text-gray-800 -ml-3" type="text" value="140 001 848 1383" disabled>
             </div>
-            <a href="#" class="text-blue-600 font-semibold text-lg">Copy</a>
+            <button id="copyBtn" class="text-blue-600 font-semibold text-lg">Copy</button>
           </div>
         </div>
         <div class="border-b-[3px] border-gray-400 my-3"></div>
@@ -57,17 +55,15 @@
               <p class="font-semibold text-gray-500">
                 Total Payment
               </p>
-              <p class="text-3xl font-bold text-gray-800">
-                Rp. 100.<span class="text-blue-600">008</span>
-              </p>
+              <input id="copyTextPrice" class="border-0 bg-transparent text-3xl font-bold text-gray-800 -ml-3" type="text" value="Rp. 100.008" disabled>
               <p class="text-red-500 font-semibold">
                 *Transfer up to the last 3 digits
               </p>
               <p class="text-gray-500 font-semibold">
-                Unique code nominal still goes to the PPOB deposit
+                Unique code nominal still goes to the bone
               </p>
             </div>
-            <a href="#" class="text-blue-600 font-semibold text-lg">Copy</a>
+            <button id="copyBtnPrice" class="text-blue-600 font-semibold text-lg -ml-10">Copy</button>
           </div>
         </div>
 
@@ -116,5 +112,36 @@
     }).render('#paypal-button-container');
   }
   initPayPalButton();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+  const copyBtn = document.getElementById('copyBtn');
+  const copyText = document.getElementById("copyText");
+  const copyBtnPrice = document.getElementById('copyBtnPrice')
+  const copyTextPrice = document.getElementById('copyTextPrice')
+  
+  // NOTE : COPY TO CLIPBOARD
+  copyBtn.onclick = () => {
+    copyText.select();    // Selects the text inside the input
+    navigator.clipboard.writeText(copyText.value);
+      Swal.fire({         //displays a pop up with sweetalert
+        icon: 'success',
+        title: 'Text copied to clipboard',
+        showConfirmButton: false,
+        timer: 1000
+    });
+  }
+
+  // NOTE : COPY TO CLIPBOARD PRICE
+  copyBtnPrice.onclick = () => {
+    copyTextPrice.select();    // Selects the text inside the input
+    navigator.clipboard.writeText(copyTextPrice.value);
+      Swal.fire({         //displays a pop up with sweetalert
+        icon: 'success',
+        title: 'Text copied to clipboard',
+        showConfirmButton: false,
+        timer: 1000
+    });
+  }
 </script>
 @endpush

@@ -77,7 +77,7 @@
       {{-- NOTE : PAYMENT BY MOOTA --}}
       <a href="{{ route('spp-payment-detail', $data->id) }}">
         <div class="rounded-full py-4 bg-blue-600 text-white font-bold text-xl text-center">
-          Next
+          <i class="fas fa-money-check"></i> Pay with Bank
         </div>
       </a>
 
