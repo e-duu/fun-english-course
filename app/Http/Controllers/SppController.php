@@ -39,8 +39,18 @@ class SppController extends Controller
             'level_id.required' => 'please input recipient student',
         ]);
 
-        $data = $request->all();
-        SppMonth::create($data);
+        // $data = $request->all();
+
+        $code = mt_rand(1,999);
+        // dd($code);
+        
+        SppMonth::create([
+            'month' => $request->month,
+            'price' => $request->price,
+            'code' => $code,
+            'user_id' => $request->user_id,
+            'level_id' => $request->level_id,
+        ]);
         return redirect()->route('spp.all');
     }
 
@@ -67,9 +77,17 @@ class SppController extends Controller
             'level_id.required' => 'please input recipient student',
         ]);
 
-        $data = $request->all();
+        // $data = $request->all();
+        $code = mt_rand(1,999);
+        
         $item = SppMonth::findorfail($id);
-        $item->update($data);
+        $item->update([
+            'month' => $request->month,
+            'price' => $request->price,
+            'code' => $code,
+            'user_id' => $request->user_id,
+            'level_id' => $request->level_id,
+        ]);
         return redirect()->route('spp.all');
     }
 

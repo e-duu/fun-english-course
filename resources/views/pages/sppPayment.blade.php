@@ -80,6 +80,7 @@
     </div>
 
     @if ($data->status != 'paid')
+<<<<<<< HEAD
         @if ($data->status != 'paid_manually')
             <div class="rounded-lg mx-auto w-11/12 md:w-9/12 lg:w-1/2 mt-12">
                 {{-- NOTE : PAYMENT BY MOOTA --}}
@@ -88,9 +89,19 @@
                     <i class="fas fa-money-check"></i> Pay with Bank
                     </div>
                 </a>
+=======
+    <div class="rounded-lg mx-auto w-11/12 md:w-9/12 lg:w-1/2 mt-12">
+      {{-- NOTE : PAYMENT BY MOOTA --}}
+      <a href="{{ route('spp-payment-detail', $data->id) }}">
+        <div class="rounded-full py-4 bg-blue-600 text-white font-bold text-xl text-center">
+          <i class="fas fa-money-check"></i> Pay with Bank
+        </div>
+      </a>
+>>>>>>> b192b8863a16265df5aec69ce5db5d72c848d99a
 
                 <p class="text-center text-lg font-bold my-3">Or</p>
 
+<<<<<<< HEAD
                 {{-- NOTE : PAYMENT BY PAYPAL --}}
                 <div id="smart-button-container">
                     <div style="text-align: center;">
@@ -101,6 +112,16 @@
         @endif
     @endif
   </div>
+=======
+      {{-- NOTE : PAYMENT BY PAYPAL --}}
+      <div id="smart-button-container">
+        <div style="text-align: center;">
+          <div id="paypal-button-container"></div>
+        </div>
+      </div>
+    </div>
+    @endif
+>>>>>>> b192b8863a16265df5aec69ce5db5d72c848d99a
 @endsection
 
 @push('after-script')
