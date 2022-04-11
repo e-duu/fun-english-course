@@ -6,13 +6,18 @@
   Create Spps
 @endsection
 @section('content')
-  <form action="{{ route('spp.store') }}" method="POST" class="px-4 py-3 bg-white rounded-lg shadow-md dark:bg-gray-800">
+  <form id="payments" action="{{ route('spp.store') }}" method="POST" class="px-4 py-3 bg-white rounded-lg shadow-md dark:bg-gray-800">
     @csrf
 
     <label class="block mt-4 text-sm">
       <span class="text-gray-700 dark:text-gray-400">
         Student Name
       </span>
+      {{-- <select @change="setUsers(users_id)" v-model="users_id" name="user_id" class="block w-full mt-1 text-sm rounded-md border-gray-400  dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
+        @foreach ($users as $user)
+          <option value="{{ $user->id }}">{{ $user->name }}</option>
+        @endforeach
+      </select> --}}
       <select name="user_id" class="block w-full mt-1 text-sm rounded-md border-gray-400  dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
         @foreach ($users as $user)
           <option value="{{ $user->id }}">{{ $user->name }}</option>
@@ -30,9 +35,10 @@
         Level
       </span>
       <select name="level_id" class="block w-full mt-1 text-sm rounded-md border-gray-400  dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
-        @foreach ($levels as $level)
-          <option value="{{ $level->level->id }}">{{ $level->level->name }}</option>
+        @foreach ($levelUsers as $level)
+            <option value="{{$level->level->id}}">{{$level->level->name}}</option>
         @endforeach
+        {{-- <option v-for="level in selectedLevels" :value="level.id">@{{ level.name }}</option> --}}
       </select>
       @error('level_id')
         <div class="mt-1 text-sm text-[red]">
@@ -81,4 +87,29 @@
   </form>
 @endsection
 
+@push('after-script')
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=sb&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
+    <script>
+        var payments = new Vue({
+            el: "#payments",
+            mounted() {
 
+            },
+            data: {
+                users: @json($users ),
+                levels: @json($levels),
+                levelUsers: @json($levelUsers),
+                selectedLevels: null,
+                users_id: null,
+            },
+            methods: {
+                setUsers(id) {
+                    let selectedLevel = this.levelUsers.filter(e => e.user_id == id)
+                    this.selectedLevels = selectedLevel
+                    console.log(selectedLevel)
+                }
+            },
+        });
+    </script>
+@endpush

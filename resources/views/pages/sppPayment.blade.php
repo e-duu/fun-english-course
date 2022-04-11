@@ -79,23 +79,27 @@
       </div>
     </div>
 
-    <div class="rounded-lg mx-auto w-11/12 md:w-9/12 lg:w-1/2 mt-12">
-      {{-- NOTE : PAYMENT BY MOOTA --}}
-      <a href="{{ route('spp-payment-detail', $data->id) }}">
-        <div class="rounded-full py-4 bg-blue-600 text-white font-bold text-xl text-center">
-          <i class="fas fa-money-check"></i> Pay with Bank
-        </div>
-      </a>
+    @if ($data->status != 'paid')
+        @if ($data->status != 'paid_manually')
+            <div class="rounded-lg mx-auto w-11/12 md:w-9/12 lg:w-1/2 mt-12">
+                {{-- NOTE : PAYMENT BY MOOTA --}}
+                <a href="{{ route('spp-payment-detail', $data->id) }}">
+                    <div class="rounded-full py-4 bg-blue-600 text-white font-bold text-xl text-center">
+                    <i class="fas fa-money-check"></i> Pay with Bank
+                    </div>
+                </a>
 
-      <p class="text-center text-lg font-bold my-3">Or</p>
+                <p class="text-center text-lg font-bold my-3">Or</p>
 
-      {{-- NOTE : PAYMENT BY PAYPAL --}}
-      <div id="smart-button-container">
-        <div style="text-align: center;">
-          <div id="paypal-button-container"></div>
-        </div>
-      </div>
-    </div>
+                {{-- NOTE : PAYMENT BY PAYPAL --}}
+                <div id="smart-button-container">
+                    <div style="text-align: center;">
+                    <div id="paypal-button-container"></div>
+                    </div>
+                </div>
+            </div>
+        @endif
+    @endif
   </div>
 @endsection
 
@@ -151,7 +155,7 @@
             // element.innerHTML = '';
             // element.innerHTML = '<h3>Thank you for your payment!</h3>'
 
-            window.location.replace("/");
+            window.location.replace("{{route('spp-payment-success')}}");
         });
       },
 
