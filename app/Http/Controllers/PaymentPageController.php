@@ -60,6 +60,8 @@ class PaymentPageController extends Controller
     public function sppPaymentDetail($id)
     {
         $data = SppMonth::findOrFail($id);
+
         return view('pages.sppPaymentDetail', compact('data'));
     }
+
 }
