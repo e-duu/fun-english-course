@@ -63,8 +63,6 @@
                     element.innerHTML = '<h3>Thank you for your payment!</h3>'
                 });
             }
-
-
         }).render('#paypal-button-container');
     </script>
 </body>

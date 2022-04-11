@@ -12,6 +12,8 @@
       <thead>
         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
           <th class="px-4 py-3">Student Name</th>
+          <th class="px-4 py-3">Program</th>
+          <th class="px-4 py-3">Level</th>
           <th class="px-4 py-3">Month</th>
           <th class="px-4 py-3">Price</th>
           <th class="px-4 py-3">Actions</th>
@@ -23,6 +25,12 @@
           <tr class="text-gray-700 dark:text-gray-400">
             <td class="px-4 py-3 text-sm">
               {{ $item->student->name }}
+            </td>
+            <td class="px-4 py-3 text-sm">
+              {{ $item->level->program->name }}
+            </td>
+            <td class="px-4 py-3 text-sm">
+              {{ $item->level->name }}
             </td>
             <td class="px-4 py-3 text-sm">
               @if ($item->month == 1)
@@ -73,7 +81,7 @@
           </tr>
         @empty
           <tr>
-            <td colspan="4" class="text-center text-gray-500 px-4 py-3">
+            <td colspan="6" class="text-center text-gray-500 px-4 py-3">
               <p>
                 Data is empty..
               </p>

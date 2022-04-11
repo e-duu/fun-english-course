@@ -50,7 +50,11 @@ Route::middleware(['auth'])->group(function ()
 
 	// Payment
 	Route::get('/payment', [PaymentPageController::class, 'index'])->name('payment');
-	Route::post('/payment/store', [PaymentPageController::class, 'store'])->name('payment.post');
+	Route::post('/payment/store', [PaymentPageController::class, 'store'])->name('payment.store');
+
+	// Spp Payment
+	Route::get('/spp-payment/{id}', [PaymentPageController::class, 'sppPayment'])->name('spp-payment');
+	Route::post('/payment/store', [PaymentPageController::class, 'sppPaymentStore'])->name('spp-payment.store');
 
 	// Watch Material
 	Route::get('/watch/{id}', [WatchController::class, 'index'])->name('watch');

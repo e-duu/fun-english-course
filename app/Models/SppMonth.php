@@ -14,12 +14,19 @@ class SppMonth extends Model
     protected $fillable = [
         'month',
         'price',
+        'status',
         'user_id',
+        'level_id',
     ];
 
     public function student()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function level()
+    {
+        return $this->belongsTo(Level::class, 'level_id', 'id');
     }
 
     public function sppPayment()
