@@ -45,21 +45,27 @@ class PaymentPageController extends Controller
         return view('pages.sppPayment', compact('data'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function sppPaymentStore(Request $request)
-    {
-        Payment::create($request->all());
-        return redirect()->route('resource');
-    }
+    // /**
+    //  * Store a newly created resource in storage.
+    //  *
+    //  * @param  \Illuminate\Http\Request  $request
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function sppPaymentStore(Request $request)
+    // {
+    //     SppMonth::create($request->all());
+    //     return redirect()->route('resource');
+    // }
 
     public function sppPaymentDetail($id)
     {
         $data = SppMonth::findOrFail($id);
         return view('pages.sppPaymentDetail', compact('data'));
+    }
+
+    public function sppPaymentSuccess()
+    {
+        // $data = SppMonth::findOrFail($id);
+        return view('pages.paymentSuccess');
     }
 }
