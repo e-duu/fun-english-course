@@ -15,6 +15,7 @@ class SppMonth extends Model
         'month',
         'price',
         'status',
+        'code',
         'user_id',
         'level_id',
     ];
@@ -32,5 +33,10 @@ class SppMonth extends Model
     public function sppPayment()
     {
         return $this->belongsTo(SppPayment::class);
+    }
+
+    public function sppPaymentBank()
+    {
+        return $this->belongsTo(SppPaymentBank::class);
     }
 }

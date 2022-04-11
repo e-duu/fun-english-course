@@ -20,16 +20,22 @@
         </div>
         <div class="border-b-[3px] border-gray-400 my-3"></div>
         <div class="grid grid-cols-1 my-4 items-center">
+          @forelse ($account_banks as $bank)
           <div class="flex justify-between items-center">
             <div class="flex-col">
               <img src="{{ asset('images/mandiri.png') }}" class="max-h-8 mb-2">
               <p class="font-semibold text-lg text-gray-700">
-                PT Edukasi Diversitas Global Exelsia
+                {{ $bank->account_name }}
               </p>
-              <input id="copyText" class="border-0 bg-transparent text-xl font-bold text-gray-800 -ml-3" type="text" value="140 001 848 1383" disabled>
+              <input id="copyText" class="border-0 bg-transparent text-xl font-bold text-gray-800 -ml-3" type="text" value="{{ $bank->account_number }}" disabled>
             </div>
             <button id="copyBtn" class="text-blue-600 font-semibold text-lg">Copy</button>
           </div>
+          @empty
+          <p class="text-xl font-bold text-gray-800">
+            Account bank not found
+          </p>
+          @endforelse
         </div>
         <div class="border-b-[3px] border-gray-400 my-3"></div>
         <div class="grid grid-cols-1 my-4 items-center">
@@ -55,7 +61,14 @@
               <p class="font-semibold text-gray-500">
                 Total Payment
               </p>
-              <input id="copyTextPrice" class="border-0 bg-transparent text-3xl font-bold text-gray-800 -ml-3" type="text" value="Rp. 100.008" disabled>
+                @php
+                    // $price = substr($data->price, 0, -3);
+                    $price = $data->price + $data->code;
+                @endphp
+              {{-- <p class="text-3xl font-bold text-gray-800">
+                Rp. {{ $price }}.<span class="text-blue-600">{{ $data->code }}</span>
+              </p> --}}
+              <input id="copyTextPrice" class="border-0 bg-transparent text-3xl font-bold text-gray-800 -ml-3" type="text" value="Rp. {{ number_format($price,0,'.','.') }}" disabled>
               <p class="text-red-500 font-semibold">
                 *Transfer up to the last 3 digits
               </p>
@@ -70,6 +83,7 @@
       </div>
       <div class='flex items-center justify-center pt-10'>
         <button class='w-full bg-blue-600 hover:bg-blue-700 rounded-b-lg shadow-xl font-bold text-md sm:text-xl text-white transition-colors duration-100 py-3 sm:py-5' type="submit">Done</button>
+        {{-- <a href="{{ route('cek-notif-transfer') }}" class='w-full bg-blue-600 hover:bg-blue-700 rounded-b-lg shadow-xl font-bold text-md sm:text-xl text-white transition-colors duration-100 py-3 sm:py-5'>Done</a> --}}
       </div>
     </div>
   </div>
