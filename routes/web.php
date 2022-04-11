@@ -19,6 +19,7 @@ use App\Http\Controllers\MootaController;
 use App\Http\Controllers\PaymentPageController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\SppController;
+use App\Http\Controllers\SppPaymentBankController;
 use App\Http\Controllers\SppPaymentController;
 
 /*
@@ -56,6 +57,9 @@ Route::middleware(['auth'])->group(function ()
 	Route::get('/spp-payment/{id}', [PaymentPageController::class, 'sppPayment'])->name('spp-payment');
 	Route::post('/payment/store', [PaymentPageController::class, 'sppPaymentStore'])->name('spp-payment.store');
 	Route::get('/spp-payment-detail/{id}', [PaymentPageController::class, 'sppPaymentDetail'])->name('spp-payment-detail');
+
+	// api notif push webhoox
+	Route::get('/notification-payment-bank/success', [SppPaymentBankController::class, 'index'])->name('cek-notif-transfer');
 
 	// Watch Material
 	Route::get('/watch/{id}', [WatchController::class, 'index'])->name('watch');

@@ -20,18 +20,24 @@
         </div>
         <div class="border-b-[3px] border-gray-400 my-3"></div>
         <div class="grid grid-cols-1 my-4 items-center">
+          @forelse ($account_banks as $bank)
           <div class="flex justify-between items-center">
             <div class="flex-col">
               <img src="{{ asset('images/mandiri.png') }}" class="max-h-8 mb-2">
               <p class="font-semibold text-lg text-gray-700">
-                PT Edukasi Diversitas Global Exelsia
+                {{ $bank->account_name }}
               </p>
               <p class="text-xl font-bold text-gray-800">
-                140 001 848 1383
+                {{ $bank->account_number }}
               </p>
             </div>
             <a href="#" class="text-blue-600 font-semibold text-lg">Copy</a>
           </div>
+          @empty
+          <p class="text-xl font-bold text-gray-800">
+            Account bank not found
+          </p>
+          @endforelse
         </div>
         <div class="border-b-[3px] border-gray-400 my-3"></div>
         <div class="grid grid-cols-1 my-4 items-center">
@@ -58,7 +64,10 @@
                 Total Payment
               </p>
               <p class="text-3xl font-bold text-gray-800">
-                Rp. 100.<span class="text-blue-600">008</span>
+                @php
+                    $price = substr($data->price, 0, -3);
+                @endphp
+                Rp. {{ $price }}.<span class="text-blue-600">{{ $data->code }}</span>
               </p>
               <p class="text-red-500 font-semibold">
                 *Transfer up to the last 3 digits
@@ -74,6 +83,7 @@
       </div>
       <div class='flex items-center justify-center pt-10'>
         <button class='w-full bg-blue-600 hover:bg-blue-700 rounded-b-lg shadow-xl font-bold text-md sm:text-xl text-white transition-colors duration-100 py-3 sm:py-5' type="submit">Done</button>
+        {{-- <a href="{{ route('cek-notif-transfer') }}" class='w-full bg-blue-600 hover:bg-blue-700 rounded-b-lg shadow-xl font-bold text-md sm:text-xl text-white transition-colors duration-100 py-3 sm:py-5'>Done</a> --}}
       </div>
     </div>
   </div>

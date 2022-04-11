@@ -40,7 +40,7 @@ class SppController extends Controller
 
         // $data = $request->all();
 
-        $code = mt_rand(1,999);
+        $code = mt_rand(100,999);
         // dd($code);
         
         SppMonth::create([
@@ -77,7 +77,7 @@ class SppController extends Controller
         ]);
 
         // $data = $request->all();
-        $code = mt_rand(1,999);
+        $code = mt_rand(100,999);
         
         $item = SppMonth::findorfail($id);
         $item->update([

@@ -17,8 +17,8 @@ class CreateSppPaymentBanksTable extends Migration
             $table->id();
 
             $table->foreignId('spp_month_id');
-            $table->integer('bank_id');
-            $table->integer('account_number');
+            $table->string('bank_id');
+            $table->string('account_number');
             $table->string('bank_type');
             $table->dateTime('date');
             $table->integer('amount');

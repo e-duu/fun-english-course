@@ -20,6 +20,7 @@ class SppPaymentBank extends Model
         'type',
         'balance',
         'code',
-        'recipent_name'
+        'recipient_name',
+        'send_name'
     ];
 }

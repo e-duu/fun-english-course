@@ -67,10 +67,12 @@
               </td>
               <td class="px-4 py-3">
                 <div class="flex items-center space-x-4 text-sm">
+                  @if ($item->status != 'paid')
                   <a href="{{ route('spp-payment', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
                     <i class="fas fa-cart-plus"></i>
                     <p>Pay</p>
                   </a>
+                  @endif
                   <a href="{{ route('user.show', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
                     <i class=" fas fa-eye"></i>
                     <p>Detail</p>
