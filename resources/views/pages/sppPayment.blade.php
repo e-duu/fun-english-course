@@ -79,15 +79,16 @@
       </div>
     </div>
 
-    <div class="rounded-lg mx-auto w-11/12 md:w-9/12 lg:w-1/2 mt-12">
-      {{-- NOTE : PAYMENT BY MOOTA --}}
-        <div class="mb-4">
-          <a href="{{ route('spp-payment-detail', $data->id) }}">
-            <div class="rounded-full py-4 bg-blue-600 text-white font-bold text-xl text-center">
-              PayBank
-            </div>
-          </a>
-        </div>
+    @if ($data->status != 'paid')
+      <div class="rounded-lg mx-auto w-11/12 md:w-9/12 lg:w-1/2 mt-12">
+        {{-- NOTE : PAYMENT BY MOOTA --}}
+        <a href="{{ route('spp-payment-detail', $data->id) }}">
+          <div class="rounded-full py-4 bg-blue-600 text-white font-bold text-xl text-center">
+            Next
+          </div>
+        </a>
+
+        <h3 class="text-black font-medium text-center text-lg my-4">Or</h3>
 
         {{-- NOTE : PAYMENT BY PAYPAL --}}
         <div id="smart-button-container">
@@ -96,6 +97,7 @@
          </div>
        </div>
       </div>
+    @endif
   </div>
 @endsection
 

@@ -25,62 +25,52 @@
         </thead>
         <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-darker">
           @forelse ($data as $item)
-              <tr class="text-gray-700 dark:text-gray-400">
-                <td class="px-4 py-3 text-sm">
-                  {{ $item->student->name }}
-                </td>
-                <td class="px-4 py-3 text-sm">
-                  {{ $item->level->program->name }}
-                </td>
-                <td class="px-4 py-3 text-sm">
-                  {{ $item->level->name }}
-                </td>
-                <td class="px-4 py-3 text-sm">
-                  @if ($item->month == 1)
-                      January
-                  @elseif ($item->month == 2)
-                      February
-                  @elseif ($item->month == 3)
-                      March
-                  @elseif ($item->month == 4)
-                      April
-                  @elseif ($item->month == 5)
-                      May
-                  @elseif ($item->month == 6)
-                      June
-                  @elseif ($item->month == 7)
-                      July
-                  @elseif ($item->month == 8)
-                      August
-                  @elseif ($item->month == 9)
-                      September
-                  @elseif ($item->month == 10)
-                      October
-                  @elseif ($item->month == 11)
-                      November
-                  @elseif ($item->month == 12)
-                      December
-                  @endif
-                </td>
-                <td class="px-4 py-3 text-sm">
-                  {{'Rp '.number_format($item->price) }}
-                </td>
-              <form action="{{ route('spp-payment.store') }}" id="form-store" method="POST">
-                @csrf
-
-                <input type="hidden" name="month" value="">
-                <input type="hidden" name="month" value="">
-                <input type="hidden" name="month" value="">
-                <input type="hidden" name="month" value="">
-                
-                @method('POST')
-              </form>
+            <tr class="text-gray-700 dark:text-gray-400">
+              <td class="px-4 py-3 text-sm">
+                {{ $item->student->name }}
+              </td>
+              <td class="px-4 py-3 text-sm">
+                {{ $item->level->program->name }}
+              </td>
+              <td class="px-4 py-3 text-sm">
+                {{ $item->level->name }}
+              </td>
+              <td class="px-4 py-3 text-sm">
+                @if ($item->month == 1)
+                    January
+                @elseif ($item->month == 2)
+                    February
+                @elseif ($item->month == 3)
+                    March
+                @elseif ($item->month == 4)
+                    April
+                @elseif ($item->month == 5)
+                    May
+                @elseif ($item->month == 6)
+                    June
+                @elseif ($item->month == 7)
+                    July
+                @elseif ($item->month == 8)
+                    August
+                @elseif ($item->month == 9)
+                    September
+                @elseif ($item->month == 10)
+                    October
+                @elseif ($item->month == 11)
+                    November
+                @elseif ($item->month == 12)
+                    December
+                @endif
+              </td>
+              <td class="px-4 py-3 text-sm">
+                {{'Rp '.number_format($item->price) }}
+              </td>
               <td class="px-4 py-3">
                 <div class="flex items-center space-x-4 text-sm">
-                  <button form="form-store" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                  <a href="{{ route('spp-payment', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
                     <i class="fas fa-cart-plus"></i>
                     <p>Pay</p>
-                  </button>
+                  </a>
                   <a href="{{ route('user.show', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
                     <i class=" fas fa-eye"></i>
                     <p>Detail</p>

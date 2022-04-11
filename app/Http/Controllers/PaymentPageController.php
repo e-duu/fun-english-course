@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AccountBank;
 use App\Models\Level;
 use App\Models\Payment;
 use App\Models\Program;
@@ -60,8 +61,9 @@ class PaymentPageController extends Controller
     public function sppPaymentDetail($id)
     {
         $data = SppMonth::findOrFail($id);
+        $account_banks = AccountBank::get();
 
-        return view('pages.sppPaymentDetail', compact('data'));
+        return view('pages.sppPaymentDetail', compact('data', 'account_banks'));
     }
 
 }
