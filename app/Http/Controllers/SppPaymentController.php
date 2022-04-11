@@ -23,7 +23,7 @@ class SppPaymentController extends Controller
         $data = SppMonth::findOrFail($id);
 
         // Conversi IDR to USD
-        $req_url = "https://v6.exchangerate-api.com/v6/4de7938f23bbd34918b9c82c/latest/USD";
+        $req_url = "https://v6.exchangerate-api.com/v6/4de7938f23bbd34918b9c82c/latest/IDR";
         $response_json = file_get_contents($req_url);
         if(false !== $response_json) {
             try {
@@ -81,6 +81,7 @@ class SppPaymentController extends Controller
 
         // movement to Database (Import & Update)
         SppPayment::create([
+            'currency' => 'USD',
             'amount' => $data->price,
             'user_id' => $data->user_id,
             'spp_month_id' => $data->id,
