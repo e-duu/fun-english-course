@@ -1,9 +1,9 @@
 @extends('layouts.dash')
 @section('title')
-  Fun English Course | Recipient Edit
+  Fun English Course | Spp Edit
 @endsection
 @section('sub-title')
-  Edit Recipients
+  Edit Spp
 @endsection
 @section('content')
   <form action="{{ route('spp.update', $data->id) }}" method="POST" class="px-4 py-3 bg-white rounded-lg shadow-md dark:bg-gray-800">
@@ -26,8 +26,27 @@
     </label>
 
     <label class="block mt-4 text-sm">
+        <span class="text-gray-700 dark:text-gray-400">
+          Level
+        </span>
+        <select name="level_id" class="block w-full mt-1 text-sm rounded-md border-gray-400  dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
+          @foreach ($levels as $level)
+            <option value="{{ $level->level->id }}" {{ $level->id == $data->level_id ? 'selected' : '' }}>{{ $level->level->name }}</option>
+          @endforeach
+        </select>
+        @error('level_id')
+          <div class="mt-1 text-sm text-[red]">
+            <i class="fas fa-dot-circle text-xs"></i> {{ $message }}
+          </div>
+        @enderror
+    </label>
+
+    {{-- Coba --}}
+    <input type="hidden" value="unpaid" name="status">
+
+    <label class="block mt-4 text-sm">
       <span class="text-gray-700 dark:text-gray-400">
-        Student Name
+        Month
       </span>
       <select name="month" class="block w-full mt-1 text-sm rounded-md border-gray-400  dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
         <option value="1" {{$data->month == '1' ? 'selected' : ''}}>January</option>

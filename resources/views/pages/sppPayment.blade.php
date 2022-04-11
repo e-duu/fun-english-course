@@ -8,7 +8,7 @@
       <div class="bg-blue-600 rounded-t-lg py-3 sm:py-6 sm:mb-5">
         <h1 class="text-white text-center font-bold text-lg sm:text-2xl">Payment Confirmation</h1>
       </div>
-      
+
       <div class="flex-col mx-10">
         <div class="grid grid-cols-2 my-4 items-center">
           <p class="text-md text-gray-700">Student Name</p>
@@ -59,6 +59,12 @@
           </p>
         </div>
         <div class="grid grid-cols-2 my-4 items-center">
+            <p class="text-md text-gray-700">Status</p>
+            <p class="font-semibold text-lg @if($data->status == 'paid' || $data->status == 'paid_manually') text-green-500 @else text-red-500 @endif text-right">
+              {{ $data->status }}
+            </p>
+        </div>
+        <div class="grid grid-cols-2 my-4 items-center">
           <p class="text-md text-gray-700">Price Amount</p>
           <p class="font-semibold text-lg text-gray-700 text-right">
             {{'Rp. '.number_format($data->price) }}
@@ -73,23 +79,25 @@
       </div>
     </div>
 
-    <div class="rounded-lg mx-auto w-11/12 md:w-9/12 lg:w-1/2 mt-12">
-      {{-- NOTE : PAYMENT BY MOOTA --}}
-      <a href="{{ route('spp-payment-detail', $data->id) }}">
-        <div class="rounded-full py-4 bg-blue-600 text-white font-bold text-xl text-center">
-          <i class="fas fa-money-check"></i> Pay with Bank
-        </div>
-      </a>
+    @if ($data->status != 'paid')
+      <div class="rounded-lg mx-auto w-11/12 md:w-9/12 lg:w-1/2 mt-12">
+        {{-- NOTE : PAYMENT BY MOOTA --}}
+        <a href="{{ route('dashboard') }}">
+          <div class="rounded-full py-4 bg-blue-600 text-white font-bold text-xl text-center">
+            Next
+          </div>
+        </a>
 
-      <h3 class="text-black font-medium text-center text-lg my-4">Or</h3>
-      
-      {{-- NOTE : PAYMENT BY PAYPAL --}}
-      <div id="smart-button-container">
-       <div style="text-align: center;">
-         <div id="paypal-button-container"></div>
+        <h3 class="text-black font-medium text-center text-lg my-4">Or</h3>
+
+        {{-- NOTE : PAYMENT BY PAYPAL --}}
+        <div id="smart-button-container">
+         <div style="text-align: center;">
+           <div id="paypal-button-container"></div>
+         </div>
        </div>
-     </div>
-    </div>
+      </div>
+    @endif
   </div>
 @endsection
 
@@ -106,21 +114,46 @@
       },
 
       createOrder: function(data, actions) {
-        return actions.order.create({
-          purchase_units: [{"amount":{"currency_code":"USD","value":1}}]
+        return fetch('{{route("create.order.spp", $data->id)}}', {
+            method: 'post',
+        }).then(function(res) {
+            return res.json()
+        }).then(function(orderData) {
+            return orderData.id
         });
       },
 
       onApprove: function(data, actions) {
-        return actions.order.capture().then(function(orderData) {
-          
-          // Full available details
-          console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+        return fetch('{{route("capture.order.spp", $data->id)}}', {
+            method: 'post',
+            body:JSON.stringify({
+                orderId:data.orderID,
+            })
+        }).then(function(res) {
+            return res.json();
+        }).then(function(orderData) {
+            var errorDetail = Array.isArray(orderData.details) && orderData.details[0];
 
-          // Show a success message within this page, e.g.
-          const element = document.getElementById('paypal-button-container');
-          element.innerHTML = '';
-          element.innerHTML = '<h3>Thank you for your payment!</h3>';
+            if (errorDetail && errorDetail.issue === 'INSTRUMENT_DECLINED') {
+                return actions.restart();
+            }
+
+            if (errorDetail) {
+                var msg = 'Maaf, transaksi Anda tidak dapat diproses.';
+                if(errorDetail.description) msg += '\n\n' + errorDetail.description;
+                if(orderData.debug_id) msg += ' ('+ orderData.debug_id +')';
+                return alert(msg);
+            }
+
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+            // var transaction = orderData.purchase_units[0].payments.captures[0];
+            // alert('Transaction ' + transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
+
+            // const element = document.getElementById('paypal-button-container');
+            // element.innerHTML = '';
+            // element.innerHTML = '<h3>Thank you for your payment!</h3>'
+
+            window.location.replace("/");
         });
       },
 

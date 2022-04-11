@@ -25,7 +25,7 @@
         <div class="flex-1 h-full overflow-x-hidden overflow-y-auto">
           <!-- Navbar -->
           @include('includes.admin.navbar')
-          
+
           <div class="px-10 pt-10 pb-20">
             <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
               @yield('sub-title')

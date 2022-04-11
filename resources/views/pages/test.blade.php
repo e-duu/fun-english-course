@@ -14,7 +14,7 @@
     <div id="paypal-button-container"></div>
 
     <!-- Include the PayPal JavaScript SDK -->
-    <script src="https://www.paypal.com/sdk/js?client-id=AaFtYqh4OyV1bM6pKf2nCUr1mI_iwQEFZv_-xu4CO5qsYKx2zq73zMf9peqPsKZErJavR6SJhyGpc3ye&currency=USD"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=AQyuDo4zlYjzWRDR9Qml4fd9xqx36ytYwAJ3DGSgQsR7mjN4vnX0QhDHqbHppR2xCZW56SFyIcPmMpjK&currency=USD"></script>
 
     <script>
         // Render the PayPal button into #paypal-button-container
@@ -63,8 +63,6 @@
                     element.innerHTML = '<h3>Thank you for your payment!</h3>'
                 });
             }
-
-
         }).render('#paypal-button-container');
     </script>
 </body>

@@ -14,6 +14,7 @@ class SppMonth extends Model
     protected $fillable = [
         'month',
         'price',
+        'status',
         'user_id',
         'level_id',
     ];

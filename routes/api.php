@@ -23,5 +23,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/payment', [PaymentPageController::class, 'index'])->name('payment');
 Route::get('/payment/{programs_id}', [PaymentPageController::class, 'levels'])->name('payment');
 
-Route::post('payment/spp/create', [SppPaymentController::class, 'create']);
-Route::post('payment/spp/capture', [SppPaymentController::class, 'capture']);
+Route::post('payment/spp/create/{id}', [SppPaymentController::class, 'createPayment'])->name('create.order.spp');
+Route::post('payment/spp/capture/{id}', [SppPaymentController::class, 'capturePayment'])->name('capture.order.spp');

@@ -5,18 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SppPayment extends Model
+class LevelUser extends Model
 {
     use HasFactory;
 
-    protected $table = 'spp_payments';
+    protected $table = 'level_user';
 
     protected $fillable = [
-        'amount',
-        'evidence',
-        'currency',
-        'orderId',
+        'level_id',
         'user_id',
-        'spp_month_id',
     ];
+
+    public function level()
+    {
+        return $this->belongsTo(Level::class, 'level_id', 'id');
+    }
 }

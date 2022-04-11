@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\SppMonth;
 use App\Models\SppPayment;
+use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
@@ -20,11 +22,26 @@ class SppPaymentController extends Controller
         // From Database
         $data = SppMonth::findOrFail($id);
 
-        // Purchase Units
-        $price = $data->price;
-        $description = '$'.$data->price.' spp price';
+        // Conversi IDR to USD
+        $req_url = "https://v6.exchangerate-api.com/v6/4de7938f23bbd34918b9c82c/latest/IDR";
+        $response_json = file_get_contents($req_url);
+        if(false !== $response_json) {
+            try {
+                $response = json_decode($response_json);
+                    if('success' === $response->result) {
+                        $base_price = $data->price;
+                        $price = round(($base_price * $response->conversion_rates->USD), 2);
+                    }
+                }
+            catch(Exception $e) {
+                dd('terjadi Kesalahan');
+            }
+        }
 
-        $provider->createOrder([
+        // Purchase Units
+        $description = '$'.$price.' total spp price';
+
+        $item = $provider->createOrder([
             'intent' => 'CAPTURE',
             'purchase_units' => [
                 [
@@ -36,12 +53,22 @@ class SppPaymentController extends Controller
                 ],
             ],
         ]);
+
+        // database movement
+        $data->update([
+            'status' => 'unpaid',
+        ]);
+
+        return response()->json($item);
     }
 
-    public function capturePayment(Request $request)
+    public function capturePayment(Request $request, $id)
     {
         $data = json_decode($request->getContent(), true);
         $orderId = $data['orderId'];
+
+        // From Database
+        $data = SppMonth::findOrFail($id);
 
         // Init Paypal
         $provider = new PayPalClient;
@@ -51,9 +78,20 @@ class SppPaymentController extends Controller
 
         $result = $provider->capturePaymentOrder($orderId);
 
-        // Update to Database
+
+        // movement to Database (Import & Update)
+        SppPayment::create([
+            'currency' => 'USD',
+            'amount' => $data->price,
+            'user_id' => $data->user_id,
+            'spp_month_id' => $data->id,
+            'orderId' => $orderId,
+        ]);
+        $data->update([
+            'status' => 'paid',
+            'updated_at' => Carbon::now(),
+        ]);
 
         return response()->json($result);
     }
-
 }
