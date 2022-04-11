@@ -22,21 +22,8 @@ class SppPaymentController extends Controller
         // From Database
         $data = SppMonth::findOrFail($id);
 
-        // Conversi IDR to USD
-        $req_url = "https://v6.exchangerate-api.com/v6/4de7938f23bbd34918b9c82c/latest/IDR";
-        $response_json = file_get_contents($req_url);
-        if(false !== $response_json) {
-            try {
-                $response = json_decode($response_json);
-                    if('success' === $response->result) {
-                        $base_price = $data->price;
-                        $price = round(($base_price * $response->conversion_rates->USD), 2);
-                    }
-                }
-            catch(Exception $e) {
-                dd('terjadi Kesalahan');
-            }
-        }
+        // Convert IDR to USD
+        $price = $this->convertToDollar($data->price);
 
         // Purchase Units
         $description = '$'.$price.' total spp price';
@@ -47,7 +34,7 @@ class SppPaymentController extends Controller
                 [
                     'amount' => [
                         'currency_code' => 'USD',
-                        'value' => $price
+                        'value' => $price,
                     ],
                     'description' => $description,
                 ],
@@ -78,11 +65,13 @@ class SppPaymentController extends Controller
 
         $result = $provider->capturePaymentOrder($orderId);
 
+        // Convert IDR to USD
+        $price = $this->convertToDollar($data->price);
 
         // movement to Database (Import & Update)
         SppPayment::create([
             'currency' => 'USD',
-            'amount' => $data->price,
+            'amount' => $price,
             'user_id' => $data->user_id,
             'spp_month_id' => $data->id,
             'orderId' => $orderId,
@@ -93,5 +82,26 @@ class SppPaymentController extends Controller
         ]);
 
         return response()->json($result);
+    }
+
+    public function convertToDollar($price)
+    {
+        // Convertion IDR to USD
+        $req_url = "https://v6.exchangerate-api.com/v6/4de7938f23bbd34918b9c82c/latest/IDR";
+        $response_json = file_get_contents($req_url);
+        if(false !== $response_json) {
+            try {
+                $response = json_decode($response_json);
+                    if('success' === $response->result) {
+                        $base_price = $price;
+                        $result = round(($base_price * $response->conversion_rates->USD), 2);
+                    }
+                }
+            catch(Exception $e) {
+                dd('terjadi Kesalahan');
+            }
+        }
+
+        return $result;
     }
 }
