@@ -12,7 +12,7 @@
       <div class="flex-col mx-10">
         <div class="flex-col">
           <p class="font-semibold text-xl text-gray-700">
-            KPPTM13702
+            #KPPTM13702
           </p>
           <p class="text-lg text-gray-500">
             {{ $data->created_at }} WIB
@@ -65,10 +65,10 @@
                     // $price = substr($data->price, 0, -3);
                     $price = $data->price + $data->code;
                 @endphp
-              {{-- <p class="text-3xl font-bold text-gray-800">
-                Rp. {{ $price }}.<span class="text-blue-600">{{ $data->code }}</span>
-              </p> --}}
-              <input id="copyTextPrice" class="border-0 bg-transparent text-3xl font-bold text-gray-800 -ml-3" type="text" value="Rp. {{ number_format($price,0,'.','.') }}" disabled>
+              <p class="text-3xl font-bold text-gray-800">
+                Rp. {{ number_format($price) }}
+              </p>
+              <input id="copyTextPrice" class="border-0 bg-transparent text-3xl font-bold text-gray-800 -ml-3" type="hidden" value="{{ $price }}" disabled>
               <p class="text-red-500 font-semibold">
                 *Transfer up to the last 3 digits
               </p>
@@ -83,7 +83,11 @@
       </div>
       <div class='flex items-center justify-center pt-10'>
         {{-- <button class='w-full bg-blue-600 hover:bg-blue-700 rounded-b-lg shadow-xl font-bold text-md sm:text-xl text-white transition-colors duration-100 py-3 sm:py-5' type="submit">Done</button> --}}
+<<<<<<< HEAD
         <a href="{{ route('cek-notif-transfer') }}" class='w-full bg-blue-600 hover:bg-blue-700 rounded-b-lg shadow-xl font-bold text-md sm:text-xl text-white transition-colors duration-100 py-3 sm:py-5'>Done</a>
+=======
+        <a href="{{ route('payment-webhook') }}" class='w-full bg-blue-600 hover:bg-blue-700 rounded-b-lg shadow-xl font-bold text-md sm:text-xl text-white transition-colors duration-100 py-3 sm:py-5 text-center'>Done</a>
+>>>>>>> ff2d37bd4cc1ad67a89f908edccc302612d2fccc
       </div>
     </div>
   </div>

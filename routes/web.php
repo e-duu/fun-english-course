@@ -60,7 +60,7 @@ Route::middleware(['auth'])->group(function ()
 	Route::get('/spp-payment-success', [PaymentPageController::class, 'sppPaymentSuccess'])->name('spp-payment-success');
 
 	// api notif push webhoox
-	Route::get('/notification-payment-bank/success', [SppPaymentBankController::class, 'index'])->name('cek-notif-transfer');
+	Route::get('/payment/webhook', [SppPaymentBankController::class, 'index'])->name('payment-webhook');
 
 	// Watch Material
 	Route::get('/watch/{id}', [WatchController::class, 'index'])->name('watch');
@@ -203,6 +203,7 @@ Route::middleware(['auth'])->group(function ()
 			Route::get('/edit/{id}', [SppController::class, 'edit'])->name('spp.edit');
 			Route::post('/update/{id}', [SppController::class, 'update'])->name('spp.update');
 			Route::delete('/delete/{id}', [SppController::class, 'destroy'])->name('spp.delete');
+			Route::get('/invoice/{id}', [SppController::class, 'sppInvoice'])->name('spp.invoice');
 		});
 
 	});

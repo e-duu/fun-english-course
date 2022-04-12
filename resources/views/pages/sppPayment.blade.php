@@ -59,10 +59,16 @@
           </p>
         </div>
         <div class="grid grid-cols-2 my-4 items-center">
-            <p class="text-md text-gray-700">Status</p>
-            <p class="font-semibold text-lg @if($data->status == 'paid' || $data->status == 'paid_manually') text-green-500 @else text-red-500 @endif text-right">
-              {{ $data->status }}
-            </p>
+          <p class="text-md text-gray-700">Status</p>
+          <p class="font-semibold text-lg uppercase @if($data->status == 'paid' || $data->status == 'paid_manually') text-green-500 @else text-red-500 @endif text-right">
+            @if ($data->status == 'paid')
+              PAID
+            @elseif ($data->status == 'paid_manually')
+              PAID(Manually)
+            @elseif ($data->status == 'unpaid')
+              UNPAID
+            @endif
+          </p>
         </div>
         <div class="grid grid-cols-2 my-4 items-center">
           <p class="text-md text-gray-700">Price Amount</p>
@@ -80,28 +86,31 @@
     </div>
 
     @if ($data->status != 'paid')
-    <div class="rounded-lg mx-auto w-11/12 md:w-9/12 lg:w-1/2 mt-12">
-      {{-- NOTE : PAYMENT BY MOOTA --}}
-      <a href="{{ route('spp-payment-detail', $data->id) }}">
-        <div class="rounded-full py-4 bg-blue-600 text-white font-bold text-xl text-center">
-          <i class="fas fa-money-check"></i> Pay with Bank
-        </div>
-      </a>
+        @if ($data->status != 'paid_manually')
+            <div class="rounded-lg mx-auto w-11/12 md:w-9/12 lg:w-1/2 mt-12">
+                {{-- NOTE : PAYMENT BY MOOTA --}}
+                <a href="{{ route('spp-payment-detail', $data->id) }}">
+                    <div class="rounded-full py-4 bg-blue-600 text-white font-bold text-xl text-center">
+                    <i class="fas fa-money-check"></i> Pay with Bank
+                    </div>
+                </a>
 
-      <p class="text-center text-lg font-bold my-3">Or</p>
+                <p class="text-center text-lg font-bold my-3">Or</p>
 
-      {{-- NOTE : PAYMENT BY PAYPAL --}}
-      <div id="smart-button-container">
-        <div style="text-align: center;">
-          <div id="paypal-button-container"></div>
-        </div>
-      </div>
-    </div>
+                {{-- NOTE : PAYMENT BY PAYPAL --}}
+                <div id="smart-button-container">
+                    <div style="text-align: center;">
+                    <div id="paypal-button-container"></div>
+                    </div>
+                </div>
+            </div>
+        @endif
     @endif
+  </div>
 @endsection
 
 @push('after-script')
-<script src="https://www.paypal.com/sdk/js?client-id=sb&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=AQyuDo4zlYjzWRDR9Qml4fd9xqx36ytYwAJ3DGSgQsR7mjN4vnX0QhDHqbHppR2xCZW56SFyIcPmMpjK&currency=USD" data-sdk-integration-source="button-factory"></script>
 <script>
   function initPayPalButton() {
     paypal.Buttons({
@@ -152,7 +161,7 @@
             // element.innerHTML = '';
             // element.innerHTML = '<h3>Thank you for your payment!</h3>'
 
-            window.location.replace("/");
+            window.location.replace("{{route('spp-payment-success')}}");
         });
       },
 

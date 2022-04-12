@@ -19,8 +19,9 @@ class SppController extends Controller
     public function create()
     {
         $users = User::where('role', 'student')->get();
-        $levels = LevelUser::get();
-        return view('pages.admin.spps.create', compact('users', 'levels'));
+        $levelUsers = LevelUser::get();
+        $levels = Level::get();
+        return view('pages.admin.spps.create', compact('users', 'levels', 'levelUsers'));
     }
 
     public function store(Request $request)
@@ -42,7 +43,7 @@ class SppController extends Controller
 
         $code = mt_rand(1,999);
         // dd($code);
-        
+
         SppMonth::create([
             'month' => $request->month,
             'price' => $request->price,
@@ -68,23 +69,26 @@ class SppController extends Controller
             'price' => 'required|max:255',
             'user_id' => 'required',
             'level_id' => 'required',
+            'status' => 'required',
         ],
         [
             'month.required' => 'please input recipient month',
             'price.required' => 'please input recipient price',
             'user_id.required' => 'please input recipient student',
-            'level_id.required' => 'please input recipient student',
+            'level_id.required' => 'please input recipient level',
+            'status.required' => 'please input recipient status',
         ]);
 
         // $data = $request->all();
         $code = mt_rand(1,999);
-        
+
         $item = SppMonth::findorfail($id);
         $item->update([
             'month' => $request->month,
             'price' => $request->price,
             'code' => $code,
             'user_id' => $request->user_id,
+            'status' => $request->status,
             'level_id' => $request->level_id,
         ]);
         return redirect()->route('spp.all');
@@ -95,5 +99,11 @@ class SppController extends Controller
         $data = SppMonth::findOrFail($id);
         $data->delete();
         return back();
+    }
+
+    public function sppInvoice($id)
+    {
+        $data = SppMonth::findOrFail($id);
+        return view('pages.invoice', compact('data'));
     }
 }
