@@ -82,8 +82,8 @@
 
       </div>
       <div class='flex items-center justify-center pt-10'>
-        <button class='w-full bg-blue-600 hover:bg-blue-700 rounded-b-lg shadow-xl font-bold text-md sm:text-xl text-white transition-colors duration-100 py-3 sm:py-5' type="submit">Done</button>
-        {{-- <a href="{{ route('cek-notif-transfer') }}" class='w-full bg-blue-600 hover:bg-blue-700 rounded-b-lg shadow-xl font-bold text-md sm:text-xl text-white transition-colors duration-100 py-3 sm:py-5'>Done</a> --}}
+        {{-- <button class='w-full bg-blue-600 hover:bg-blue-700 rounded-b-lg shadow-xl font-bold text-md sm:text-xl text-white transition-colors duration-100 py-3 sm:py-5' type="submit">Done</button> --}}
+        <a href="{{ route('cek-notif-transfer') }}" class='w-full bg-blue-600 hover:bg-blue-700 rounded-b-lg shadow-xl font-bold text-md sm:text-xl text-white transition-colors duration-100 py-3 sm:py-5'>Done</a>
       </div>
     </div>
   </div>

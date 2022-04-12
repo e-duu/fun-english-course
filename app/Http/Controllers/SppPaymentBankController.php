@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SppMonth;
 use App\Models\SppPaymentBank;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class SppPaymentBankController extends Controller
@@ -15,9 +16,9 @@ class SppPaymentBankController extends Controller
                     "bank_id" : "3245234",
                     "bank_type" : "BRI",
                     "account_number": "123124",
-                    "date": "2019-11-10 14:33:01",
+                    "date": "2022-04-11 14:33:01",
                     "description": "TRSF E-BANKING CR 11/10 124123 MOOTA CO",
-                    "amount": 400267,
+                    "amount": 143370,
                     "type": "CR",
                     "balance": 520000,
                     "updated_at": "2019-11-10 14:33:01",
@@ -46,6 +47,7 @@ class SppPaymentBankController extends Controller
                 // ]);
                 
                 $spp = SppMonth::where('code', $unique_code)->first();
+                // $spp = SppMonth::whereDay('created_at', )->where('code', $unique_code)->first();
                 // dd($spp);
                 
                 $store = SppPaymentBank::create([
