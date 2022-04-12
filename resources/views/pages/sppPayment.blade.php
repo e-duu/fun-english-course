@@ -67,6 +67,8 @@
               PAID(Manually)
             @elseif ($data->status == 'unpaid')
               UNPAID
+            @elseif ($data->status == 'pending')
+              PENDING
             @endif
           </p>
         </div>

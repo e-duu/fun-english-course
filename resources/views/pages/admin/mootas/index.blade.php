@@ -35,22 +35,22 @@
 
   </form> --}}
 
-  <div class="flex justify-between items-center">
-    <div class="flex-col">
+  <div class="flex justify-between items-center bg-blue-400 rounded  p-2">
+    <div class="bg-blue-400 rounded">
       <span class="text-gray-700 dark:text-gray-400">Webhook URL</span>
-      <p class="font-semibold text-lg text-gray-700">
-        {{ route('cek-notif-transfer') }}
+      <p class="font-semibold text-lg text-white">
+        {{ route('payment-webhook') }}
       </p>
-      <input id="copyText" class="border-0 bg-transparent text-xl font-bold text-gray-800 -ml-3 hidden" type="text" value="{{ route('cek-notif-transfer') }}" disabled>
+      <input id="copyText" class="border-0 bg-transparent text-xl font-bold text-gray-800 -ml-3 hidden" type="text" value="{{ route('payment-webhook') }}" disabled>
     </div>
-    <button id="copyBtn" class="text-blue-600 font-semibold text-lg">Copy</button>
+    <button id="copyBtn" class="text-white font-semibold text-lg">Copy</button>
   </div>
 
   @php
       $banks = App\Models\AccountBank::get();
   @endphp
   
-  @if ($data)
+  {{-- @if ($data) --}}
   {{-- <label class="block text-sm mt-4">
     <div class="text-gray-700 dark:text-gray-400">Nama pemilik rekening</div>
     <div class="bg-blue-400 rounded inline-block p-2">{{ $banks->first()->account_name }}</div>
@@ -107,7 +107,7 @@
     @enderror --}}
     
   </div>
-  @endif
+  {{-- @endif --}}
 @endsection
 
 @push('after-style')

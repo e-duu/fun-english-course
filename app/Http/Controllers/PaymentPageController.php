@@ -8,6 +8,7 @@ use App\Models\Payment;
 use App\Models\Program;
 use App\Models\Recipient;
 use App\Models\SppMonth;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PaymentPageController extends Controller
@@ -61,9 +62,26 @@ class PaymentPageController extends Controller
     public function sppPaymentDetail($id)
     {
         $data = SppMonth::findOrFail($id);
+
+        $data->update([
+            'date' => Carbon::now(),
+            'status' => 'pending',
+        ]);
+        
         $account_banks = AccountBank::get();
 
         return view('pages.sppPaymentDetail', compact('data', 'account_banks'));
+    }
+
+    public function sppPaymentCancel($id)
+    {
+        $data = SppMonth::findOrFail($id);
+
+        $data->update([
+            'status' => 'unpaid',
+        ]);
+
+        return view('pages.sppPayment', compact('data'));
     }
 
     public function sppPaymentSuccess()

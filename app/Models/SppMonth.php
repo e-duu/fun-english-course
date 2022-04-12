@@ -16,6 +16,7 @@ class SppMonth extends Model
         'price',
         'status',
         'code',
+        'date',
         'user_id',
         'level_id',
     ];
