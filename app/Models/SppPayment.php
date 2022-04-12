@@ -19,4 +19,9 @@ class SppPayment extends Model
         'user_id',
         'spp_month_id',
     ];
+
+    public function user()
+    {
+        $this->belongsTo(User::class, 'id', 'user_id');
+    }
 }

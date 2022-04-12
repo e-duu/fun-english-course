@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\MyMail;
 use App\Models\SppMonth;
 use App\Models\SppPayment;
+use App\Models\User;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
+use Throwable;
 
 class SppPaymentController extends Controller
 {
@@ -55,7 +59,8 @@ class SppPaymentController extends Controller
         $orderId = $data['orderId'];
 
         // From Database
-        $data = SppMonth::findOrFail($id);
+        $sppMonth = SppMonth::findOrFail($id);
+        $user = User::findOrFail($sppMonth->user_id);
 
         // Init Paypal
         $provider = new PayPalClient;
@@ -66,20 +71,29 @@ class SppPaymentController extends Controller
         $result = $provider->capturePaymentOrder($orderId);
 
         // Convert IDR to USD
-        $price = $this->convertToDollar($data->price);
+        $price = $this->convertToDollar($sppMonth->price);
 
         // movement to Database (Import & Update)
-        SppPayment::create([
+        $sppPayment = SppPayment::create([
             'currency' => 'USD',
             'amount' => $price,
-            'user_id' => $data->user_id,
-            'spp_month_id' => $data->id,
+            'user_id' => $sppMonth->user_id,
+            'spp_month_id' => $sppMonth->id,
             'orderId' => $orderId,
         ]);
-        $data->update([
+        $sppMonth->update([
             'status' => 'paid',
             'updated_at' => Carbon::now(),
         ]);
+
+        // Send To Mail
+        Mail::to($user->email)->send(new MyMail(
+            $sppMonth,
+            $sppPayment,
+            $sppMonth->level->program,
+            $sppMonth->level,
+            $user,
+        ));
 
         return response()->json($result);
     }
@@ -98,7 +112,7 @@ class SppPaymentController extends Controller
                     }
                 }
             catch(Exception $e) {
-                dd('terjadi Kesalahan');
+                dd('Convertion Failed!');
             }
         }
 
