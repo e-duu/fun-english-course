@@ -64,7 +64,7 @@
               {{'Rp '.number_format($item->price) }}
             </td>
             <td class="px-4 py-3 text-sm">
-              <div class="font-semibold uppercase p-[1px] rounded-lg @if($item->status == 'paid') bg-green-500 @elseif ($item->status == 'paid_manually') bg-green-500 @elseif ($item->status == 'unpaid') bg-red-500 @endif">
+              <div class="font-semibold uppercase p-[1px] rounded-lg @if($item->status == 'paid') bg-green-500 @elseif ($item->status == 'paid_manually') bg-green-500 @elseif ($item->status == 'unpaid') bg-red-500 @elseif($item->status == 'pending') bg-yellow-500 @endif">
                 <p class="text-white text-center">
                   @if ($item->status == 'paid')
                     PAID
@@ -72,12 +72,18 @@
                     PAID(Manually)
                   @elseif ($item->status == 'unpaid')
                     UNPAID
+                  @elseif ($item->status == 'pending')
+                    PENDING
                   @endif
                 </p>
               </div>
             </td>
             <td class="px-4 py-3">
               <div class="flex items-center space-x-4 text-sm">
+                <a href="{{ route('spp.invoice.mail', $item->user_id.'/'.$item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                    <i class=" fas fa-print"></i>
+                    <p>Invoice</p>
+                </a>
                 <a href="{{ route('spp.edit', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
                   <i class=" fas fa-edit"></i>
                   <p>Pay</p>

@@ -26,8 +26,8 @@ class CreateSppPaymentBanksTable extends Migration
             $table->string('type');
             $table->integer('balance');
             $table->string('code');
-            $table->string('recipient_name');
-            $table->string('send_name');
+            $table->string('recipient_name')->nullable();
+            $table->string('send_name')->nullable();
             
             $table->timestamps();
         });

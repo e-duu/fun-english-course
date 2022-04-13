@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-  <form id="payments" action="{{ route('moota.store') }}" method="POST" class="px-4 py-3 bg-white rounded-lg shadow-md dark:bg-gray-800" enctype="multipart/form-data">
+  {{-- <form id="payments" action="{{ route('moota.store') }}" method="POST" class="px-4 py-3 bg-white rounded-lg shadow-md dark:bg-gray-800" enctype="multipart/form-data">
     @csrf
 
     <label class="block text-sm mt-4">
@@ -32,19 +32,25 @@
 
     <button class="mt-4 bg-blue-600 py-2 px-7 rounded-md text-white">Submit</button>
 
-    {{-- <select id="js-choice" multiple="multiple">
-      <option value="1">One</option>
-      <option value="2">two</option>
-      <option value="3">three</option>
-    </select> --}}
 
-  </form>
+  </form> --}}
+
+  <div class="flex justify-between items-center bg-blue-400 rounded  p-2">
+    <div class="bg-blue-400 rounded">
+      <span class="text-gray-700 dark:text-gray-400">Webhook URL</span>
+      <p class="font-semibold text-lg text-white">
+        {{ route('payment-webhook') }}
+      </p>
+      <input id="copyText" class="border-0 bg-transparent text-xl font-bold text-gray-800 -ml-3 hidden" type="text" value="{{ route('payment-webhook') }}" disabled>
+    </div>
+    <button id="copyBtn" class="text-white font-semibold text-lg">Copy</button>
+  </div>
 
   @php
       $banks = App\Models\AccountBank::get();
   @endphp
   
-  @if ($data)
+  {{-- @if ($data) --}}
   {{-- <label class="block text-sm mt-4">
     <div class="text-gray-700 dark:text-gray-400">Nama pemilik rekening</div>
     <div class="bg-blue-400 rounded inline-block p-2">{{ $banks->first()->account_name }}</div>
@@ -101,7 +107,7 @@
     @enderror --}}
     
   </div>
-  @endif
+  {{-- @endif --}}
 @endsection
 
 @push('after-style')
@@ -132,20 +138,35 @@
       removeItemButton: true
     });
   </script>
-
-{{-- <script type="text/javascript">
-
-  var optionsToSelect = ['One', 'three'];
-  var select = document.getElementById( 'js-choice' );
-  
-  for ( var i = 0, l = select.options.length, o; i < l; i++ )
-  {
-    o = select.options[i];
-    if ( optionsToSelect.indexOf( o.text ) != -1 )
-    {
-      o.selected = true;
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <script>
+    const copyBtn = document.getElementById('copyBtn');
+    const copyText = document.getElementById("copyText");
+    const copyBtnPrice = document.getElementById('copyBtnPrice')
+    const copyTextPrice = document.getElementById('copyTextPrice')
+    
+    // NOTE : COPY TO CLIPBOARD
+    copyBtn.onclick = () => {
+      copyText.select();    // Selects the text inside the input
+      navigator.clipboard.writeText(copyText.value);
+        Swal.fire({         //displays a pop up with sweetalert
+          icon: 'success',
+          title: 'Text copied to clipboard',
+          showConfirmButton: false,
+          timer: 1000
+      });
     }
-  }
   
-  </script> --}}
+    // NOTE : COPY TO CLIPBOARD PRICE
+    copyBtnPrice.onclick = () => {
+      copyTextPrice.select();    // Selects the text inside the input
+      navigator.clipboard.writeText(copyTextPrice.value);
+        Swal.fire({         //displays a pop up with sweetalert
+          icon: 'success',
+          title: 'Text copied to clipboard',
+          showConfirmButton: false,
+          timer: 1000
+      });
+    }
+  </script>
 @endpush

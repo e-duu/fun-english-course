@@ -58,6 +58,7 @@ Route::middleware(['auth'])->group(function ()
 	Route::post('/payment/store', [PaymentPageController::class, 'sppPaymentStore'])->name('spp-payment.store');
 	Route::get('/spp-payment-detail/{id}', [PaymentPageController::class, 'sppPaymentDetail'])->name('spp-payment-detail');
 	Route::get('/spp-payment-success', [PaymentPageController::class, 'sppPaymentSuccess'])->name('spp-payment-success');
+	Route::get('/spp-payment-cancel/{id}', [PaymentPageController::class, 'sppPaymentCancel'])->name('spp-payment-cancel');
 
 	// api notif push webhoox
 	Route::get('/payment/webhook', [SppPaymentBankController::class, 'index'])->name('payment-webhook');
@@ -204,6 +205,7 @@ Route::middleware(['auth'])->group(function ()
 			Route::post('/update/{id}', [SppController::class, 'update'])->name('spp.update');
 			Route::delete('/delete/{id}', [SppController::class, 'destroy'])->name('spp.delete');
 			Route::get('/invoice/{id}', [SppController::class, 'sppInvoice'])->name('spp.invoice');
+			Route::get('/invoice/mail/{userId}/{sppMonthId?}', [SppController::class, 'sppInvoiceMail'])->name('spp.invoice.mail');
 		});
 
 	});

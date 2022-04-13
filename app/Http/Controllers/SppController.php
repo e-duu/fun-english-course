@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\InvoiceMail;
 use App\Models\Level;
 use App\Models\LevelUser;
 use App\Models\SppMonth;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class SppController extends Controller
 {
@@ -105,5 +107,20 @@ class SppController extends Controller
     {
         $data = SppMonth::findOrFail($id);
         return view('pages.invoice', compact('data'));
+    }
+
+    public function sppInvoiceMail($userId, $sppMonthId)
+    {
+        $user = User::findOrFail($userId);
+        $sppMonth = SppMonth::findOrFail($sppMonthId);
+
+        Mail::to($user->email)->send(new InvoiceMail(
+            $user,
+            $sppMonth,
+            $sppMonth->level->program,
+            $sppMonth->level,
+        ));
+
+        return back()->with('send_invoice_to_mail', 'Invoice berhasil diunggah kepada '.$user->email);
     }
 }
