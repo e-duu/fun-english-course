@@ -21,7 +21,7 @@ class SppController extends Controller
     public function create()
     {
         $users = User::where('role', 'student')->get();
-        $levelUsers = LevelUser::get();
+        $levelUsers = LevelUser::with(['level'])->get();
         $levels = Level::get();
         return view('pages.admin.spps.create', compact('users', 'levels', 'levelUsers'));
     }

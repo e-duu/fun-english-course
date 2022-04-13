@@ -95,17 +95,13 @@
                     </div>
                 </td>
             </tr>
-            {{-- <tr>
-                <td style="">
-                    <table bgcolor="#e05443" border="0" cellspacing="0" cellpadding="0">
-                      <tr>
-                        <td class="button" style="padding: 0 20px 0 20px; color: #ffffff; font-size: 14px;" height="45">
-                          <a style="text-decoration: none; color: #fff;" href="http://localhost:8000">Print</a>
-                        </td>
-                      </tr>
-                    </table>
+            <tr>
+                <td>
+                    <div class="column-text">
+                        <p class="text-bold">Thank You.</p>
+                    </div>
                 </td>
-            </tr> --}}
+            </tr>
         </table>
     </body>
 </html>
