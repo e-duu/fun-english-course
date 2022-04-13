@@ -4,6 +4,12 @@
 @endsection
 @section('content')
   <main>
+    {{-- Notification --}}
+    <div class="w-full py-4 px-5 bg-yellow-200 overflow-hidden rounded-lg shadow-xs mt-5 flex space-x-3 items-center text-lg">
+      <i class="fas fa-bell text-xl"></i>
+      <p>Reminder for monthly subscription payment</p>
+    </div>
+    
     <!-- Content header -->
     <div class="flex items-center justify-between px-4 py-4 border-b lg:py-6 dark:border-primary-darker">
       <h1 class="text-2xl font-semibold">Dashboard</h1>
