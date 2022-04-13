@@ -4,31 +4,37 @@ namespace App\Http\Controllers;
 
 use App\Models\SppMonth;
 use App\Models\SppPaymentBank;
+use Carbon\Carbon;
+use DateTime;
+use Hamcrest\Core\HasToString;
 use Illuminate\Http\Request;
 
 class SppPaymentBankController extends Controller
 {
     public function index(Request $request)
     {
-        $notif = '[
-                {
-                    "bank_id" : "3245234",
-                    "bank_type" : "BRI",
-                    "account_number": "123124",
-                    "date": "2019-11-10 14:33:01",
-                    "description": "TRSF E-BANKING CR 11/10 124123 MOOTA CO",
-                    "amount": 200944,
-                    "type": "CR",
-                    "balance": 520000,
-                    "updated_at": "2019-11-10 14:33:01",
-                    "created_at": "2019-11-10 14:33:01",
-                    "mutation_id": "IHBb97sba7d",
-                    "token": "OASiuh(DYNb97"
-                }
-            ]';
+        // $notif = '[
+        //         {
+        //             "bank_id" : "3245234",
+        //             "bank_type" : "BRI",
+        //             "account_number": "123124",
+        //             "date": "2022-04-11 14:33:01",
+        //             "description": "TRSF E-BANKING CR 11/10 124123 MOOTA CO",
+        //             "amount": 200108,
+        //             "type": "CR",
+        //             "balance": 520000,
+        //             "updated_at": "2019-11-10 14:33:01",
+        //             "created_at": "2019-11-10 14:33:01",
+        //             "mutation_id": "IHBb97sba7d",
+        //             "token": "OASiuh(DYNb97"
+        //         }
+        //     ]';
 
-        // $notif = json_decode($request->all(), true);
+        //konversi ke string
+        $notif = json_encode($request->all());
+
         $notifications = json_decode($notif, true);
+        // $notifications = json_decode($notif, true);
         // dd($notifications);
 
         if ($notif) {
@@ -37,15 +43,8 @@ class SppPaymentBankController extends Controller
                 $unique_code = substr($data['amount'], -3);
                 // dd($data);
 
-                // SppMonth::create([
-                //     'user_id' => 1,
-                //     'date' => $data['created_at'],
-                //     'code' => $data['amount'],
-                //     'status' => 'pending',
-                //     'token' => $data['token'],
-                // ]);
-                
-                $spp = SppMonth::where('code', $unique_code)->first();
+
+                $spp = SppMonth::where('date', '>=', date('Y-m-d 00:00:00'))->where('status', 'pending')->where('code', $unique_code)->get();
                 // dd($spp);
                 
                 $store = SppPaymentBank::create([
@@ -59,11 +58,10 @@ class SppPaymentBankController extends Controller
                     'type'   => $data['type'],
                     'balance'   => $data['balance'],
                     'code'   => $unique_code,
-                    'recipient_name' => 'muji',
-                    'send_name' => 'kuwat',
+                    // 'recipient_name' => 'muji',
+                    // 'send_name' => 'kuwat',
                 ]);
 
-                // $detail = SppMonth::where('order_id', $spp->id);
                 $spp->update([
                     'status' => 'paid',
                 ]);

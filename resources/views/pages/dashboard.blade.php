@@ -4,6 +4,45 @@
 @endsection
 @section('content')
   <main>
+    {{-- Notification --}}
+    @if (!$latest == null)
+    <div class="flex justify-between w-full py-4 px-5 bg-yellow-200 dark:bg-yellow-500 overflow-hidden rounded-lg shadow-xs items-center">
+      <div class="flex items-center text-lg">
+        <i class="fas fa-bell text-xl mr-3"></i>
+        <p>Reminder for the month of&nbsp;
+        <p class="font-bold text-red-500">
+          @if ($latest->month == 1)
+              January,
+          @elseif ($latest->month == 2)
+              February,
+          @elseif ($latest->month == 3)
+              March,
+          @elseif ($latest->month == 4)
+              April,
+          @elseif ($latest->month == 5)
+              May,
+          @elseif ($latest->month == 6)
+              June,
+          @elseif ($latest->month == 7)
+              July,
+          @elseif ($latest->month == 8)
+              August,
+          @elseif ($latest->month == 9)
+              September,
+          @elseif ($latest->month == 10)
+              October,
+          @elseif ($latest->month == 11)
+              November,
+          @elseif ($latest->month == 12)
+              December,
+          @endif
+        </p>
+        &nbsp;please pay immediately. Thank You!</p>
+      </div>
+      <a href="{{ route('spp-payment', $latest->id) }}" class="font-bold text-green-500  dark:text-green-500 mr-5"><i class="fas fa-money-check"></i>&nbsp;PAY</a>
+    </div>
+    @endif
+    
     <!-- Content header -->
     <div class="flex items-center justify-between px-4 py-4 border-b lg:py-6 dark:border-primary-darker">
       <h1 class="text-2xl font-semibold">Dashboard</h1>
@@ -67,7 +106,7 @@
                 {{'Rp '.number_format($item->price) }}
               </td>
               <td class="px-4 py-3 text-sm">
-                <div class="font-semibold uppercase p-[1px] rounded-lg @if($item->status == 'paid') bg-green-500 @elseif ($item->status == 'paid_manually') bg-green-500 @elseif ($item->status == 'unpaid') bg-red-500 @endif">
+                <div class="font-semibold uppercase p-[1px] rounded-lg @if($item->status == 'paid') bg-green-500 @elseif ($item->status == 'paid_manually') bg-green-500 @elseif ($item->status == 'unpaid') bg-red-500 @elseif ($item->status == 'pending') bg-yellow-500 @endif">
                   <p class="text-white text-center">
                     @if ($item->status == 'paid')
                       PAID
@@ -75,6 +114,8 @@
                       PAID(Manually)
                     @elseif ($item->status == 'unpaid')
                       UNPAID
+                    @elseif ($item->status == 'pending')
+                      PENDING
                     @endif
                   </p>
                 </div>
@@ -83,20 +124,20 @@
                 <div class="flex items-center space-x-4 text-sm">
                   {{-- @if ($item->status != 'paid') --}}
                   <a href="{{ route('spp-payment', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
-                    <i class="fas fa-cart-plus"></i>
+                    <i class="fas fa-money-check"></i>
                     <p>Pay</p>
                   </a>
                   {{-- @endif --}}
-                  <a href="{{ route('spp.invoice', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                  {{-- <a href="{{ route('spp.invoice', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
                     <i class=" fas fa-eye"></i>
                     <p>Detail</p>
-                  </a>
+                  </a> --}}
                 </div>
               </td>
             </tr>
           @empty
             <tr>
-              <td colspan="6" class="text-center text-gray-500 px-4 py-3">
+              <td colspan="7" class="text-center text-gray-500 px-4 py-3">
                 <p>
                   Data is empty..
                 </p>

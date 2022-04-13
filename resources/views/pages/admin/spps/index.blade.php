@@ -64,7 +64,7 @@
               {{'Rp '.number_format($item->price) }}
             </td>
             <td class="px-4 py-3 text-sm">
-              <div class="font-semibold uppercase p-[1px] rounded-lg @if($item->status == 'paid') bg-green-500 @elseif ($item->status == 'paid_manually') bg-green-500 @elseif ($item->status == 'unpaid') bg-red-500 @endif">
+              <div class="font-semibold uppercase p-[1px] rounded-lg @if($item->status == 'paid') bg-green-500 @elseif ($item->status == 'paid_manually') bg-green-500 @elseif ($item->status == 'unpaid') bg-red-500 @elseif($item->status == 'pending') bg-yellow-500 @endif">
                 <p class="text-white text-center">
                   @if ($item->status == 'paid')
                     PAID
@@ -72,6 +72,8 @@
                     PAID(Manually)
                   @elseif ($item->status == 'unpaid')
                     UNPAID
+                  @elseif ($item->status == 'pending')
+                    PENDING
                   @endif
                 </p>
               </div>
@@ -81,6 +83,10 @@
                 <a href="{{ route('spp.invoice.mail', $item->user_id.'/'.$item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
                     <i class=" fas fa-print"></i>
                     <p>Invoice</p>
+                </a>
+                <a href="{{ route('spp.pay-manually', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                  <i class="fas fa-money-check"></i>
+                  <p>Pay</p>
                 </a>
                 <a href="{{ route('spp.edit', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
                   <i class=" fas fa-edit"></i>
@@ -99,7 +105,7 @@
           </tr>
         @empty
           <tr>
-            <td colspan="6" class="text-center text-gray-500 px-4 py-3">
+            <td colspan="7" class="text-center text-gray-500 px-4 py-3">
               <p>
                 Data is empty..
               </p>
@@ -112,8 +118,17 @@
     </div>
     <div class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
       <div class="text-center w-auto sm:w-[565px] md:w-[980px] 2xl:w-[1335px] ">
-        {{-- {{ $data->links() }} --}}
+        {{ $data->links() }}
       </div>
     </div>
   </div>
 @endsection
+
+@push('after-script')
+  <script>
+    if ({{ session()->has('send_invoice_to_mail') }}) {
+      console.log('{{ session()->get("send_invoice_to_mail") }}')
+      alert('{{ session()->get("send_invoice_to_mail") }}')
+    }
+  </script>
+@endpush

@@ -16,8 +16,9 @@ class CreateSppMonthsTable extends Migration
         Schema::create('spp_months', function (Blueprint $table) {
             $table->id();
             $table->integer('month');
-            $table->enum('status', ['paid', 'unpaid', 'paid_manually', 'failed'])->default('unpaid');
+            $table->enum('status', ['paid', 'unpaid', 'paid_manually', 'pending','failed'])->default('unpaid');
             $table->bigInteger('price');
+            $table->dateTime('date')->nullable();
             $table->integer('code')->nullable();
             $table->foreignId('user_id');
             $table->foreignId('level_id');
