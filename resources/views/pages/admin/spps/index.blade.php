@@ -80,6 +80,10 @@
               <div class="flex items-center space-x-4 text-sm">
                 <a href="{{ route('spp.edit', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
                   <i class=" fas fa-edit"></i>
+                  <p>Pay</p>
+                </a>
+                <a href="{{ route('spp.edit', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                  <i class=" fas fa-edit"></i>
                   <p>Edit</p>
                 </a>
                 <form action="{{ route('spp.delete', $item->id) }}" method="POST" class="d-inline">
