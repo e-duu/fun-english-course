@@ -80,7 +80,7 @@ Route::middleware(['auth'])->group(function ()
 	Route::prefix('admin')->group(function () {
 
 		// Dashboard
-		Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+		Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('admin');
 
 		// Score
 		Route::get('/score/all', [ExerciseController::class, 'score_all'])->name('score.all');
@@ -204,7 +204,7 @@ Route::middleware(['auth'])->group(function ()
 			Route::get('/edit/{id}', [SppController::class, 'edit'])->name('spp.edit');
 			Route::post('/update/{id}', [SppController::class, 'update'])->name('spp.update');
 			Route::delete('/delete/{id}', [SppController::class, 'destroy'])->name('spp.delete');
-			Route::get('/invoice/{id}', [SppController::class, 'sppInvoice'])->name('spp.invoice');
+			Route::get('/pay-manually/{id}', [SppController::class, 'payManually'])->name('spp.pay-manually');
 			Route::get('/invoice/mail/{userId}/{sppMonthId?}', [SppController::class, 'sppInvoiceMail'])->name('spp.invoice.mail');
 		});
 

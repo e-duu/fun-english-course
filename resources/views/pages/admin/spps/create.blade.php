@@ -13,12 +13,7 @@
       <span class="text-gray-700 dark:text-gray-400">
         Student Name
       </span>
-      {{-- <select @change="setUsers(users_id)" v-model="users_id" name="user_id" class="block w-full mt-1 text-sm rounded-md border-gray-400  dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
-        @foreach ($users as $user)
-          <option value="{{ $user->id }}">{{ $user->name }}</option>
-        @endforeach
-      </select> --}}
-      <select name="user_id" class="block w-full mt-1 text-sm rounded-md border-gray-400  dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
+      <select @change="setUsers(users_id)" v-model="users_id" name="user_id" class="block w-full mt-1 text-sm rounded-md border-gray-400  dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
         @foreach ($users as $user)
           <option value="{{ $user->id }}">{{ $user->name }}</option>
         @endforeach
@@ -35,10 +30,7 @@
         Level
       </span>
       <select name="level_id" class="block w-full mt-1 text-sm rounded-md border-gray-400  dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
-        @foreach ($levelUsers as $level)
-            <option value="{{$level->level->id}}">{{$level->level->name}}</option>
-        @endforeach
-        {{-- <option v-for="level in selectedLevels" :value="level.id">@{{ level.name }}</option> --}}
+        <option v-for="level in selectedLevels" :value="level.id">@{{ level.level.name }}</option>
       </select>
       @error('level_id')
         <div class="mt-1 text-sm text-[red]">

@@ -21,7 +21,7 @@ class SppController extends Controller
     public function create()
     {
         $users = User::where('role', 'student')->get();
-        $levelUsers = LevelUser::get();
+        $levelUsers = LevelUser::with(['level'])->get();
         $levels = Level::get();
         return view('pages.admin.spps.create', compact('users', 'levels', 'levelUsers'));
     }
@@ -103,10 +103,10 @@ class SppController extends Controller
         return back();
     }
 
-    public function sppInvoice($id)
+    public function payManually($id)
     {
         $data = SppMonth::findOrFail($id);
-        return view('pages.invoice', compact('data'));
+        return view('pages.admin.spps.pay-manually', compact('data'));
     }
 
     public function sppInvoiceMail($userId, $sppMonthId)
