@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\SppMonth;
 use App\Models\SppPaymentBank;
 use Carbon\Carbon;
+use DateTime;
 use Hamcrest\Core\HasToString;
 use Illuminate\Http\Request;
 
@@ -29,28 +30,22 @@ class SppPaymentBankController extends Controller
         //         }
         //     ]';
 
-        // $notif = json_decode($request->all(), true);
-        $notifications = json_decode(HasToString($request->all()), true);
+        //konversi ke string
+        $notif = json_encode($request->all());
+
+        $notifications = json_decode($notif, true);
         // $notifications = json_decode($notif, true);
         // dd($notifications);
 
-        if ($request->all()) {
+        if ($notif) {
             foreach ($notifications as $data) {
                 // kode unik
                 $unique_code = substr($data['amount'], -3);
                 // dd($data);
 
-                // SppMonth::create([
-                //     'user_id' => 1,
-                //     'date' => $data['created_at'],
-                //     'code' => $data['amount'],
-                //     'status' => 'pending',
-                //     'token' => $data['token'],
-                // ]);
-                
-                $spp = SppMonth::where('date', '>=', date('Y-m-d 00:00:00'))->where('status', 'pending')->where('code', $unique_code)->latest('date')->first();
-                // $spp = SppMonth::whereDay('created_at', )->where('code', $unique_code)->first();
-                dd($spp);
+
+                $spp = SppMonth::where('date', '>=', date('Y-m-d 00:00:00'))->where('status', 'pending')->where('code', $unique_code)->get();
+                // dd($spp);
                 
                 $store = SppPaymentBank::create([
                     'spp_month_id' => $spp->id,
@@ -67,7 +62,6 @@ class SppPaymentBankController extends Controller
                     // 'send_name' => 'kuwat',
                 ]);
 
-                // $detail = SppMonth::where('order_id', $spp->id);
                 $spp->update([
                     'status' => 'paid',
                 ]);
