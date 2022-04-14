@@ -63,10 +63,13 @@ class PaymentPageController extends Controller
     {
         $data = SppMonth::findOrFail($id);
 
-        $data->update([
-            'date' => Carbon::now(),
-            'status' => 'pending',
-        ]);
+        if($data->date == null){
+            $data->update([
+                'date' => Carbon::now(),
+                'status' => 'pending',
+            ]);
+        }
+        // dd($data);
         
         $account_banks = AccountBank::get();
 

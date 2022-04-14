@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,6 +11,8 @@ class SppMonth extends Model
     use HasFactory;
 
     protected $table = 'spp_months';
+    
+    protected $dates = ['date'];
 
     protected $fillable = [
         'month',

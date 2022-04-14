@@ -12,11 +12,11 @@
       <div class="flex-col mx-10">
         <div class="flex-col">
           <p class="font-semibold text-xl text-gray-700">
-            #KPPTM13702
+            #EDGE{{ $data->date->format('Ymd').$data->code }}
           </p>
-          <p class="text-lg text-gray-500">
+          {{-- <p class="text-lg text-gray-500">
             {{ $data->created_at }} WIB
-          </p>
+          </p> --}}
         </div>
         <div class="border-b-[3px] border-gray-400 my-3"></div>
         <div class="grid grid-cols-1 my-4 items-center">
@@ -32,9 +32,16 @@
             <button id="copyBtn" class="text-blue-600 font-semibold text-lg">Copy</button>
           </div>
           @empty
-          <p class="text-xl font-bold text-gray-800">
-            Account bank not found
-          </p>
+          <div class="flex justify-between items-center">
+            <div class="flex-col">
+              <img src="{{ asset('images/mandiri.png') }}" class="max-h-8 mb-2">
+              <p class="font-semibold text-lg text-gray-700">
+                Edukasi Diversitas Global Excelsia 
+              </p>
+              <input id="copyText" class="border-0 bg-transparent text-xl font-bold text-gray-800 -ml-3" type="text" value="0700010372956" disabled>
+            </div>
+            <button id="copyBtn" class="text-blue-600 font-semibold text-lg">Copy</button>
+          </div>
           @endforelse
         </div>
         <div class="border-b-[3px] border-gray-400 my-3"></div>
@@ -44,11 +51,14 @@
               <p class="font-bold text-lg text-gray-500">
                 Transfer Deadline
               </p>
+              @php
+                $date = date('Y-m-d H:i:s', strtotime($data->date)); 
+              @endphp
               <p class="text-lg font-bold text-gray-800">
-                {{ $data->created_at }} WIB
+                {{ date('Y-m-d H:i:s A', strtotime($date . ' +1 day')); }} 
               </p>
               <p class="text-md font-bold text-gray-800">
-                11 hour 59 minute 56 second left
+                Maximal 24 hours 
               </p>
             </div>
             <a href="#" class="text-blue-600 font-semibold text-lg"><i class="fas fa-exclamation-circle text-xl text-red-500"></i></a>
