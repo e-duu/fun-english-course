@@ -6,8 +6,9 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Invoice Mail</title>
         <style>
-            body{
+            body[yahoo] body{
                 padding: 20px;
+                font-family: sans-serif;
             }
             .text-bold {
                 color: black;
@@ -34,19 +35,23 @@
 
         @php
             // Convertion IDR to USD
-            $req_url = "https://v6.exchangerate-api.com/v6/4de7938f23bbd34918b9c82c/latest/IDR";
-            $response_json = file_get_contents($req_url);
-            if(false !== $response_json) {
-                try {
-                    $response = json_decode($response_json);
-                        if('success' === $response->result) {
-                            $base_price = $sppMonth->price;
-                            $result = round(($base_price * $response->conversion_rates->USD), 2);
+            try {
+                $req_url = "https://v6.exchangerate-api.com/v6/4de7938f23bbd34918b9c82c/latest/IDR";
+                $response_json = file_get_contents($req_url);
+                if(false !== $response_json) {
+                    try {
+                        $response = json_decode($response_json);
+                            if('success' === $response->result) {
+                                $base_price = $sppMonth->price;
+                                $result = round(($base_price * $response->conversion_rates->USD), 2);
+                            }
                         }
+                    catch(Exception $e) {
+                        dd('Convertion Failed!');
                     }
-                catch(Exception $e) {
-                    dd('Convertion Failed!');
                 }
+            } catch (\Throwable $th) {
+                echo 'an error occurred on the server';
             }
         @endphp
 
@@ -115,7 +120,7 @@
                 <td>
                     <table bgcolor="#e05443" border="0" cellspacing="0" cellpadding="0">
                       <tr>
-                        <td class="button" style="padding: 0 20px 0 20px; color: #ffffff; font-size: 14px;" height="45">
+                        <td class="button" style="padding: 0 20px 0 20px; font-size: 14px; font-weight: bold; font-family: sans-serif; text-align: center;" height="45">
                           <a style="text-decoration: none; color: #fff;" href="{{route('spp-payment', $sppMonth->id)}}">Pay Now</a>
                         </td>
                       </tr>
