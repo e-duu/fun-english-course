@@ -6,7 +6,9 @@ use App\Mail\InvoiceMail;
 use App\Models\Level;
 use App\Models\LevelUser;
 use App\Models\SppMonth;
+use App\Models\SppPayment;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -107,6 +109,30 @@ class SppController extends Controller
     {
         $data = SppMonth::findOrFail($id);
         return view('pages.admin.spps.pay-manually', compact('data'));
+    }
+
+    public function payManuallyProsses(Request $request, $id)
+    {
+        $data = SppMonth::findOrFail($id);
+        if ($request->currency == 'IDR') {
+            $amount = $request->IDR;
+        } else if ($request->currency == 'USD') {
+            $amount = $request->USD;
+        } else {
+            return back();
+        }
+        SppPayment::create([
+            'amount' => $amount,
+            'currency' => $request->currency,
+            'orderId' => rand(1000000000, 9999999999),
+            'user_id' => $data->user_id,
+            'spp_month_id' => $data->id,
+        ]);
+        $data->update([
+            'status' => 'paid_manually',
+            'updated_at' => Carbon::now(),
+        ]);
+        return redirect()->route('spp.all');
     }
 
     public function sppInvoiceMail($userId, $sppMonthId)

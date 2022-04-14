@@ -17,7 +17,7 @@ class CreateSppPaymentsTable extends Migration
             $table->id();
             $table->bigInteger('amount');
             $table->string('currency');
-            $table->string('orderId')->nullable();
+            $table->string('orderId')->unique()->nullable();
             $table->foreignId('user_id');
             $table->foreignId('spp_month_id');
             $table->timestamps();
