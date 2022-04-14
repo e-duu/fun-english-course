@@ -97,14 +97,15 @@
                     </div>
                 </a>
 
+                @if ($data->status != 'pending')
                 <p class="text-center text-lg font-bold my-3">Or</p>
-
-                {{-- NOTE : PAYMENT BY PAYPAL --}}
-                <div id="smart-button-container">
+                  {{-- NOTE : PAYMENT BY PAYPAL --}}
+                  <div id="smart-button-container">
                     <div style="text-align: center;">
                     <div id="paypal-button-container"></div>
                     </div>
-                </div>
+                  </div>
+                @endif
             </div>
         @endif
     @endif
