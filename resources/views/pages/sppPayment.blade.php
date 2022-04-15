@@ -3,8 +3,21 @@
     Fun English Course - Payment
 @endsection
 @section('content')
-    <div class="container-fluid px-7 sm:px-20 mt-10 sm:mt-16">
-    <div class="grid bg-gray-50 rounded-lg mx-auto shadow-xl w-11/12 md:w-9/12 lg:w-1/2">
+
+
+<div class="container-fluid px-7 sm:px-20 mt-10 sm:mt-16">
+  
+  @if (session('failed'))
+  <div class="grid mx-auto rounded-lg shadow-xl w-11/12 md:w-9/12 lg:w-1/2 mb-4">
+    <div class="py-4 px-5 bg-blue-600 overflow-hidden rounded-lg shadow-xs items-center">
+      <div class="flex text-white text-center font-bold text-base">
+        <i class="fas fa-bell text-xl mr-3"></i>
+        <p>{{ session('failed') }}</p>
+      </div>
+    </div>
+  </div>
+  @endif
+  <div class="grid bg-gray-50 rounded-lg mx-auto shadow-xl w-11/12 md:w-9/12 lg:w-1/2">
       <div class="bg-blue-600 rounded-t-lg py-3 sm:py-6 sm:mb-5">
         <h1 class="text-white text-center font-bold text-lg sm:text-2xl">Payment Confirmation</h1>
       </div>
