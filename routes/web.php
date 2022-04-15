@@ -205,6 +205,7 @@ Route::middleware(['auth'])->group(function ()
 			Route::post('/update/{id}', [SppController::class, 'update'])->name('spp.update');
 			Route::delete('/delete/{id}', [SppController::class, 'destroy'])->name('spp.delete');
 			Route::get('/pay-manually/{id}', [SppController::class, 'payManually'])->name('spp.pay-manually');
+			Route::post('/pay-manually/prosses/{id}', [SppController::class, 'payManuallyProsses'])->name('spp.pay-manually.prosses');
 			Route::get('/invoice/mail/{userId}/{sppMonthId?}', [SppController::class, 'sppInvoiceMail'])->name('spp.invoice.mail');
 		});
 
