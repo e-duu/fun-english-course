@@ -62,13 +62,17 @@ class PaymentPageController extends Controller
     public function sppPaymentDetail($id)
     {
         $data = SppMonth::findOrFail($id);
-        // $date = date('Y-m-d H:i:s', strtotime($data->date)); 
-        // $tgl = date('Y-m-d H:i:s A', strtotime($date . ' +1 day'));
+
+        if($data->status == 'pending' && Carbon::now() >= $data->dateEnd){
+            $data->update([
+                'status' => 'unpaid',
+            ]);
+        }
 
         if($data->date == null){
             $data->update([
                 'date' => Carbon::now(),
-                'dateEnd' => Carbon::tomorrow(),
+                'dateEnd' => Carbon::now()->addDay(),
                 'status' => 'pending',
             ]);
         }
