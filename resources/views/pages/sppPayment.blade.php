@@ -93,18 +93,24 @@
                 {{-- NOTE : PAYMENT BY MOOTA --}}
                 <a href="{{ route('spp-payment-detail', $data->id) }}">
                     <div class="rounded-full py-4 bg-blue-600 text-white font-bold text-xl text-center">
-                    <i class="fas fa-money-check"></i> Pay with Bank
+                      <i class="fas fa-money-check"></i> 
+                      @if ($data->status == 'pending')
+                        Continue Payment
+                      @else
+                        Pay with Bank
+                      @endif
                     </div>
                 </a>
 
-                <p class="text-center text-lg font-bold my-3">Or</p>
-
-                {{-- NOTE : PAYMENT BY PAYPAL --}}
-                <div id="smart-button-container">
+                @if ($data->status != 'pending')
+                  <p class="text-center text-lg font-bold my-3">Or</p>
+                  {{-- NOTE : PAYMENT BY PAYPAL --}}
+                  <div id="smart-button-container">
                     <div style="text-align: center;">
                     <div id="paypal-button-container"></div>
                     </div>
-                </div>
+                  </div>
+                @endif
             </div>
         @endif
     @endif
