@@ -58,11 +58,28 @@
                 {{-- {{ date('Y-m-d H:i:s A', strtotime($date . ' +1 day')); }}  --}}
                 {{ $data->dateEnd->format('d M Y H:i A') }}
               </p>
-              {{-- <p class="text-md font-bold text-gray-800">
-                Maximal 24 hours 
-              </p> --}}
+              <div class="flex">
+                {{-- <div class="flex text-md font-bold text-gray-800 mr-2">
+                  <p id="days" class="mr-2">00</p>
+                  <span>Days</span>
+                </div> --}}
+                <div class="flex text-md font-bold text-gray-800 mr-2">
+                  <p id="hours" class="mr-2">00</p>
+                  <span>hours</span>
+                </div>
+                <div class="flex text-md font-bold text-gray-800 mr-2">
+                  <p id="mins" class="mr-2">00</p>
+                  <span>minutes</span>
+                </div>
+                <div class="flex text-md font-bold text-gray-800 mr-2">
+                  <p id="secs" class="mr-2">00</p>
+                  <span>seconds</span>
+                  <p class="ml-2">left</p>
+                </div>
+              </div>
             </div>
-            <a href="#" class="text-blue-600 font-semibold text-lg"><i class="fas fa-exclamation-circle text-xl text-red-500"></i></a>
+
+            <a href="#" class="text-blue-600 font-semibold text-lg transition duration-150 ease-in-out" data-bs-toggle="tooltip" data-bs-placement="left" title="The transaction will be automatically canceled if it exceeds the transfer time limit"><i class="fas fa-exclamation-circle text-xl text-red-500"></i></a>
           </div>
         </div>
         <div class="border-b-[3px] border-gray-400 my-3"></div>
@@ -171,4 +188,35 @@
     });
   }
 </script>
+
+<script>
+    
+    var countDownDate = new Date("{{$data['dateEnd']}}").getTime();
+
+    var myfunc = setInterval(function() {
+        var now = new Date().getTime();
+        var timeleft = countDownDate - now;
+    
+        // var days = Math.floor(timeleft / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
+
+
+        // document.getElementById("days").innerHTML = days
+        document.getElementById("hours").innerHTML = hours
+        document.getElementById("mins").innerHTML = minutes
+        document.getElementById("secs").innerHTML = seconds
+
+        if (timeleft < 0) {
+            clearInterval(myfunc);
+            // document.getElementById("days").innerHTML = "00"
+            document.getElementById("hours").innerHTML = "00" 
+            document.getElementById("mins").innerHTML = "00"
+            document.getElementById("secs").innerHTML = "00"
+            // document.getElementById("end").innerHTML = "TIME UP!!";
+        }
+    }, 1000)
+</script>
+
 @endpush
