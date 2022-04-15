@@ -30,7 +30,7 @@
         Level
       </span>
       <select name="level_id" class="block w-full mt-1 text-sm rounded-md border-gray-400  dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
-        <option v-for="level in selectedLevels" :value="level.id">@{{ level.level.name }}</option>
+        <option v-for="level in selectedLevels" :value="level.level.id">@{{ level.level.name }}</option>
       </select>
       @error('level_id')
         <div class="mt-1 text-sm text-[red]">

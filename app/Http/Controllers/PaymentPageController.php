@@ -62,24 +62,30 @@ class PaymentPageController extends Controller
     public function sppPaymentDetail($id)
     {
         $data = SppMonth::findOrFail($id);
+        $account_banks = AccountBank::get();
 
-        if($data->status == 'pending' && Carbon::now() >= $data->dateEnd){
-            $data->update([
-                'status' => 'unpaid',
-            ]);
-        }
 
-        if($data->date == null){
+        if($data->status == 'unpaid'){
             $data->update([
                 'date' => Carbon::now(),
                 'dateEnd' => Carbon::now()->addDay(),
                 'status' => 'pending',
             ]);
         }
-        
-        $account_banks = AccountBank::get();
 
-        return view('pages.sppPaymentDetail', compact('data', 'account_banks'));
+        if($data->status == 'pending' && Carbon::now() >= $data->dateEnd){
+            $data->update([
+                'status' => 'unpaid',
+                'date' => null,
+                'dateEnd' => null,
+            ]);
+
+            return back()->with('failed', 'the transaction is canceled because it exceeds the transfer time limit !');
+        }else{
+            return view('pages.sppPaymentDetail', compact('data', 'account_banks'));
+        }
+        
+
     }
 
     public function sppPaymentCancel($id)

@@ -24,8 +24,12 @@
                 }
             }
         } catch (\Throwable $th) {
+<<<<<<< HEAD
+            dd('an error occurred on the server');
+=======
             $result = null;
             echo 'an error occurred on the server';
+>>>>>>> 6442f9756f6918d90e0a9ebdf9153ff104f7bdaa
         }
     @endphp
     <div class="container-fluid w-full mt-5">

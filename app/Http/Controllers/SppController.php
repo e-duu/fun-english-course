@@ -118,6 +118,9 @@ class SppController extends Controller
             $amount = $request->IDR;
         } else if ($request->currency == 'USD') {
             $amount = $request->USD;
+            if ($amount == null) {
+                return back();
+            }
         } else {
             return back();
         }
