@@ -24,7 +24,7 @@
                 }
             }
         } catch (\Throwable $th) {
-            echo 'an error occurred on the server';
+            dd('an error occurred on the server');
         }
     @endphp
     <div class="container-fluid w-full mt-5">

@@ -51,7 +51,7 @@
                     }
                 }
             } catch (\Throwable $th) {
-                echo 'an error occurred on the server';
+                dd('an error occurred on the server');
             }
         @endphp
 
