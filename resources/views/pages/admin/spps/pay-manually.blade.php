@@ -24,6 +24,7 @@
                 }
             }
         } catch (\Throwable $th) {
+            $result = null;
             echo 'an error occurred on the server';
         }
     @endphp
