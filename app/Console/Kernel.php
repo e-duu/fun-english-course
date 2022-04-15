@@ -28,9 +28,11 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
 
         // $schedule->call(function () {
-        //     SppMonth::query()
-        //             ->where('created_at', '<', today()->subDays(1))
-        //             ->update(['your_status_column' => 'deleted']);
+
+        //     $spp = SppMonth::where('status', 'pending')->where('user_id', auth()->user()->id)->get();
+        //     $spp->query()
+        //         ->where('date', '<', today()->subDays(1))
+        //         ->update(['status' => 'unpaid']);
         // })->daily();
     }
 

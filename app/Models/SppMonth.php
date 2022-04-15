@@ -12,7 +12,7 @@ class SppMonth extends Model
 
     protected $table = 'spp_months';
     
-    protected $dates = ['date'];
+    protected $dates = ['date', 'dateEnd'];
 
     protected $fillable = [
         'month',
@@ -20,6 +20,7 @@ class SppMonth extends Model
         'status',
         'code',
         'date',
+        'dateEnd',
         'user_id',
         'level_id',
     ];

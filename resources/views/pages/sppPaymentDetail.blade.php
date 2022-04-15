@@ -55,11 +55,12 @@
                 $date = date('Y-m-d H:i:s', strtotime($data->date)); 
               @endphp
               <p class="text-lg font-bold text-gray-800">
-                {{ date('Y-m-d H:i:s A', strtotime($date . ' +1 day')); }} 
+                {{-- {{ date('Y-m-d H:i:s A', strtotime($date . ' +1 day')); }}  --}}
+                {{ $data->dateEnd->format('d M Y H:i A') }}
               </p>
-              <p class="text-md font-bold text-gray-800">
+              {{-- <p class="text-md font-bold text-gray-800">
                 Maximal 24 hours 
-              </p>
+              </p> --}}
             </div>
             <a href="#" class="text-blue-600 font-semibold text-lg"><i class="fas fa-exclamation-circle text-xl text-red-500"></i></a>
           </div>
