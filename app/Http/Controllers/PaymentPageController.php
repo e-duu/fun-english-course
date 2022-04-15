@@ -63,13 +63,19 @@ class PaymentPageController extends Controller
     {
         $data = SppMonth::findOrFail($id);
 
+        if($data->status == 'pending' && Carbon::now() >= $data->dateEnd){
+            $data->update([
+                'status' => 'unpaid',
+            ]);
+        }
+
         if($data->date == null){
             $data->update([
                 'date' => Carbon::now(),
+                'dateEnd' => Carbon::now()->addDay(),
                 'status' => 'pending',
             ]);
         }
-        // dd($data);
         
         $account_banks = AccountBank::get();
 
@@ -82,6 +88,8 @@ class PaymentPageController extends Controller
 
         $data->update([
             'status' => 'unpaid',
+            'date' => null,
+            'dateEnd' => null,
         ]);
 
         return view('pages.sppPayment', compact('data'));
@@ -92,4 +100,5 @@ class PaymentPageController extends Controller
         // $data = SppMonth::findOrFail($id);
         return view('pages.paymentSuccess');
     }
+
 }
