@@ -13,7 +13,6 @@ class SppPayment extends Model
 
     protected $fillable = [
         'amount',
-        'evidence',
         'currency',
         'orderId',
         'user_id',
