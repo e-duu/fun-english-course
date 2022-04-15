@@ -100,9 +100,6 @@
               <p class="text-red-500 font-semibold">
                 *Transfer up to the last 3 digits
               </p>
-              <p class="text-gray-500 font-semibold">
-                Unique code nominal still goes to the bone
-              </p>
             </div>
             <button id="copyBtnPrice" class="text-blue-600 font-semibold text-lg -ml-10">Copy</button>
           </div>
