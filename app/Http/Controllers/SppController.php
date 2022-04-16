@@ -101,6 +101,7 @@ class SppController extends Controller
     public function destroy($id)
     {
         $data = SppMonth::findOrFail($id);
+        $data->sppPayment()->delete();
         $data->delete();
         return back();
     }
