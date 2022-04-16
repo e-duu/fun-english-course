@@ -32,7 +32,15 @@
             <div class="grid bg-gray-50 rounded-lg shadow-xl w-full mx-auto">
                 <div class="bg-blue-600 rounded-t-lg py-3 sm:py-6 sm:mb-5">
                     <h1 class="text-white text-center font-bold text-lg sm:text-2xl">
-                        Payment Confirmation
+                        @if ($data->status == 'paid')
+                            Payment Info
+                        @elseif ($data->status == 'paid_manually')
+                            Payment Info
+                        @elseif ($data->status == 'unpaid')
+                            Payment Confirmation
+                        @elseif ($data->status == 'pending')
+                            Payment Confirmation
+                        @endif
                     </h1>
                 </div>
 

@@ -11,7 +11,7 @@ class SppMonth extends Model
     use HasFactory;
 
     protected $table = 'spp_months';
-    
+
     protected $dates = ['date', 'dateEnd'];
 
     protected $fillable = [
@@ -37,7 +37,7 @@ class SppMonth extends Model
 
     public function sppPayment()
     {
-        return $this->belongsTo(SppPayment::class);
+        return $this->belongsTo(SppPayment::class, 'id', 'spp_month_id');
     }
 
     public function sppPaymentBank()
