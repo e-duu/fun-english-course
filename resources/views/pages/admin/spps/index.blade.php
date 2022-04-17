@@ -84,10 +84,12 @@
                     <i class=" fas fa-print"></i>
                     <p>Invoice</p>
                 </a>
-                <a href="{{ route('spp.pay-manually', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
-                  <i class="fas fa-money-check"></i>
-                  <p>Pay</p>
-                </a>
+                @if ($item->status != 'pending')
+                  <a href="{{ route('spp.pay-manually', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                    <i class="fas fa-money-check"></i>
+                    <p>Pay</p>
+                  </a>
+                @endif
                 <a href="{{ route('spp.edit', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
                   <i class=" fas fa-edit"></i>
                   <p>Edit</p>

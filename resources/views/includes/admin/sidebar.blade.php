@@ -126,7 +126,7 @@
           </div>
         </div>
 
-        <!-- Payment -->
+        <!-- Spp Payment -->
         <div x-data="{ isActive: false, open: false}">
           <!-- active & hover classes 'bg-primary-100 dark:bg-primary' -->
           <a
@@ -139,7 +139,7 @@
             :aria-expanded="(open || isActive) ? 'true' : 'false'"
           >
             <span aria-hidden="true">
-              <i class="fas fa-credit-card"></i>
+              <i class="fas fa-comments-dollar"></i>
             </span>
             <span class="ml-2 text-sm"> Spps </span>
             <span aria-hidden="true" class="ml-auto">
@@ -316,7 +316,7 @@
           <!-- active & hover classes 'bg-primary-100 dark:bg-primary' -->
           <a href="{{ route('moota') }}" class="flex items-center py-2 px-3 text-gray-500 transition-colors rounded-md dark:text-light hover:bg-primary-100 dark:hover:bg-primary" role="button">
             <span>
-              <i class="fas fa-list-alt"></i>
+              <i class="fas fa-cog"></i>
             </span>
             <span class="ml-2 text-sm"> Setting Moota </span>
           </a>
