@@ -20,7 +20,7 @@ class SppPaymentBankController extends Controller
         //             "account_number": "123124",
         //             "date": "2022-04-11 14:33:01",
         //             "description": "TRSF E-BANKING CR 11/10 124123 MOOTA CO",
-        //             "amount": 200108,
+        //             "amount": 300191,
         //             "type": "CR",
         //             "balance": 520000,
         //             "updated_at": "2019-11-10 14:33:01",
@@ -30,8 +30,6 @@ class SppPaymentBankController extends Controller
         //         }
         //     ]';
 
-        dd($request->all);
-        
         //konversi ke string
         $notif = json_encode($request->all());
 
@@ -46,7 +44,7 @@ class SppPaymentBankController extends Controller
                 // dd($data);
 
 
-                $spp = SppMonth::where('date', '>=', date('Y-m-d 00:00:00'))->where('status', 'pending')->where('code', $unique_code)->get();
+                $spp = SppMonth::where('date', '>=', date('Y-m-d 00:00:00'))->where('status', 'pending')->where('code', $unique_code)->first();
                 // dd($spp);
                 
                 $store = SppPaymentBank::create([
@@ -68,6 +66,7 @@ class SppPaymentBankController extends Controller
                     'status' => 'paid',
                 ]);
 
+                return response()->json(['success' => 'success'], 200);
             }
         }
         
