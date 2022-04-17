@@ -15,8 +15,12 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DownloadableController;
 use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\LevelUserController;
+use App\Http\Controllers\MootaController;
 use App\Http\Controllers\PaymentPageController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\SppController;
+use App\Http\Controllers\SppPaymentBankController;
+use App\Http\Controllers\SppPaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,39 +40,57 @@ Route::middleware(['guest'])->group(function ()
 });
 
 
-
 Route::middleware(['auth'])->group(function ()
 {
 
 	// Home
 	Route::get('/', [ResourceController::class, 'index'])->name('resource');
-	
+
 	// Resource
 	Route::get('/resource/{slug}', [ResourceController::class, 'detail'])->name('resource.detail');
-	
+
 	// Payment
 	Route::get('/payment', [PaymentPageController::class, 'index'])->name('payment');
-	Route::post('/payment/store', [PaymentPageController::class, 'store'])->name('payment.post');
-	
+	Route::post('/payment/store', [PaymentPageController::class, 'store'])->name('payment.store');
+
+	// Spp Payment
+	Route::get('/spp-payment/{id}', [PaymentPageController::class, 'sppPayment'])->name('spp-payment');
+	Route::post('/payment/store', [PaymentPageController::class, 'sppPaymentStore'])->name('spp-payment.store');
+	Route::get('/spp-payment-detail/{id}', [PaymentPageController::class, 'sppPaymentDetail'])->name('spp-payment-detail');
+	Route::get('/spp-payment-success', [PaymentPageController::class, 'sppPaymentSuccess'])->name('spp-payment-success');
+	Route::get('/spp-payment-cancel/{id}', [PaymentPageController::class, 'sppPaymentCancel'])->name('spp-payment-cancel');
+
+	// api notif push webhoox
+	Route::get('/payment/webhook', [SppPaymentBankController::class, 'index'])->name('payment-webhook');
+
 	// Watch Material
 	Route::get('/watch/{id}', [WatchController::class, 'index'])->name('watch');
 	Route::get('/exercise/{id}', [WatchController::class, 'exercise'])->name('exercise');
 	Route::get('/downloadable/{id}', [WatchController::class, 'downloadable'])->name('downloadable');
-	
+
 	// Score
 	Route::get('/score', [WatchController::class, 'score'])->name('score');
 
 	// Logout
 	Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+	// Dashboard Student
+	Route::get('/dashboard-student', [DashboardController::class, 'dashboardUser'])->name('dashboard.user');
+
 	Route::prefix('admin')->group(function () {
-			
+
 		// Dashboard
-		Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+		Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('admin');
 
 		// Score
 		Route::get('/score/all', [ExerciseController::class, 'score_all'])->name('score.all');
 		Route::delete('/delete/{id}', [ExerciseController::class, 'score_delete'])->name('score.delete');
+
+		// Moota
+		Route::get('/moota/setting', [MootaController::class, 'create'])->name('moota');
+		Route::post('moota/create', [MootaController::class, 'store'])->name('moota.store');
+		Route::get('/moota/get-bank', [MootaController::class, 'getListBank'])->name('moota.get-bank');
+
 
 		Route::prefix('user')->group(function () {
 				Route::get('/all', [UserController::class, 'index'])->name('user.all');
@@ -153,7 +175,7 @@ Route::middleware(['auth'])->group(function ()
 				Route::post('/edit/{id}', [DownloadableController::class, 'update'])->name('downloadable.update');
 				Route::delete('/delete/{id}', [DownloadableController::class, 'destroy'])->name('downloadable.delete');
 		});
-		
+
 		Route::prefix('exercise')->group(function () {
 				Route::get('/all', [ExerciseController::class, 'index'])->name('exercise.all');
 				Route::get('/create{id}', [ExerciseController::class, 'create'])->name('exercise.create');
@@ -172,8 +194,21 @@ Route::middleware(['auth'])->group(function ()
 				Route::get('/edit/{id}', [QuestionController::class, 'edit'])->name('question.edit');
 				Route::post('/edit/{id}', [QuestionController::class, 'update'])->name('question.update');
 				Route::delete('/delete/{id}', [QuestionController::class, 'destroy'])->name('question.delete');
-			});
-			
+		});
+
+		Route::prefix('spp')->group(function () {
+			Route::get('/all', [SppController::class, 'index'])->name('spp.all');
+			Route::get('/create', [SppController::class, 'create'])->name('spp.create');
+			Route::post('/store', [SppController::class, 'store'])->name('spp.store');
+			Route::get('/show/{id}', [SppController::class, 'show'])->name('spp.show');
+			Route::get('/edit/{id}', [SppController::class, 'edit'])->name('spp.edit');
+			Route::post('/update/{id}', [SppController::class, 'update'])->name('spp.update');
+			Route::delete('/delete/{id}', [SppController::class, 'destroy'])->name('spp.delete');
+			Route::get('/pay-manually/{id}', [SppController::class, 'payManually'])->name('spp.pay-manually');
+			Route::post('/pay-manually/prosses/{id}', [SppController::class, 'payManuallyProsses'])->name('spp.pay-manually.prosses');
+			Route::get('/invoice/mail/{userId}/{sppMonthId?}', [SppController::class, 'sppInvoiceMail'])->name('spp.invoice.mail');
+		});
+
 	});
 
 });

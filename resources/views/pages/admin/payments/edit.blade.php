@@ -1,12 +1,12 @@
 @extends('layouts.dash')
 @section('title')
-  Fun English Course | Payment Creates
+  Fun English Course | Payment Edits
 @endsection
 @section('sub-title')
-  Create Payments
+  Edit Payments
 @endsection
 @section('content')
-  <form id="payments" action="{{ route('payment.store') }}" method="POST" class="px-4 py-3 bg-white rounded-lg shadow-md dark:bg-gray-800" enctype="multipart/form-data">
+  <form id="payments" action="{{ route('payment.update', $payments->id) }}" method="POST" class="px-4 py-3 bg-white rounded-lg shadow-md dark:bg-gray-800" enctype="multipart/form-data">
     @csrf
 
     <label class="block mt-4 text-sm">
@@ -14,8 +14,8 @@
         Student Name
       </span>
       <select name="user_id" class="block w-full mt-1 text-sm rounded-md border-gray-400  dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
-      @foreach ($users as $user)
-          <option value="{{ $user->id }}" >{{ $user->name }}</option>
+        @foreach ($users as $user)
+          <option value="{{ $user->id }}" {{ $user->id == $payments->user_id ? 'selected' : '' }}>{{ $user->name }}</option>
         @endforeach
       </select>
       @error('user_id')

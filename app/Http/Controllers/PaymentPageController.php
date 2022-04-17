@@ -2,23 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AccountBank;
 use App\Models\Level;
 use App\Models\Payment;
 use App\Models\Program;
 use App\Models\Recipient;
-use App\Models\User;
+use App\Models\SppMonth;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PaymentPageController extends Controller
 {
     public function index()
     {
-        $users = User::all();
         $recipients = Recipient::all();
         $programs = Program::all();
         $levels = Level::all();
 
-        return view('pages.payment', compact('users', 'recipients', 'programs', 'levels'));
+        return view('pages.payment', compact('recipients', 'programs', 'levels'));
     }
 
 
@@ -39,4 +40,71 @@ class PaymentPageController extends Controller
         Payment::create($request->all());
         return redirect()->route('resource');
     }
+
+    public function sppPayment($id)
+    {
+        $data = SppMonth::findOrFail($id);
+        return view('pages.sppPayment', compact('data'));
+    }
+
+    // /**
+    //  * Store a newly created resource in storage.
+    //  *
+    //  * @param  \Illuminate\Http\Request  $request
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function sppPaymentStore(Request $request)
+    // {
+    //     SppMonth::create($request->all());
+    //     return redirect()->route('resource');
+    // }
+
+    public function sppPaymentDetail($id)
+    {
+        $data = SppMonth::findOrFail($id);
+        $account_banks = AccountBank::get();
+
+
+        if($data->status == 'unpaid'){
+            $data->update([
+                'date' => Carbon::now(),
+                'dateEnd' => Carbon::now()->addDay(),
+                'status' => 'pending',
+            ]);
+        }
+
+        if($data->status == 'pending' && Carbon::now() >= $data->dateEnd){
+            $data->update([
+                'status' => 'unpaid',
+                'date' => null,
+                'dateEnd' => null,
+            ]);
+
+            return back()->with('failed', 'the transaction is canceled because it exceeds the transfer time limit !');
+        }else{
+            return view('pages.sppPaymentDetail', compact('data', 'account_banks'));
+        }
+        
+
+    }
+
+    public function sppPaymentCancel($id)
+    {
+        $data = SppMonth::findOrFail($id);
+
+        $data->update([
+            'status' => 'unpaid',
+            'date' => null,
+            'dateEnd' => null,
+        ]);
+
+        return view('pages.sppPayment', compact('data'));
+    }
+
+    public function sppPaymentSuccess()
+    {
+        // $data = SppMonth::findOrFail($id);
+        return view('pages.paymentSuccess');
+    }
+
 }

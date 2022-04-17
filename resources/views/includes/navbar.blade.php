@@ -15,7 +15,7 @@
       <li class="absolute right-4 top-1 sm:top-5 sm:right-20">
         <div x-data="{ dropdownOpen: false }" class="relative">
           <button @click="dropdownOpen = !dropdownOpen" class="relative z-10 ml-8 sm:ml-0">
-            <img src="{{ asset('/users/' . Auth::user()->photo) }}" alt="user profile photo" class="w-8 sm:w-12 rounded-full">
+            <img src="{{ asset('/users/' . Auth::user()->photo) }}" alt="user profile photo" class="h-8 w-8 sm:h-12 sm:w-12 rounded-full">
           </button>
       
           <div x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 h-full w-full z-10"></div>
@@ -27,6 +27,11 @@
             </div>
             @if (Auth::user()->role == 'admin')
               <a href="{{ route('dashboard') }}" class="flex items-center space-x-2 px-2 sm:px-4 py-2 text-xs sm:text-lg text-gray-800 border-b hover:text-blue-700 hover:bg-blue-100 transition-colors duration-150">
+                <i class="fas fa-paw mr-2"></i>
+                Dashboard
+              </a>
+            @elseif (Auth::user()->role == 'student')
+              <a href="{{ route('dashboard.user') }}" class="flex items-center space-x-2 px-2 sm:px-4 py-2 text-xs sm:text-lg text-gray-800 border-b hover:text-blue-700 hover:bg-blue-100 transition-colors duration-150">
                 <i class="fas fa-paw mr-2"></i>
                 Dashboard
               </a>

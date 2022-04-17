@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Models\SppMonth;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -25,6 +26,14 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+
+        // $schedule->call(function () {
+
+        //     $spp = SppMonth::where('status', 'pending')->where('user_id', auth()->user()->id)->get();
+        //     $spp->query()
+        //         ->where('date', '<', today()->subDays(1))
+        //         ->update(['status' => 'unpaid']);
+        // })->daily();
     }
 
     /**
