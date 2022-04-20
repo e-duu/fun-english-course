@@ -54,14 +54,14 @@ Route::middleware(['auth'])->group(function ()
 	Route::post('/payment/store', [PaymentPageController::class, 'store'])->name('payment.store');
 
 	// Spp Payment
-	Route::get('/spp-payment/{id}', [PaymentPageController::class, 'sppPayment'])->name('spp-payment');
-	Route::post('/payment/store', [PaymentPageController::class, 'sppPaymentStore'])->name('spp-payment.store');
-	Route::get('/spp-payment-detail/{id}', [PaymentPageController::class, 'sppPaymentDetail'])->name('spp-payment-detail');
-	Route::get('/spp-payment-success', [PaymentPageController::class, 'sppPaymentSuccess'])->name('spp-payment-success');
-	Route::get('/spp-payment-cancel/{id}', [PaymentPageController::class, 'sppPaymentCancel'])->name('spp-payment-cancel');
+	// Route::get('/spp-payment/{id}', [PaymentPageController::class, 'sppPayment'])->name('spp-payment');
+	// Route::post('/payment/store', [PaymentPageController::class, 'sppPaymentStore'])->name('spp-payment.store');
+	// Route::get('/spp-payment-detail/{id}', [PaymentPageController::class, 'sppPaymentDetail'])->name('spp-payment-detail');
+	// Route::get('/spp-payment-success', [PaymentPageController::class, 'sppPaymentSuccess'])->name('spp-payment-success');
+	// Route::get('/spp-payment-cancel/{id}', [PaymentPageController::class, 'sppPaymentCancel'])->name('spp-payment-cancel');
 
 	// api notif push webhoox
-	Route::get('/payment/webhook', [SppPaymentBankController::class, 'index'])->name('payment-webhook');
+	// Route::get('/payment/webhook', [SppPaymentBankController::class, 'index'])->name('payment-webhook');
 
 	// Watch Material
 	Route::get('/watch/{id}', [WatchController::class, 'index'])->name('watch');
@@ -75,7 +75,7 @@ Route::middleware(['auth'])->group(function ()
 	Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 	// Dashboard Student
-	Route::get('/dashboard-student', [DashboardController::class, 'dashboardUser'])->name('dashboard.user');
+	// Route::get('/dashboard-student', [DashboardController::class, 'dashboardUser'])->name('dashboard.user');
 
 	Route::prefix('admin')->group(function () {
 
@@ -196,18 +196,18 @@ Route::middleware(['auth'])->group(function ()
 				Route::delete('/delete/{id}', [QuestionController::class, 'destroy'])->name('question.delete');
 		});
 
-		Route::prefix('spp')->group(function () {
-			Route::get('/all', [SppController::class, 'index'])->name('spp.all');
-			Route::get('/create', [SppController::class, 'create'])->name('spp.create');
-			Route::post('/store', [SppController::class, 'store'])->name('spp.store');
-			Route::get('/show/{id}', [SppController::class, 'show'])->name('spp.show');
-			Route::get('/edit/{id}', [SppController::class, 'edit'])->name('spp.edit');
-			Route::post('/update/{id}', [SppController::class, 'update'])->name('spp.update');
-			Route::delete('/delete/{id}', [SppController::class, 'destroy'])->name('spp.delete');
-			Route::get('/pay-manually/{id}', [SppController::class, 'payManually'])->name('spp.pay-manually');
-			Route::post('/pay-manually/prosses/{id}', [SppController::class, 'payManuallyProsses'])->name('spp.pay-manually.prosses');
-			Route::get('/invoice/mail/{userId}/{sppMonthId?}', [SppController::class, 'sppInvoiceMail'])->name('spp.invoice.mail');
-		});
+		// Route::prefix('spp')->group(function () {
+		// 	Route::get('/all', [SppController::class, 'index'])->name('spp.all');
+		// 	Route::get('/create', [SppController::class, 'create'])->name('spp.create');
+		// 	Route::post('/store', [SppController::class, 'store'])->name('spp.store');
+		// 	Route::get('/show/{id}', [SppController::class, 'show'])->name('spp.show');
+		// 	Route::get('/edit/{id}', [SppController::class, 'edit'])->name('spp.edit');
+		// 	Route::post('/update/{id}', [SppController::class, 'update'])->name('spp.update');
+		// 	Route::delete('/delete/{id}', [SppController::class, 'destroy'])->name('spp.delete');
+		// 	Route::get('/pay-manually/{id}', [SppController::class, 'payManually'])->name('spp.pay-manually');
+		// 	Route::post('/pay-manually/prosses/{id}', [SppController::class, 'payManuallyProsses'])->name('spp.pay-manually.prosses');
+		// 	Route::get('/invoice/mail/{userId}/{sppMonthId?}', [SppController::class, 'sppInvoiceMail'])->name('spp.invoice.mail');
+		// });
 
 	});
 

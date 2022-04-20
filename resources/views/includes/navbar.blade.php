@@ -25,17 +25,10 @@
               <i class="fas fa-user-circle mr-2"></i>
               Hello!, {{ Auth::user()->name }}
             </div>
-            @if (Auth::user()->role == 'admin')
-              <a href="{{ route('dashboard') }}" class="flex items-center space-x-2 px-2 sm:px-4 py-2 text-xs sm:text-lg text-gray-800 border-b hover:text-blue-700 hover:bg-blue-100 transition-colors duration-150">
-                <i class="fas fa-paw mr-2"></i>
-                Dashboard
-              </a>
-            @elseif (Auth::user()->role == 'student')
-              <a href="{{ route('dashboard.user') }}" class="flex items-center space-x-2 px-2 sm:px-4 py-2 text-xs sm:text-lg text-gray-800 border-b hover:text-blue-700 hover:bg-blue-100 transition-colors duration-150">
-                <i class="fas fa-paw mr-2"></i>
-                Dashboard
-              </a>
-            @endif
+            <a href="{{ route('dashboard') }}" class="flex items-center space-x-2 px-2 sm:px-4 py-2 text-xs sm:text-lg text-gray-800 border-b hover:text-blue-700 hover:bg-blue-100 transition-colors duration-150">
+              <i class="fas fa-paw mr-2"></i>
+              Dashboard
+            </a>
             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="block px-2 sm:px-4 py-2 text-xs sm:text-lg text-gray-800 border-b hover:text-[red] hover:bg-blue-100 transition-colors duration-150">
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                   @csrf
