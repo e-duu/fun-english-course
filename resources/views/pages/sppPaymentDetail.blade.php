@@ -107,10 +107,10 @@
 
       </div>
       <div class='pt-10'>
-        <a href="{{ route('spp-payment-cancel', $data->id) }}" class='block w-full border-2 border-blue-600 hover:bg-blue-700 hover:text-white mb-2 shadow-xl font-bold text-md sm:text-xl text-blue-600 transition-colors duration-100 py-3 sm:py-5 text-center'>Cancel transaction</a>
-        <a href="{{ route('spp-payment', $data->id) }}" class='block w-full bg-blue-600 hover:bg-blue-700 rounded-b-lg shadow-xl font-bold text-md sm:text-xl text-white transition-colors duration-100 py-3 sm:py-5 text-center'>Back</a>
+        {{-- <a href="{{ route('spp-payment-cancel', $data->id) }}" class='block w-full border-2 border-blue-600 hover:bg-blue-700 hover:text-white mb-2 shadow-xl font-bold text-md sm:text-xl text-blue-600 transition-colors duration-100 py-3 sm:py-5 text-center'>Cancel transaction</a>
+        <a href="{{ route('spp-payment', $data->id) }}" class='block w-full bg-blue-600 hover:bg-blue-700 rounded-b-lg shadow-xl font-bold text-md sm:text-xl text-white transition-colors duration-100 py-3 sm:py-5 text-center'>Back</a> --}}
         
-        {{-- <a href="{{ route('payment-webhook') }}" class='w-full bg-blue-600 hover:bg-blue-700 rounded-b-lg shadow-xl font-bold text-md sm:text-xl text-white transition-colors duration-100 py-3 sm:py-5 text-center'>Done</a> --}}
+        <a href="{{ route('payment-webhook') }}" class='w-full bg-blue-600 hover:bg-blue-700 rounded-b-lg shadow-xl font-bold text-md sm:text-xl text-white transition-colors duration-100 py-3 sm:py-5 text-center'>Done</a>
       </div>
     </div>
   </div>

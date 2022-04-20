@@ -3,7 +3,7 @@
     <!-- Sidebar links -->
     <nav aria-label="Main" class="flex-1 px-2 py-4 space-y-2 overflow-y-hidden hover:overflow-y-auto">
 
-      @if (Auth::user()->role == 'student')
+      {{-- @if (Auth::user()->role == 'student')
         <!-- Dashboard -->
         <div>
           <!-- active & hover classes 'bg-primary-100 dark:bg-primary' -->
@@ -14,7 +14,7 @@
             <span class="ml-2 text-sm"> Dashboard </span>
           </a>
         </div>
-      @else
+      @else --}}
         <!-- Dashboard -->
         <div>
           <!-- active & hover classes 'bg-primary-100 dark:bg-primary' -->
@@ -127,7 +127,7 @@
         </div>
 
         <!-- Spp Payment -->
-        <div x-data="{ isActive: false, open: false}">
+        {{-- <div x-data="{ isActive: false, open: false}">
           <!-- active & hover classes 'bg-primary-100 dark:bg-primary' -->
           <a
             href="#"
@@ -174,7 +174,7 @@
               Create Spp
             </a>
           </div>
-        </div>
+        </div> --}}
 
         <!-- Recipient -->
         <div x-data="{ isActive: false, open: false}">
@@ -312,7 +312,7 @@
         </div>
 
         <!-- Moota Setting -->
-        <div>
+        {{-- <div>
           <!-- active & hover classes 'bg-primary-100 dark:bg-primary' -->
           <a href="{{ route('moota') }}" class="flex items-center py-2 px-3 text-gray-500 transition-colors rounded-md dark:text-light hover:bg-primary-100 dark:hover:bg-primary" role="button">
             <span>
@@ -320,8 +320,8 @@
             </span>
             <span class="ml-2 text-sm"> Setting Moota </span>
           </a>
-        </div>
-      @endif
+        </div> --}}
+      {{-- @endif --}}
     </nav>
   </div>
 </aside>
