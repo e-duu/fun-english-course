@@ -6,7 +6,7 @@
 
 
 <div class="container-fluid px-7 sm:px-20 mt-10 sm:mt-16">
-  
+
   @if (session('failed'))
   <div class="grid mx-auto rounded-lg shadow-xl w-11/12 md:w-9/12 lg:w-1/2 mb-4">
     <div class="py-4 px-5 bg-blue-600 overflow-hidden rounded-lg shadow-xs items-center">
@@ -106,7 +106,7 @@
                 {{-- NOTE : PAYMENT BY MOOTA --}}
                 <a href="{{ route('spp-payment-detail', $data->id) }}">
                     <div class="rounded-full py-4 bg-blue-600 text-white font-bold text-xl text-center">
-                      <i class="fas fa-money-check"></i> 
+                      <i class="fas fa-money-check"></i>
                       @if ($data->status == 'pending')
                         Continue Payment
                       @else
@@ -131,7 +131,7 @@
 @endsection
 
 @push('after-script')
-<script src="https://www.paypal.com/sdk/js?client-id=AQyuDo4zlYjzWRDR9Qml4fd9xqx36ytYwAJ3DGSgQsR7mjN4vnX0QhDHqbHppR2xCZW56SFyIcPmMpjK&currency=USD" data-sdk-integration-source="button-factory"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=AVGe_Clbw8MyQC-AyvivdfBtQoeXKWEXdRbakt9dCGD6av_HLW8_wjxTs6MARf1mBQ-rVyvSF7AhHDnt&currency=USD" data-sdk-integration-source="button-factory"></script>
 <script>
   function initPayPalButton() {
     paypal.Buttons({
