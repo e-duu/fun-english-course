@@ -22,6 +22,7 @@ use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\SppController;
 use App\Http\Controllers\SppPaymentBankController;
 use App\Http\Controllers\SppPaymentController;
+use App\Http\Controllers\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -109,6 +110,12 @@ Route::middleware(['auth'])->group(function ()
 				Route::post('/enroll/delete', [LevelUserController::class, 'delete'])->name('enroll.delete');
 				Route::get('/manyEnroll', [LevelUserController::class, 'manyEnroll'])->name('manyEnroll');
 				Route::post('/manyEnroll/store', [LevelUserController::class, 'manyEnrollStore'])->name('manyEnroll.store');
+		});
+
+		Route::prefix('student')->group(function () {
+			Route::get('/all', [StudentController::class, 'index'])->name('student.all');
+			Route::get('/show/{id}', [StudentController::class, 'show'])->name('student.show');
+			Route::get('/show/student/{id}', [StudentController::class, 'sppStudent'])->name('student.show-spp');
 		});
 
 		Route::prefix('program')->group(function () {
