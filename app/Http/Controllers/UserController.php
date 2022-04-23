@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\UsersTemplate;
 use App\Imports\UsersImport;
+use App\Models\DetailUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -52,7 +53,11 @@ class UserController extends Controller
             'email' => 'required|email|unique:users,email',
             'role' => 'required',
             'password' => 'required|min:6|max:16',
-            'photo_file' => 'required'
+            'photo_file' => 'required',
+            'parent' => 'required',
+            'city' => 'required',
+            'country' => 'required',
+            'status' => 'required',
         ],
         [
             'name.required' => 'please input user name',
@@ -62,6 +67,10 @@ class UserController extends Controller
             'role.required' => 'please select the role',
             'photo_file.required' => 'please insert your profile photo',
             'password.required' => 'password must be at least 6 characters',
+            'parent.required' => 'please input user parent',
+            'city.required' => 'please input user city',
+            'country.required' => 'please input user country',
+            'status.required' => 'please input user status',
 
         ]);
 
@@ -71,7 +80,14 @@ class UserController extends Controller
         $request->merge([
             'photo' => $new_name_image
         ]);
-        User::create($request->all());
+        $user = User::create($request->all());
+        DetailUser::create([
+            'parent' => $request->parent,
+            'city' => $request->city,
+            'country' => $request->country,
+            'status' => $request->status,
+            'user_id' => $user->id,
+        ]);
         return redirect()->route('user.all');
     }
 

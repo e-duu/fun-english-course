@@ -23,7 +23,18 @@
       'name' => 'Student',
     ];
 
+    $active = [
+      'value' => 'active',
+      'name' => 'Active',
+    ];
+
+    $nonActive = [
+      'value' => 'non-active',
+      'name' => 'Non-active',
+    ];
+
     $roles = [$admin, $teacher, $student];
+    $statuses = [$active, $nonActive];
   @endphp
 
   <form action="{{ route('user.store') }}" method="POST" class="px-4 py-3 bg-white rounded-lg shadow-md dark:bg-gray-800" enctype="multipart/form-data">
@@ -38,6 +49,50 @@
         </div>
       @enderror
     </label>
+
+    <label class="block text-sm" style="margin-top: 20px">
+      <span class="text-gray-700 dark:text-gray-400">Parent</span>
+      <input type="text" name="parent" class="border w-full mt-1 text-sm border-gray-400  dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md" value="{{ old('parent') }}" placeholder="John Doe"/>
+      @error('parent')
+        <div class="mt-2 text-[red]">
+          <i class="fas fa-dot-circle"></i> {{ $message }}
+        </div>
+      @enderror
+    </label>
+    
+    <label class="block text-sm" style="margin-top: 20px">
+      <span class="text-gray-700 dark:text-gray-400">City</span>
+      <input type="text" name="city" class="border w-full mt-1 text-sm border-gray-400  dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md" value="{{ old('city') }}" placeholder="John Doe"/>
+      @error('city')
+        <div class="mt-2 text-[red]">
+          <i class="fas fa-dot-circle"></i> {{ $message }}
+        </div>
+      @enderror
+    </label>
+    
+    <label class="block text-sm" style="margin-top: 20px">
+      <span class="text-gray-700 dark:text-gray-400">Country</span>
+      <input type="text" name="country" class="border w-full mt-1 text-sm border-gray-400  dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md" value="{{ old('country') }}" placeholder="John Doe"/>
+      @error('country')
+        <div class="mt-2 text-[red]">
+          <i class="fas fa-dot-circle"></i> {{ $message }}
+        </div>
+      @enderror
+    </label>
+
+    <div class="mt-4 text-sm">
+      <span class="text-gray-700 dark:text-gray-400">
+        Status
+      </span>
+      <div class="mt-2">
+        @foreach ($statuses as $status)
+          <label class="inline-flex items-center text-gray-600 dark:text-gray-400 mr-4">
+            <input type="radio" class="text-blue-600 form-radio focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray" name="status" value="{{ $status['value'] }}" />
+            <span class="ml-2">{{ $status['name'] }}</span>
+          </label>
+        @endforeach
+      </div>
+    </div>
     
     <label class="block text-sm" style="margin-top: 20px">
       <span class="text-gray-700 dark:text-gray-400">Username</span>
