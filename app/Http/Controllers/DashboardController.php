@@ -20,12 +20,4 @@ class DashboardController extends Controller
 
         return view('pages.admin.dashboard', compact('studentCount', 'teacherCount' ,'programCount', 'paymentCount'));
     }
-
-    public function dashboardUser()
-    {
-        $auth = Auth::user()->id;
-        $data = SppMonth::where('user_id', $auth)->latest()->get();
-        $latest = SppMonth::where('user_id', $auth)->where('status', '!=', 'paid')->where('status', '!=', 'paid_manually')->latest()->first();
-        return view('pages.dashboard', compact('data', 'latest'));
-    }
 }

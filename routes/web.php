@@ -52,14 +52,13 @@ Route::middleware(['auth'])->group(function ()
 
 	// Payment
 	Route::get('/payment', [PaymentPageController::class, 'index'])->name('payment');
-	Route::post('/payment/store', [PaymentPageController::class, 'store'])->name('payment.store');
 
 	// Spp Payment
-	// Route::get('/spp-payment/{id}', [PaymentPageController::class, 'sppPayment'])->name('spp-payment');
-	// Route::post('/payment/store', [PaymentPageController::class, 'sppPaymentStore'])->name('spp-payment.store');
-	// Route::get('/spp-payment-detail/{id}', [PaymentPageController::class, 'sppPaymentDetail'])->name('spp-payment-detail');
-	// Route::get('/spp-payment-success', [PaymentPageController::class, 'sppPaymentSuccess'])->name('spp-payment-success');
-	// Route::get('/spp-payment-cancel/{id}', [PaymentPageController::class, 'sppPaymentCancel'])->name('spp-payment-cancel');
+	Route::get('/spp-payment/{id}', [PaymentPageController::class, 'sppPayment'])->name('spp-payment');
+	Route::post('/payment/store', [PaymentPageController::class, 'sppPaymentStore'])->name('spp-payment.store');
+	Route::get('/spp-payment-detail/{id}', [PaymentPageController::class, 'sppPaymentDetail'])->name('spp-payment-detail');
+	Route::get('/spp-payment-success', [PaymentPageController::class, 'sppPaymentSuccess'])->name('spp-payment-success');
+	Route::get('/spp-payment-cancel/{id}', [PaymentPageController::class, 'sppPaymentCancel'])->name('spp-payment-cancel');
 
 	// api notif push webhoox
 	// Route::get('/payment/webhook', [SppPaymentBankController::class, 'index'])->name('payment-webhook');
@@ -74,9 +73,6 @@ Route::middleware(['auth'])->group(function ()
 
 	// Logout
 	Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-	// Dashboard Student
-	// Route::get('/dashboard-student', [DashboardController::class, 'dashboardUser'])->name('dashboard.user');
 
 	Route::prefix('admin')->group(function () {
 
