@@ -18,7 +18,6 @@ class CreateDetailUsersTable extends Migration
             $table->string('parent');
             $table->string('city');
             $table->string('country');
-            $table->string('country');
             $table->foreignId('user_id');
             $table->timestamps();
         });
