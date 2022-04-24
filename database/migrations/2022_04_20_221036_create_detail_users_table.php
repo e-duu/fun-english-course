@@ -18,10 +18,7 @@ class CreateDetailUsersTable extends Migration
             $table->string('parent');
             $table->string('city');
             $table->string('country');
-<<<<<<< HEAD
-=======
             $table->enum('status', ['active', 'non-active']);
->>>>>>> 49b78fa847123423d0e9fd536598eab730999a4e
             $table->foreignId('user_id');
             $table->timestamps();
         });
