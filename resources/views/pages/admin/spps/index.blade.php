@@ -233,13 +233,6 @@
 @endsection
 
 @push('after-script')
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script language="javascript">
-        $("#checkAll").click(function () {
-            $('input:checkbox').not(this).prop('checked', this.checked);
-        });
-    </script>
-
   <script>
     if ({{ session()->has('send_invoice_to_mail') }}) {
       console.log('{{ session()->get("send_invoice_to_mail") }}')

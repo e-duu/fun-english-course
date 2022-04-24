@@ -35,15 +35,20 @@ class StudentController extends Controller
     public function show($id)
     {
         $data = Program::findorfail($id);
-        $levels = $data->levels()->paginate(10);
-        return view('pages.admin.students.detail', compact('data', 'levels'));
+        $levelsFt = Level::where('program_id', $id)->get();
+        if (request()->level == null) {
+            $levels = $data->levels()->paginate(10);
+        } else {
+            $levels = Level::where('id', request()->level)->paginate(1);
+        }
+        return view('pages.admin.students.detail', compact('data', 'levels', 'levelsFt'));
     }
-    
+
     public function sppStudent($id)
     {
         $data = Level::findOrFail($id);
         $spps = SppMonth::where('level_id', $id)->get();
-        
+
         return view('pages.admin.students.detail-student', compact('data', 'spps'));
     }
 
