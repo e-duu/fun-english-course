@@ -17,6 +17,9 @@ class CreateStudentsTable extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('spp_month_id');
+            $table->dateTime('date')->nullable();
+            $table->dateTime('dateEnd')->nullable();
+            $table->integer('code')->nullable();
             $table->timestamps();
         });
     }
