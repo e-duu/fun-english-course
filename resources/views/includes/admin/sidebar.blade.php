@@ -26,7 +26,7 @@
           </a>
         </div>
 
-        <!-- Spp Payment -->
+        {{-- <!-- Spp Payment -->
         <div x-data="{ isActive: false, open: false}">
           <!-- active & hover classes 'bg-primary-100 dark:bg-primary' -->
           <a
@@ -74,7 +74,7 @@
               Add Student Spp
             </a>
           </div>
-        </div>
+        </div> --}}
 
         <!-- Program -->
         <div x-data="{ isActive: false, open: false}">

@@ -7,8 +7,8 @@ Detail Students - {{ $data->name }}
 @endsection
 @section('content')
 
-<div class="float-right">
-  <a href="{{ route('student.show', $data->program_id) }}" class="px-5 py-1 bg-yellow-400 rounded-md font-semibold text-white">Back to Program</a>
+<div class="float-right mb-5">
+  <a href="{{ route('student.show', $data->program_id) }}" class="px-5 py-1 bg-yellow-400 rounded-md font-semibold text-white">Back to Level</a>
 </div>
 
 <div class="w-full overflow-hidden rounded-lg shadow-xs mt-4">
