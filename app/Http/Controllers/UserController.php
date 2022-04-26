@@ -81,13 +81,6 @@ class UserController extends Controller
             'photo' => $new_name_image
         ]);
         $user = User::create($request->all());
-        DetailUser::create([
-            'parent' => $request->parent,
-            'city' => $request->city,
-            'country' => $request->country,
-            'status' => $request->status,
-            'user_id' => $user->id,
-        ]);
         return redirect()->route('user.all');
     }
 

@@ -97,7 +97,7 @@
               </tr>
             @empty
               <tr>
-                <td colspan="7" class="text-center text-gray-500 px-4 py-3">
+                <td colspan="8" class="text-center text-gray-500 px-4 py-3">
                   <p>
                     Data is empty..
                   </p>

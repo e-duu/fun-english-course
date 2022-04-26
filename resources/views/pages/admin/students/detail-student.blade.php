@@ -7,7 +7,7 @@ Detail Students - {{ $data->name }}
 @endsection
 @section('content')
 
-<div class="flex item-center space-x-2">
+<div class="flex item-center justify-between space-x-2">
 	{{-- Modal Upload --}}
 	<div x-data="{ showModal : false }">
 		<!-- Button -->
@@ -71,11 +71,11 @@ Detail Students - {{ $data->name }}
             </div>
 		</div>
 	</div>
+  <div class="float-right mb-5">
+    <a href="{{ route('student.show', $data->program_id) }}" class="px-5 py-1 bg-yellow-400 rounded-md font-semibold text-white">Back to Level</a>
+  </div>
 </div>
 
-<div class="float-right mb-5">
-  <a href="{{ route('student.show', $data->program_id) }}" class="px-5 py-1 bg-yellow-400 rounded-md font-semibold text-white">Back to Level</a>
-</div>
 
 <div class="w-full overflow-hidden rounded-lg shadow-xs mt-4">
   <div class="w-full overflow-x-auto">
@@ -103,16 +103,16 @@ Detail Students - {{ $data->name }}
               {{ $item->student->name }}
             </td>
             <td class="px-4 py-3 text-sm">
-              {{ $item->student->detail->parent }}
+              {{ $item->student->parent }}
             </td>
             <td class="px-4 py-3 text-sm">
-              {{ $item->student->detail->city }}
+              {{ $item->student->city }}
             </td>
             <td class="px-4 py-3 text-sm">
-              {{ $item->student->detail->country }}
+              {{ $item->student->country }}
             </td>
             <td class="px-4 py-3 text-sm">
-              {{ $item->student->detail->status }}
+              {{ $item->student->status }}
             </td>
             <td class="px-4 py-3 text-sm">
               {{ $item->level->program->name }}
@@ -134,7 +134,7 @@ Detail Students - {{ $data->name }}
               {{ $item->status }}
             </td>
             <td class="px-4 py-3">
-                <a href="{{ route('user.edit', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                <a href="{{ route('user.edit', $item->student->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
                     <i class="fas fa-print"></i>
                     @if ($item->status == 'paid')
                         <p>Receipt</p>
