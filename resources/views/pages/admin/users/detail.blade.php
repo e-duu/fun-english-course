@@ -15,6 +15,10 @@
       <div class="flex-col space-y-3">
         <p class="text-sm sm:text-lg"><b> Name :</b> &nbsp;&nbsp; {{ $data->name }}</p>
         <p class="text-sm sm:text-lg"><b> Username :</b> &nbsp;&nbsp; {{ $data->username }}</p>
+        <p class="text-sm sm:text-lg"><b> Parent :</b> &nbsp;&nbsp; {{ $data->parent }}</p>
+        <p class="text-sm sm:text-lg"><b> City :</b> &nbsp;&nbsp; {{ $data->city }}</p>
+        <p class="text-sm sm:text-lg"><b> Country :</b> &nbsp;&nbsp; {{ $data->country }}</p>
+        <p class="text-sm sm:text-lg"><b> Status :</b> &nbsp;&nbsp; {{ $data->status }}</p>
         <p class="text-sm sm:text-lg"><b> Role :</b> &nbsp;&nbsp; {{ $data->role }}</p>
         <p class="text-sm sm:text-lg"><b> Email :</b> &nbsp;&nbsp; {{ $data->email }}</p>
         <p class="text-sm sm:text-lg"><b> Enroll in Levels :</b></p>

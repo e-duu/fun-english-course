@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AccountBank;
-use App\Models\SppMonth;
+use App\Models\Student;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,13 +12,13 @@ class PaymentPageController extends Controller
     public function index()
     {
         $auth = Auth::user()->id;
-        $data = SppMonth::where('user_id', $auth)->latest()->get();
+        $data = Student::where('user_id', $auth)->latest()->get();
         return view('pages.payment', compact('data'));
     }
 
     public function sppPayment($id)
     {
-        $data = SppMonth::findOrFail($id);
+        $data = Student::findOrFail($id);
         return view('pages.sppPayment', compact('data'));
     }
 
@@ -30,13 +30,13 @@ class PaymentPageController extends Controller
     //  */
     // public function sppPaymentStore(Request $request)
     // {
-    //     SppMonth::create($request->all());
+    //     Student::create($request->all());
     //     return redirect()->route('resource');
     // }
 
     public function sppPaymentDetail($id)
     {
-        $data = SppMonth::findOrFail($id);
+        $data = Student::findOrFail($id);
         $account_banks = AccountBank::get();
 
 
@@ -65,7 +65,7 @@ class PaymentPageController extends Controller
 
     public function sppPaymentCancel($id)
     {
-        $data = SppMonth::findOrFail($id);
+        $data = Student::findOrFail($id);
 
         $data->update([
             'status' => 'unpaid',
@@ -78,7 +78,7 @@ class PaymentPageController extends Controller
 
     public function sppPaymentSuccess()
     {
-        // $data = SppMonth::findOrFail($id);
+        // $data = Student::findOrFail($id);
         return view('pages.paymentSuccess');
     }
 
