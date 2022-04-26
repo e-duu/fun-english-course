@@ -14,10 +14,29 @@ use Illuminate\Support\Facades\Mail;
 
 class SppController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $data = SppMonth::paginate(5);
-        return view('pages.admin.spps.index', compact('data'));
+        $levelFt = $request->level;
+        $levels = Level::all();
+        if ($levelFt != null) {
+            $data = SppMonth::whereHas('level', function($query){
+                $query->where('id', request()->level);
+            })->paginate(5);
+            $filter = $levelFt;
+            $students = SppMonth::whereHas('level', function($query){
+                $query->where('id', request()->level);
+            })->get();
+        } else {
+            $data = SppMonth::paginate(5);
+            $filter = null;
+            $students = SppMonth::get();
+        }
+        return view('pages.admin.spps.index', compact(
+            'data',
+            'filter',
+            'levels',
+            'students',
+        ));
     }
 
     public function create()
