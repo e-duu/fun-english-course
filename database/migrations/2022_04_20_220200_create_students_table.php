@@ -15,8 +15,14 @@ class CreateStudentsTable extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
+            $table->integer('month');
+            $table->enum('status', ['paid', 'unpaid', 'paid_manually', 'pending','failed'])->default('unpaid');
+            $table->bigInteger('price');
+            $table->dateTime('date')->nullable();
+            $table->dateTime('dateEnd')->nullable();
+            $table->integer('code')->nullable();
             $table->foreignId('user_id');
-            $table->foreignId('spp_month_id');
+            $table->foreignId('level_id');
             $table->timestamps();
         });
     }
