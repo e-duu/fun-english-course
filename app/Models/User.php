@@ -23,8 +23,12 @@ class User extends Authenticatable
         'role',
         'email',
         'photo',
+        'parent',
+        'city',
+        'country',
+        'status',
     ];
-    
+
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);
@@ -37,7 +41,7 @@ class User extends Authenticatable
 
     public function levels()
     {
-        return $this->belongsToMany(Level::class);  
+        return $this->belongsToMany(Level::class);
     }
 
     public function scores()
