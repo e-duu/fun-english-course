@@ -92,6 +92,7 @@ Detail Students - {{ $data->name }}
             <th class="px-4 py-3">Currency</th>
             <th class="px-4 py-3">Price</th>
             <th class="px-4 py-3">Status Payment</th>
+            <th class="px-4 py-3">Action</th>
         </tr>
       </thead>
       <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-darker">
@@ -132,11 +133,25 @@ Detail Students - {{ $data->name }}
             <td class="px-4 py-3 text-sm">
               {{ $item->status }}
             </td>
+            <td class="px-4 py-3">
+                <a href="{{ route('user.edit', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                    <i class="fas fa-print"></i>
+                    @if ($item->status == 'paid')
+                        <p>Receipt</p>
+                    @elseif ($item->status == 'paid_manually')
+                        <p>Receipt</p>
+                    @elseif ($item->status == 'unpaid')
+                        <p>Invoice</p>
+                    @elseif ($item->status == 'pending')
+                        <p>Invoice</p>
+                    @endif
+                </a>
+            </td>
 
           </tr>
         @empty
           <tr>
-            <td colspan="10" class="text-center text-gray-500 px-4 py-3">
+            <td colspan="11" class="text-center text-gray-500 px-4 py-3">
               <p>
                 Data is empty..
               </p>
