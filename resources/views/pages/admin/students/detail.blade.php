@@ -7,7 +7,7 @@ Detail Programs - {{ $data->name }}
 @endsection
 @section('content')
 
-<div class="flex item-center space-x-2">
+<div class="flex item-center justify-between space-x-2">
     {{-- Modal Filter --}}
     <div x-data="{ showModal : false }">
         <!-- Button -->
@@ -47,11 +47,11 @@ Detail Programs - {{ $data->name }}
             </div>
         </div>
     </div>
+    <div class="float-right mb-5">
+      <a href="{{ route('student.all') }}" class="px-5 py-1 bg-yellow-400 rounded-md font-semibold text-white">Back to Program</a>
+    </div>
 </div>
 
-<div class="float-right mb-5">
-  <a href="{{ route('student.all') }}" class="px-5 py-1 bg-yellow-400 rounded-md font-semibold text-white">Back to Program</a>
-</div>
 
 <div class="w-full overflow-hidden rounded-lg shadow-xs mt-4">
   <div class="w-full overflow-x-auto">

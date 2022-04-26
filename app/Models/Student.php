@@ -12,17 +12,33 @@ class Student extends Model
     protected $table = 'students';
 
     protected $fillable = [
+        'month',
+        'price',
+        'status',
+        'code',
+        'date',
+        'dateEnd',
         'user_id',
-        'spp_month_id'
+        'level_id',
     ];
 
-    public function user()
+    public function student()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function sppMonth()
+    public function level()
     {
-        return $this->belongsTo(SppMonth::class, 'spp_month_id', 'id');
+        return $this->belongsTo(Level::class, 'level_id', 'id');
+    }
+
+    public function sppPayment()
+    {
+        return $this->belongsTo(SppPayment::class, 'id', 'spp_month_id');
+    }
+
+    public function sppPaymentBank()
+    {
+        return $this->belongsTo(SppPaymentBank::class);
     }
 }
