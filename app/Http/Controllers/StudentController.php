@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\InvoiceMail;
 use App\Models\Level;
+use App\Models\LevelUser;
 use App\Models\Program;
 use App\Models\SppMonth;
 use App\Models\Student;
@@ -13,29 +14,48 @@ use Illuminate\Support\Facades\Mail;
 
 class StudentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $data = Program::paginate(10);
-        return view('pages.admin.students.index', compact('data'));
+        $users = User::where('role', 'student')->get();
+        $levelUsers = LevelUser::with(['level'])->get();
+        $levels = Level::get();
+
+        return view('pages.admin.students.index', compact('data', 'users', 'levelUsers', 'levels'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'month' => 'required|max:255',
+            'price' => 'required',
+            'user_id' => 'required',
+            'level_id' => 'required',
+            'code' => 'nullable',
+            'date' => 'nullable',
+            'dateEnd' => 'nullable',
+        ],
+        [
+            'month.required' => 'please input recipient month',
+            'price.required' => 'please input recipient price',
+            'user_id.required' => 'please input recipient student',
+            'level_id.required' => 'please input recipient level',
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+        $code = mt_rand(1,999);
+        // dd($code);
+
+        Student::create([
+            'month' => $request->month,
+            'price' => $request->price,
+            'code' => $code,
+            'user_id' => $request->user_id,
+            'level_id' => $request->level_id,
+            'status' => 'unpaid',
+        ]);
+        return redirect()->route('student.show-spp', $request->level_id);
+    }
+
     public function show($id)
     {
         $data = Program::findorfail($id);
@@ -51,7 +71,7 @@ class StudentController extends Controller
     public function sppStudent($id)
     {
         $data = Level::findOrFail($id);
-        $spps = Student::where('level_id', $id)->get();
+        $spps = Student::get();
 
         return view('pages.admin.students.detail-student', compact('data', 'spps'));
     }

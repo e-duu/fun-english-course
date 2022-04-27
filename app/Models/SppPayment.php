@@ -16,7 +16,7 @@ class SppPayment extends Model
         'currency',
         'orderId',
         'user_id',
-        'spp_month_id',
+        'student_id',
     ];
 
     public function user()

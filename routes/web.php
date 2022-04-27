@@ -79,7 +79,7 @@ Route::middleware(['auth'])->group(function ()
 
 		// Dashboard
 		Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('admin');
-		
+
 		// Invoice & Receipt
 		Route::get('/invoice', [InvoiceController::class, 'invoice'])->name('invoice');
 		Route::get('/receipt', [InvoiceController::class, 'receipt'])->name('receipt');
@@ -114,6 +114,7 @@ Route::middleware(['auth'])->group(function ()
 
 		Route::prefix('student')->group(function () {
 			Route::get('/all', [StudentController::class, 'index'])->name('student.all');
+			Route::post('/store', [StudentController::class, 'store'])->name('student.store');
 			Route::get('/show/{id}', [StudentController::class, 'show'])->name('student.show');
 			Route::get('/show/student/{id}', [StudentController::class, 'sppStudent'])->name('student.show-spp');
 		});
