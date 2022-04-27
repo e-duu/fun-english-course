@@ -106,6 +106,7 @@
 		<tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
 			<th class="px-4 py-3">Photo</th>
 			<th class="px-4 py-3">Name</th>
+			<th class="px-4 py-3">Status</th>
 			<th class="px-4 py-3">Email</th>
 			<th class="px-4 py-3">Role</th>
 			<th class="px-4 py-3">Actions</th>
@@ -126,6 +127,17 @@
 					</td>
 					<td class="px-4 py-3 text-sm">
 						{{ $item->role }}
+					</td>
+					<td class="px-4 py-3 text-sm">
+						<div class="font-semibold uppercase p-[1px] rounded-lg @if($item->status == 'paid') bg-green-500 @elseif ($item->status == 'active') bg-green-500 @elseif ($item->status == 'non-active') bg-red-500 @endif">
+							<p class="text-white text-center">
+								@if ($item->status == 'active')
+										ACTIVE
+								@elseif ($item->status == 'non-active')
+										NON-ACTIVE
+								@endif
+							</p>
+						</div>
 					</td>
 					<td class="px-4 py-3">
 					<div class="flex items-center space-x-4 text-sm">
