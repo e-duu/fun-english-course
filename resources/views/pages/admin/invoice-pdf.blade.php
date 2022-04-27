@@ -18,13 +18,14 @@
         src: url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap') format("truetype");
     }
     h1 {
-      text-align: end;
+      text-align: right;
       padding: 20px 30px;
       background-color: #1E3E97;
       color: #fff;
+      margin: 0px;
     }
     .content{
-      margin: 40px 100px;
+      margin: 20px 60px;
     }
     .logo {
       display: flex;
@@ -73,6 +74,18 @@
       background-color: #1E3E97;
       color: white;
     }
+
+    #table2 {
+      font-family: Arial, Helvetica, sans-serif;
+      width: 100%;
+    }
+
+    #table2 td {
+      text-transform: capitalize;
+      color: #1E3E97;
+      font-weight: bold;
+    }
+
   </style>
 </head>
 <body>
@@ -80,26 +93,61 @@
     <h1>INVOICE</h1>
   </div>
   <div class="content">
+    <table style="width: 100%">
+      <tr>
+        <td>
+          <img src="{{ public_path('/images/edge-logo.png') }}" style="height: 80px">
+        </td>
+        <td style="text-align: right">
+          <img src="{{ public_path('/images/logo.png') }}" style="height: 80px">
+        </td>
+      </tr>
+    </table>
     <div class="logo">
-      <img src="{{ public_path('/images/edge-logo.png') }}">
-      <img src="{{ public_path('/images/logo.png') }}">
     </div>
-    <div style="margin-top: 50px;">
-      <h3 style="color: #1E3E97;">BILLED TO:</h3>
-      <div class="flex">
-        <p>Parent's Name :&nbsp;&nbsp; Abdurrahman Huaidi</p>
-        <p>Invoice Number :&nbsp;&nbsp; INV-2020124556</p>
-      </div>
-      <div class="flex">
-        <p>Student's Name :&nbsp;&nbsp; Ramadhan Tri Nurdias</p>
-        <p>Invoice Date :&nbsp;&nbsp; 12 - 12 - 2021</p>
-      </div>
-      <div class="flex">
-        <p>City of Residence :&nbsp;&nbsp; Jakarta</p>
-        <p>Due Date :&nbsp;&nbsp; 19 - 19 - 19</p>
-      </div>
-      <p>Country of Residence :&nbsp;&nbsp; Indognesia</p>
-      <p>Email Address :&nbsp;&nbsp; ramangart2@gmail.com</p>
+    <div style="margin-top: 30px;">
+      <h3 style="color: #1E3E97; padding-left: 2px">BILLED TO :</h3>
+      <table id="table2">
+        <tbody>   
+          <tr>
+            <td>Parent's Name</td>
+            <td>:</td>
+            <td>{{  $data->student->parent }}</td>
+            <td></td>
+            <td>Invoice Number</td>
+            <td>:</td>
+            <td>INV-{{ $data->created_at->format('Ymd') }}</td>
+          </tr>
+          <tr>
+            <td>Student's Name</td>
+            <td>:</td>
+            <td>{{  $data->student->name }}</td>
+            <td></td>
+            <td>Invoice Date</td>
+            <td>:</td>
+            <td>{{ $data->created_at->format('d-m-Y') }}</td>
+          </tr>
+          <tr>
+            <td>City of Residence</td>
+            <td>:</td>
+            <td>{{  $data->student->city }}</td>
+            <td></td>
+            <td>Due Date</td>
+            <td>:</td>
+            <td>{{ $data->created_at->format('d-m-Y') }}</td>
+          </tr>
+          <tr>
+            <td>Country of Residence</td>
+            <td>:</td>
+            <td colspan="4">{{  $data->student->country }}</td>
+          </tr>
+          <tr>
+            <td>Email Address</td>
+            <td>:</td>
+            <td colspan="4" style="text-transform: none">{{  $data->student->email }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
     <table id="table">
       <thead>
@@ -113,11 +161,11 @@
       </thead>
       <tbody>   
         <tr>
-          <td>Program</td>
-          <td>Description</td>
-          <td>Unit Price</td>
-          <td>Quantity</td>
-          <td>Amount</td>
+          <td>{{ $data->level->program->name.' - '.$data->level->name }}</td>
+          <td>-</td>
+          <td>{{ number_format($data->price) }}</td>
+          <td>{{ $data->count() }}</td>
+          <td>{{ number_format($data->price) }}</td>
         </tr>
       </tbody>
       <tfoot>   
@@ -126,7 +174,7 @@
           <th></th>
           <th></th>
           <th>Total</th>
-          <th></th>
+          <th>{{ number_format($data->price) }}</th>
         </tr>
       </tfoot>
     </table>

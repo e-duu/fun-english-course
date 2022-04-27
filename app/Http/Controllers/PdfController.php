@@ -14,7 +14,7 @@ class PdfController extends Controller
 
         $data = Student::find($id);
         
-        $pdf = PDF::loadView('pages.admin.invoice', ['data' => $data]);
+        $pdf = PDF::loadView('pages.admin.invoice-pdf', ['data' => $data]);
         $pdf->setPaper('A4', 'landscape');
         
         return $pdf->download('invoice.pdf');
@@ -26,7 +26,7 @@ class PdfController extends Controller
 
         $data = Student::find($id);
         
-        $pdf = PDF::loadView('pages.admin.receipt', ['data' => $data]);
+        $pdf = PDF::loadView('pages.admin.receipt-pdf', ['data' => $data]);
         $pdf->setPaper('A4', 'landscape');
         
         return $pdf->download('receipt.pdf');
