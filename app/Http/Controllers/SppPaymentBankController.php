@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SppMonth;
 use App\Models\SppPaymentBank;
+use App\Models\Student;
 use Carbon\Carbon;
 use DateTime;
 use Hamcrest\Core\HasToString;
@@ -44,7 +44,7 @@ class SppPaymentBankController extends Controller
                 // dd($data);
 
 
-                $spp = SppMonth::where('date', '>=', date('Y-m-d 00:00:00'))->where('status', 'pending')->where('code', $unique_code)->first();
+                $spp = Student::where('date', '>=', date('Y-m-d 00:00:00'))->where('status', 'pending')->where('code', $unique_code)->first();
                 // dd($spp);
                 
                 $store = SppPaymentBank::create([
@@ -77,7 +77,7 @@ class SppPaymentBankController extends Controller
     {
         $tgl = date('Y-m-d 00:00:00');
 
-        $query = SppMonth::where('date', '>=', $tgl)->where('code', $data);
+        $query = Student::where('date', '>=', $tgl)->where('code', $data);
         
         return $query->row();
     }

@@ -133,21 +133,22 @@ Detail Students - {{ $data->name }}
               {{ number_format($item->price, 0, ',', ',') }}
             </td>
             <td class="px-4 py-3 text-sm">
-              {{ $item->status }}
+              <p class="rounded text-center font-bold text-white py-1 bold @if($item->status == 'paid') bg-green-500 @elseif ($item->status == 'paid_manually') bg-green-500 @elseif ($item->status == 'unpaid') bg-red-500 @elseif ($item->status == 'pending') bg-yellow-500 @endif">
+                {{ $item->status }}
+              </p>
             </td>
             <td class="px-4 py-3">
-                <a href="{{ route('user.edit', $item->student->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
-                    <i class="fas fa-print"></i>
-                    @if ($item->status == 'paid')
-                        <p>Receipt</p>
-                    @elseif ($item->status == 'paid_manually')
-                        <p>Receipt</p>
-                    @elseif ($item->status == 'unpaid')
-                        <p>Invoice</p>
-                    @elseif ($item->status == 'pending')
-                        <p>Invoice</p>
-                    @endif
+              @if ($item->status == 'paid' or $item->status == 'paid_manually')
+                <a href="{{ route('receipt', $item->id) }}" class="flex-col text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                  <i class="fas fa-print"></i>
+                  <p>Receipt</p>
                 </a>
+              @elseif ($item->status == 'unpaid' or $item->status == 'pending')
+                <a href="{{ route('invoice', $item->id) }}" class="flex-col text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                  <i class="fas fa-print"></i>
+                  <p>Invoice</p>
+                </a>
+              @endif
             </td>
 
           </tr>

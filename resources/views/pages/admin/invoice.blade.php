@@ -7,7 +7,7 @@
   @include('includes.style')
   <title>Fun English Course | Invoice</title>
 </head>
-<body class="bg-[#f0f0f0]">
+<body class="bg-[#e0e0e0]">
   <div class="container-fluid">
     <div class="bg-[#1e3e97] px-32 py-5">
       <h1 class="text-white font-bold text-right text-3xl uppercase">Invoice</h1>
@@ -21,19 +21,19 @@
         <div class="flex-col">
           <p class="text-blue-700 font-bold text-lg mb-5">BILLED TO : </p>
           <div class="flex justify-between items-center">
-            <p class="text-blue-700 font-bold">Parent's Name :&nbsp;&nbsp; Abdurrahman Huaidi</p>
-            <p class="text-blue-700 font-bold">Invoice Number :&nbsp;&nbsp; INV-2020124556</p>
+            <p class="text-blue-700 font-bold">Parent's Name :</p>
+            <p class="text-blue-700 font-bold">Invoice Number :</p>
           </div>
           <div class="flex justify-between items-center">
-            <p class="text-blue-700 font-bold">Student's Name :&nbsp;&nbsp; Ramadhan Tri Nurdias</p>
-            <p class="text-blue-700 font-bold">Invoice Date :&nbsp;&nbsp; 12 - 12 - 2021</p>
+            <p class="text-blue-700 font-bold">Student's Name :</p>
+            <p class="text-blue-700 font-bold">Invoice Date :</p>
           </div>
           <div class="flex justify-between items-center">
-            <p class="text-blue-700 font-bold">City of Residence :&nbsp;&nbsp; Jakarta</p>
-            <p class="text-blue-700 font-bold">Due Date :&nbsp;&nbsp; 19 - 19 - 19</p>
+            <p class="text-blue-700 font-bold">City of Residence :</p>
+            <p class="text-blue-700 font-bold">Due Date :</p>
           </div>
-          <p class="text-blue-700 font-bold">Country of Residence :&nbsp;&nbsp; Indognesia</p>
-          <p class="text-blue-700 font-bold">Email Address :&nbsp;&nbsp; ramangart2@gmail.com</p>
+          <p class="text-blue-700 font-bold">Country of Residence :</p>
+          <p class="text-blue-700 font-bold">Email Address :</p>
           <div class="w-full overflow-hidden rounded-sm shadow-xs mt-5 mb-10">
             <div class="w-full overflow-x-auto">
               <table class="w-full whitespace-no-wrap">
