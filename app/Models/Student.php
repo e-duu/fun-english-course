@@ -11,6 +11,8 @@ class Student extends Model
 
     protected $table = 'students';
 
+    protected $dates = ['date', 'dateEnd'];
+
     protected $fillable = [
         'month',
         'price',
