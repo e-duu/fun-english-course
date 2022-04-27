@@ -18,6 +18,7 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\LevelUserController;
 use App\Http\Controllers\MootaController;
 use App\Http\Controllers\PaymentPageController;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\SppController;
 use App\Http\Controllers\SppPaymentBankController;
@@ -74,15 +75,21 @@ Route::middleware(['auth'])->group(function ()
 
 	// Logout
 	Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+	
+	// Download pdf
+	Route::get('download/invoice/{id}', [PdfController::class, 'downloadInvoice'])->name('invoice');
+	Route::get('download/receipt/{id}', [PdfController::class, 'downloadReceipt'])->name('receipt');
 
 	Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
+
+		
 		// Dashboard
 		Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('admin');
 		
-		// Invoice & Receipt
-		Route::get('/invoice', [InvoiceController::class, 'invoice'])->name('invoice');
-		Route::get('/receipt', [InvoiceController::class, 'receipt'])->name('receipt');
+		// // Invoice & Receipt
+		// Route::get('/invoice', [InvoiceController::class, 'invoice'])->name('invoice');
+		// Route::get('/receipt', [InvoiceController::class, 'receipt'])->name('receipt');
 
 		// Score
 		Route::get('/score/all', [ExerciseController::class, 'score_all'])->name('score.all');

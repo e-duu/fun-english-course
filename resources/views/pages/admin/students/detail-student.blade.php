@@ -134,18 +134,17 @@ Detail Students - {{ $data->name }}
               {{ $item->status }}
             </td>
             <td class="px-4 py-3">
-                <a href="{{ route('user.edit', $item->student->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
-                    <i class="fas fa-print"></i>
-                    @if ($item->status == 'paid')
-                        <p>Receipt</p>
-                    @elseif ($item->status == 'paid_manually')
-                        <p>Receipt</p>
-                    @elseif ($item->status == 'unpaid')
-                        <p>Invoice</p>
-                    @elseif ($item->status == 'pending')
-                        <p>Invoice</p>
-                    @endif
+              @if ($item->status == 'paid' or $item->status == 'paid_manually')
+                <a href="{{ route('receipt', $item->id) }}" class="flex-col text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                  <i class="fas fa-print"></i>
+                  <p>Receipt</p>
                 </a>
+              @elseif ($item->status == 'unpaid' or $item->status == 'pending')
+                <a href="{{ route('invoice', $item->id) }}" class="flex-col text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                  <i class="fas fa-print"></i>
+                  <p>Invoice</p>
+                </a>
+              @endif
             </td>
 
           </tr>
