@@ -30,19 +30,19 @@
           </p>
         </div>
         <div class="grid grid-cols-2 my-4 items-center">
-          <p class="text-md text-gray-700">Student Name</p>
+          <p class="text-md text-gray-700">Parent Name</p>
           <p class="font-semibold text-lg text-gray-700 text-right">
             {{ Auth::user()->parent }}
           </p>
         </div>
         <div class="grid grid-cols-2 my-4 items-center">
-          <p class="text-md text-gray-700">Student Name</p>
+          <p class="text-md text-gray-700">City</p>
           <p class="font-semibold text-lg text-gray-700 text-right">
             {{ Auth::user()->city }}
           </p>
         </div>
         <div class="grid grid-cols-2 my-4 items-center">
-          <p class="text-md text-gray-700">Student Name</p>
+          <p class="text-md text-gray-700">Country</p>
           <p class="font-semibold text-lg text-gray-700 text-right">
             {{ Auth::user()->country }}
           </p>

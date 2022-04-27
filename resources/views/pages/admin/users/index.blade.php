@@ -123,12 +123,6 @@
 						{{ $item->name }}
 					</td>
 					<td class="px-4 py-3 text-sm">
-						{{ $item->email }}
-					</td>
-					<td class="px-4 py-3 text-sm">
-						{{ $item->role }}
-					</td>
-					<td class="px-4 py-3 text-sm">
 						<div class="font-semibold uppercase p-[1px] rounded-lg @if($item->status == 'paid') bg-green-500 @elseif ($item->status == 'active') bg-green-500 @elseif ($item->status == 'non-active') bg-red-500 @endif">
 							<p class="text-white text-center">
 								@if ($item->status == 'active')
@@ -138,6 +132,12 @@
 								@endif
 							</p>
 						</div>
+					</td>
+					<td class="px-4 py-3 text-sm">
+						{{ $item->email }}
+					</td>
+					<td class="px-4 py-3 text-sm">
+						{{ $item->role }}
 					</td>
 					<td class="px-4 py-3">
 					<div class="flex items-center space-x-4 text-sm">

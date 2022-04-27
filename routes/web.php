@@ -86,17 +86,10 @@ Route::middleware(['auth'])->group(function ()
 		
 		// Dashboard
 		Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('admin');
-<<<<<<< HEAD
-
-		// Invoice & Receipt
-		Route::get('/invoice', [InvoiceController::class, 'invoice'])->name('invoice');
-		Route::get('/receipt', [InvoiceController::class, 'receipt'])->name('receipt');
-=======
 		
 		// // Invoice & Receipt
 		// Route::get('/invoice', [InvoiceController::class, 'invoice'])->name('invoice');
 		// Route::get('/receipt', [InvoiceController::class, 'receipt'])->name('receipt');
->>>>>>> 387e85a3dd3db53377b4288713f906f0c85e1270
 
 		// Score
 		Route::get('/score/all', [ExerciseController::class, 'score_all'])->name('score.all');
