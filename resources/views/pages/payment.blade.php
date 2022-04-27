@@ -24,7 +24,7 @@
             @forelse ($data as $item)
               <tr class="text-gray-700 dark:text-gray-400">
                 <td class="px-4 py-3 text-sm">
-                  John Due
+                  {{ $item->student->parent }}
                 </td>
                 <td class="px-4 py-3 text-sm">
                   {{ $item->student->name }}

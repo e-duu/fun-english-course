@@ -131,7 +131,9 @@ Detail Students - {{ $data->name }}
               {{ number_format($item->price, 0, ',', ',') }}
             </td>
             <td class="px-4 py-3 text-sm">
-              {{ $item->status }}
+              <p class="rounded text-center font-bold text-white py-1 bold @if($item->status == 'paid') bg-green-500 @elseif ($item->status == 'paid_manually') bg-green-500 @elseif ($item->status == 'unpaid') bg-red-500 @elseif ($item->status == 'pending') bg-yellow-500 @endif">
+                {{ $item->status }}
+              </p>
             </td>
             <td class="px-4 py-3">
               @if ($item->status == 'paid' or $item->status == 'paid_manually')
