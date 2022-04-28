@@ -46,7 +46,7 @@
                 </div>
 
                 <div class="flex-col mx-10">
-                    <form id="currency" method="POST" action="{{ route('spp.pay-manually.prosses', $data->id) }}">
+                    <form id="currency" method="POST" action="{{ route('pay.manually.prosses', $data->id) }}">
                         @csrf
                         @method('POST')
                         <input type="hidden" value="{{$data->price}}" name="IDR">

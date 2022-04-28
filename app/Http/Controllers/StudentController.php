@@ -6,7 +6,6 @@ use App\Mail\InvoiceMail;
 use App\Models\Level;
 use App\Models\LevelUser;
 use App\Models\Program;
-use App\Models\SppMonth;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -76,17 +75,17 @@ class StudentController extends Controller
         return view('pages.admin.students.detail-student', compact('data', 'spps'));
     }
 
-    public function sppInvoiceMail($userId, $sppMonthId)
+    public function sppInvoiceMail($userId, $studentId)
     {
         $user = User::findOrFail($userId);
-        $sppMonth = Student::findOrFail($sppMonthId);
+        $student = Student::findOrFail($studentId);
 
         Mail::to($user->email)->send(new InvoiceMail(
             $user,
             $user->detail,
-            $sppMonth,
-            $sppMonth->level->program,
-            $sppMonth->level,
+            $student,
+            $student->level->program,
+            $student->level,
         ));
 
         return back()->with('send_invoice_to_mail', 'Invoice berhasil diunggah kepada '.$user->email);

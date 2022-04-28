@@ -16,8 +16,8 @@ class ResourceController extends Controller
         $programs = Program::get();
         $levels = Level::get();
         $lessons = Lesson::get();
-        $spps = Student::where('user_id', auth()->user()->id)->latest()->get();
-        return view('pages.home', compact('programs', 'levels', 'lessons', 'spps'));
+        $spp = Student::where('user_id', auth()->user()->id)->latest()->first();
+        return view('pages.home', compact('programs', 'levels', 'lessons', 'spp'));
     }
 
     public function detail(Request $request, $slug)

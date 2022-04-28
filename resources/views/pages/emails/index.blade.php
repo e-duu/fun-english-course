@@ -37,6 +37,9 @@
                 <td>
                     <div class="column-text">
                         <p class="text-bold">Student Name </p>
+                        <p class="text-bold">Parent Name</p>
+                        <p class="text-bold">City </p>
+                        <p class="text-bold">Country</p>
                         <p class="text-bold">Month</p>
                         <p class="text-bold">Program </p>
                         <p class="text-bold">Level </p>
@@ -48,36 +51,39 @@
                 <td>
                     <div class="column-text">
                         <p class="">: {{$user->name}}</p>
+                        <p class="">: {{$user->parent}}</p>
+                        <p class="">: {{$user->city}}</p>
+                        <p class="">: {{$user->country}}</p>
                         <p class="">:
-                            @if ($sppMonth->month == 1)
+                            @if ($student->month == 1)
                                 January
-                            @elseif ($sppMonth->month == 2)
+                            @elseif ($student->month == 2)
                                 February
-                            @elseif ($sppMonth->month == 3)
+                            @elseif ($student->month == 3)
                                 March
-                            @elseif ($sppMonth->month == 4)
+                            @elseif ($student->month == 4)
                                 April
-                            @elseif ($sppMonth->month == 5)
+                            @elseif ($student->month == 5)
                                 May
-                            @elseif ($sppMonth->month == 6)
+                            @elseif ($student->month == 6)
                                 June
-                            @elseif ($sppMonth->month == 7)
+                            @elseif ($student->month == 7)
                                 July
-                            @elseif ($sppMonth->month == 8)
+                            @elseif ($student->month == 8)
                                 August
-                            @elseif ($sppMonth->month == 9)
+                            @elseif ($student->month == 9)
                                 September
-                            @elseif ($sppMonth->month == 10)
+                            @elseif ($student->month == 10)
                                 October
-                            @elseif ($sppMonth->month == 11)
+                            @elseif ($student->month == 11)
                                 November
-                            @elseif ($sppMonth->month == 12)
+                            @elseif ($student->month == 12)
                                 December
                             @endif
                         </p>
                         <p class="">: {{$program->name}}</p>
                         <p class="">: {{$level->name}}</p>
-                        <p class="">: {{$sppMonth->status}}</p>
+                        <p class="">: {{$student->status}}</p>
                         <p class="">: {{'USD'}}</p>
                         <p class="">: {{'$'.$sppPayment->amount}}</p>
                     </div>
@@ -100,6 +106,17 @@
                     <div class="column-text">
                         <p class="text-bold">Thank You.</p>
                     </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table bgcolor="#e05443" border="0" cellspacing="0" cellpadding="0">
+                      <tr>
+                        <td class="button" style="padding: 0 20px 0 20px; font-size: 14px; font-weight: bold; font-family: sans-serif; text-align: center;" height="45">
+                          <a style="text-decoration: none; color: #fff;" href="{{route('receipt', $student->id)}}">Show Receipt</a>
+                        </td>
+                      </tr>
+                    </table>
                 </td>
             </tr>
         </table>

@@ -36,7 +36,7 @@ class Student extends Model
 
     public function sppPayment()
     {
-        return $this->belongsTo(SppPayment::class, 'id', 'spp_month_id');
+        return $this->belongsTo(SppPayment::class, 'id', 'student_id');
     }
 
     public function sppPaymentBank()

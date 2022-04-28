@@ -4,8 +4,8 @@ namespace App\Mail;
 
 use App\Models\Level;
 use App\Models\Program;
-use App\Models\SppMonth;
 use App\Models\SppPayment;
+use App\Models\Student;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -16,7 +16,7 @@ class MyMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $sppMonth;
+    public $student;
     public $sppPayment;
     public $program;
     public $level;
@@ -27,9 +27,9 @@ class MyMail extends Mailable
      *
      * @return void
      */
-    public function __construct(SppMonth $sppMonth, SppPayment $sppPayment, Program $program, Level $level, User $user)
+    public function __construct(Student $student, SppPayment $sppPayment, Program $program, Level $level, User $user)
     {
-        $this->sppMonth = $sppMonth;
+        $this->student = $student;
         $this->sppPayment = $sppPayment;
         $this->program = $program;
         $this->level = $level;
@@ -44,7 +44,7 @@ class MyMail extends Mailable
     public function build()
     {
         return $this->subject('Info Payment (fun english courses)')->markdown('pages.emails.index')->with([
-            'sppMonth', $this->sppMonth,
+            'student', $this->student,
             'sppPayment', $this->sppPayment,
             'user', $this->user,
             'program', $this->program,

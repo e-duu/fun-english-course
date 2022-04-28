@@ -123,14 +123,14 @@ Detail Students - {{ $data->name }}
               {{ $item->level->name }}
             </td>
             <td class="px-4 py-3 text-sm">
-              @if ($item->price < 10000)
+              @if ($item->sppPayment->currency == 'USD')
                 USD
-              @else
+              @elseif ($item->sppPayment->currency == 'IDR')
                 IDR
               @endif
             </td>
             <td class="px-4 py-3 text-sm">
-              {{ number_format($item->price, 0, ',', ',') }}
+              {{ 'Rp. '.number_format($item->price, 0, ',', ',') }}
             </td>
             <td class="px-4 py-3 text-sm">
               <p class="rounded text-center font-bold text-white py-1 bold @if($item->status == 'paid') bg-green-500 @elseif ($item->status == 'paid_manually') bg-green-500 @elseif ($item->status == 'unpaid') bg-red-500 @elseif ($item->status == 'pending') bg-yellow-500 @endif">
@@ -138,17 +138,23 @@ Detail Students - {{ $data->name }}
               </p>
             </td>
             <td class="px-4 py-3">
-              @if ($item->status == 'paid' or $item->status == 'paid_manually')
-                <a href="{{ route('receipt', $item->id) }}" class="flex-col text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
-                  <i class="fas fa-print"></i>
-                  <p>Receipt</p>
+              <div class="flex items-center space-x-4 text-sm">
+                @if ($item->status == 'paid' or $item->status == 'paid_manually')
+                    <a href="{{ route('receipt', $item->id) }}" class="flex-col text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                        <i class="fas fa-print"></i>
+                        <p>Receipt</p>
+                    </a>
+                @elseif ($item->status == 'unpaid' or $item->status == 'pending')
+                    <a href="{{ route('invoice', $item->id) }}" class="flex-col text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                        <i class="fas fa-print"></i>
+                        <p>Invoice</p>
+                    </a>
+                @endif
+                <a href="{{ route('pay.manually', $item->id) }}" class="flex-col text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                    <i class="fas fa-pay"></i>
+                    <p>Pay</p>
                 </a>
-              @elseif ($item->status == 'unpaid' or $item->status == 'pending')
-                <a href="{{ route('invoice', $item->id) }}" class="flex-col text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
-                  <i class="fas fa-print"></i>
-                  <p>Invoice</p>
-                </a>
-              @endif
+              </div>
             </td>
 
           </tr>

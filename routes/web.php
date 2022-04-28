@@ -56,6 +56,10 @@ Route::middleware(['auth'])->group(function ()
 	Route::get('/payment', [PaymentPageController::class, 'index'])->name('payment');
 
 	// Spp Payment
+	Route::get('/spp-payment-manually/{id}', [SppPaymentController::class, 'payManually'])->name('pay.manually');
+	Route::post('/spp-payment-manually-prosses/{id}', [SppPaymentController::class, 'payManuallyProsses'])->name('pay.manually.prosses');
+
+    // Spp Payment Page
 	Route::get('/spp-payment/{id}', [PaymentPageController::class, 'sppPayment'])->name('spp-payment');
 	Route::post('/payment/store', [PaymentPageController::class, 'sppPaymentStore'])->name('spp-payment.store');
 	Route::get('/spp-payment-detail/{id}', [PaymentPageController::class, 'sppPaymentDetail'])->name('spp-payment-detail');
@@ -75,7 +79,7 @@ Route::middleware(['auth'])->group(function ()
 
 	// Logout
 	Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-	
+
 	// Download pdf
 	Route::get('download/invoice/{id}', [PdfController::class, 'downloadInvoice'])->name('invoice');
 	Route::get('download/receipt/{id}', [PdfController::class, 'downloadReceipt'])->name('receipt');
@@ -83,20 +87,13 @@ Route::middleware(['auth'])->group(function ()
 	Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
 
-		
+
 		// Dashboard
 		Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('admin');
-<<<<<<< HEAD
 
-		// Invoice & Receipt
-		Route::get('/invoice', [InvoiceController::class, 'invoice'])->name('invoice');
-		Route::get('/receipt', [InvoiceController::class, 'receipt'])->name('receipt');
-=======
-		
 		// // Invoice & Receipt
 		// Route::get('/invoice', [InvoiceController::class, 'invoice'])->name('invoice');
 		// Route::get('/receipt', [InvoiceController::class, 'receipt'])->name('receipt');
->>>>>>> 387e85a3dd3db53377b4288713f906f0c85e1270
 
 		// Score
 		Route::get('/score/all', [ExerciseController::class, 'score_all'])->name('score.all');

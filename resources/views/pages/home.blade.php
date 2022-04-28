@@ -31,11 +31,11 @@
           @endif
           @endforeach
         </aside>
-        
+
         <section class="col-span-12 sm:col-span-8">
         {{-- Notification --}}
         @if (auth()->user()->role === 'student')
-          @if ($spps != null)
+          @if ($spp->status == 'unpaid')
             <div class="flex justify-between w-full py-4 px-5 bg-yellow-200 dark:bg-yellow-500 overflow-hidden rounded-sm shadow-xs items-center shadow-lg mb-5 sm:mb-7">
               <div class="flex items-center tex-xs sm:text-lg">
                 <i class="fas fa-bell text-lg sm:text-xl mr-3"></i>
