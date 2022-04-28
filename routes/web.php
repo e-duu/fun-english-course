@@ -106,21 +106,21 @@ Route::middleware(['auth'])->group(function ()
 
 
 		Route::prefix('user')->group(function () {
-				Route::get('/all', [UserController::class, 'index'])->name('user.all');
-				Route::get('/create', [UserController::class, 'create'])->name('user.create');
-				Route::post('/create', [UserController::class, 'store'])->name('user.store');
-				Route::get('/show/{id}', [UserController::class, 'show'])->name('user.show');
-				Route::get('/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
-				Route::post('/edit/{id}', [UserController::class, 'update'])->name('user.update');
-				Route::delete('/delete/{id}', [UserController::class, 'destroy'])->name('user.delete');
-				Route::get('template-user', [UserController::class, 'template'])->name('template.user');
-				Route::post('file-import-user', [UserController::class, 'fileImport'])->name('file-import-user');
-				Route::get('/reset', [UserController::class, 'filterReset'])->name('user.reset');
-				Route::get('/enroll/{id}', [LevelUserController::class, 'enroll'])->name('user.enroll');
-				Route::post('/enroll/store', [LevelUserController::class, 'store'])->name('enroll.store');
-				Route::post('/enroll/delete', [LevelUserController::class, 'delete'])->name('enroll.delete');
-				Route::get('/manyEnroll', [LevelUserController::class, 'manyEnroll'])->name('manyEnroll');
-				Route::post('/manyEnroll/store', [LevelUserController::class, 'manyEnrollStore'])->name('manyEnroll.store');
+            Route::get('/all', [UserController::class, 'index'])->name('user.all');
+            Route::get('/create', [UserController::class, 'create'])->name('user.create');
+            Route::post('/create', [UserController::class, 'store'])->name('user.store');
+            Route::get('/show/{id}', [UserController::class, 'show'])->name('user.show');
+            Route::get('/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
+            Route::post('/edit/{id}', [UserController::class, 'update'])->name('user.update');
+            Route::delete('/delete/{id}', [UserController::class, 'destroy'])->name('user.delete');
+            Route::get('template-user', [UserController::class, 'template'])->name('template.user');
+            Route::post('file-import-user', [UserController::class, 'fileImport'])->name('file-import-user');
+            Route::get('/reset', [UserController::class, 'filterReset'])->name('user.reset');
+            Route::get('/enroll/{id}', [LevelUserController::class, 'enroll'])->name('user.enroll');
+            Route::post('/enroll/store', [LevelUserController::class, 'store'])->name('enroll.store');
+            Route::post('/enroll/delete', [LevelUserController::class, 'delete'])->name('enroll.delete');
+            Route::get('/manyEnroll', [LevelUserController::class, 'manyEnroll'])->name('manyEnroll');
+            Route::post('/manyEnroll/store', [LevelUserController::class, 'manyEnrollStore'])->name('manyEnroll.store');
 		});
 
 		Route::prefix('student')->group(function () {
