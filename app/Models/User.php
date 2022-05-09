@@ -49,11 +49,6 @@ class User extends Authenticatable
         return $this->hasMany(Score::class);
     }
 
-    public function detail()
-    {
-        return $this->hasOne(DetailUser::class);
-    }
-
     protected static function boot()
     {
         parent::boot();

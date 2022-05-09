@@ -8,6 +8,8 @@
 @section('content')
 
 <div class="flex item-center justify-between space-x-2">
+    {{-- <a href="{{route('export.excel.invoice')}}">Click</a> --}}
+
     {{-- Modal Create --}}
     <div x-data="{ showModal : false }">
         <!-- Button -->
@@ -41,6 +43,7 @@
                         </label>
 
                         <label class="block mt-2 text-sm">
+<<<<<<< HEAD
                           <span class="text-gray-700 dark:text-gray-400">
                               Level
                           </span>
@@ -52,13 +55,29 @@
                                   <i class="fas fa-dot-circle text-xs"></i> {{ $message }}
                               </div>
                           @enderror
+=======
+                            <span class="text-gray-700 dark:text-gray-400">
+                                Month
+                            </span>
+                            <input name="month" type="number" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border rounded-md border-gray-400 -gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
+                            @error('month')
+                                <div class="mt-1 text-sm text-[red]">
+                                    <i class="fas fa-dot-circle text-xs"></i> {{ $message }}
+                                </div>
+                            @enderror
+>>>>>>> 5584d38b659c790e8cd6f0e276d84e76f091434a
                         </label>
-                        
+
                         <label class="block mt-2 text-sm">
                             <span class="text-gray-700 dark:text-gray-400">
                                 Price
                             </span>
                             <input name="price" type="number" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border rounded-md border-gray-400 -gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
+                            @error('price')
+                                <div class="mt-1 text-sm text-[red]">
+                                    <i class="fas fa-dot-circle text-xs"></i> {{ $message }}
+                                </div>
+                            @enderror
                         </label>
 
                         <label class="flex-col text-sm">

@@ -84,6 +84,9 @@ Route::middleware(['auth'])->group(function ()
 	Route::get('download/invoice/{id}', [PdfController::class, 'downloadInvoice'])->name('invoice');
 	Route::get('download/receipt/{id}', [PdfController::class, 'downloadReceipt'])->name('receipt');
 
+    // Export Excel
+    Route::get('invoice/export/excel', [InvoiceController::class, 'invoiceExcel'])->name('export.excel.invoice');
+
 	Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
 
