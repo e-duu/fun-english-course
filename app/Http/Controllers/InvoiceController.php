@@ -3,19 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Exports\StudentExport;
+use App\Models\Student;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
 class InvoiceController extends Controller
 {
-    public function invoice()
+    public function invoice($id)
     {
-        return view('pages.admin.invoice');
+        $data = Student::find($id);
+        
+        return view('pages.admin.invoice', compact('data'));
     }
 
-    public function receipt()
+    public function receipt($id)
     {
-        return view('pages.admin.receipt');
+        $data = Student::find($id);
+        
+        return view('pages.admin.receipt', compact('data'));
     }
 
     // Export Excel Invoice
