@@ -93,12 +93,12 @@
                       <p>Detail</p>
                     </a> --}}
                     @if ($item->status == 'paid' or $item->status == 'paid_manually')
-                      <a href="{{ route('receipt', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                      <a href="{{ route('page-receipt', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
                         <i class="fas fa-print"></i>
                         <p>Receipt</p>
                       </a>
                     @elseif ($item->status == 'unpaid' or $item->status == 'pending')
-                      <a href="{{ route('invoice', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                      <a href="{{ route('page-invoice', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
                         <i class="fas fa-print"></i>
                         <p>Invoice</p>
                       </a>

@@ -84,6 +84,10 @@ Route::middleware(['auth'])->group(function ()
 	Route::get('download/invoice/{id}', [PdfController::class, 'downloadInvoice'])->name('invoice');
 	Route::get('download/receipt/{id}', [PdfController::class, 'downloadReceipt'])->name('receipt');
 
+	// Page Invoice & Receipt
+	Route::get('/invoice/{id}', [InvoiceController::class, 'invoice'])->name('page-invoice');
+	Route::get('/receipt/{id}', [InvoiceController::class, 'receipt'])->name('page-receipt');
+
     // Export Excel
     Route::get('invoice/export/excel', [InvoiceController::class, 'invoiceExcel'])->name('export.excel.invoice');
 
@@ -94,9 +98,6 @@ Route::middleware(['auth'])->group(function ()
 		// Dashboard
 		Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('admin');
 
-		// // Invoice & Receipt
-		// Route::get('/invoice', [InvoiceController::class, 'invoice'])->name('invoice');
-		// Route::get('/receipt', [InvoiceController::class, 'receipt'])->name('receipt');
 
 		// Score
 		Route::get('/score/all', [ExerciseController::class, 'score_all'])->name('score.all');

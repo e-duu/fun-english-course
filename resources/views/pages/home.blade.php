@@ -35,15 +35,17 @@
         <section class="col-span-12 sm:col-span-8">
         {{-- Notification --}}
         @if (auth()->user()->role === 'student')
-          @if ($spp->status == 'unpaid')
-            <div class="flex justify-between w-full py-4 px-5 bg-yellow-200 dark:bg-yellow-500 overflow-hidden rounded-sm shadow-xs items-center shadow-lg mb-5 sm:mb-7">
-              <div class="flex items-center tex-xs sm:text-lg">
-                <i class="fas fa-bell text-lg sm:text-xl mr-3"></i>
-                <p>Reminder for your payment bill, please pay immediately. Thank You!</p>
+          @isset($spp)
+            @if ($spp->status == 'unpaid')
+              <div class="flex justify-between w-full py-4 px-5 bg-yellow-200 dark:bg-yellow-500 overflow-hidden rounded-sm shadow-xs items-center shadow-lg mb-5 sm:mb-7">
+                <div class="flex items-center tex-xs sm:text-lg">
+                  <i class="fas fa-bell text-lg sm:text-xl mr-3"></i>
+                  <p>Reminder for your payment bill, please pay immediately. Thank You!</p>
+                </div>
+                <a href="{{ route('payment') }}" class="font-bold text-center text-green-500  dark:text-green-500 mr-5"><i class="fas fa-money-check"></i> PAY</a>
               </div>
-              <a href="{{ route('payment') }}" class="font-bold text-center text-green-500  dark:text-green-500 mr-5"><i class="fas fa-money-check"></i> PAY</a>
-            </div>
-          @endif
+            @endif
+          @endisset
         @endif
         <header>
           <h1 class="bg-[rgb(1,131,215)] text-white text-center py-4 sm:py-5 text-xl sm:text-5xl rounded-t-sm font-bold shadow-lg">LEARNING RESOURCES</h1>
