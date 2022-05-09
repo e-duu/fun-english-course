@@ -26,7 +26,7 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'month' => 'required|max:255',
+            'months' => 'required|max:255',
             'price' => 'required',
             'user_id' => 'required',
             'level_id' => 'required',
@@ -35,7 +35,7 @@ class StudentController extends Controller
             'dateEnd' => 'nullable',
         ],
         [
-            'month.required' => 'please input recipient month',
+            'months.required' => 'please input recipient month',
             'price.required' => 'please input recipient price',
             'user_id.required' => 'please input recipient student',
             'level_id.required' => 'please input recipient level',
@@ -44,14 +44,17 @@ class StudentController extends Controller
         $code = mt_rand(1,999);
         // dd($code);
 
-        Student::create([
-            'month' => $request->month,
-            'price' => $request->price,
-            'code' => $code,
-            'user_id' => $request->user_id,
-            'level_id' => $request->level_id,
-            'status' => 'unpaid',
-        ]);
+        foreach ($request->months as $month) {
+            Student::create([
+                'month' => $month,
+                'price' => $request->price,
+                'code' => $code,
+                'user_id' => $request->user_id,
+                'level_id' => $request->level_id,
+                'status' => 'unpaid',
+            ]);
+        }
+
         return redirect()->route('student.show-spp', $request->level_id);
     }
 

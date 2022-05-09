@@ -114,7 +114,15 @@ Detail Students - {{ $data->name }}
               {{ $item->student->country == null ? '-' : $item->student->country }}
             </td>
             <td class="px-4 py-3 text-sm">
-              {{ $item->student->status == null ? '-' : $item->student->status }}
+              <div class="font-semibold uppercase rounded py-[2px] px-2 bold @if($item->student->status == 'paid') bg-green-500 @elseif ($item->student->status == 'active') bg-green-500 @elseif ($item->student->status == 'non-active') bg-red-500 @endif">
+                <p class="text-white text-center">
+                  @if ($item->student->status == 'active')
+                      ACTIVE
+                  @elseif ($item->student->status == 'non-active')
+                      NON-ACTIVE
+                  @endif
+                </p>
+              </div>
             </td>
             <td class="px-4 py-3 text-sm">
               {{ $item->level->program->name }}
@@ -123,17 +131,17 @@ Detail Students - {{ $data->name }}
               {{ $item->level->name }}
             </td>
             <td class="px-4 py-3 text-sm">
-              @if ($item->sppPayment->currency == 'USD')
+              {{-- @if ($item->sppPayment->currency == 'USD')
                 USD
               @elseif ($item->sppPayment->currency == 'IDR')
                 IDR
-              @endif
+              @endif --}}
             </td>
             <td class="px-4 py-3 text-sm">
-              {{ $item->sppPayment->currency == 'USD' ? '$'.number_format($item->price, 0, ',', ',') : 'Rp. '.number_format($item->price, 0, ',', ',') }}
+              {{-- {{ $item->sppPayment->currency == 'USD' ? '$'.number_format($item->price, 0, ',', ',') : 'Rp. '.number_format($item->price, 0, ',', ',') }} --}}
             </td>
             <td class="px-4 py-3 text-sm">
-              <p class="rounded text-center font-bold text-white py-1 bold @if($item->status == 'paid') bg-green-500 @elseif ($item->status == 'paid_manually') bg-green-500 @elseif ($item->status == 'unpaid') bg-red-500 @elseif ($item->status == 'pending') bg-yellow-500 @endif">
+              <p class="rounded text-center font-bold uppercase text-white py-1 bold @if($item->status == 'paid') bg-green-500 @elseif ($item->status == 'paid_manually') bg-green-500 @elseif ($item->status == 'unpaid') bg-red-500 @elseif ($item->status == 'pending') bg-yellow-500 @endif">
                 {{ $item->status }}
               </p>
             </td>

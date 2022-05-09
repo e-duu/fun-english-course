@@ -75,63 +75,63 @@
                           <div class="flex space-x-10 items-center w-full">
                             <div class="flex-col">
                               <label class="flex items-center">
-                                <input type="checkbox" class="form-checkbox rounded-md border-blue-600 h-5 w-5 text-blue-600" value="" name="levels[]">
+                                <input type="checkbox" class="form-checkbox rounded-md border-blue-600 h-5 w-5 text-blue-600" value="1" name="months[]">
                                 <span class="ml-2 text-xs sm:text-lg text-gray-700 dark:text-white">January</span>
                               </label>
 
                               <label class="flex items-center">
-                                <input type="checkbox" class="form-checkbox rounded-md border-blue-600 h-5 w-5 text-blue-600" value="" name="levels[]">
+                                <input type="checkbox" class="form-checkbox rounded-md border-blue-600 h-5 w-5 text-blue-600" value="2" name="months[]">
                                 <span class="ml-2 text-xs sm:text-lg text-gray-700 dark:text-white">February</span>
                               </label>
 
                               <label class="flex items-center">
-                                <input type="checkbox" class="form-checkbox rounded-md border-blue-600 h-5 w-5 text-blue-600" value="" name="levels[]">
+                                <input type="checkbox" class="form-checkbox rounded-md border-blue-600 h-5 w-5 text-blue-600" value="3" name="months[]">
                                 <span class="ml-2 text-xs sm:text-lg text-gray-700 dark:text-white">March</span>
                               </label>
 
                               <label class="flex items-center">
-                                <input type="checkbox" class="form-checkbox rounded-md border-blue-600 h-5 w-5 text-blue-600" value="" name="levels[]">
+                                <input type="checkbox" class="form-checkbox rounded-md border-blue-600 h-5 w-5 text-blue-600" value="4" name="months[]">
                                 <span class="ml-2 text-xs sm:text-lg text-gray-700 dark:text-white">April</span>
                               </label>
 
                               <label class="flex items-center">
-                                <input type="checkbox" class="form-checkbox rounded-md border-blue-600 h-5 w-5 text-blue-600" value="" name="levels[]">
+                                <input type="checkbox" class="form-checkbox rounded-md border-blue-600 h-5 w-5 text-blue-600" value="5" name="months[]">
                                 <span class="ml-2 text-xs sm:text-lg text-gray-700 dark:text-white">May</span>
                               </label>
 
                               <label class="flex items-center">
-                                <input type="checkbox" class="form-checkbox rounded-md border-blue-600 h-5 w-5 text-blue-600" value="" name="levels[]">
+                                <input type="checkbox" class="form-checkbox rounded-md border-blue-600 h-5 w-5 text-blue-600" value="6" name="months[]">
                                 <span class="ml-2 text-xs sm:text-lg text-gray-700 dark:text-white">June</span>
                               </label>
                             </div>
                             <div class="flex-col">
                               <label class="flex items-center">
-                                <input type="checkbox" class="form-checkbox rounded-md border-blue-600 h-5 w-5 text-blue-600" value="" name="levels[]">
+                                <input type="checkbox" class="form-checkbox rounded-md border-blue-600 h-5 w-5 text-blue-600" value="7" name="months[]">
                                 <span class="ml-2 text-xs sm:text-lg text-gray-700 dark:text-white">July</span>
                               </label>
                               
                               <label class="flex items-center">
-                                <input type="checkbox" class="form-checkbox rounded-md border-blue-600 h-5 w-5 text-blue-600" value="" name="levels[]">
+                                <input type="checkbox" class="form-checkbox rounded-md border-blue-600 h-5 w-5 text-blue-600" value="8" name="months[]">
                                 <span class="ml-2 text-xs sm:text-lg text-gray-700 dark:text-white">August</span>
                               </label>
 
                               <label class="flex items-center">
-                                <input type="checkbox" class="form-checkbox rounded-md border-blue-600 h-5 w-5 text-blue-600" value="" name="levels[]">
+                                <input type="checkbox" class="form-checkbox rounded-md border-blue-600 h-5 w-5 text-blue-600" value="9" name="months[]">
                                 <span class="ml-2 text-xs sm:text-lg text-gray-700 dark:text-white">September</span>
                               </label>
                               
                               <label class="flex items-center">
-                                <input type="checkbox" class="form-checkbox rounded-md border-blue-600 h-5 w-5 text-blue-600" value="" name="levels[]">
+                                <input type="checkbox" class="form-checkbox rounded-md border-blue-600 h-5 w-5 text-blue-600" value="10" name="months[]">
                                 <span class="ml-2 text-xs sm:text-lg text-gray-700 dark:text-white">October</span>
                               </label>
                               
                               <label class="flex items-center">
-                                <input type="checkbox" class="form-checkbox rounded-md border-blue-600 h-5 w-5 text-blue-600" value="" name="levels[]">
+                                <input type="checkbox" class="form-checkbox rounded-md border-blue-600 h-5 w-5 text-blue-600" value="11" name="months[]">
                                 <span class="ml-2 text-xs sm:text-lg text-gray-700 dark:text-white">November</span>
                               </label>
                               
                               <label class="flex items-center">
-                                <input type="checkbox" class="form-checkbox rounded-md border-blue-600 h-5 w-5 text-blue-600" value="" name="levels[]">
+                                <input type="checkbox" class="form-checkbox rounded-md border-blue-600 h-5 w-5 text-blue-600" value="12" name="months[]">
                                 <span class="ml-2 text-xs sm:text-lg text-gray-700 dark:text-white">December</span>
                               </label>
                             </div>
