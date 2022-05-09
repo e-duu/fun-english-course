@@ -16,22 +16,22 @@ class StudentExport implements FromCollection, WithHeadings, ShouldAutoSize, Wit
 {
     public function collection()
     {
-        return Student::with(['user', 'sppMonth'])->get();
+        return Student::with(['student'])->get();
     }
 
     public function map($student) : array
     {
         return [
             $student->id,
-            $student->user->detail->parent,
-            $student->user->detail->city,
-            $student->user->detail->country,
-            $student->user->detail->status,
-            $student->sppMonth->level->program->name,
-            $student->sppMonth->level->name,
-            $student->sppMonth->price > 10000 ? 'USD' : 'IDR',
-            $student->sppMonth->price,
-            $student->sppMonth->status,
+            $student->student->parent == null ? '-' : $student->student->parent,
+            $student->student->city == null ? '-' : $student->student->city,
+            $student->student->country == null ? '-' : $student->student->country,
+            $student->student->name,
+            $student->level->program->name,
+            $student->level->name,
+            $student->price,
+            $student->status,
+            date('d M Y'),
         ];
     }
 
@@ -39,15 +39,15 @@ class StudentExport implements FromCollection, WithHeadings, ShouldAutoSize, Wit
     {
         return [
             'No',
-            'Parent',
+            'Parent Name',
             'City',
             'Country',
-            'Status',
+            'Student Name',
             'Program',
             'Level',
-            'Currency',
             'Price',
-            'Status Payment',
+            'Status',
+            'Invoice Date',
         ];
     }
 
