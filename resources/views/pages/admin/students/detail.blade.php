@@ -28,7 +28,8 @@
                                 Level
                             </span>
                             <select name="level" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border rounded-md border-gray-400 -gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
-                                <option selected>Choose Option...</option>
+                                <option selected disabled>Choose Option...</option>
+                                <option value="all">All</option>
                                 @foreach ($levelsFt as $level)
                                     <option value="{{ $level->id }}" >{{ $level->name }}</option>
                                 @endforeach

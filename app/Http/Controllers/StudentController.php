@@ -64,6 +64,8 @@ class StudentController extends Controller
         $levelsFt = Level::where('program_id', $id)->get();
         if (request()->level == null) {
             $levels = $data->levels()->paginate(10);
+        } elseif (request()->level == 'all') {
+            $levels = $data->levels()->paginate(10);
         } else {
             $levels = Level::where('id', request()->level)->paginate(1);
         }
