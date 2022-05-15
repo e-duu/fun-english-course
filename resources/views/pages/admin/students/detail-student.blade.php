@@ -30,7 +30,7 @@ Detail Students - {{ $data->name }}
                                     <thead>
                                         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                                             <th class="px-4 py-3">Student Name</th>
-                                            <th class="px-4 py-3">Price</th>
+                                            <th class="px-4 py-3 text-center">Status</th>
                                             <th class="px-4 py-3"><input id="checkAll" type="checkbox"></th>
                                         </tr>
                                     </thead>
@@ -42,7 +42,9 @@ Detail Students - {{ $data->name }}
                                                     {{ $item->student->name }}
                                                 </td>
                                                 <td class="px-4 py-3 text-sm">
-                                                    {{'Rp '.number_format($item->price) }}
+                                                    <p class="rounded text-center font-bold uppercase text-white py-1 bold @if($item->status == 'paid') bg-green-500 @elseif ($item->status == 'paid_manually') bg-green-500 @elseif ($item->status == 'unpaid') bg-red-500 @elseif ($item->status == 'pending') bg-yellow-500 @endif">
+                                                        {{ $item->status }}
+                                                    </p>
                                                 </td>
                                                 <td class="px-4 py-3 text-sm">
                                                     <input type="checkbox" name="level">
@@ -156,12 +158,16 @@ Detail Students - {{ $data->name }}
             <td class="px-4 py-3 text-sm">
               <div class="font-semibold uppercase rounded py-[2px] px-2 bold @if($item->student->status == 'paid') bg-green-500 @elseif ($item->student->status == 'active') bg-green-500 @elseif ($item->student->status == 'non-active') bg-red-500 @endif">
                 <p class="text-white text-center">
-                  @if ($item->student->status == 'active')
-                      ACTIVE
-                  @elseif ($item->student->status == 'non-active')
-                      NON-ACTIVE
-                  @endif
-                </p>
+                    @if ($item->student->status == 'active')
+                        ACTIVE
+                        </p>
+                    @elseif ($item->student->status == 'non-active')
+                        NON-ACTIVE
+                        </p>
+                    @else
+                        </p>
+                        -
+                    @endif
               </div>
             </td>
             <td class="px-4 py-3 text-sm">
@@ -183,7 +189,7 @@ Detail Students - {{ $data->name }}
             </td>
             <td class="px-4 py-3 text-sm">
                 @if ($item->status == 'unpaid')
-                    {{ number_format($item->price, 0, ',', ',') }}
+                    {{ 'Rp. '.number_format($item->price, 0, ',', ',') }}
                 @else
                     {{ $item->sppPayment->currency == 'USD' ? '$'.$item->sppPayment->amount: 'Rp. '.number_format($item->sppPayment->amount, 0, ',', ',') }}
                 @endif
