@@ -94,4 +94,8 @@ class StudentController extends Controller
         return back()->with('send_invoice_to_mail', 'Invoice berhasil diunggah kepada '.$user->email);
     }
 
+    public function filterReset(Request $request)
+    {
+        return redirect()->route('student.show', $request->id);
+    }
 }

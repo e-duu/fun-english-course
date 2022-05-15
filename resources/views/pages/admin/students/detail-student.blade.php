@@ -131,14 +131,18 @@ Detail Students - {{ $data->name }}
               {{ $item->level->name }}
             </td>
             <td class="px-4 py-3 text-sm">
-              {{-- @if ($item->sppPayment->currency == 'USD')
-                USD
-              @elseif ($item->sppPayment->currency == 'IDR')
-                IDR
-              @endif --}}
+              @if ($item->status != 'unpaid')
+                @if ($item->sppPayment->currency == 'USD')
+                  USD
+                @elseif ($item->sppPayment->currency == 'IDR')
+                  IDR
+                @endif
+              @else
+                <p class="font-bold">-</p>
+              @endif
             </td>
             <td class="px-4 py-3 text-sm">
-              {{-- {{ $item->sppPayment->currency == 'USD' ? '$'.number_format($item->price, 0, ',', ',') : 'Rp. '.number_format($item->price, 0, ',', ',') }} --}}
+              {{ number_format($item->price, 0, ',', ',') }}
             </td>
             <td class="px-4 py-3 text-sm">
               <p class="rounded text-center font-bold uppercase text-white py-1 bold @if($item->status == 'paid') bg-green-500 @elseif ($item->status == 'paid_manually') bg-green-500 @elseif ($item->status == 'unpaid') bg-red-500 @elseif ($item->status == 'pending') bg-yellow-500 @endif">
