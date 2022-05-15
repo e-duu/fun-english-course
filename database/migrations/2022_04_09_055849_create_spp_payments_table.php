@@ -15,7 +15,7 @@ class CreateSppPaymentsTable extends Migration
     {
         Schema::create('spp_payments', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('amount');
+            $table->string('amount');
             $table->string('currency');
             $table->string('orderId')->unique()->nullable();
             $table->foreignId('user_id');

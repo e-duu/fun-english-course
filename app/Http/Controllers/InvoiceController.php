@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\StudentExport;
 use App\Imports\StudentImport;
+use App\Models\Level;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -25,9 +26,13 @@ class InvoiceController extends Controller
     }
 
     // Export Excel Invoice
-    public function invoiceExcelExport()
+    public function invoiceExcelExport($id)
     {
-        return Excel::download(new StudentExport(), 'invoice.xlsx');
+        $date = time();
+
+        $level = Level::findOrFail($id);
+
+        return Excel::download(new StudentExport($id), $level->name.'-'.$date.'.xlsx');
     }
 
     // Import Excel Invoice

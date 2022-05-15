@@ -89,16 +89,13 @@ Route::middleware(['auth'])->group(function ()
 	Route::get('/receipt/{id}', [InvoiceController::class, 'receipt'])->name('page-receipt');
 
     // Export Excel
-    Route::get('invoice/export/excel', [InvoiceController::class, 'invoiceExcelExport'])->name('export.excel.invoice');
+    Route::get('invoice/export/excel/{id}', [InvoiceController::class, 'invoiceExcelExport'])->name('export.excel.invoice');
     Route::post('invoice/import/excel/{id}', [InvoiceController::class, 'invoiceExcelImport'])->name('import.excel.invoice');
 
 	Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
-
-
 		// Dashboard
 		Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('admin');
-
 
 		// Score
 		Route::get('/score/all', [ExerciseController::class, 'score_all'])->name('score.all');
@@ -109,23 +106,22 @@ Route::middleware(['auth'])->group(function ()
 		Route::post('moota/create', [MootaController::class, 'store'])->name('moota.store');
 		Route::get('/moota/get-bank', [MootaController::class, 'getListBank'])->name('moota.get-bank');
 
-
 		Route::prefix('user')->group(function () {
-            Route::get('/all', [UserController::class, 'index'])->name('user.all');
-            Route::get('/create', [UserController::class, 'create'])->name('user.create');
-            Route::post('/create', [UserController::class, 'store'])->name('user.store');
-            Route::get('/show/{id}', [UserController::class, 'show'])->name('user.show');
-            Route::get('/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
-            Route::post('/edit/{id}', [UserController::class, 'update'])->name('user.update');
-            Route::delete('/delete/{id}', [UserController::class, 'destroy'])->name('user.delete');
-            Route::get('template-user', [UserController::class, 'template'])->name('template.user');
-            Route::post('file-import-user', [UserController::class, 'fileImport'])->name('file-import-user');
-            Route::get('/reset', [UserController::class, 'filterReset'])->name('user.reset');
-            Route::get('/enroll/{id}', [LevelUserController::class, 'enroll'])->name('user.enroll');
-            Route::post('/enroll/store', [LevelUserController::class, 'store'])->name('enroll.store');
-            Route::post('/enroll/delete', [LevelUserController::class, 'delete'])->name('enroll.delete');
-            Route::get('/manyEnroll', [LevelUserController::class, 'manyEnroll'])->name('manyEnroll');
-            Route::post('/manyEnroll/store', [LevelUserController::class, 'manyEnrollStore'])->name('manyEnroll.store');
+			Route::get('/all', [UserController::class, 'index'])->name('user.all');
+			Route::get('/create', [UserController::class, 'create'])->name('user.create');
+			Route::post('/create', [UserController::class, 'store'])->name('user.store');
+			Route::get('/show/{id}', [UserController::class, 'show'])->name('user.show');
+			Route::get('/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
+			Route::post('/edit/{id}', [UserController::class, 'update'])->name('user.update');
+			Route::delete('/delete/{id}', [UserController::class, 'destroy'])->name('user.delete');
+			Route::get('template-user', [UserController::class, 'template'])->name('template.user');
+			Route::post('file-import-user', [UserController::class, 'fileImport'])->name('file-import-user');
+			Route::get('/reset', [UserController::class, 'filterReset'])->name('user.reset');
+			Route::get('/enroll/{id}', [LevelUserController::class, 'enroll'])->name('user.enroll');
+			Route::post('/enroll/store', [LevelUserController::class, 'store'])->name('enroll.store');
+			Route::post('/enroll/delete', [LevelUserController::class, 'delete'])->name('enroll.delete');
+			Route::get('/manyEnroll', [LevelUserController::class, 'manyEnroll'])->name('manyEnroll');
+			Route::post('/manyEnroll/store', [LevelUserController::class, 'manyEnrollStore'])->name('manyEnroll.store');
 		});
 
 		Route::prefix('student')->group(function () {
@@ -133,6 +129,7 @@ Route::middleware(['auth'])->group(function ()
 			Route::post('/store', [StudentController::class, 'store'])->name('student.store');
 			Route::get('/show/{id}', [StudentController::class, 'show'])->name('student.show');
 			Route::get('/show/student/{id}', [StudentController::class, 'sppStudent'])->name('student.show-spp');
+			Route::get('/reset/{id}', [StudentController::class, 'filterReset'])->name('student.reset');
 		});
 
 		Route::prefix('program')->group(function () {

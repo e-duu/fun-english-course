@@ -3,7 +3,7 @@
   Fun English Course | Program Detail
 @endsection
 @section('sub-title')
-Detail Programs - {{ $data->name }}
+  Detail Programs - {{ $data->name }}
 @endsection
 @section('content')
 
@@ -41,8 +41,9 @@ Detail Programs - {{ $data->name }}
                         <div class="flex-col sm:flex-row sm:justify-end text-center sm:text-right space-y-2 sm:space-x-2 mt-5">
                             <button type="button" @click="showModal = !showModal" class="w-full sm:w-auto sm:px-4 py-2 text-xs sm:text-sm bg-gray-600 rounded-md transition-colors duration-150 ease-linear text-white focus:outline-none focus:ring-0 font-semibold hover:bg-gray-700">Cancel</button>
 
-                            <button formaction="{{route('student.show', $data->id)}}" class="w-full sm:w-auto sm:px-4 py-2 text-xs sm:text-sm bg-blue-600 rounded-md transition-colors duration-150 ease-linear text-white focus:outline-none focus:ring-0 font-semibold hover:bg-blue-700">Apply Filter</button>
+                            <button formaction="{{ route('student.reset', $data->id) }}" class="w-full sm:w-auto sm:px-4 py-2 text-xs sm:text-sm bg-red-600 rounded-md transition-colors duration-150 ease-linear text-white focus:outline-none focus:ring-0 font-semibold hover:bg-red-700">Reset</button>
 
+                            <button formaction="{{route('student.show', $data->id)}}" class="w-full sm:w-auto sm:px-4 py-2 text-xs sm:text-sm bg-blue-600 rounded-md transition-colors duration-150 ease-linear text-white focus:outline-none focus:ring-0 font-semibold hover:bg-blue-700">Apply Filter</button>
                         </form>
                     </div>
                 </div>

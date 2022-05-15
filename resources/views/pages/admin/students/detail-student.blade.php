@@ -109,7 +109,7 @@ Detail Students - {{ $data->name }}
                 </div>
             </div>
         </div>
-        <form method="GET" action="{{route('export.excel.invoice')}}">
+        <form method="GET" action="{{route('export.excel.invoice', $data->id)}}">
             <button class="px-4 py-2 text-sm bg-blue-600 rounded-md transition-colors duration-150 ease-linear text-white focus:outline-none focus:ring-0 font-semibold hover:bg-blue-700">Export</button>
         </form>
     </div>
@@ -171,14 +171,22 @@ Detail Students - {{ $data->name }}
               {{ $item->level->name }}
             </td>
             <td class="px-4 py-3 text-sm">
-              {{-- @if ($item->sppPayment->currency == 'USD')
-                USD
-              @elseif ($item->sppPayment->currency == 'IDR')
-                IDR
-              @endif --}}
+              @if ($item->status != 'unpaid')
+                @if ($item->sppPayment->currency == 'USD')
+                  USD
+                @elseif ($item->sppPayment->currency == 'IDR')
+                  IDR
+                @endif
+              @else
+                <p class="font-bold">-</p>
+              @endif
             </td>
             <td class="px-4 py-3 text-sm">
-              {{-- {{ $item->sppPayment->currency == 'USD' ? '$'.number_format($item->price, 0, ',', ',') : 'Rp. '.number_format($item->price, 0, ',', ',') }} --}}
+                @if ($item->status == 'unpaid')
+                    {{ number_format($item->price, 0, ',', ',') }}
+                @else
+                    {{ $item->sppPayment->currency == 'USD' ? '$'.$item->sppPayment->amount: 'Rp. '.number_format($item->sppPayment->amount, 0, ',', ',') }}
+                @endif
             </td>
             <td class="px-4 py-3 text-sm">
               <p class="rounded text-center font-bold uppercase text-white py-1 bold @if($item->status == 'paid') bg-green-500 @elseif ($item->status == 'paid_manually') bg-green-500 @elseif ($item->status == 'unpaid') bg-red-500 @elseif ($item->status == 'pending') bg-yellow-500 @endif">
@@ -219,11 +227,11 @@ Detail Students - {{ $data->name }}
       </tbody>
     </table>
   </div>
-  {{-- <div class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
+  <div class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
 		<div class="text-center w-auto sm:w-[565px] md:w-[980px] 2xl:w-[1335px] ">
 			{{ $spps->links() }}
 		</div>
-	</div> --}}
+	</div>
 </div>
 @endsection
 

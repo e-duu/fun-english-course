@@ -14,9 +14,16 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class StudentExport implements FromCollection, WithHeadings, ShouldAutoSize, WithMapping, WithStyles, WithEvents
 {
+    public $id;
+
+    public function __construct($id)
+    {
+        $this->id = $id;
+    }
+
     public function collection()
     {
-        return Student::with(['student'])->get();
+        return Student::where('level_id', $this->id)->with(['student'])->get();
     }
 
     public function map($student) : array
