@@ -72,6 +72,46 @@ Detail Students - {{ $data->name }}
                 </div>
             </div>
         </div>
+        {{-- Modal Import --}}
+        <div x-data="{ showModal : false }">
+            <!-- Button -->
+            <button @click="showModal = !showModal" class="px-4 py-2 text-sm bg-blue-600 rounded-md transition-colors duration-150 ease-linear text-white focus:outline-none focus:ring-0 font-semibold hover:bg-blue-700">Import</button>
+
+            <!-- Modal Background -->
+            <div x-show="showModal" class="fixed text-gray-500 flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0" x-transition:enter="transition ease duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+                    <!-- Modal -->
+                    <div x-show="showModal" class="bg-white rounded-xl shadow-2xl p-6 w-80 sm:w-3/6 mx-10" @click.away="showModal = false" x-transition:enter="transition ease duration-100 transform" x-transition:enter-start="opacity-0 scale-90 translate-y-1" x-transition:enter-end="opacity-100 scale-100 translate-y-0" x-transition:leave="transition ease duration-100 transform" x-transition:leave-start="opacity-100 scale-100 translate-y-0" x-transition:leave-end="opacity-0 scale-90 translate-y-1">
+                        <!-- Title -->
+                        <span class="font-bold block text-2xl mb-3">Import </span>
+                        <div class="border-b border-gray-500 mb-5"></div>
+                        <!-- Send To Email (Invoice) -->
+                        <form action="{{route('import.excel.invoice', $data->id)}}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            @method('POST')
+                            <div class='flex items-center justify-center w-full'>
+                                <table class="w-full whitespace-no-wrap">
+                                    <thead>
+                                    </thead>
+                                    <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-darker">
+                                        <input type="file" name="file">
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="border-b border-gray-500 my-5"></div>
+
+                            <!-- Buttons -->
+                            <div class="flex-col sm:flex-row sm:justify-end text-center sm:text-right space-y-2 sm:space-y-0 sm:space-x-2 mt-5">
+                            <button type="button" @click="showModal = !showModal" class="w-full sm:w-auto sm:px-4 py-2 text-xs sm:text-sm bg-red-600 rounded-md transition-colors duration-150 ease-linear text-white focus:outline-none focus:ring-0 font-semibold hover:bg-red-700">Cancel</button>
+
+                            <button type="submit" class="w-full sm:w-auto sm:px-4 py-2 text-xs sm:text-sm bg-blue-600 rounded-md transition-colors duration-150 ease-linear text-white focus:outline-none focus:ring-0 font-semibold hover:bg-blue-700">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form method="GET" action="{{route('export.excel.invoice')}}">
+            <button class="px-4 py-2 text-sm bg-blue-600 rounded-md transition-colors duration-150 ease-linear text-white focus:outline-none focus:ring-0 font-semibold hover:bg-blue-700">Export</button>
+        </form>
     </div>
     <div class="float-right mb-5">
         <a href="{{ route('student.show', $data->program_id) }}" class="px-5 py-1 bg-yellow-400 rounded-md font-semibold text-white">Back to Level</a>

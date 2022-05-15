@@ -89,7 +89,8 @@ Route::middleware(['auth'])->group(function ()
 	Route::get('/receipt/{id}', [InvoiceController::class, 'receipt'])->name('page-receipt');
 
     // Export Excel
-    Route::get('invoice/export/excel', [InvoiceController::class, 'invoiceExcel'])->name('export.excel.invoice');
+    Route::get('invoice/export/excel', [InvoiceController::class, 'invoiceExcelExport'])->name('export.excel.invoice');
+    Route::post('invoice/import/excel/{id}', [InvoiceController::class, 'invoiceExcelImport'])->name('import.excel.invoice');
 
 	Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 

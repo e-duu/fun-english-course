@@ -109,7 +109,7 @@
                                 <input type="checkbox" class="form-checkbox rounded-md border-blue-600 h-5 w-5 text-blue-600" value="7" name="months[]">
                                 <span class="ml-2 text-xs sm:text-lg text-gray-700 dark:text-white">July</span>
                               </label>
-                              
+
                               <label class="flex items-center">
                                 <input type="checkbox" class="form-checkbox rounded-md border-blue-600 h-5 w-5 text-blue-600" value="8" name="months[]">
                                 <span class="ml-2 text-xs sm:text-lg text-gray-700 dark:text-white">August</span>
@@ -119,17 +119,17 @@
                                 <input type="checkbox" class="form-checkbox rounded-md border-blue-600 h-5 w-5 text-blue-600" value="9" name="months[]">
                                 <span class="ml-2 text-xs sm:text-lg text-gray-700 dark:text-white">September</span>
                               </label>
-                              
+
                               <label class="flex items-center">
                                 <input type="checkbox" class="form-checkbox rounded-md border-blue-600 h-5 w-5 text-blue-600" value="10" name="months[]">
                                 <span class="ml-2 text-xs sm:text-lg text-gray-700 dark:text-white">October</span>
                               </label>
-                              
+
                               <label class="flex items-center">
                                 <input type="checkbox" class="form-checkbox rounded-md border-blue-600 h-5 w-5 text-blue-600" value="11" name="months[]">
                                 <span class="ml-2 text-xs sm:text-lg text-gray-700 dark:text-white">November</span>
                               </label>
-                              
+
                               <label class="flex items-center">
                                 <input type="checkbox" class="form-checkbox rounded-md border-blue-600 h-5 w-5 text-blue-600" value="12" name="months[]">
                                 <span class="ml-2 text-xs sm:text-lg text-gray-700 dark:text-white">December</span>
