@@ -73,7 +73,7 @@ class StudentController extends Controller
     public function sppStudent($id)
     {
         $data = Level::findOrFail($id);
-        $spps = Student::where('level_id', $id)->get();
+        $spps = Student::where('level_id', $id)->paginate(5);
 
         return view('pages.admin.students.detail-student', compact('data', 'spps'));
     }
