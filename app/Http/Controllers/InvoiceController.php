@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\StudentExport;
+use App\Exports\StudentTemplate;
 use App\Imports\StudentImport;
 use App\Models\Level;
 use App\Models\Student;
@@ -23,6 +24,14 @@ class InvoiceController extends Controller
         $data = Student::find($id);
 
         return view('pages.admin.receipt', compact('data'));
+    }
+
+    // Export Template Invoice
+    public function invoiceExcelTemplate()
+    {
+        $date = date('d-m-Y');
+
+        return Excel::download(new StudentTemplate, 'template-student-'.$date.'.xlsx');
     }
 
     // Export Excel Invoice

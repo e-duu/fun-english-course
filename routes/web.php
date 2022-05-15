@@ -91,6 +91,7 @@ Route::middleware(['auth'])->group(function ()
     // Export Excel
     Route::get('invoice/export/excel/{id}', [InvoiceController::class, 'invoiceExcelExport'])->name('export.excel.invoice');
     Route::post('invoice/import/excel/{id}', [InvoiceController::class, 'invoiceExcelImport'])->name('import.excel.invoice');
+    Route::get('invoice/export/template/excel', [InvoiceController::class, 'invoiceExcelTemplate'])->name('template.excel.invoice');
 
 	Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
