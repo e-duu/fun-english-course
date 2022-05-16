@@ -29,7 +29,7 @@ class InvoiceController extends Controller
     // Export Template Invoice
     public function invoiceExcelTemplate()
     {
-        $date = date('d-m-Y');
+        $date = date('dmY');
 
         return Excel::download(new StudentTemplate, 'template-student-'.$date.'.xlsx');
     }
