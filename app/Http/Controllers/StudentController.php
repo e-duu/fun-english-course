@@ -96,7 +96,22 @@ class StudentController extends Controller
     public function sppStudent($id)
     {
         $data = Level::findOrFail($id);
-        $spps = Student::where('level_id', $id)->paginate(5);
+        
+        // Search student by name
+        if (request()->get('name') && request()->get('name') != null) {
+            $spps = Student::whereHas('student', function($query){
+                $query->where('name', 'like', '%'. request()->get('name').'%');
+            })->where('level_id', $id)->paginate(5);
+        } else {
+            $spps = Student::where('level_id', $id)->paginate(5);
+        }
+
+        // Filter spp by payment status
+        if (request()->get('status') && request()->get('status') != null) {
+            $spps = Student::where('status', '=', request()->get('status'))->where('level_id', $id)->paginate(5);;
+        } else {
+            $spps = Student::where('level_id', $id)->paginate(5);
+        }
 
         return view('pages.admin.students.detail-student', compact('data', 'spps'));
     }
@@ -120,5 +135,10 @@ class StudentController extends Controller
     public function filterReset(Request $request)
     {
         return redirect()->route('student.show', $request->id);
+    }
+
+    public function filterStudentReset(Request $request)
+    {
+        return redirect()->route('student.show-spp', $request->id);
     }
 }
