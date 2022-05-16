@@ -26,11 +26,15 @@ class UsersImport implements ToModel, WithStartRow
     public function model(array $row)
     {
         return new User([
-            'name'     => $row[1],
-            'username'     => $row[2],
+            'name' => $row[1],
+            'username' => $row[2],
             'password' =>$row[3],
             'role' => $row[4],
-            'email'    => $row[5]
+            'parent' => $row[5],
+            'city' => $row[6],
+            'country' => $row[7],
+            'status' => $row[8],
+            'email' => $row[9]
         ]);
     }
 }

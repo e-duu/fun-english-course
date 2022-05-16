@@ -2,7 +2,6 @@
 
 namespace App\Imports;
 
-use App\Models\Level;
 use App\Models\Student;
 use App\Models\User;
 use Maatwebsite\Excel\Concerns\ToModel;
@@ -34,12 +33,12 @@ class StudentImport implements ToModel, WithStartRow
     */
     public function model(array $row)
     {
-        $user = User::where('role', 'student')->where('name', 'like', '%'.$row[4].'%')->where('parent', 'like', '%'.$row[1].'%')->first();
+        $user = User::where('role', 'student')->where('name', 'like', '%'.$row[2].'%')->where('parent', 'like', '%'.$row[1].'%')->first();
 
         if ($user) {
             Student::create([
-                'month' => $row[6],
-                'price' => $row[5],
+                'month' => $row[4],
+                'price' => $row[3],
                 'user_id' => $user->id,
                 'level_id' => $this->id,
             ]);
