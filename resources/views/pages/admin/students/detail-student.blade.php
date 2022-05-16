@@ -116,7 +116,7 @@ Detail Students - {{ $data->name }}
               </div>
           </div>
       </div>
-        
+
         {{-- Modal import --}}
         <div x-data="{ showModal : false }">
             <!-- Button -->
