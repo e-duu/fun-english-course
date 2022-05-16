@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\InvoiceMail;
+use App\Models\Invoice;
 use App\Models\Level;
 use App\Models\LevelUser;
 use App\Models\Program;
@@ -54,6 +55,26 @@ class StudentController extends Controller
                 'status' => 'unpaid',
             ]);
         }
+
+        $data = Student::latest()->first();
+        $yymm = $data->created_at->format('ym');
+        
+        if ($data->created_at == date('Y-01-01')) {
+            $number = 1;
+        }else{
+            $num = Invoice::latest()->first();
+            if ($num) {
+                $number = $num->numberInv+1;
+            }else{
+                $number = 1;
+            }
+        }
+
+        Invoice::create([
+            'dateCode' => $yymm,
+            'numberInv' => $number,
+            'student_id' =>$data->id,
+        ]);
 
         return redirect()->route('student.show-spp', $request->level_id);
     }

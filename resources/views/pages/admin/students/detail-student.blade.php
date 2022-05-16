@@ -165,7 +165,7 @@ Detail Students - {{ $data->name }}
             <button class="px-4 py-2 text-sm bg-blue-600 rounded-md transition-colors duration-150 ease-linear text-white focus:outline-none focus:ring-0 font-semibold hover:bg-blue-700">Export</button>
         </form>
     </div>
-    <div class="float-right mb-5">
+    <div class="float-right">
         <a href="{{ route('student.show', $data->program_id) }}" class="px-5 py-1 bg-yellow-400 rounded-md font-semibold text-white">Back to Level</a>
     </div>
 </div>

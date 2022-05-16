@@ -51,7 +51,7 @@
             </div>
         </div>
     </div>
-    <div class="float-right mb-5">
+    <div class="float-right">
       <a href="{{ route('student.all') }}" class="px-5 py-1 bg-yellow-400 rounded-md font-semibold text-white">Back to Program</a>
     </div>
 </div>
