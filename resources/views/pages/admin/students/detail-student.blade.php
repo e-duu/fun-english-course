@@ -3,7 +3,7 @@
   Fun English Course | Program Detail
 @endsection
 @section('sub-title')
-Detail Students - {{ $data->name }}
+  Detail Students
 @endsection
 @section('content')
 
@@ -78,27 +78,31 @@ Detail Students - {{ $data->name }}
         {{-- Modal Filter --}}
         <div x-data="{ showModal : false }">
           <!-- Button -->
-          <button @click="showModal = !showModal" class="px-4 py-2 text-sm bg-blue-600 rounded-md transition-colors duration-150 ease-linear text-white focus:outline-none focus:ring-0 font-semibold hover:bg-blue-700">Filter & Sort</button>
+          <button @click="showModal = !showModal" class="px-4 py-2 text-sm bg-blue-600 rounded-md transition-colors duration-150 ease-linear text-white focus:outline-none focus:ring-0 font-semibold hover:bg-blue-700">Filter & Search</button>
 
           <!-- Modal Background -->
           <div x-show="showModal" class="fixed text-gray-500 flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0" x-transition:enter="transition ease duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
                   <!-- Modal -->
               <div x-show="showModal" class="bg-white rounded-xl shadow-2xl p-6 w-80 sm:w-3/6 mx-10" @click.away="showModal = false" x-transition:enter="transition ease duration-100 transform" x-transition:enter-start="opacity-0 scale-90 translate-y-1" x-transition:enter-end="opacity-100 scale-100 translate-y-0" x-transition:leave="transition ease duration-100 transform" x-transition:leave-start="opacity-100 scale-100 translate-y-0" x-transition:leave-end="opacity-0 scale-90 translate-y-1">
                   <!-- Title -->
-                  <span class="font-bold block text-2xl mb-3">Filter & Sort </span>
+                  <span class="font-bold block text-2xl mb-3">Filter & Search</span>
                   <div class="border-b border-gray-500 mb-5"></div>
                   <!-- Some beer 🍺 -->
-                  <form action="{{route('student.show', $data->id)}}" method="GET">
+                  <form action="" method="GET">
+                      <label class="block text-sm mt-2">
+                        <span class="text-gray-700 dark:text-gray-400">Student Name</span>
+                        <input type="text" name="name" class="border w-full mt-1 text-sm border-gray-400  dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md" placeholder="John Doe"/>
+                      </label>
+
                       <label class="block mt-4 text-sm">
                           <span class="text-gray-700 dark:text-gray-400">
-                              Level
+                              Payment Status
                           </span>
-                          <select name="level" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border rounded-md border-gray-400 -gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
+                          <select name="status" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border rounded-md border-gray-400 -gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
                               <option selected disabled>Choose Option...</option>
-                              <option value="all">All</option>
-                              @foreach ($spps as $level)
-                                  <option value="{{ $level->id }}" >{{ $level->name }}</option>
-                              @endforeach
+                              <option value="paid">PAID</option>
+                              <option value="unpaid">UNPAID</option>
+                              <option value="paid_manually">PAID(Manually)</option>
                           </select>
                       </label>
 
@@ -108,9 +112,9 @@ Detail Students - {{ $data->name }}
                       <div class="flex-col sm:flex-row sm:justify-end text-center sm:text-right space-y-2 sm:space-x-2 mt-5">
                           <button type="button" @click="showModal = !showModal" class="w-full sm:w-auto sm:px-4 py-2 text-xs sm:text-sm bg-gray-600 rounded-md transition-colors duration-150 ease-linear text-white focus:outline-none focus:ring-0 font-semibold hover:bg-gray-700">Cancel</button>
 
-                          <button formaction="{{ route('student.reset', $data->id) }}" class="w-full sm:w-auto sm:px-4 py-2 text-xs sm:text-sm bg-red-600 rounded-md transition-colors duration-150 ease-linear text-white focus:outline-none focus:ring-0 font-semibold hover:bg-red-700">Reset</button>
+                          <button formaction="{{ route('student.search-reset', $data->id) }}" class="w-full sm:w-auto sm:px-4 py-2 text-xs sm:text-sm bg-red-600 rounded-md transition-colors duration-150 ease-linear text-white focus:outline-none focus:ring-0 font-semibold hover:bg-red-700">Reset</button>
 
-                          <button formaction="{{route('student.show', $data->id)}}" class="w-full sm:w-auto sm:px-4 py-2 text-xs sm:text-sm bg-blue-600 rounded-md transition-colors duration-150 ease-linear text-white focus:outline-none focus:ring-0 font-semibold hover:bg-blue-700">Apply Filter</button>
+                          <button formaction="{{ route('student.show-spp', $data->id) }}" class="w-full sm:w-auto sm:px-4 py-2 text-xs sm:text-sm bg-blue-600 rounded-md transition-colors duration-150 ease-linear text-white focus:outline-none focus:ring-0 font-semibold hover:bg-blue-700">Search</button>
                       </form>
                   </div>
               </div>
@@ -185,6 +189,7 @@ Detail Students - {{ $data->name }}
             <th class="px-4 py-3">Level</th>
             <th class="px-4 py-3">Currency</th>
             <th class="px-4 py-3">Price</th>
+            <th class="px-4 py-3">Month</th>
             <th class="px-4 py-3">Status Payment</th>
             <th class="px-4 py-3">Action</th>
         </tr>
@@ -228,21 +233,48 @@ Detail Students - {{ $data->name }}
             </td>
             <td class="px-4 py-3 text-sm">
               @if ($item->status != 'unpaid')
-                @if ($item->sppPayment->currency == 'USD')
+              @if ($item->sppPayment->currency == 'USD')
                   USD
                 @elseif ($item->sppPayment->currency == 'IDR')
                   IDR
                 @endif
               @else
-                <p class="font-bold">-</p>
+              <p class="font-bold">-</p>
               @endif
             </td>
             <td class="px-4 py-3 text-sm">
-                @if ($item->status == 'unpaid')
-                    {{ 'Rp. '.number_format($item->price, 0, ',', ',') }}
-                @else
-                    {{ $item->sppPayment->currency == 'USD' ? '$'.$item->sppPayment->amount: 'Rp. '.number_format($item->sppPayment->amount, 0, ',', ',') }}
-                @endif
+              @if ($item->status == 'unpaid')
+              {{ 'Rp. '.number_format($item->price, 0, ',', ',') }}
+              @else
+              {{ $item->sppPayment->currency == 'USD' ? '$'.$item->sppPayment->amount: 'Rp. '.number_format($item->sppPayment->amount, 0, ',', ',') }}
+              @endif
+            </td>
+            <td class="px-4 py-3 text-sm">
+              @if ($item->month == 1)
+                  January
+              @elseif ($item->month == 2)
+                  February
+              @elseif ($item->month == 3)
+                  March
+              @elseif ($item->month == 4)
+                  April
+              @elseif ($item->month == 5)
+                  May
+              @elseif ($item->month == 6)
+                  June
+              @elseif ($item->month == 7)
+                  July
+              @elseif ($item->month == 8)
+                  August
+              @elseif ($item->month == 9)
+                  September
+              @elseif ($item->month == 10)
+                  October
+              @elseif ($item->month == 11)
+                  November
+              @elseif ($item->month == 12)
+                  December
+              @endif
             </td>
             <td class="px-4 py-3 text-sm">
               <p class="rounded text-center font-bold uppercase text-white py-1 bold @if($item->status == 'paid') bg-green-500 @elseif ($item->status == 'paid_manually') bg-green-500 @elseif ($item->status == 'unpaid') bg-red-500 @elseif ($item->status == 'pending') bg-yellow-500 @endif">
@@ -272,7 +304,7 @@ Detail Students - {{ $data->name }}
           </tr>
         @empty
           <tr>
-            <td colspan="11" class="text-center text-gray-500 px-4 py-3">
+            <td colspan="12" class="text-center text-gray-500 px-4 py-3">
               <p>
                 Data is empty..
               </p>

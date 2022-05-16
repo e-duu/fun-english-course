@@ -132,6 +132,7 @@ Route::middleware(['auth'])->group(function ()
 			Route::get('/show/{id}', [StudentController::class, 'show'])->name('student.show');
 			Route::get('/show/student/{id}', [StudentController::class, 'sppStudent'])->name('student.show-spp');
 			Route::get('/reset/{id}', [StudentController::class, 'filterReset'])->name('student.reset');
+			Route::get('/reset/search/{id}', [StudentController::class, 'filterStudentReset'])->name('student.search-reset');
 		});
 
 		Route::prefix('program')->group(function () {
