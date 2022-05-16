@@ -27,7 +27,10 @@
           <p class="text-blue-700 font-bold text-lg mb-5">BILLED TO : </p>
           <div class="flex justify-between items-center">
             <p class="text-blue-700 font-bold">Parent's Name : {{ $data->student->parent }}</p>
-            <p class="text-blue-700 font-bold">Receipt Number : RCPT-{{ $data->created_at->format('Ymd') }}</p>
+            @php
+                $num = (str_pad((int)$data->invoice->numberInv , 8, '0', STR_PAD_LEFT));
+            @endphp
+            <p class="text-blue-700 font-bold">Receipt Number : RCPT-{{ $data->invoice->dateCode.$num }}</p>
           </div>
           <div class="flex justify-between items-center">
             <p class="text-blue-700 font-bold">Student's Name : {{ $data->student->name }}</p>
@@ -35,7 +38,7 @@
           </div>
           <div class="flex justify-between items-center">
             <p class="text-blue-700 font-bold">City of Residence : {{  $data->student->city }}</p>
-            <p class="text-blue-700 font-bold">Due Date : {{ $data->created_at->format('d-m-Y') }}</p>
+            <p class="text-blue-700 font-bold">Due Date : -</p>
           </div>
           <p class="text-blue-700 font-bold">Country of Residence : {{  $data->student->country }}</p>
           <p class="text-blue-700 font-bold">Email Address : {{  $data->student->email }}</p>
@@ -65,7 +68,7 @@
                         {{ number_format($data->price) }}
                       </td>
                       <td class="px-4 py-3 text-sm">
-                        {{ $data->count() }}
+                        1
                       </td>
                       <td class="px-4 py-3 text-sm">
                         {{ number_format($data->price) }}

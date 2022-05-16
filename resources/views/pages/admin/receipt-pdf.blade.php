@@ -116,7 +116,10 @@
             <td></td>
             <td>Receipt Number</td>
             <td>:</td>
-            <td>RCPT-{{ $data->created_at->format('Ymd') }}</td>
+            @php
+                $num = (str_pad((int)$data->invoice->numberInv , 8, '0', STR_PAD_LEFT));
+            @endphp
+            <td>RCPT-{{ $data->invoice->dateCode.$num }}</td>
           </tr>
           <tr>
             <td>Student's Name</td>
@@ -134,7 +137,7 @@
             <td></td>
             <td>Due Date</td>
             <td>:</td>
-            <td>{{ $data->created_at->format('d-m-Y') }}</td>
+            <td>-</td>
           </tr>
           <tr>
             <td>Country of Residence</td>
@@ -164,7 +167,7 @@
           <td>{{ $data->level->program->name.' - '.$data->level->name }}</td>
           <td>-</td>
           <td>{{ number_format($data->price) }}</td>
-          <td>{{ $data->count() }}</td>
+          <td>1</td>
           <td>{{ number_format($data->price) }}</td>
         </tr>
       </tbody>

@@ -43,4 +43,9 @@ class Student extends Model
     {
         return $this->belongsTo(SppPaymentBank::class);
     }
+
+    public function invoice()
+    {
+        return $this->hasOne(Invoice::class, 'student_id');
+    }
 }
