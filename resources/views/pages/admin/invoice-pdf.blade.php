@@ -114,12 +114,12 @@
             <td>:</td>
             <td>{{  $data->student->parent }}</td>
             <td></td>
-            {{-- <td>Invoice Number</td>
+            <td>Invoice Number</td>
             <td>:</td>
             @php
                 $num = (str_pad((int)$data->invoice->numberInv , 8, '0', STR_PAD_LEFT));
             @endphp
-            <td>INV-{{ $data->invoice->dateCode.$num }}</td> --}}
+            <td>INV-{{ $data->invoice->dateCode.$num }}</td>
           </tr>
           <tr>
             <td>Student's Name</td>

@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Invoice Mail</title>
+        <title>Receipt Mail</title>
         <style>
             body[yahoo] body{
                 padding: 20px;
@@ -30,7 +30,7 @@
     </head>
     <body yahoo>
         <h1>
-            Invoice Spp
+            Receipt Spp
         </h1>
 
         @php
@@ -42,7 +42,7 @@
                     try {
                         $response = json_decode($response_json);
                             if('success' === $response->result) {
-                                $base_price = $sppMonth->price;
+                                $base_price = $data->price;
                                 $result = round(($base_price * $response->conversion_rates->USD), 2);
                             }
                         }
@@ -51,7 +51,7 @@
                     }
                 }
             } catch (\Throwable $th) {
-                dd('an error occurred on the server');
+                dd('an error occurred on the server, check your network again');
             }
         @endphp
 
@@ -69,38 +69,38 @@
                 </td>
                 <td>
                     <div class="column-text">
-                        <p class="">: {{$user->name}}</p>
+                        <p class="">: {{$data->student->name}}</p>
                         <p class="">:
-                            @if ($sppMonth->month == 1)
+                            @if ($data->month == 1)
                                 January
-                            @elseif ($sppMonth->month == 2)
+                            @elseif ($data->month == 2)
                                 February
-                            @elseif ($sppMonth->month == 3)
+                            @elseif ($data->month == 3)
                                 March
-                            @elseif ($sppMonth->month == 4)
+                            @elseif ($data->month == 4)
                                 April
-                            @elseif ($sppMonth->month == 5)
+                            @elseif ($data->month == 5)
                                 May
-                            @elseif ($sppMonth->month == 6)
+                            @elseif ($data->month == 6)
                                 June
-                            @elseif ($sppMonth->month == 7)
+                            @elseif ($data->month == 7)
                                 July
-                            @elseif ($sppMonth->month == 8)
+                            @elseif ($data->month == 8)
                                 August
-                            @elseif ($sppMonth->month == 9)
+                            @elseif ($data->month == 9)
                                 September
-                            @elseif ($sppMonth->month == 10)
+                            @elseif ($data->month == 10)
                                 October
-                            @elseif ($sppMonth->month == 11)
+                            @elseif ($data->month == 11)
                                 November
-                            @elseif ($sppMonth->month == 12)
+                            @elseif ($data->month == 12)
                                 December
                             @endif
                         </p>
-                        <p class="">: {{$program->name}}</p>
-                        <p class="">: {{$level->name}}</p>
-                        <p class="">: {{$sppMonth->status}}</p>
-                        <p class="">: {{'Rp. '.number_format($sppMonth->price).' / $'.$result}}</p>
+                        <p class="">: {{$data->level->program->name}}</p>
+                        <p class="">: {{$data->level->name}}</p>
+                        <p class="">: {{$data->status}}</p>
+                        <p class="">: {{'Rp.'.number_format($data->price).' / $'.$result}}</p>
                     </div>
                 </td>
             </tr>
@@ -112,19 +112,17 @@
                 </td>
                 <td>
                     <div class="column-text">
-                        <p class="text-extra-bold">: {{'Rp. '.number_format($sppMonth->price).' / $'.$result}}</p>
+                        <p class="text-extra-bold">: {{'Rp.'.number_format($data->price).' / $'.$result}}</p>
                     </div>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <table bgcolor="#e05443" border="0" cellspacing="0" cellpadding="0">
-                      <tr>
-                        <td class="button" style="padding: 0 20px 0 20px; font-size: 14px; font-weight: bold; font-family: sans-serif; text-align: center;" height="45">
-                          <a style="text-decoration: none; color: #fff;" href="{{route('spp-payment', $sppMonth->id)}}">Pay Now</a>
-                        </td>
-                      </tr>
-                    </table>
+                    <div class="column-text">
+                        <p class="text-extra-bold">
+                            Thank You So Much...
+                        </p>
+                    </div>
                 </td>
             </tr>
         </table>

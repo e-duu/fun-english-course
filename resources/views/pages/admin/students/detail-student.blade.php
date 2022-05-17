@@ -9,7 +9,7 @@
 
 <div class="flex item-center justify-between space-x-2">
     <div class="flex space-x-2 items-center">
-        {{-- Modal Upload --}}
+        {{-- Modal Send To Mail --}}
         <div x-data="{ showModal : false }">
             <!-- Button -->
             <button @click="showModal = !showModal" class="px-4 py-2 text-sm bg-blue-600 rounded-md transition-colors duration-150 ease-linear text-white focus:outline-none focus:ring-0 font-semibold hover:bg-blue-700">Send Mail</button>
@@ -22,7 +22,7 @@
                         <span class="font-bold block text-2xl mb-3">Send To Mail</span>
                         <div class="border-b border-gray-500 mb-5"></div>
                         <!-- Send To Email (Invoice) -->
-                        <form action="" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('invorecToMail') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('POST')
                             <div class='flex items-center justify-center w-full'>
@@ -47,7 +47,7 @@
                                                     </p>
                                                 </td>
                                                 <td class="px-4 py-3 text-sm">
-                                                    <input type="checkbox" name="level">
+                                                    <input type="checkbox" name="student[{{ $item->id }}]">
                                                 </td>
                                             </tr>
                                         @empty

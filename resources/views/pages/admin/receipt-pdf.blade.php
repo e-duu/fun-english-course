@@ -135,12 +135,12 @@
             <td>:</td>
             <td>{{  $data->student->parent }}</td>
             <td></td>
-            {{-- <td>Receipt Number</td>
+            <td>Receipt Number</td>
             <td>:</td>
             @php
                 $num = (str_pad((int)$data->invoice->numberInv , 8, '0', STR_PAD_LEFT));
             @endphp
-            <td>RCPT-{{ $data->invoice->dateCode.$num }}</td> --}}
+            <td>RCPT-{{ $data->invoice->dateCode.$num }}</td>
           </tr>
           <tr>
             <td>Student's Name</td>
