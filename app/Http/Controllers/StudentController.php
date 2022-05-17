@@ -98,7 +98,7 @@ class StudentController extends Controller
         $data = Level::findOrFail($id);
         
         // Search student by name
-        if (request()->get('name') && request()->get('name') != null) {
+        if (request()->get('name') != null) {
             $spps = Student::whereHas('student', function($query){
                 $query->where('name', 'like', '%'. request()->get('name').'%');
             })->where('level_id', $id)->paginate(5);
@@ -107,10 +107,8 @@ class StudentController extends Controller
         }
 
         // Filter spp by payment status
-        if (request()->get('status') && request()->get('status') != null) {
-            $spps = Student::where('status', '=', request()->get('status'))->where('level_id', $id)->paginate(5);;
-        } else {
-            $spps = Student::where('level_id', $id)->paginate(5);
+        if (request()->get('status') != null) {
+            $spps = Student::where('status', request()->get('status'))->where('level_id', $id)->paginate(5);
         }
 
         return view('pages.admin.students.detail-student', compact('data', 'spps'));
