@@ -36,18 +36,18 @@
                                     </thead>
                                     <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-darker">
 
-                                        @forelse ($spps as $item)
+                                        @forelse ($students as $student)
                                             <tr class="text-gray-700 dark:text-gray-400">
                                                 <td class="px-4 py-3 text-sm">
-                                                    {{ $item->student->name }}
+                                                    {{ $student->student->name }}
                                                 </td>
                                                 <td class="px-4 py-3 text-sm">
-                                                    <p class="rounded text-center font-bold uppercase text-white py-1 bold @if($item->status == 'paid') bg-green-500 @elseif ($item->status == 'paid_manually') bg-green-500 @elseif ($item->status == 'unpaid') bg-red-500 @elseif ($item->status == 'pending') bg-yellow-500 @endif">
-                                                        {{ $item->status }}
+                                                    <p class="rounded text-center font-bold uppercase text-white py-1 bold @if($student->status == 'paid') bg-green-500 @elseif ($student->status == 'paid_manually') bg-green-500 @elseif ($student->status == 'unpaid') bg-red-500 @elseif ($student->status == 'pending') bg-yellow-500 @endif">
+                                                        {{ $student->status }}
                                                     </p>
                                                 </td>
                                                 <td class="px-4 py-3 text-sm">
-                                                    <input type="checkbox" name="student[{{ $item->id }}]">
+                                                    <input type="checkbox" name="student[{{ $student->id }}]">
                                                 </td>
                                             </tr>
                                         @empty
