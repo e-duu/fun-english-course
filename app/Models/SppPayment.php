@@ -23,4 +23,9 @@ class SppPayment extends Model
     {
         $this->belongsTo(User::class, 'id', 'user_id');
     }
+
+    public function student()
+    {
+        $this->belongsTo(Student::class, 'id', 'student_id');
+    }
 }

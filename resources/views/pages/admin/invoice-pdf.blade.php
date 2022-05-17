@@ -6,15 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fun English Course | Invoice</title>
   <style>
-    @page { 
-            margin: 0; 
+    @page {
+            margin: 0;
             display: flex;
             align-items: center;
         }
     @font-face {
         font-family: "Roboto Slab", sans-serif;
         font-weight: 400;
-        font-style: normal; 
+        font-style: normal;
         src: url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap') format("truetype");
     }
     h1 {
@@ -108,7 +108,7 @@
     <div style="margin-top: 30px;">
       <h3 style="color: #1E3E97; padding-left: 2px">BILLED TO :</h3>
       <table id="table2">
-        <tbody>   
+        <tbody>
           <tr>
             <td>Parent's Name</td>
             <td>:</td>
@@ -162,7 +162,7 @@
           <th>Amount</th>
         </tr>
       </thead>
-      <tbody>   
+      <tbody>
         <tr>
           <td>{{ $data->level->program->name.' - '.$data->level->name }}</td>
           <td>-</td>
@@ -171,7 +171,7 @@
           <td>{{ number_format($data->price) }}</td>
         </tr>
       </tbody>
-      <tfoot>   
+      <tfoot>
         <tr>
           <th></th>
           <th></th>

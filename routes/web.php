@@ -84,6 +84,9 @@ Route::middleware(['auth'])->group(function ()
 	Route::get('download/invoice/{id}', [PdfController::class, 'downloadInvoice'])->name('invoice');
 	Route::get('download/receipt/{id}', [PdfController::class, 'downloadReceipt'])->name('receipt');
 
+    // Send Invoice & Receipt To Mail
+	Route::post('download/invorec-to-mail', [StudentController::class, 'invorecToMail'])->name('invorecToMail');
+
 	// Page Invoice & Receipt
 	Route::get('/invoice/{id}', [InvoiceController::class, 'invoice'])->name('page-invoice');
 	Route::get('/receipt/{id}', [InvoiceController::class, 'receipt'])->name('page-receipt');

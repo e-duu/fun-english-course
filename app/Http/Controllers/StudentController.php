@@ -11,6 +11,7 @@ use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class StudentController extends Controller
 {
@@ -55,7 +56,7 @@ class StudentController extends Controller
 
         $data = Student::latest()->first();
         $yymm = $data->created_at->format('ym');
-        
+
         if ($data->created_at == date('Y-01-01')) {
             $number = 1;
         }else{
@@ -96,9 +97,11 @@ class StudentController extends Controller
     public function sppStudent($id)
     {
         $data = Level::findOrFail($id);
-        
+
+        $students = Student::where('level_id', $id)->get();
+
         // Search student by name
-        if (request()->get('name') != null) {
+        if (request()->get('name') && request()->get('status') != null) {
             $spps = Student::whereHas('student', function($query){
                 $query->where('name', 'like', '%'. request()->get('name').'%');
             })->where('level_id', $id)->paginate(5);
@@ -111,7 +114,7 @@ class StudentController extends Controller
             $spps = Student::where('status', request()->get('status'))->where('level_id', $id)->paginate(5);
         }
 
-        return view('pages.admin.students.detail-student', compact('data', 'spps'));
+        return view('pages.admin.students.detail-student', compact('data', 'spps', 'students'));
     }
 
     public function sppInvoiceMail($userId, $studentId)
@@ -138,5 +141,38 @@ class StudentController extends Controller
     public function filterStudentReset(Request $request)
     {
         return redirect()->route('student.show-spp', $request->id);
+    }
+
+    // Send To Mail
+    public function invorecToMail(Request $request)
+    {
+        $data = $request->all();
+
+        // try {
+            foreach ($data['student'] as $index => $value) {
+                $student = Student::whereId($index)->first();
+
+                $dataEmail["email"] = $student->student->email;
+                $dataEmail["title"] = "From Fun English Course";
+
+                if ($student->status == 'unpaid') {
+                    $this->namePdf = 'invoice.pdf';
+                    $pdf = PDF::loadView('pages.admin.invoice-pdf', ['data' => $student]);
+                } else {
+                    $this->namePdf = 'receipt.pdf';
+                    $pdf = PDF::loadView('pages.admin.receipt-pdf', ['data' => $student]);
+                }
+
+                Mail::send($student->status == 'unpaid' ? 'pages.emails.InvoiceMail' : 'pages.emails.ReceiptMail', ['data' => $student], function($message)use($dataEmail, $pdf) {
+                    $message->to($dataEmail["email"], $dataEmail["email"])
+                        ->subject($dataEmail["title"])
+                        ->attachData($pdf->output(), $this->namePdf);
+                });
+            }
+        // } catch (\Throwable $th) {
+        //     dd('Send To Mail Failed, check your network again');
+        // }
+
+        return back()->with('success', 'send mail successfully');
     }
 }

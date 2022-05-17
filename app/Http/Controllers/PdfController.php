@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
-use Illuminate\Http\Request;
-// use Barryvdh\DomPDF\PDF;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 class PdfController extends Controller
@@ -32,4 +30,5 @@ class PdfController extends Controller
         return $pdf->download('receipt.pdf');
 
     }
+
 }

@@ -9,7 +9,7 @@
 
 <div class="flex item-center justify-between space-x-2">
     <div class="flex space-x-2 items-center">
-        {{-- Modal Upload --}}
+        {{-- Modal Send To Mail --}}
         <div x-data="{ showModal : false }">
             <!-- Button -->
             <button @click="showModal = !showModal" class="px-4 py-2 text-sm bg-blue-600 rounded-md transition-colors duration-150 ease-linear text-white focus:outline-none focus:ring-0 font-semibold hover:bg-blue-700">Send Mail</button>
@@ -22,7 +22,7 @@
                         <span class="font-bold block text-2xl mb-3">Send To Mail</span>
                         <div class="border-b border-gray-500 mb-5"></div>
                         <!-- Send To Email (Invoice) -->
-                        <form action="" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('invorecToMail') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('POST')
                             <div class='flex items-center justify-center w-full'>
@@ -36,18 +36,18 @@
                                     </thead>
                                     <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-darker">
 
-                                        @forelse ($spps as $item)
+                                        @forelse ($students as $student)
                                             <tr class="text-gray-700 dark:text-gray-400">
                                                 <td class="px-4 py-3 text-sm">
-                                                    {{ $item->student->name }}
+                                                    {{ $student->student->name }}
                                                 </td>
                                                 <td class="px-4 py-3 text-sm">
-                                                    <p class="rounded text-center font-bold uppercase text-white py-1 bold @if($item->status == 'paid') bg-green-500 @elseif ($item->status == 'paid_manually') bg-green-500 @elseif ($item->status == 'unpaid') bg-red-500 @elseif ($item->status == 'pending') bg-yellow-500 @endif">
-                                                        {{ $item->status }}
+                                                    <p class="rounded text-center font-bold uppercase text-white py-1 bold @if($student->status == 'paid') bg-green-500 @elseif ($student->status == 'paid_manually') bg-green-500 @elseif ($student->status == 'unpaid') bg-red-500 @elseif ($student->status == 'pending') bg-yellow-500 @endif">
+                                                        {{ $student->status }}
                                                     </p>
                                                 </td>
                                                 <td class="px-4 py-3 text-sm">
-                                                    <input type="checkbox" name="level">
+                                                    <input type="checkbox" name="student[{{ $student->id }}]">
                                                 </td>
                                             </tr>
                                         @empty
