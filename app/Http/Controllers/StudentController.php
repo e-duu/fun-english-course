@@ -18,11 +18,8 @@ class StudentController extends Controller
     public function index()
     {
         $data = Program::paginate(10);
-        $users = User::where('role', 'student')->get();
-        $levelUsers = LevelUser::with(['level'])->get();
-        $levels = Level::get();
 
-        return view('pages.admin.students.index', compact('data', 'users', 'levelUsers', 'levels'));
+        return view('pages.admin.students.index', compact('data'));
     }
 
     public function store(Request $request)
@@ -83,6 +80,9 @@ class StudentController extends Controller
     public function show($id)
     {
         $data = Program::findorfail($id);
+        $users = User::where('role', 'student')->get();
+        $levelUsers = LevelUser::with(['level'])->get();
+        $getLevels = Level::get();
         $levelsFt = Level::where('program_id', $id)->get();
         if (request()->level == null) {
             $levels = $data->levels()->paginate(10);
@@ -91,7 +91,7 @@ class StudentController extends Controller
         } else {
             $levels = Level::where('id', request()->level)->paginate(1);
         }
-        return view('pages.admin.students.detail', compact('data', 'levels', 'levelsFt'));
+        return view('pages.admin.students.detail', compact('data', 'levels', 'levelsFt', 'users', 'levelUsers', 'getLevels'));
     }
 
     public function sppStudent($id)
