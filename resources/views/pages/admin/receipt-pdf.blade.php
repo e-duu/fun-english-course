@@ -89,6 +89,27 @@
   </style>
 </head>
 <body>
+    @php
+        // Convertion IDR to USD
+        try {
+            $req_url = "https://v6.exchangerate-api.com/v6/4de7938f23bbd34918b9c82c/latest/IDR";
+            $response_json = file_get_contents($req_url);
+            if(false !== $response_json) {
+                try {
+                    $response = json_decode($response_json);
+                        if('success' === $response->result) {
+                            $base_price = $data->price;
+                            $result = round(($base_price * $response->conversion_rates->USD), 2);
+                        }
+                    }
+                catch(Exception $e) {
+                    dd('Convertion Failed!');
+                }
+            }
+        } catch (\Throwable $th) {
+            dd('an error occurred on the server, check your network again');
+        }
+    @endphp
   <div>
     <h1>RECEIPT</h1>
   </div>
@@ -166,9 +187,9 @@
         <tr>
           <td>{{ $data->level->program->name.' - '.$data->level->name }}</td>
           <td>-</td>
-          <td>{{ number_format($data->price) }}</td>
+          <td>{{ $data->sppPayment->currency == 'USD' ? '$'.$result : number_format($data->price) }}</td>
           <td>1</td>
-          <td>{{ number_format($data->price) }}</td>
+          <td>{{ $data->sppPayment->currency == 'USD' ? '$'.$result : number_format($data->price) }}</td>
         </tr>
       </tbody>
       <tfoot>
@@ -177,7 +198,7 @@
           <th></th>
           <th></th>
           <th>Total</th>
-          <th>{{ number_format($data->price) }}</th>
+          <th>{{ $data->sppPayment->currency == 'USD' ? '$'.$result : number_format($data->price) }}</th>
         </tr>
       </tfoot>
     </table>

@@ -35,11 +35,11 @@ class PdfController extends Controller
 
     public function invoiceToMail()
     {
-        $data = Student::findOrFail(9);
+        $data = Student::findOrFail(2);
 
         $dataEmail["email"] = $data->student->email;
         $dataEmail["title"] = "From Fun English Course";
-        $dataEmail["body"] = "This is Demo";
+        $dataEmail["body"] = "This is Invoice";
 
         if ($data->status == 'unpaid') {
             $this->namePdf = 'invoice.pdf';
