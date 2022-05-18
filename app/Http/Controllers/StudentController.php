@@ -148,7 +148,7 @@ class StudentController extends Controller
     {
         $data = $request->all();
 
-        // try {
+        try {
             foreach ($data['student'] as $index => $value) {
                 $student = Student::whereId($index)->first();
 
@@ -169,9 +169,9 @@ class StudentController extends Controller
                         ->attachData($pdf->output(), $this->namePdf);
                 });
             }
-        // } catch (\Throwable $th) {
-        //     dd('Send To Mail Failed, check your network again');
-        // }
+        } catch (\Throwable $th) {
+            dd('Send To Mail Failed, check your network again');
+        }
 
         return back()->with('success', 'send mail successfully');
     }
