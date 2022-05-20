@@ -45,6 +45,11 @@
       <input type="text" name="name" value="{{ $data->name }}" class="block w-full mt-1 text-sm rounded-md border-gray-400 dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray form-input" placeholder="Jane Doe"/>
     </label>
 
+    <label class="block text-sm mt-4">
+      <span class="text-gray-700 dark:text-gray-400">Number</span>
+      <input type="text" name="number" value="{{ $data->number }}" class="block w-full mt-1 text-sm rounded-md border-gray-400 dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray form-input" placeholder="000000"/>
+    </label>
+
     <label class="block text-sm" style="margin-top: 20px">
       <span class="text-gray-700 dark:text-gray-400">Parent</span>
       <input type="text" name="parent" value="{{ $data->parent }}" class="border w-full mt-1 text-sm border-gray-400  dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md" value="{{ old('parent') }}" placeholder="John Doe"/>

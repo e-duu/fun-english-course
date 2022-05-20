@@ -12,7 +12,7 @@ class PaymentPageController extends Controller
     public function index()
     {
         $auth = Auth::user()->id;
-        $data = Student::where('user_id', $auth)->latest()->get();
+        $data = Student::where('user_id', $auth)->latest()->paginate(5);
         return view('pages.payment', compact('data'));
     }
 
@@ -21,18 +21,6 @@ class PaymentPageController extends Controller
         $data = Student::findOrFail($id);
         return view('pages.sppPayment', compact('data'));
     }
-
-    // /**
-    //  * Store a newly created resource in storage.
-    //  *
-    //  * @param  \Illuminate\Http\Request  $request
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function sppPaymentStore(Request $request)
-    // {
-    //     Student::create($request->all());
-    //     return redirect()->route('resource');
-    // }
 
     public function sppPaymentDetail($id)
     {

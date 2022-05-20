@@ -48,6 +48,7 @@ class UsersTemplate implements FromArray, WithHeadings, WithEvents, WithStyles, 
         return [
             'No',
             'Student Name',
+            'Student Number',
             'Username',
             'Password',
             'Role',
@@ -62,7 +63,7 @@ class UsersTemplate implements FromArray, WithHeadings, WithEvents, WithStyles, 
     public function registerEvents(): array
     {
         return [
-            AfterSheet::class => function(AfterSheet $event) {
+            AfterSheet::class => function (AfterSheet $event) {
 
                 $event->sheet->getDelegate()->getStyle(1)
                     ->getAlignment()
@@ -77,4 +78,3 @@ class UsersTemplate implements FromArray, WithHeadings, WithEvents, WithStyles, 
         ];
     }
 }
-

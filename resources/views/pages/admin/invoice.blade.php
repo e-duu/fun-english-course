@@ -38,7 +38,7 @@
           </div>
           <div class="flex justify-between items-center">
             <p class="text-blue-700 font-bold">City of Residence : {{  $data->student->city }}</p>
-            <p class="text-blue-700 font-bold">Due Date : {{ $data->created_at->addDay()->format('d-m-Y') }}</p>
+            {{-- <p class="text-blue-700 font-bold">Due Date : {{ $data->created_at->addDay()->format('d-m-Y') }}</p> --}}
           </div>
           <p class="text-blue-700 font-bold">Country of Residence : {{  $data->student->country }}</p>
           <p class="text-blue-700 font-bold">Email Address : {{  $data->student->email }}</p>
