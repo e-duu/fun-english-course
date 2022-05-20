@@ -253,6 +253,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
 
   <script>
+    var users = {{json_encode($users)}};
+    var levelUsers = {{json_encode($levelUsers)}};
+    var selectedLevels = null;
+    var users_id = null;
+
     $(document).ready(function () {
         $('select').selectize({
             sortField: 'text'
@@ -262,14 +267,14 @@
 
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
   <script>
+
       var payments = new Vue({
           el: "#payments",
           mounted() {
 
           },
           data: {
-              users: @json($users ),
-              levels: @json($levels),
+              users: @json($users),
               levelUsers: @json($levelUsers),
               selectedLevels: null,
               users_id: null,
