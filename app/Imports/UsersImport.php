@@ -9,32 +9,33 @@ use Maatwebsite\Excel\Concerns\WithStartRow;
 class UsersImport implements ToModel, WithStartRow
 {
     /**
-    * @param array $row
-    *
-    * @return \Illuminate\Database\Eloquent\Model|null
-    */
+     * @param array $row
+     *
+     * @return \Illuminate\Database\Eloquent\Model|null
+     */
     public function startRow(): int
     {
         return 2;
     }
-    
+
     /**
-    * @param array $row
-    *
-    * @return \Illuminate\Database\Eloquent\Model|null
-    */
+     * @param array $row
+     *
+     * @return \Illuminate\Database\Eloquent\Model|null
+     */
     public function model(array $row)
     {
         return new User([
             'name' => $row[1],
-            'username' => $row[2],
-            'password' =>$row[3],
-            'role' => $row[4],
-            'parent' => $row[5],
-            'city' => $row[6],
-            'country' => $row[7],
-            'status' => $row[8],
-            'email' => $row[9]
+            'number' => $row[2],
+            'username' => $row[3],
+            'password' => $row[4],
+            'role' => $row[5],
+            'parent' => $row[6],
+            'city' => $row[7],
+            'country' => $row[8],
+            'status' => $row[9],
+            'email' => $row[10]
         ]);
     }
 }
