@@ -14,6 +14,7 @@
       <img src="{{ asset('/users/' . $data->photo) }}" alt="user profile photo" class="w-60 sm:w-96 rounded-md">
       <div class="flex-col space-y-3">
         <p class="text-sm sm:text-lg"><b> Name :</b> &nbsp;&nbsp; {{ $data->name }}</p>
+        <p class="text-sm sm:text-lg"><b> Number :</b> &nbsp;&nbsp; {{ $data->number }}</p>
         <p class="text-sm sm:text-lg"><b> Username :</b> &nbsp;&nbsp; {{ $data->username }}</p>
         <p class="text-sm sm:text-lg"><b> Parent :</b> &nbsp;&nbsp; {{ $data->parent }}</p>
         <p class="text-sm sm:text-lg"><b> City :</b> &nbsp;&nbsp; {{ $data->city }}</p>

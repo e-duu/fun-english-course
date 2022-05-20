@@ -156,9 +156,9 @@
             <td>:</td>
             <td>{{  $data->student->city }}</td>
             <td></td>
-            <td>Due Date</td>
+            {{-- <td>Due Date</td>
             <td>:</td>
-            <td>-</td>
+            <td>-</td> --}}
           </tr>
           <tr>
             <td>Country of Residence</td>

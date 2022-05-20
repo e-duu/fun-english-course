@@ -135,9 +135,9 @@
             <td>:</td>
             <td>{{  $data->student->city }}</td>
             <td></td>
-            <td>Due Date</td>
+            {{-- <td>Due Date</td>
             <td>:</td>
-            <td>{{ $data->created_at->addDay()->format('d-m-Y') }}</td>
+            <td>{{ $data->created_at->addDay()->format('d-m-Y') }}</td> --}}
           </tr>
           <tr>
             <td>Country of Residence</td>
