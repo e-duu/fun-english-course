@@ -63,7 +63,7 @@
                   @endif
                 </td>
                 <td class="px-4 py-3 text-sm">
-                  {{'Rp '.number_format($item->price) }}
+                    {{ $item->currency == 'USD' ? '$ '.$item->price: 'Rp '.number_format($item->price, 0, ',', ',') }}
                 </td>
                 <td class="px-4 py-3 text-sm">
                   <div class="font-semibold uppercase p-[1px] rounded-lg @if($item->status == 'paid') bg-green-500 @elseif ($item->status == 'paid_manually') bg-green-500 @elseif ($item->status == 'unpaid') bg-red-500 @elseif ($item->status == 'pending') bg-yellow-500 @endif">
@@ -115,7 +115,7 @@
                 </td>
               </tr>
             @endforelse
-      
+
           </tbody>
         </table>
         </div>

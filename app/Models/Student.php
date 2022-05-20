@@ -16,6 +16,7 @@ class Student extends Model
     protected $fillable = [
         'month',
         'price',
+        'currency',
         'status',
         'code',
         'date',

@@ -232,22 +232,14 @@
               {{ $item->level->name }}
             </td>
             <td class="px-4 py-3 text-sm">
-              @if ($item->status != 'unpaid')
-              @if ($item->sppPayment->currency == 'USD')
+                @if ($item->currency == 'USD')
                   USD
-                @elseif ($item->sppPayment->currency == 'IDR')
+                @elseif ($item->currency == 'IDR')
                   IDR
                 @endif
-              @else
-              <p class="font-bold">-</p>
-              @endif
             </td>
             <td class="px-4 py-3 text-sm">
-              @if ($item->status == 'unpaid')
-              {{ 'Rp. '.number_format($item->price, 0, ',', ',') }}
-              @else
-              {{ $item->sppPayment->currency == 'USD' ? '$'.$item->sppPayment->amount: 'Rp. '.number_format($item->sppPayment->amount, 0, ',', ',') }}
-              @endif
+              {{ $item->currency == 'USD' ? '$'.$item->price: 'Rp. '.number_format($item->price, 0, ',', ',') }}
             </td>
             <td class="px-4 py-3 text-sm">
               @if ($item->month == 1)

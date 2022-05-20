@@ -55,8 +55,8 @@
                   </tr>
                 </thead>
                 <tbody class="bg-blue-100 divide-y-2 divide-white dark:divide-gray-700 dark:bg-darker">
-          
-                  {{-- @forelse ($data as $item) --}}
+
+                  {{-- @forelse ($data as $data) --}}
                     <tr class="text-black dark:text-gray-400">
                       <td class="px-4 py-3 text-sm">
                         {{ $data->level->program->name.' - '.$data->level->name }}
@@ -65,13 +65,13 @@
                         -
                       </td>
                       <td class="px-4 py-3 text-sm">
-                        {{ number_format($data->price) }}
+                        {{ $data->currency == 'USD' ? '$'.$data->price: 'Rp.'.number_format($data->price, 0, ',', ',') }}
                       </td>
                       <td class="px-4 py-3 text-sm">
                         1
                       </td>
                       <td class="px-4 py-3 text-sm">
-                        {{ number_format($data->price) }}
+                        {{ $data->currency == 'USD' ? '$'.$data->price: 'Rp.'.number_format($data->price, 0, ',', ',') }}
                       </td>
                     </tr>
                   {{-- @empty --}}
@@ -83,7 +83,7 @@
                       </td>
                     </tr>
                   @endforelse --}}
-          
+
                 </tbody>
               </table>
             </div>
@@ -91,7 +91,9 @@
               <div class="col-span-7"></div>
               <div class="flex items-center justify-between">
                 <p>Total</p>
-                <p class="text-lg">{{ number_format($data->price) }}</p>
+                <p class="text-lg">
+                    {{ $data->currency == 'USD' ? '$'.$data->price: number_format($data->price, 0, ',', ',') }}
+                </p>
               </div>
             </div>
           </div>
