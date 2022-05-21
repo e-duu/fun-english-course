@@ -106,6 +106,27 @@
                           </select>
                       </label>
 
+                      <label class="block mt-4 text-sm">
+                          <span class="text-gray-700 dark:text-gray-400">
+                              Month
+                          </span>
+                          <select name="month" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border rounded-md border-gray-400 -gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
+                              <option selected disabled>Choose Option...</option>
+                              <option value="1">January</option>
+                              <option value="2">February</option>
+                              <option value="3">March</option>
+                              <option value="4">April</option>
+                              <option value="5">May</option>
+                              <option value="6">June</option>
+                              <option value="7">July</option>
+                              <option value="8">August</option>
+                              <option value="9">September</option>
+                              <option value="10">October</option>
+                              <option value="11">November</option>
+                              <option value="12">December</option>
+                          </select>
+                      </label>
+
                       <div class="border-b border-gray-500 my-5"></div>
 
                       <!-- Buttons -->
