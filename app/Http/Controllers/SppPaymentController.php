@@ -128,19 +128,10 @@ class SppPaymentController extends Controller
     public function payManuallyProsses(Request $request, $id)
     {
         $data = Student::findOrFail($id);
-        if ($request->currency == 'IDR') {
-            $amount = $request->IDR;
-        } else if ($request->currency == 'USD') {
-            $amount = $request->USD;
-            if ($amount == null) {
-                return back();
-            }
-        } else {
-            return back();
-        }
+
         SppPayment::create([
-            'amount' => $amount,
-            'currency' => $request->currency,
+            'amount' => $data->price,
+            'currency' => $data->currency,
             'orderId' => rand(1000000000, 9999999999),
             'user_id' => $data->user_id,
             'student_id' => $data->id,

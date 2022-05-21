@@ -29,6 +29,7 @@ class StudentController extends Controller
             'price' => 'required',
             'user_id' => 'required',
             'level_id' => 'required',
+            'currency' => 'required',
             'code' => 'nullable',
             'date' => 'nullable',
             'dateEnd' => 'nullable',
@@ -38,10 +39,10 @@ class StudentController extends Controller
             'price.required' => 'please input recipient price',
             'user_id.required' => 'please input recipient student',
             'level_id.required' => 'please input recipient level',
+            'currency.required' => 'please input recipient currency',
         ]);
 
         $code = mt_rand(1,999);
-        // dd($code);
 
         foreach ($request->months as $month) {
             Student::create([
@@ -50,6 +51,7 @@ class StudentController extends Controller
                 'code' => $code,
                 'user_id' => $request->user_id,
                 'level_id' => $request->level_id,
+                'currency' => $request->currency,
                 'status' => 'unpaid',
             ]);
         }

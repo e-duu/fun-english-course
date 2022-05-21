@@ -135,9 +135,9 @@
             <td>:</td>
             <td>{{  $data->student->city }}</td>
             <td></td>
-            <td>Due Date</td>
+            {{-- <td>Due Date</td>
             <td>:</td>
-            <td>{{ $data->created_at->addDay()->format('d-m-Y') }}</td>
+            <td>{{ $data->created_at->addDay()->format('d-m-Y') }}</td> --}}
           </tr>
           <tr>
             <td>Country of Residence</td>
@@ -166,9 +166,13 @@
         <tr>
           <td>{{ $data->level->program->name.' - '.$data->level->name }}</td>
           <td>-</td>
-          <td>{{ number_format($data->price) }}</td>
+          <td>
+              {{ $data->currency == 'USD' ? '$'.$data->price: 'Rp. '.number_format($data->price, 0, ',', ',') }}
+          </td>
           <td>1</td>
-          <td>{{ number_format($data->price) }}</td>
+          <td>
+              {{ $data->currency == 'USD' ? '$'.$data->price: 'Rp. '.number_format($data->price, 0, ',', ',') }}
+          </td>
         </tr>
       </tbody>
       <tfoot>
@@ -177,7 +181,9 @@
           <th></th>
           <th></th>
           <th>Total</th>
-          <th>{{ number_format($data->price) }}</th>
+          <th>
+              {{ $data->currency == 'USD' ? '$'.$data->price: 'Rp. '.number_format($data->price, 0, ',', ',') }}
+          </th>
         </tr>
       </tfoot>
     </table>

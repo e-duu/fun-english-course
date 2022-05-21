@@ -89,27 +89,6 @@
   </style>
 </head>
 <body>
-    @php
-        // Convertion IDR to USD
-        try {
-            $req_url = "https://v6.exchangerate-api.com/v6/4de7938f23bbd34918b9c82c/latest/IDR";
-            $response_json = file_get_contents($req_url);
-            if(false !== $response_json) {
-                try {
-                    $response = json_decode($response_json);
-                        if('success' === $response->result) {
-                            $base_price = $data->price;
-                            $result = round(($base_price * $response->conversion_rates->USD), 2);
-                        }
-                    }
-                catch(Exception $e) {
-                    dd('Convertion Failed!');
-                }
-            }
-        } catch (\Throwable $th) {
-            dd('an error occurred on the server, check your network again');
-        }
-    @endphp
   <div>
     <h1>RECEIPT</h1>
   </div>
@@ -156,9 +135,9 @@
             <td>:</td>
             <td>{{  $data->student->city }}</td>
             <td></td>
-            <td>Due Date</td>
+            {{-- <td>Due Date</td>
             <td>:</td>
-            <td>-</td>
+            <td>-</td> --}}
           </tr>
           <tr>
             <td>Country of Residence</td>
@@ -187,9 +166,13 @@
         <tr>
           <td>{{ $data->level->program->name.' - '.$data->level->name }}</td>
           <td>-</td>
-          <td>{{ $data->sppPayment->currency == 'USD' ? '$'.$result : number_format($data->price) }}</td>
+          <td>
+            {{ $data->currency == 'USD' ? '$'.$data->price: 'Rp. '.number_format($data->price, 0, ',', ',') }}
+          </td>
           <td>1</td>
-          <td>{{ $data->sppPayment->currency == 'USD' ? '$'.$result : number_format($data->price) }}</td>
+          <td>
+            {{ $data->currency == 'USD' ? '$'.$data->price: 'Rp. '.number_format($data->price, 0, ',', ',') }}
+          </td>
         </tr>
       </tbody>
       <tfoot>
@@ -198,7 +181,9 @@
           <th></th>
           <th></th>
           <th>Total</th>
-          <th>{{ $data->sppPayment->currency == 'USD' ? '$'.$result : number_format($data->price) }}</th>
+          <th>
+            {{ $data->currency == 'USD' ? '$'.$data->price: 'Rp. '.number_format($data->price, 0, ',', ',') }}
+          </th>
         </tr>
       </tfoot>
     </table>

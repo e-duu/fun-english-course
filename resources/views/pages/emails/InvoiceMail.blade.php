@@ -100,7 +100,9 @@
                         <p class="">: {{$data->level->program->name}}</p>
                         <p class="">: {{$data->level->name}}</p>
                         <p class="">: {{$data->status}}</p>
-                        <p class="">: {{'Rp.'.number_format($data->price).' / $'.$result}}</p>
+                        <p class="">:
+                          {{ $data->currency == 'USD' ? '$ '.$data->price: 'Rp '.number_format($data->price, 0, ',', ',') }}
+                        </p>
                     </div>
                 </td>
             </tr>
@@ -112,7 +114,9 @@
                 </td>
                 <td>
                     <div class="column-text">
-                        <p class="text-extra-bold">: {{'Rp.'.number_format($data->price).' / $'.$result}}</p>
+                        <p class="text-extra-bold">:
+                          {{ $data->currency == 'USD' ? '$ '.$data->price: 'Rp '.number_format($data->price, 0, ',', ',') }}
+                        </p>
                     </div>
                 </td>
             </tr>

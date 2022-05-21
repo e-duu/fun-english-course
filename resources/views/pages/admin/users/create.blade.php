@@ -51,6 +51,16 @@
     </label>
 
     <label class="block text-sm" style="margin-top: 20px">
+      <span class="text-gray-700 dark:text-gray-400">Number</span>
+      <input type="text" name="number" class="border w-full mt-1 text-sm border-gray-400  dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md" value="{{ old('number') }}" placeholder="000000"/>
+      @error('number')
+        <div class="mt-2 text-[red]">
+          <i class="fas fa-dot-circle"></i> {{ $message }}
+        </div>
+      @enderror
+    </label>
+
+    <label class="block text-sm" style="margin-top: 20px">
       <span class="text-gray-700 dark:text-gray-400">Parent</span>
       <input type="text" name="parent" class="border w-full mt-1 text-sm border-gray-400  dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md" value="{{ old('parent') }}" placeholder="John Doe"/>
       @error('parent')

@@ -18,6 +18,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'number',
         'username',
         'password',
         'role',
@@ -61,5 +62,4 @@ class User extends Authenticatable
             });
         });
     }
-
 }
