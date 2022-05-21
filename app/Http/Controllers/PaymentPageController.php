@@ -12,8 +12,9 @@ class PaymentPageController extends Controller
     public function index()
     {
         $auth = Auth::user()->id;
-        $data = Student::where('user_id', $auth)->latest()->paginate(5);
-        return view('pages.payment', compact('data'));
+        $data = Student::where('user_id', $auth)->latest()->paginate(12);
+        $needPay = Student::where('user_id', $auth)->where('month', Carbon::now()->month)->first();
+        return view('pages.payment', compact('data', 'needPay'));
     }
 
     public function sppPayment($id)
@@ -28,7 +29,7 @@ class PaymentPageController extends Controller
         $account_banks = AccountBank::get();
 
 
-        if($data->status == 'unpaid'){
+        if ($data->status == 'unpaid') {
             $data->update([
                 'date' => Carbon::now(),
                 'dateEnd' => Carbon::now()->addDay(),
@@ -36,7 +37,7 @@ class PaymentPageController extends Controller
             ]);
         }
 
-        if($data->status == 'pending' && Carbon::now() >= $data->dateEnd){
+        if ($data->status == 'pending' && Carbon::now() >= $data->dateEnd) {
             $data->update([
                 'status' => 'unpaid',
                 'date' => null,
@@ -44,11 +45,9 @@ class PaymentPageController extends Controller
             ]);
 
             return back()->with('failed', 'the transaction is canceled because it exceeds the transfer time limit !');
-        }else{
+        } else {
             return view('pages.sppPaymentDetail', compact('data', 'account_banks'));
         }
-        
-
     }
 
     public function sppPaymentCancel($id)
@@ -69,5 +68,4 @@ class PaymentPageController extends Controller
         // $data = Student::findOrFail($id);
         return view('pages.paymentSuccess');
     }
-
 }
