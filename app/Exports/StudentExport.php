@@ -28,8 +28,10 @@ class StudentExport implements FromCollection, WithHeadings, ShouldAutoSize, Wit
 
     public function map($student) : array
     {
+        $i = 1;
+
         return [
-            $student->id,
+            $i++,
             $student->student->parent == null ? '-' : $student->student->parent,
             $student->student->city == null ? '-' : $student->student->city,
             $student->student->country == null ? '-' : $student->student->country,
@@ -37,8 +39,9 @@ class StudentExport implements FromCollection, WithHeadings, ShouldAutoSize, Wit
             $student->level->program->name,
             $student->level->name,
             $student->price,
+            $student->currency,
             $student->status,
-            date('d M Y'),
+            $student->invoice->created_at = date('Y-m-d'),
         ];
     }
 
@@ -53,6 +56,7 @@ class StudentExport implements FromCollection, WithHeadings, ShouldAutoSize, Wit
             'Program',
             'Level',
             'Price',
+            'Currency',
             'Status',
             'Invoice Date',
         ];

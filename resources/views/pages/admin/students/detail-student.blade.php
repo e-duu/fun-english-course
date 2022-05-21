@@ -15,12 +15,12 @@
             <button @click="showModal = !showModal" class="px-4 py-2 text-sm bg-blue-600 rounded-md transition-colors duration-150 ease-linear text-white focus:outline-none focus:ring-0 font-semibold hover:bg-blue-700">Send Mail</button>
 
             <!-- Modal Background -->
-            <div x-show="showModal" class="fixed text-gray-500 flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0" x-transition:enter="transition ease duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
-                    <!-- Modal -->
-                    <div x-show="showModal" class="bg-white rounded-xl shadow-2xl p-6 w-80 sm:w-3/6 mx-10" @click.away="showModal = false" x-transition:enter="transition ease duration-100 transform" x-transition:enter-start="opacity-0 scale-90 translate-y-1" x-transition:enter-end="opacity-100 scale-100 translate-y-0" x-transition:leave="transition ease duration-100 transform" x-transition:leave-start="opacity-100 scale-100 translate-y-0" x-transition:leave-end="opacity-0 scale-90 translate-y-1">
-                        <!-- Title -->
-                        <span class="font-bold block text-2xl mb-3">Send To Mail</span>
-                        <div class="border-b border-gray-500 mb-5"></div>
+            <div x-show="showModal" class="fixed text-gray-500 overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0" x-transition:enter="transition ease duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+                <!-- Modal -->
+                <div x-show="showModal" class="bg-white rounded-xl shadow-2xl p-6 w-80 my-10 sm:w-3/6 mx-10" @click.away="showModal = false" x-transition:enter="transition ease duration-100 transform" x-transition:enter-start="opacity-0 scale-90 translate-y-1" x-transition:enter-end="opacity-100 scale-100 translate-y-0" x-transition:leave="transition ease duration-100 transform" x-transition:leave-start="opacity-100 scale-100 translate-y-0" x-transition:leave-end="opacity-0 scale-90 translate-y-1">
+                    <!-- Title -->
+                    <span class="font-bold block text-2xl mb-3">Send To Mail</span>
+                    <div class="border-b border-gray-500 mb-5"></div>
                         <!-- Send To Email (Invoice) -->
                         <form action="{{ route('invorecToMail') }}" method="POST" enctype="multipart/form-data">
                             @csrf
@@ -30,6 +30,7 @@
                                     <thead>
                                         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                                             <th class="px-4 py-3">Student Name</th>
+                                            <th class="px-4 py-3">Month</th>
                                             <th class="px-4 py-3 text-center">Status</th>
                                             <th class="px-4 py-3"><input id="checkAll" type="checkbox"></th>
                                         </tr>
@@ -40,6 +41,33 @@
                                             <tr class="text-gray-700 dark:text-gray-400">
                                                 <td class="px-4 py-3 text-sm">
                                                     {{ $student->student->name }}
+                                                </td>
+                                                <td class="px-4 py-3 text-sm">
+                                                    @if ($student->month == 1)
+                                                        January
+                                                    @elseif ($student->month == 2)
+                                                        February
+                                                    @elseif ($student->month == 3)
+                                                        March
+                                                    @elseif ($student->month == 4)
+                                                        April
+                                                    @elseif ($student->month == 5)
+                                                        May
+                                                    @elseif ($student->month == 6)
+                                                        June
+                                                    @elseif ($student->month == 7)
+                                                        July
+                                                    @elseif ($student->month == 8)
+                                                        August
+                                                    @elseif ($student->month == 9)
+                                                        September
+                                                    @elseif ($student->month == 10)
+                                                        October
+                                                    @elseif ($student->month == 11)
+                                                        November
+                                                    @elseif ($student->month == 12)
+                                                        December
+                                                    @endif
                                                 </td>
                                                 <td class="px-4 py-3 text-sm">
                                                     <p class="rounded text-center font-bold uppercase text-white py-1 bold @if($student->status == 'paid') bg-green-500 @elseif ($student->status == 'paid_manually') bg-green-500 @elseif ($student->status == 'unpaid') bg-red-500 @elseif ($student->status == 'pending') bg-yellow-500 @endif">
