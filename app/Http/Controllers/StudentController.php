@@ -84,7 +84,7 @@ class StudentController extends Controller
         $data = Program::findorfail($id);
         $users = User::where('role', 'student')->get();
         $levelUsers = LevelUser::with(['level'])->get();
-        $getLevels = Level::get();
+        $getLevels = Level::where('program_id', $id)->get();
         $levelsFt = Level::where('program_id', $id)->get();
         if (request()->level == null) {
             $levels = $data->levels()->paginate(10);

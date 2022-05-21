@@ -34,7 +34,6 @@ class StudentTemplate implements FromArray, WithHeadings, WithEvents, WithStyles
             'B' => 20,
             'C' => 20,
             'D' => 20,
-            'E' => 20,
         ];
     }
 
@@ -45,8 +44,7 @@ class StudentTemplate implements FromArray, WithHeadings, WithEvents, WithStyles
     {
         return [
             'No',
-            'Parent Name',
-            'Student Name',
+            'Student Number',
             'Price',
             'Month(number)',
         ];
