@@ -4,7 +4,6 @@
 @endsection
 @section('content')
     <div class="container-fluid px-7 sm:px-20 mt-10 sm:mt-16">
-      <h1 class="text-white rounded-md font-bold text-center text-3xl py-5 bg-blue-500">History & List Payment</h1>
 
       <div class="w-full overflow-hidden rounded-lg shadow-xs mt-5">
         <h2 class="text-white rounded-md font-bold text-center text-3xl py-5 bg-blue-500">Need Payment</h2>
@@ -23,61 +22,61 @@
           </tr>
           </thead>
           <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-darker">
-            @forelse ($data as $item)
-              @if ($item->month == Carbon\Carbon::now()->month)
+            @if ($needPay)
+                
               <tr class="text-gray-700 dark:text-gray-400">
                 <td class="px-4 py-3 text-sm">
-                  {{ $item->student->parent }}
+                  {{ $needPay->student->parent }}
                 </td>
                 <td class="px-4 py-3 text-sm">
-                  {{ $item->student->name }}
+                  {{ $needPay->student->name }}
                 </td>
                 <td class="px-4 py-3 text-sm">
-                  {{ $item->level->program->name }}
+                  {{ $needPay->level->program->name }}
                 </td>
                 <td class="px-4 py-3 text-sm">
-                  {{ $item->level->name }}
+                  {{ $needPay->level->name }}
                 </td>
                 <td class="px-4 py-3 text-sm">
-                  @if ($item->month == 1)
+                  @if ($needPay->month == 1)
                       January
-                  @elseif ($item->month == 2)
+                  @elseif ($needPay->month == 2)
                       February
-                  @elseif ($item->month == 3)
+                  @elseif ($needPay->month == 3)
                       March
-                  @elseif ($item->month == 4)
+                  @elseif ($needPay->month == 4)
                       April
-                  @elseif ($item->month == 5)
+                  @elseif ($needPay->month == 5)
                       May
-                  @elseif ($item->month == 6)
+                  @elseif ($needPay->month == 6)
                       June
-                  @elseif ($item->month == 7)
+                  @elseif ($needPay->month == 7)
                       July
-                  @elseif ($item->month == 8)
+                  @elseif ($needPay->month == 8)
                       August
-                  @elseif ($item->month == 9)
+                  @elseif ($needPay->month == 9)
                       September
-                  @elseif ($item->month == 10)
+                  @elseif ($needPay->month == 10)
                       October
-                  @elseif ($item->month == 11)
+                  @elseif ($needPay->month == 11)
                       November
-                  @elseif ($item->month == 12)
+                  @elseif ($needPay->month == 12)
                       December
                   @endif
                 </td>
                 <td class="px-4 py-3 text-sm">
-                  {{'Rp '.number_format($item->price) }}
+                  {{'Rp '.number_format($needPay->price) }}
                 </td>
                 <td class="px-4 py-3 text-sm">
-                  <div class="font-semibold uppercase p-[1px] rounded-lg @if($item->status == 'paid') bg-green-500 @elseif ($item->status == 'paid_manually') bg-green-500 @elseif ($item->status == 'unpaid') bg-red-500 @elseif ($item->status == 'pending') bg-yellow-500 @endif">
+                  <div class="font-semibold uppercase p-[1px] rounded-lg @if($needPay->status == 'paid') bg-green-500 @elseif ($needPay->status == 'paid_manually') bg-green-500 @elseif ($needPay->status == 'unpaid') bg-red-500 @elseif ($needPay->status == 'pending') bg-yellow-500 @endif">
                     <p class="text-white text-center">
-                      @if ($item->status == 'paid')
+                      @if ($needPay->status == 'paid')
                         PAID
-                      @elseif ($item->status == 'paid_manually')
+                      @elseif ($needPay->status == 'paid_manually')
                         PAID(Manually)
-                      @elseif ($item->status == 'unpaid')
+                      @elseif ($needPay->status == 'unpaid')
                         UNPAID
-                      @elseif ($item->status == 'pending')
+                      @elseif ($needPay->status == 'pending')
                         PENDING
                       @endif
                     </p>
@@ -85,19 +84,19 @@
                 </td>
                 <td class="px-4 py-3">
                   <div class="flex items-center space-x-4 text-sm">
-                    @if ($item->status == 'unpaid')
-                      <a href="{{ route('spp-payment', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                    @if ($needPay->status == 'unpaid')
+                      <a href="{{ route('spp-payment', $needPay->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
                         <i class="fas fa-money-check"></i>
                         <p>Pay</p>
                       </a>
                     @endif
-                    @if ($item->status == 'paid' or $item->status == 'paid_manually')
-                      <a href="{{ route('page-receipt', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                    @if ($needPay->status == 'paid' or $needPay->status == 'paid_manually')
+                      <a href="{{ route('page-receipt', $needPay->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
                         <i class="fas fa-print"></i>
                         <p>Receipt</p>
                       </a>
-                    @elseif ($item->status == 'unpaid' or $item->status == 'pending')
-                      <a href="{{ route('page-invoice', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                    @elseif ($needPay->status == 'unpaid' or $needPay->status == 'pending')
+                      <a href="{{ route('page-invoice', $needPay->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
                         <i class="fas fa-print"></i>
                         <p>Invoice</p>
                       </a>
@@ -105,8 +104,7 @@
                   </div>
                 </td>
               </tr>
-              @endif
-            @empty
+            @else
               <tr>
                 <td colspan="8" class="text-center text-gray-500 px-4 py-3">
                   <p>
@@ -114,16 +112,16 @@
                   </p>
                 </td>
               </tr>
-            @endforelse
+            @endif
       
           </tbody>
         </table>
         </div>
-        <div class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
+        {{-- <div class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
           <div class="text-center w-auto sm:w-[565px] md:w-[1160px] 2xl:w-[1495px] ">
             {{ $data->links() }}
           </div>
-        </div>
+        </div> --}}
       </div>
 
       <div class="w-full overflow-hidden rounded-lg shadow-xs mt-5">
