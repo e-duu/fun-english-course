@@ -6,7 +6,7 @@
     <div class="container-fluid px-7 sm:px-20 mt-10 sm:mt-16">
 
       <div class="w-full overflow-hidden rounded-lg shadow-xs mt-5">
-        <h2 class="text-white rounded-md font-bold text-center text-3xl py-5 bg-blue-500">Need Payment</h2>
+        <h2 class="text-white rounded-md font-bold text-center text-3xl py-5 bg-blue-500">Need Payment This Month</h2>
         <div class="w-full overflow-x-auto">
         <table class="w-full whitespace-no-wrap">
           <thead>
