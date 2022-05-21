@@ -26,8 +26,8 @@ class SppPaymentController extends Controller
         // From Database
         $data = Student::findOrFail($id);
 
-        // Convert IDR to USD
-        $price = $this->convertToDollar($data->price);
+        // Price
+        $price = $data->price;
 
         // Purchase Units
         $description = '$' . $price . ' total spp price';
@@ -71,7 +71,7 @@ class SppPaymentController extends Controller
         $result = $provider->capturePaymentOrder($orderId);
 
         // Convert IDR to USD
-        $price = $this->convertToDollar($student->price);
+        $price = $student->price;
 
         // movement to Database (Import & Update)
         $sppPayment = SppPayment::create([
@@ -97,26 +97,6 @@ class SppPaymentController extends Controller
         ));
 
         return response()->json($result);
-    }
-
-    public function convertToDollar($price)
-    {
-        // Convertion IDR to USD
-        $req_url = "https://v6.exchangerate-api.com/v6/4de7938f23bbd34918b9c82c/latest/IDR";
-        $response_json = file_get_contents($req_url);
-        if (false !== $response_json) {
-            try {
-                $response = json_decode($response_json);
-                if ('success' === $response->result) {
-                    $base_price = $price;
-                    $result = round(($base_price * $response->conversion_rates->USD), 2);
-                }
-            } catch (Exception $e) {
-                dd('Convertion Failed!');
-            }
-        }
-
-        return $result;
     }
 
     public function payManually($id)
