@@ -130,6 +130,7 @@ Route::middleware(['auth'])->group(function ()
 
 		Route::prefix('student')->group(function () {
 			Route::get('/all', [StudentController::class, 'index'])->name('student.all');
+			Route::get('/send-to-mail/{id}', [StudentController::class, 'sendToMailPage'])->name('send-to-mail-page');
 			Route::post('/store', [StudentController::class, 'store'])->name('student.store');
 			Route::get('/show/{id}', [StudentController::class, 'show'])->name('student.show');
 			Route::get('/show/student/{id}', [StudentController::class, 'sppStudent'])->name('student.show-spp');
