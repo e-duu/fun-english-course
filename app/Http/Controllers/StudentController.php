@@ -128,6 +128,32 @@ class StudentController extends Controller
         return view('pages.admin.students.detail-student', compact('data', 'spps', 'students'));
     }
 
+    public function sendToMailPage($id)
+    {
+        // Search student by name
+        if (request()->get('name') != null) {
+            $students = Student::whereHas('student', function($query){
+                $query->where('name', 'like', '%'. request()->get('name').'%');
+            })->where('level_id', $id)->get();
+        } else {
+            $students = Student::where('level_id', $id)->get();
+        }
+
+        // Filter spp by payment status
+        if (request()->get('status') != null) {
+            $students = Student::where('status', request()->get('status'))->where('level_id', $id)->get();
+        }
+
+        // Filter spp by month
+        if (request()->get('month') != null) {
+            $students = Student::where('month', request()->get('month'))->where('level_id', $id)->get();
+        }
+
+        $data = Level::findOrFail($id);
+
+        return view('pages.admin.students.send-mail-page', compact('data', 'students'));
+    }
+
     public function sppInvoiceMail($userId, $studentId)
     {
         $user = User::findOrFail($userId);
@@ -159,6 +185,10 @@ class StudentController extends Controller
     {
         $data = $request->all();
 
+        if ($request->student == null) {
+            return back()->with('students must be selected');
+        }
+
         try {
             foreach ($data['student'] as $index => $value) {
                 $student = Student::whereId($index)->first();
@@ -181,7 +211,7 @@ class StudentController extends Controller
                 });
             }
         } catch (\Throwable $th) {
-            dd('Send To Mail Failed, check your network again');
+            dd('Send To Mail Failed, come back to check your network again');
         }
 
         return back()->with('success', 'send mail successfully');
