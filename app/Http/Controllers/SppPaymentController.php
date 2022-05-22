@@ -30,7 +30,7 @@ class SppPaymentController extends Controller
         $price = $data->price;
 
         // Purchase Units
-        $description = '$'.$price.' total spp price';
+        $description = '$' . $price . ' total spp price';
 
         $item = $provider->createOrder([
             'intent' => 'CAPTURE',
@@ -83,6 +83,7 @@ class SppPaymentController extends Controller
         ]);
         $student->update([
             'status' => 'paid',
+            'code' => null,
             'updated_at' => Carbon::now(),
         ]);
 
@@ -117,6 +118,7 @@ class SppPaymentController extends Controller
         ]);
         $data->update([
             'status' => 'paid_manually',
+            'code' => null,
             'updated_at' => Carbon::now(),
         ]);
         return redirect()->route('student.show-spp', $data->level_id);

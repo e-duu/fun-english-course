@@ -46,7 +46,7 @@ class SppPaymentBankController extends Controller
 
                 $spp = Student::where('date', '>=', date('Y-m-d 00:00:00'))->where('status', 'pending')->where('code', $unique_code)->first();
                 // dd($spp);
-                
+
                 $store = SppPaymentBank::create([
                     'spp_month_id' => $spp->id,
                     'bank_id'   => $data['bank_id'],
@@ -64,13 +64,12 @@ class SppPaymentBankController extends Controller
 
                 $spp->update([
                     'status' => 'paid',
+                    'code' => null,
                 ]);
 
                 return response()->json(['success' => 'success'], 200);
             }
         }
-        
-
     }
 
     public function jGetDataOrder($data)
@@ -78,7 +77,7 @@ class SppPaymentBankController extends Controller
         $tgl = date('Y-m-d 00:00:00');
 
         $query = Student::where('date', '>=', $tgl)->where('code', $data);
-        
+
         return $query->row();
     }
 

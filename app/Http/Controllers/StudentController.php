@@ -12,6 +12,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Carbon;
 
 class StudentController extends Controller
 {
@@ -24,28 +25,31 @@ class StudentController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'months' => 'required|max:255',
-            'price' => 'required',
-            'user_id' => 'required',
-            'level_id' => 'required',
-            'currency' => 'required',
-            'code' => 'nullable',
-            'date' => 'nullable',
-            'dateEnd' => 'nullable',
-        ],
-        [
-            'months.required' => 'please input recipient month',
-            'price.required' => 'please input recipient price',
-            'user_id.required' => 'please input recipient student',
-            'level_id.required' => 'please input recipient level',
-            'currency.required' => 'please input recipient currency',
-        ]);
+        $request->validate(
+            [
+                'months' => 'required|max:255',
+                'price' => 'required',
+                'user_id' => 'required',
+                'level_id' => 'required',
+                'currency' => 'required',
+                'code' => 'nullable',
+                'date' => 'nullable',
+                'dateEnd' => 'nullable',
+            ],
+            [
+                'months.required' => 'please input recipient month',
+                'price.required' => 'please input recipient price',
+                'user_id.required' => 'please input recipient student',
+                'level_id.required' => 'please input recipient level',
+                'currency.required' => 'please input recipient currency',
+            ]
+        );
 
-        $code = mt_rand(1,999);
 
         foreach ($request->months as $month) {
-            Student::create([
+            $code = mt_rand(1, 999);
+
+            $student = Student::create([
                 'month' => $month,
                 'price' => $request->price,
                 'code' => $code,
@@ -54,27 +58,27 @@ class StudentController extends Controller
                 'currency' => $request->currency,
                 'status' => 'unpaid',
             ]);
-        }
 
-        $data = Student::latest()->first();
-        $yymm = $data->created_at->format('ym');
+            $inv = Invoice::count();
 
-        if ($data->created_at == date('Y-01-01')) {
-            $number = 1;
-        }else{
-            $num = Invoice::latest()->first();
-            if ($num) {
-                $number = $num->numberInv+1;
-            }else{
+            $yymm = Carbon::now()->format('ym');
+
+            if ($inv) {
+                $number = $inv + 1;
+            } else if (Carbon::now() == date('Y-01-01')) {
+                $number = 1;
+            } else {
                 $number = 1;
             }
+
+
+            Invoice::create([
+                'dateCode' => $yymm,
+                'numberInv' => $number,
+                'student_id' => $student->id,
+            ]);
         }
 
-        Invoice::create([
-            'dateCode' => $yymm,
-            'numberInv' => $number,
-            'student_id' =>$data->id,
-        ]);
 
         return redirect()->route('student.show-spp', $request->level_id);
     }
@@ -104,8 +108,8 @@ class StudentController extends Controller
 
         // Search student by name
         if (request()->get('name') != null) {
-            $spps = Student::whereHas('student', function($query){
-                $query->where('name', 'like', '%'. request()->get('name').'%');
+            $spps = Student::whereHas('student', function ($query) {
+                $query->where('name', 'like', '%' . request()->get('name') . '%');
             })->where('level_id', $id)->paginate(5);
         } else {
             $spps = Student::where('level_id', $id)->paginate(5);
@@ -163,7 +167,7 @@ class StudentController extends Controller
             $student->level,
         ));
 
-        return back()->with('send_invoice_to_mail', 'Invoice berhasil diunggah kepada '.$user->email);
+        return back()->with('send_invoice_to_mail', 'Invoice berhasil diunggah kepada ' . $user->email);
     }
 
     public function filterReset(Request $request)
@@ -200,7 +204,7 @@ class StudentController extends Controller
                     $pdf = PDF::loadView('pages.admin.receipt-pdf', ['data' => $student]);
                 }
 
-                Mail::send($student->status == 'unpaid' ? 'pages.emails.InvoiceMail' : 'pages.emails.ReceiptMail', ['data' => $student], function($message)use($dataEmail, $pdf) {
+                Mail::send($student->status == 'unpaid' ? 'pages.emails.InvoiceMail' : 'pages.emails.ReceiptMail', ['data' => $student], function ($message) use ($dataEmail, $pdf) {
                     $message->to($dataEmail["email"], $dataEmail["email"])
                         ->subject($dataEmail["title"])
                         ->attachData($pdf->output(), $this->namePdf);
