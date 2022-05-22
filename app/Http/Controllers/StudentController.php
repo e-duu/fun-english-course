@@ -85,9 +85,12 @@ class StudentController extends Controller
 
     public function show($id)
     {
+        $this->id = $id;
         $data = Program::findorfail($id);
         $users = User::where('role', 'student')->get();
-        $levelUsers = LevelUser::with(['level'])->get();
+        $levelUsers = LevelUser::whereHas('level', function($query) {
+            $query->where('program_id', $this->id);
+        })->with(['level'])->get();
         $getLevels = Level::where('program_id', $id)->get();
         $levelsFt = Level::where('program_id', $id)->get();
         if (request()->level == null) {
