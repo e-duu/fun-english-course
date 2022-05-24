@@ -6,7 +6,6 @@
   Detail Programs - {{ $data->name }}
 @endsection
 @section('content')
-
 <div class="flex item-center justify-between space-x-2">
     <div class="flex item-center justify-between space-x-2">
       {{-- Modal Filter --}}
@@ -70,7 +69,7 @@
                               <span class="text-gray-700 dark:text-gray-400">
                                   Student
                               </span>
-                              <select @change="setUsers(users_id)" v-model="users_id" name="user_id" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border rounded-md border-gray-400 -gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
+                              <select id="select-search" onchange="setUsers()" v-model="users_id" name="user_id" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border rounded-md border-gray-400 -gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
                                   @foreach ($users as $user)
                                     <option value="{{ $user->id }}">{{ $user->name }}</option>
                                   @endforeach
@@ -86,8 +85,8 @@
                             <span class="text-gray-700 dark:text-gray-400">
                                 Level
                             </span>
-                            <select name="level_id" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border rounded-md border-gray-400 -gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
-                                <option v-for="level in selectedLevels" :value="level.level.id">@{{ level.level.name }}</option>
+                            <select id="selectLevel" name="level_id" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border rounded-md border-gray-400 -gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
+                                {{-- <option v-for="level in levelses" :value="level.level.id">@{{ level.level.name }}</option> --}}
                             </select>
                             @error('level_id')
                                 <div class="mt-1 text-sm text-[red]">
@@ -264,43 +263,35 @@
 @endpush
 
 @push('after-script')
-  {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
 
   <script>
-    var users = {{json_encode($users)}};
-    var levelUsers = {{json_encode($levelUsers)}};
-    var selectedLevels = null;
-    var users_id = null;
-
     $(document).ready(function () {
-        $('select').selectize({
+        $('#select-search').selectize({
             sortField: 'text'
         });
     });
-  </script> --}}
+  </script>
 
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
   <script>
+      const users = JSON.parse('{{$users}}'.replace(/&quot;/g,'"'));
+      const levelUsers = JSON.parse('{{$levelUsers}}'.replace(/&quot;/g,'"'));
+      var users_id = null
+      var selectedLevels = null
 
-      var payments = new Vue({
-          el: "#payments",
-          mounted() {
+      console.log(levelUsers)
 
-          },
-          data: {
-              users: @json($users),
-              levelUsers: @json($levelUsers),
-              selectedLevels: null,
-              users_id: null,
-          },
-          methods: {
-              setUsers(id) {
-                  let selectedLevel = this.levelUsers.filter(e => e.user_id == id)
-                  this.selectedLevels = selectedLevel
-                  console.log(selectedLevel)
-              }
-          },
-      });
+      function setUsers(){
+        var options = "<option disabled>Select One</option>";
+        var value = document.getElementById('select-search').value;
+        let selectedLevel = levelUsers.filter(levelUser => levelUser.user_id == value);
+        console.log(selectedLevel)
+
+        selectedLevel.forEach(element => {
+          options += "<option value='"+element.level.id+"'>"+element.level.name+"</option>";
+          document.getElementById('selectLevel').innerHTML = options;
+        });
+      }
   </script>
 @endpush
