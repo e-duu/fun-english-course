@@ -53,6 +53,7 @@
     <label class="block text-sm" style="margin-top: 20px">
       <span class="text-gray-700 dark:text-gray-400">Number</span>
       <input type="text" name="number" class="border w-full mt-1 text-sm border-gray-400  dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md" value="{{ old('number') }}" placeholder="000000"/>
+      <span class="text-gray-500 dark:text-gray-200">Student numbers cannot start with zero</span>
       @error('number')
         <div class="mt-2 text-[red]">
           <i class="fas fa-dot-circle"></i> {{ $message }}
@@ -122,13 +123,14 @@
     <label class="block text-sm" style="margin-top: 20px">
       <span class="text-gray-700 dark:text-gray-400">Password</span>
       <input type="password" name="password" class="border w-full mt-1 text-sm border-gray-400  dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md" value="{{ old('password') }}" placeholder="********"/>
+      <span class="text-gray-500 dark:text-gray-200">Password combination of at least 6 characters</span>
       @error('password')
-        <div class="mt-2 text-[red]">
-          <i class="fas fa-dot-circle"></i> {{ $message }}
-        </div>
+      <div class="mt-2 text-[red]">
+        <i class="fas fa-dot-circle"></i> {{ $message }}
+      </div>
       @enderror
     </label>
-
+    
     <div class="mt-4 text-sm">
       <span class="text-gray-700 dark:text-gray-400">
         Role
@@ -146,9 +148,10 @@
     <label class="block text-sm mt-4">
       <span class="text-gray-700 dark:text-gray-400">Email</span>
       <input type="email" name="email" class="border w-full mt-1 text-sm border-gray-400  dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md" value="{{ old('email') }}" placeholder="johndoe@gmail.com"/>
+      <span class="text-gray-500 dark:text-gray-200">Enter an active email</span>
       @error('email')
-        <div class="mt-2 text-[red]">
-          <i class="fas fa-dot-circle"></i> {{ $message }}
+      <div class="mt-2 text-[red]">
+        <i class="fas fa-dot-circle"></i> {{ $message }}
         </div>
       @enderror
     </label>
