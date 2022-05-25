@@ -24,6 +24,15 @@
 
       <div class="flex-col mx-10">
         <div class="grid grid-cols-2 my-4 items-center">
+          <p class="text-md text-gray-700">Invoice Number</p>
+          <p class="font-semibold text-lg text-gray-700 text-right">
+            @php
+                $num = (str_pad((int)$data->invoice->numberInv , 8, '0', STR_PAD_LEFT));
+            @endphp
+            INV-{{ $data->invoice->dateCode.$num }}
+          </p>
+        </div>
+        <div class="grid grid-cols-2 my-4 items-center">
           <p class="text-md text-gray-700">Student Name</p>
           <p class="font-semibold text-lg text-gray-700 text-right">
             {{ Auth::user()->name }}
