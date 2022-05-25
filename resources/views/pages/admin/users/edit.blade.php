@@ -43,26 +43,57 @@
     <label class="block text-sm mt-4">
       <span class="text-gray-700 dark:text-gray-400">Name</span>
       <input type="text" name="name" value="{{ $data->name }}" class="block w-full mt-1 text-sm rounded-md border-gray-400 dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray form-input" placeholder="Jane Doe"/>
+      @error('name')
+        <div class="mt-2 text-[red]">
+          <i class="fas fa-dot-circle"></i> {{ $message }}
+        </div>
+      @enderror
     </label>
 
     <label class="block text-sm mt-4">
       <span class="text-gray-700 dark:text-gray-400">Number</span>
       <input type="text" name="number" value="{{ $data->number }}" class="block w-full mt-1 text-sm rounded-md border-gray-400 dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray form-input" placeholder="000000"/>
+      <span class="text-gray-500 dark:text-gray-200">Student numbers cannot start with zero</span>
+      @error('number')
+        <div class="mt-2 text-[red]">
+          <i class="fas fa-dot-circle"></i> {{ $message }}
+        </div>
+      @enderror
+      @if (session()->has('error'))
+        <div class="mt-2 text-[red]">
+            <i class="fas fa-dot-circle"></i> {{ session()->get('error') }}
+        </div>
+      @endif
     </label>
 
     <label class="block text-sm" style="margin-top: 20px">
       <span class="text-gray-700 dark:text-gray-400">Parent</span>
       <input type="text" name="parent" value="{{ $data->parent }}" class="border w-full mt-1 text-sm border-gray-400  dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md" value="{{ old('parent') }}" placeholder="John Doe"/>
+      @error('parent')
+        <div class="mt-2 text-[red]">
+          <i class="fas fa-dot-circle"></i> {{ $message }}
+        </div>
+      @enderror
     </label>
     
     <label class="block text-sm" style="margin-top: 20px">
       <span class="text-gray-700 dark:text-gray-400">City</span>
       <input type="text" name="city" value="{{ $data->city }}" class="border w-full mt-1 text-sm border-gray-400  dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md" value="{{ old('city') }}" placeholder="John Doe"/>
+      @error('city')
+        <div class="mt-2 text-[red]">
+          <i class="fas fa-dot-circle"></i> {{ $message }}
+        </div>
+      @enderror
     </label>
     
     <label class="block text-sm" style="margin-top: 20px">
       <span class="text-gray-700 dark:text-gray-400">Country</span>
       <input type="text" name="country" value="{{ $data->country }}" class="border w-full mt-1 text-sm border-gray-400  dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md" value="{{ old('country') }}" placeholder="John Doe"/>
+      @error('country')
+        <div class="mt-2 text-[red]">
+          <i class="fas fa-dot-circle"></i> {{ $message }}
+        </div>
+      @enderror
     </label>
 
     <div class="mt-4 text-sm">
@@ -82,12 +113,22 @@
     <label class="block text-sm mt-4">
       <span class="text-gray-700 dark:text-gray-400">Username</span>
       <input type="text" name="username" value="{{ $data->username }}" class="block w-full mt-1 text-sm rounded-md border-gray-400 dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray form-input" placeholder="Jane Doe"/>
+      @error('username')
+        <div class="mt-2 text-[red]">
+          <i class="fas fa-dot-circle"></i> {{ $message }}
+        </div>
+      @enderror
     </label>
 
     <label class="block text-sm mt-4">
       <span class="text-gray-700 dark:text-gray-400">Password</span>
       <input type="password" name="password" class="block w-full mt-1 text-sm rounded-md border-gray-400 dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray form-input" placeholder="*******"/>
-      <p class="text-gray-600 text-xs">Let this field blank to keep the password unchanged</p>
+      <span class="text-gray-500 dark:text-gray-200">Let this field blank to keep the password unchanged</span>
+      @error('password')
+      <div class="mt-2 text-[red]">
+        <i class="fas fa-dot-circle"></i> {{ $message }}
+      </div>
+      @enderror
     </label>
 
     <div class="mt-4 text-sm">
@@ -107,11 +148,22 @@
     <label class="block text-sm mt-4">
       <span class="text-gray-700 dark:text-gray-400">Email</span>
       <input type="email" name="email" value="{{ $data->email }}" class="block w-full mt-1 text-sm rounded-md border-gray-400 dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray form-input" placeholder="janedoe@gmail.com"/>
+      <span class="text-gray-500 dark:text-gray-200">Enter an active email</span>
+      @error('email')
+      <div class="mt-2 text-[red]">
+        <i class="fas fa-dot-circle"></i> {{ $message }}
+        </div>
+      @enderror
     </label>
 
     <label class="block text-sm mt-4">
       <span class="text-gray-700 dark:text-gray-400">Profile Photo</span>
       <input type="file" name="photo_file" class="border w-full mt-1 text-sm border-gray-400 py-1 px-2  dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md" />
+      @error('photo_file')
+        <div class="mt-2 text-[red]">
+          <i class="fas fa-dot-circle"></i> {{ $message }}
+        </div>
+      @enderror
     </label>
     
     <button class="mt-4 bg-blue-600 py-2 px-7 rounded-md text-white">Submit</button>
