@@ -47,6 +47,10 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        if (substr_replace("$request->number","",1) == 0) {
+            return back()->with('error', 'characters cannot start with 0')->withInput();
+        }
+
         $request->validate(
             [
                 'name' => 'required|min:3|max:255',

@@ -59,6 +59,11 @@
           <i class="fas fa-dot-circle"></i> {{ $message }}
         </div>
       @enderror
+      @if (session()->has('error'))
+        <div class="mt-2 text-[red]">
+            <i class="fas fa-dot-circle"></i> {{ session()->get('error') }}
+        </div>
+      @endif
     </label>
 
     <label class="block text-sm" style="margin-top: 20px">
@@ -70,7 +75,7 @@
         </div>
       @enderror
     </label>
-    
+
     <label class="block text-sm" style="margin-top: 20px">
       <span class="text-gray-700 dark:text-gray-400">City</span>
       <input type="text" name="city" class="border w-full mt-1 text-sm border-gray-400  dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md" value="{{ old('city') }}" placeholder="John Doe"/>
@@ -80,7 +85,7 @@
         </div>
       @enderror
     </label>
-    
+
     <label class="block text-sm" style="margin-top: 20px">
       <span class="text-gray-700 dark:text-gray-400">Country</span>
       <input type="text" name="country" class="border w-full mt-1 text-sm border-gray-400  dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md" value="{{ old('country') }}" placeholder="John Doe"/>
@@ -98,13 +103,13 @@
       <div class="mt-2">
         @foreach ($statuses as $status)
           <label class="inline-flex items-center text-gray-600 dark:text-gray-400 mr-4">
-            <input type="radio" class="text-blue-600 form-radio focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray" name="status" value="{{ $status['value'] }}" />
+            <input {{$status['value'] == old('status') ? 'checked' : ''}} type="radio" class="text-blue-600 form-radio focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray" name="status" value="{{ $status['value'] }}" />
             <span class="ml-2">{{ $status['name'] }}</span>
           </label>
         @endforeach
       </div>
     </div>
-    
+
     <label class="block text-sm" style="margin-top: 20px">
       <span class="text-gray-700 dark:text-gray-400">Username</span>
       <input type="text" name="username" class="border w-full mt-1 text-sm border-gray-400  dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md" value="{{ old('username') }}" placeholder="johndoeck"/>
@@ -133,13 +138,13 @@
       <div class="mt-2">
         @foreach ($roles as $role)
           <label class="inline-flex items-center text-gray-600 dark:text-gray-400 mr-4">
-            <input type="radio" class="text-blue-600 form-radio focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray" name="role" value="{{ $role['value'] }}" />
+            <input {{$role['value'] == old('role') ? 'checked' : ''}} type="radio" class="text-blue-600 form-radio focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray" name="role" value="{{ $role['value'] }}" />
             <span class="ml-2">{{ $role['name'] }}</span>
           </label>
         @endforeach
       </div>
     </div>
-    
+
     <label class="block text-sm mt-4">
       <span class="text-gray-700 dark:text-gray-400">Email</span>
       <input type="email" name="email" class="border w-full mt-1 text-sm border-gray-400  dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md" value="{{ old('email') }}" placeholder="johndoe@gmail.com"/>
@@ -160,7 +165,7 @@
         </div>
       @enderror
     </label>
-    
+
     <button class="mt-4 bg-blue-600 py-2 px-7 rounded-md text-white">Submit</button>
 
   </form>
