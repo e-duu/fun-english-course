@@ -17,7 +17,7 @@ class AddColumnsToUsersTable extends Migration
             $table->string('parent')->nullable();
             $table->string('city')->nullable();
             $table->string('country')->nullable();
-            $table->integer('number')->nullable();
+            $table->bigInteger('number')->nullable();
             $table->enum('status', ['active', 'non-active'])->nullable();
         });
     }

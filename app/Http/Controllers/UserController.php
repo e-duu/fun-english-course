@@ -50,7 +50,7 @@ class UserController extends Controller
         $request->validate(
             [
                 'name' => 'required|min:3|max:255',
-                'number' => 'required|min:3|max:255',
+                'number' => 'required|unique:users,number|min:1',
                 'username' => 'required',
                 'email' => 'required|email|unique:users,email',
                 'role' => 'required',
@@ -64,7 +64,8 @@ class UserController extends Controller
             [
                 'name.required' => 'please input user name',
                 'number.required' => 'please input user number',
-                'username.required' => 'username has been already exist',
+                'number.unique' => 'student number already exists',
+                'username.required' => 'please input username',
                 'email.required' => 'please input user email',
                 'email.unique' => 'email has been already exist',
                 'role.required' => 'please select the role',
@@ -124,7 +125,7 @@ class UserController extends Controller
     {
         $rules = [
             'name' => 'required',
-            'number' => 'required',
+            'number' => 'required|unique:users,number,' . $id,
             'username' => 'required',
             'email' => 'required|email|unique:users,email,' . $id,
             'role' => 'required',
