@@ -12,7 +12,10 @@
       <div class="flex-col mx-10">
         <div class="flex-col">
           <p class="font-semibold text-xl text-gray-700">
-            #EDGE{{ $data->date->format('Ymd').$data->code }}
+            @php
+                $num = (str_pad((int)$data->invoice->numberInv , 8, '0', STR_PAD_LEFT));
+            @endphp
+            INV-{{ $data->invoice->dateCode.$num }}
           </p>
           {{-- <p class="text-lg text-gray-500">
             {{ $data->created_at }} WIB
