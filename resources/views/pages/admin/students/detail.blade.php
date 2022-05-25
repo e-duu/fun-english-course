@@ -70,6 +70,7 @@
                                   Student
                               </span>
                               <select id="select-search" onchange="setUsers()" v-model="users_id" name="user_id" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border rounded-md border-gray-400 -gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
+                                <option value="" disabled selected>Please Select One...</option>
                                   @foreach ($users as $user)
                                     <option value="{{ $user->id }}">{{ $user->name }}</option>
                                   @endforeach
@@ -85,9 +86,7 @@
                             <span class="text-gray-700 dark:text-gray-400">
                                 Level
                             </span>
-                            <select id="selectLevel" name="level_id" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border rounded-md border-gray-400 -gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
-                                {{-- <option v-for="level in levelses" :value="level.level.id">@{{ level.level.name }}</option> --}}
-                            </select>
+                            <select id="selectLevel" name="level_id" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border rounded-md border-gray-400 -gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray"></select>
                             @error('level_id')
                                 <div class="mt-1 text-sm text-[red]">
                                     <i class="fas fa-dot-circle text-xs"></i> {{ $message }}
