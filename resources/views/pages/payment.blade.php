@@ -84,7 +84,7 @@
                 </td>
                 <td class="px-4 py-3">
                   <div class="flex items-center space-x-4 text-sm">
-                    @if ($needPay->status == 'unpaid')
+                    @if ($needPay->status == 'unpaid' or $needPay->status == 'pending')
                       <a href="{{ route('spp-payment', $needPay->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
                         <i class="fas fa-money-check"></i>
                         <p>Pay</p>
@@ -117,11 +117,11 @@
           </tbody>
         </table>
         </div>
-        {{-- <div class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
+        <div class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
           <div class="text-center w-auto sm:w-[565px] md:w-[1160px] 2xl:w-[1495px] ">
-            {{ $data->links() }}
+            {{-- {{ $data->links() }} --}}
           </div>
-        </div> --}}
+        </div>
       </div>
 
       <div class="w-full overflow-hidden rounded-lg shadow-xs mt-5">
