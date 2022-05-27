@@ -16,6 +16,7 @@ class CreateStudentsTable extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->integer('month');
+            $table->integer('year');
             $table->enum('status', ['paid', 'unpaid', 'paid_manually', 'pending', 'failed'])->default('unpaid');
             $table->bigInteger('price');
             $table->string('currency');

@@ -28,6 +28,7 @@ class StudentController extends Controller
         $request->validate(
             [
                 'months' => 'required|max:255',
+                'year' => 'required',
                 'price' => 'required',
                 'user_id' => 'required',
                 'level_id' => 'required',
@@ -38,6 +39,7 @@ class StudentController extends Controller
             ],
             [
                 'months.required' => 'please input recipient month',
+                'months.required' => 'please input recipient year',
                 'price.required' => 'please input recipient price',
                 'user_id.required' => 'please input recipient student',
                 'level_id.required' => 'please input recipient level',
@@ -51,6 +53,7 @@ class StudentController extends Controller
 
             $student = Student::create([
                 'month' => $month,
+                'year' => $request->year,
                 'price' => $request->price,
                 'code' => $code,
                 'user_id' => $request->user_id,

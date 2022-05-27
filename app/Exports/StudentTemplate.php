@@ -33,8 +33,9 @@ class StudentTemplate implements FromArray, WithHeadings, WithEvents, WithStyles
             'A' => 5,
             'B' => 20,
             'C' => 20,
-            'D' => 20,
+            'D' => 23,
             'E' => 20,
+            'F' => 20,
         ];
     }
 
@@ -47,8 +48,9 @@ class StudentTemplate implements FromArray, WithHeadings, WithEvents, WithStyles
             'No',
             'Student Number',
             'Price',
-            'Currency',
+            'Currency(IDR/USD)',
             'Month(number)',
+            'Year',
         ];
     }
 

@@ -149,6 +149,7 @@
             <th class="px-4 py-3">Currency</th>
             <th class="px-4 py-3">Price</th>
             <th class="px-4 py-3">Month</th>
+            <th class="px-4 py-3">Year</th>
             <th class="px-4 py-3">Status Payment</th>
             <th class="px-4 py-3">Action</th>
         </tr>
@@ -230,6 +231,9 @@
                   December
               @endif
             </td>
+            <td class="px-4 py-3 text-sm">
+                {{$item->year}}
+              </td>
             <td class="px-4 py-3 text-sm">
               <p class="rounded text-center font-bold uppercase text-white py-1 bold @if($item->status == 'paid') bg-green-500 @elseif ($item->status == 'paid_manually') bg-green-500 @elseif ($item->status == 'unpaid') bg-red-500 @elseif ($item->status == 'pending') bg-yellow-500 @endif">
                 {{ $item->status }}

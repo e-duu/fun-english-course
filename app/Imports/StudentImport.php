@@ -35,14 +35,15 @@ class StudentImport implements ToModel, WithStartRow
     {
         $user = User::where('role', 'student')->where('number', $row[1])->first();
 
-        // if ($user) {
+        if ($user) {
             Student::create([
                 'price' => $row[2],
                 'currency' => $row[3],
                 'month' => $row[4],
+                'year' => $row[5],
                 'user_id' => $user->id,
                 'level_id' => $this->id,
             ]);
-        // }
+        }
     }
 }
