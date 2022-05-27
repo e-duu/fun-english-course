@@ -233,7 +233,7 @@
             </td>
             <td class="px-4 py-3 text-sm">
                 {{$item->year}}
-              </td>
+            </td>
             <td class="px-4 py-3 text-sm">
               <p class="rounded text-center font-bold uppercase text-white py-1 bold @if($item->status == 'paid') bg-green-500 @elseif ($item->status == 'paid_manually') bg-green-500 @elseif ($item->status == 'unpaid') bg-red-500 @elseif ($item->status == 'pending') bg-yellow-500 @endif">
                 {{ $item->status }}
@@ -262,7 +262,7 @@
           </tr>
         @empty
           <tr>
-            <td colspan="13" class="text-center text-gray-500 px-4 py-3">
+            <td colspan="14" class="text-center text-gray-500 px-4 py-3">
               <p>
                 Data is empty..
               </p>
