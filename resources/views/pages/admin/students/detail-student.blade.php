@@ -258,7 +258,7 @@
           </tr>
         @empty
           <tr>
-            <td colspan="12" class="text-center text-gray-500 px-4 py-3">
+            <td colspan="13" class="text-center text-gray-500 px-4 py-3">
               <p>
                 Data is empty..
               </p>
