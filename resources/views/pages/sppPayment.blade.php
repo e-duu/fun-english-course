@@ -87,6 +87,12 @@
           </p>
         </div>
         <div class="grid grid-cols-2 my-4 items-center">
+          <p class="text-md text-gray-700">Year</p>
+          <p class="font-semibold text-lg text-gray-700 text-right">
+            {{ $data->year }}
+          </p>
+        </div>
+        <div class="grid grid-cols-2 my-4 items-center">
           <p class="text-md text-gray-700">Program</p>
           <p class="font-semibold text-lg text-gray-700 text-right">
             {{ $data->level->program->name }}

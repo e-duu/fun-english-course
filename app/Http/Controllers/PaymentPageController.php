@@ -37,7 +37,7 @@ class PaymentPageController extends Controller
             ]);
         }
 
-        if ($data->status == 'pending' && Carbon::now() >= $data->dateEnd) {
+        if ($data->status == 'pending' && $data->dateEnd < Carbon::now()) {
             $data->update([
                 'status' => 'unpaid',
                 'date' => null,
