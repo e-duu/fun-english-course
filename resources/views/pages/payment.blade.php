@@ -16,6 +16,7 @@
             <th class="px-4 py-3">Program</th>
             <th class="px-4 py-3">Level</th>
             <th class="px-4 py-3">Month</th>
+            <th class="px-4 py-3">Year</th>
             <th class="px-4 py-3">Price</th>
             <th class="px-4 py-3">Status</th>
             <th class="px-4 py-3">Actions</th>
@@ -65,6 +66,9 @@
                   @endif
                 </td>
                 <td class="px-4 py-3 text-sm">
+                  {{ $needPay->year }}
+                </td>
+                <td class="px-4 py-3 text-sm">
                   {{ $needPay->currency == 'USD' ? '$ '.$needPay->price: 'Rp '.number_format($needPay->price, 0, ',', ',') }}
                 </td>
                 <td class="px-4 py-3 text-sm">
@@ -106,7 +110,7 @@
               </tr>
             @else
               <tr>
-                <td colspan="8" class="text-center text-gray-500 px-4 py-3">
+                <td colspan="9" class="text-center text-gray-500 px-4 py-3">
                   <p>
                     Data is empty..
                   </p>
@@ -135,6 +139,7 @@
             <th class="px-4 py-3">Program</th>
             <th class="px-4 py-3">Level</th>
             <th class="px-4 py-3">Month</th>
+            <th class="px-4 py-3">Year</th>
             <th class="px-4 py-3">Price</th>
             <th class="px-4 py-3">Status</th>
             <th class="px-4 py-3">Actions</th>
@@ -183,6 +188,9 @@
                   @endif
                 </td>
                 <td class="px-4 py-3 text-sm">
+                  {{ $item->year }}
+                </td>
+                <td class="px-4 py-3 text-sm">
                     {{ $item->currency == 'USD' ? '$ '.$item->price: 'Rp '.number_format($item->price, 0, ',', ',') }}
                 </td>
                 <td class="px-4 py-3 text-sm">
@@ -224,7 +232,7 @@
               </tr>
             @empty
               <tr>
-                <td colspan="8" class="text-center text-gray-500 px-4 py-3">
+                <td colspan="9" class="text-center text-gray-500 px-4 py-3">
                   <p>
                     Data is empty..
                   </p>
