@@ -42,6 +42,10 @@ Route::middleware(['guest'])->group(function ()
     Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
 });
 
+Route::get('tes', function(){
+    return view('pages.test');
+})->name('test');
+
 
 Route::middleware(['auth'])->group(function ()
 {

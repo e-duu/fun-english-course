@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\InvoiceMail;
 use App\Mail\MyMail;
 use App\Models\SppPayment;
 use App\Models\Student;
 use App\Models\User;
 use Carbon\Carbon;
-use Exception;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
@@ -36,11 +35,36 @@ class SppPaymentController extends Controller
             'intent' => 'CAPTURE',
             'purchase_units' => [
                 [
-                    'amount' => [
-                        'currency_code' => 'USD',
-                        'value' => $price,
+                    "description" => "Pembayaran SPP",
+                    "custom_id" => "CUST-".Str::random(7),
+                    "soft_descriptor" => "Pembayaran SPP",
+                    "amount" => [
+                        "currency_code" => "USD",
+                        "value" => $price,
+                        "breakdown" => [
+                            "item_total" => [
+                                "currency_code" => "USD",
+                                "value" => $price
+                            ],
+                        ]
                     ],
-                    'description' => $description,
+                    "items" => [
+                        [
+                            "name" => "Pembayaran SPP",
+                            "sku" => "sku".Str::random(7),
+                            "description" => "SPP Month".$data->month."-".$data->year,
+                            "unit_amount" => [
+                                "currency_code" => "USD",
+                                "value" => $price
+                            ],
+                            "tax" => [
+                                "currency_code" => "USD",
+                                "value" => "00"
+                            ],
+                            "quantity" => "1",
+                            "category" => "PHYSICAL_GOODS"
+                        ],
+                    ],
                 ],
             ],
         ]);
