@@ -142,12 +142,14 @@
             <th class="px-4 py-3">Parent</th>
             <th class="px-4 py-3">City</th>
             <th class="px-4 py-3">Country</th>
+            <th class="px-4 py-3">Student Number</th>
             <th class="px-4 py-3">Status</th>
             <th class="px-4 py-3">Program</th>
             <th class="px-4 py-3">Level</th>
             <th class="px-4 py-3">Currency</th>
             <th class="px-4 py-3">Price</th>
             <th class="px-4 py-3">Month</th>
+            <th class="px-4 py-3">Year</th>
             <th class="px-4 py-3">Status Payment</th>
             <th class="px-4 py-3">Action</th>
         </tr>
@@ -167,6 +169,9 @@
             </td>
             <td class="px-4 py-3 text-sm">
               {{ $item->student->country == null ? '-' : $item->student->country }}
+            </td>
+            <td class="px-4 py-3 text-sm">
+              {{ $item->student->number == null ? '-' : $item->student->number }}
             </td>
             <td class="px-4 py-3 text-sm">
               <div class="font-semibold uppercase rounded py-[2px] px-2 bold @if($item->student->status == 'paid') bg-green-500 @elseif ($item->student->status == 'active') bg-green-500 @elseif ($item->student->status == 'non-active') bg-red-500 @endif">
@@ -227,6 +232,9 @@
               @endif
             </td>
             <td class="px-4 py-3 text-sm">
+                {{$item->year}}
+            </td>
+            <td class="px-4 py-3 text-sm">
               <p class="rounded text-center font-bold uppercase text-white py-1 bold @if($item->status == 'paid') bg-green-500 @elseif ($item->status == 'paid_manually') bg-green-500 @elseif ($item->status == 'unpaid') bg-red-500 @elseif ($item->status == 'pending') bg-yellow-500 @endif">
                 {{ $item->status }}
               </p>
@@ -254,7 +262,7 @@
           </tr>
         @empty
           <tr>
-            <td colspan="12" class="text-center text-gray-500 px-4 py-3">
+            <td colspan="14" class="text-center text-gray-500 px-4 py-3">
               <p>
                 Data is empty..
               </p>

@@ -53,7 +53,7 @@
     <label class="block text-sm mt-4">
       <span class="text-gray-700 dark:text-gray-400">Number</span>
       <input type="text" name="number" value="{{ $data->number }}" class="block w-full mt-1 text-sm rounded-md border-gray-400 dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray form-input" placeholder="000000"/>
-      <span class="text-gray-500 dark:text-gray-200">Student numbers cannot start with zero</span>
+      <span class="text-gray-500 dark:text-gray-200">*student numbers cannot start with zero</span>
       @error('number')
         <div class="mt-2 text-[red]">
           <i class="fas fa-dot-circle"></i> {{ $message }}

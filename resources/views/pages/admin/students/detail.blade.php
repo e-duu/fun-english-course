@@ -121,6 +121,22 @@
                                 @enderror
                           </label>
 
+                          <label class="block mt-2 text-sm">
+                            <span class="text-gray-700 dark:text-gray-400">
+                                Year
+                            </span>
+                            <select name="year" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border rounded-md border-gray-400 -gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
+                                <option value="{{date('Y')}}">{{date('Y')}}</option>
+                                <option value="{{date('Y') + 1}}">{{date('Y') + 1}}</option>
+                                <option value="{{date('Y') + 2}}">{{date('Y') + 2}}</option>
+                            </select>
+                            @error('year')
+                                <div class="mt-1 text-sm text-[red]">
+                                    <i class="fas fa-dot-circle text-xs"></i> {{ $message }}
+                                </div>
+                            @enderror
+                          </label>
+
                           <label class="flex-col text-sm">
                             <div class="text-gray-700 mt-2 dark:text-gray-400">
                                 Month
