@@ -87,6 +87,12 @@
           </p>
         </div>
         <div class="grid grid-cols-2 my-4 items-center">
+          <p class="text-md text-gray-700">Year</p>
+          <p class="font-semibold text-lg text-gray-700 text-right">
+            {{ $data->year }}
+          </p>
+        </div>
+        <div class="grid grid-cols-2 my-4 items-center">
           <p class="text-md text-gray-700">Program</p>
           <p class="font-semibold text-lg text-gray-700 text-right">
             {{ $data->level->program->name }}
@@ -160,7 +166,7 @@
 @endsection
 
 @push('after-script')
-<script src="https://www.paypal.com/sdk/js?client-id=AQyuDo4zlYjzWRDR9Qml4fd9xqx36ytYwAJ3DGSgQsR7mjN4vnX0QhDHqbHppR2xCZW56SFyIcPmMpjK&currency=USD" data-sdk-integration-source="button-factory"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=AQyuDo4zlYjzWRDR9Qml4fd9xqx36ytYwAJ3DGSgQsR7mjN4vnX0QhDHqbHppR2xCZW56SFyIcPmMpjK&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
 <script>
   function initPayPalButton() {
     paypal.Buttons({
