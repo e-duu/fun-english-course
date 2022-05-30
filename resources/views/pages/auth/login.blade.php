@@ -29,7 +29,7 @@
                 @csrf
                 @method('POST')
                 <input class="w-full px-4 py-2 border-gray-300 rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring focus:ring-primary-100 dark:focus:ring-primary-darker" type="text" name="username" placeholder="Username" required/>
-        
+
                 <input class="w-full px-4 py-2 border-gray-300 rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring focus:ring-primary-100 dark:focus:ring-primary-darker" type="password" name="password" id="password" placeholder="Password" required/>
 
                 <button type="submit" class="w-full px-4 py-2 font-medium text-center text-white transition-colors duration-200 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 dark:focus:ring-offset-darker bg-blue-600">
@@ -52,7 +52,7 @@
                 @csrf
                 @method('POST')
                 <input class="w-full px-4 py-2 border-gray-300 rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring focus:ring-primary-100 dark:focus:ring-primary-darker" type="text" name="username" placeholder="Username"required />
-        
+
                 <input class="w-full px-4 py-2 border-gray-300 rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring focus:ring-primary-100 dark:focus:ring-primary-darker" type="password" name="password" id="password" placeholder="Password" required/>
                 <div>
                   <button type="submit" class="w-full px-4 py-2 font-medium text-center text-white transition-colors duration-200 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 dark:focus:ring-offset-darker bg-blue-600">

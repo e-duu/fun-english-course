@@ -33,28 +33,6 @@
             Invoice Spp
         </h1>
 
-        @php
-            // Convertion IDR to USD
-            try {
-                $req_url = "https://v6.exchangerate-api.com/v6/4de7938f23bbd34918b9c82c/latest/IDR";
-                $response_json = file_get_contents($req_url);
-                if(false !== $response_json) {
-                    try {
-                        $response = json_decode($response_json);
-                            if('success' === $response->result) {
-                                $base_price = $sppMonth->price;
-                                $result = round(($base_price * $response->conversion_rates->USD), 2);
-                            }
-                        }
-                    catch(Exception $e) {
-                        dd('Convertion Failed!');
-                    }
-                }
-            } catch (\Throwable $th) {
-                dd('an error occurred on the server');
-            }
-        @endphp
-
         <table>
             <tr>
                 <td>
@@ -69,38 +47,40 @@
                 </td>
                 <td>
                     <div class="column-text">
-                        <p class="">: {{$user->name}}</p>
+                        <p class="">: {{$data->student->name}}</p>
                         <p class="">:
-                            @if ($sppMonth->month == 1)
+                            @if ($data->month == 1)
                                 January
-                            @elseif ($sppMonth->month == 2)
+                            @elseif ($data->month == 2)
                                 February
-                            @elseif ($sppMonth->month == 3)
+                            @elseif ($data->month == 3)
                                 March
-                            @elseif ($sppMonth->month == 4)
+                            @elseif ($data->month == 4)
                                 April
-                            @elseif ($sppMonth->month == 5)
+                            @elseif ($data->month == 5)
                                 May
-                            @elseif ($sppMonth->month == 6)
+                            @elseif ($data->month == 6)
                                 June
-                            @elseif ($sppMonth->month == 7)
+                            @elseif ($data->month == 7)
                                 July
-                            @elseif ($sppMonth->month == 8)
+                            @elseif ($data->month == 8)
                                 August
-                            @elseif ($sppMonth->month == 9)
+                            @elseif ($data->month == 9)
                                 September
-                            @elseif ($sppMonth->month == 10)
+                            @elseif ($data->month == 10)
                                 October
-                            @elseif ($sppMonth->month == 11)
+                            @elseif ($data->month == 11)
                                 November
-                            @elseif ($sppMonth->month == 12)
+                            @elseif ($data->month == 12)
                                 December
                             @endif
                         </p>
-                        <p class="">: {{$program->name}}</p>
-                        <p class="">: {{$level->name}}</p>
-                        <p class="">: {{$sppMonth->status}}</p>
-                        <p class="">: {{'Rp. '.number_format($sppMonth->price).' / $'.$result}}</p>
+                        <p class="">: {{$data->level->program->name}}</p>
+                        <p class="">: {{$data->level->name}}</p>
+                        <p class="">: {{$data->status}}</p>
+                        <p class="">:
+                          {{ $data->currency == 'USD' ? '$ '.$data->price: 'Rp '.number_format($data->price, 0, ',', ',') }}
+                        </p>
                     </div>
                 </td>
             </tr>
@@ -112,7 +92,9 @@
                 </td>
                 <td>
                     <div class="column-text">
-                        <p class="text-extra-bold">: {{'Rp. '.number_format($sppMonth->price).' / $'.$result}}</p>
+                        <p class="text-extra-bold">:
+                          {{ $data->currency == 'USD' ? '$ '.$data->price: 'Rp '.number_format($data->price, 0, ',', ',') }}
+                        </p>
                     </div>
                 </td>
             </tr>
@@ -121,7 +103,7 @@
                     <table bgcolor="#e05443" border="0" cellspacing="0" cellpadding="0">
                       <tr>
                         <td class="button" style="padding: 0 20px 0 20px; font-size: 14px; font-weight: bold; font-family: sans-serif; text-align: center;" height="45">
-                          <a style="text-decoration: none; color: #fff;" href="{{route('spp-payment', $sppMonth->id)}}">Pay Now</a>
+                          <a style="text-decoration: none; color: #fff;" href="{{route('spp-payment', $data->id)}}">Pay Now</a>
                         </td>
                       </tr>
                     </table>

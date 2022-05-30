@@ -10,7 +10,7 @@ use Maatwebsite\Excel\Concerns\WithStyles;
 use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class UsersTemplate implements FromArray, WithHeadings, WithEvents, WithStyles, WithColumnWidths
+class StudentTemplate implements FromArray, WithHeadings, WithEvents, WithStyles, WithColumnWidths
 {
     /**
      * @return array
@@ -33,10 +33,9 @@ class UsersTemplate implements FromArray, WithHeadings, WithEvents, WithStyles, 
             'A' => 5,
             'B' => 20,
             'C' => 20,
-            'D' => 20,
+            'D' => 23,
             'E' => 20,
             'F' => 20,
-            'G' => 20,
         ];
     }
 
@@ -47,23 +46,18 @@ class UsersTemplate implements FromArray, WithHeadings, WithEvents, WithStyles, 
     {
         return [
             'No',
-            'Student Name',
             'Student Number',
-            'Username',
-            'Password',
-            'Role',
-            'Parent Name',
-            'City',
-            'Country',
-            'Status(active/non-active)',
-            'Email(unique)',
+            'Price',
+            'Currency(IDR/USD)',
+            'Month(number)',
+            'Year',
         ];
     }
 
     public function registerEvents(): array
     {
         return [
-            AfterSheet::class => function (AfterSheet $event) {
+            AfterSheet::class => function(AfterSheet $event) {
 
                 $event->sheet->getDelegate()->getStyle(1)
                     ->getAlignment()

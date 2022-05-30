@@ -10,61 +10,52 @@
 </head>
 
 <body>
-    <!-- Set up a container element for the button -->
-    <div id="paypal-button-container"></div>
+    <div id="smart-button-container">
+      <div style="text-align: center;">
+        <div id="paypal-button-container"></div>
+      </div>
+    </div>
+  <script src="https://www.paypal.com/sdk/js?client-id=AVGe_Clbw8MyQC-AyvivdfBtQoeXKWEXdRbakt9dCGD6av_HLW8_wjxTs6MARf1mBQ-rVyvSF7AhHDnt&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
+  <script>
+    function initPayPalButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'rect',
+          color: 'gold',
+          layout: 'vertical',
+          label: 'paypal',
 
-    <!-- Include the PayPal JavaScript SDK -->
-    <script src="https://www.paypal.com/sdk/js?client-id=AQyuDo4zlYjzWRDR9Qml4fd9xqx36ytYwAJ3DGSgQsR7mjN4vnX0QhDHqbHppR2xCZW56SFyIcPmMpjK&currency=USD"></script>
+        },
 
-    <script>
-        // Render the PayPal button into #paypal-button-container
-        paypal.Buttons({
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{"amount":{"currency_code":"USD","value":1}}]
+          });
+        },
 
-            // Set up the transaction
-            createOrder: function(data, actions) {
-                return fetch('api/payment/spp/create/', {
-                    method: 'post',
-                }).then(function(res) {
-                    return res.json();
-                }).then(function(orderData) {
-                    return orderData.id;
-                });
-            },
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(orderData) {
 
-            // Finalize the transaction
-            onApprove: function(data, actions) {
-                return fetch('api/payment/spp/capture/', {
-                    method: 'post',
-                    body:JSON.stringify({
-                        orderId:data.orderID,
-                    })
-                }).then(function(res) {
-                    return res.json();
-                }).then(function(orderData) {
-                    var errorDetail = Array.isArray(orderData.details) && orderData.details[0];
+            // Full available details
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
 
-                    if (errorDetail && errorDetail.issue === 'INSTRUMENT_DECLINED') {
-                        return actions.restart();
-                    }
+            // Show a success message within this page, e.g.
+            const element = document.getElementById('paypal-button-container');
+            element.innerHTML = '';
+            element.innerHTML = '<h3>Thank you for your payment!</h3>';
 
-                    if (errorDetail) {
-                        var msg = 'Maaf, transaksi Anda tidak dapat diproses.';
-                        if(errorDetail.description) msg += '\n\n' + errorDetail.description;
-                        if(orderData.debug_id) msg += ' ('+ orderData.debug_id +')';
-                        return alert(msg);
-                    }
+            // Or go to another URL:  actions.redirect('thank_you.html');
 
-                    console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-                    var transaction = orderData.purchase_units[0].payments.captures[0];
-                    alert('Transaction ' + transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
+          });
+        },
 
-                    const element = document.getElementById('paypal-button-container');
-                    element.innerHTML = '';
-                    element.innerHTML = '<h3>Thank you for your payment!</h3>'
-                });
-            }
-        }).render('#paypal-button-container');
-    </script>
+        onError: function(err) {
+          console.log(err);
+        }
+      }).render('#paypal-button-container');
+    }
+    initPayPalButton();
+  </script>
 </body>
 
 </html>

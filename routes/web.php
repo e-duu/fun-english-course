@@ -14,13 +14,16 @@ use App\Http\Controllers\RecipientController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DownloadableController;
 use App\Http\Controllers\ExerciseController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\LevelUserController;
 use App\Http\Controllers\MootaController;
 use App\Http\Controllers\PaymentPageController;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\SppController;
 use App\Http\Controllers\SppPaymentBankController;
 use App\Http\Controllers\SppPaymentController;
+use App\Http\Controllers\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +42,10 @@ Route::middleware(['guest'])->group(function ()
     Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
 });
 
+Route::get('tes', function(){
+    return view('pages.test');
+})->name('test');
+
 
 Route::middleware(['auth'])->group(function ()
 {
@@ -51,17 +58,20 @@ Route::middleware(['auth'])->group(function ()
 
 	// Payment
 	Route::get('/payment', [PaymentPageController::class, 'index'])->name('payment');
-	Route::post('/payment/store', [PaymentPageController::class, 'store'])->name('payment.store');
 
 	// Spp Payment
-	// Route::get('/spp-payment/{id}', [PaymentPageController::class, 'sppPayment'])->name('spp-payment');
-	// Route::post('/payment/store', [PaymentPageController::class, 'sppPaymentStore'])->name('spp-payment.store');
-	// Route::get('/spp-payment-detail/{id}', [PaymentPageController::class, 'sppPaymentDetail'])->name('spp-payment-detail');
-	// Route::get('/spp-payment-success', [PaymentPageController::class, 'sppPaymentSuccess'])->name('spp-payment-success');
-	// Route::get('/spp-payment-cancel/{id}', [PaymentPageController::class, 'sppPaymentCancel'])->name('spp-payment-cancel');
+	Route::get('/spp-payment-manually/{id}', [SppPaymentController::class, 'payManually'])->name('pay.manually');
+	Route::post('/spp-payment-manually-prosses/{id}', [SppPaymentController::class, 'payManuallyProsses'])->name('pay.manually.prosses');
+
+    // Spp Payment Page
+	Route::get('/spp-payment/{id}', [PaymentPageController::class, 'sppPayment'])->name('spp-payment');
+	Route::post('/payment/store', [PaymentPageController::class, 'sppPaymentStore'])->name('spp-payment.store');
+	Route::get('/spp-payment-detail/{id}', [PaymentPageController::class, 'sppPaymentDetail'])->name('spp-payment-detail');
+	Route::get('/spp-payment-success', [PaymentPageController::class, 'sppPaymentSuccess'])->name('spp-payment-success');
+	Route::get('/spp-payment-cancel/{id}', [PaymentPageController::class, 'sppPaymentCancel'])->name('spp-payment-cancel');
 
 	// api notif push webhoox
-	// Route::get('/payment/webhook', [SppPaymentBankController::class, 'index'])->name('payment-webhook');
+	Route::get('/payment/webhook', [SppPaymentBankController::class, 'index'])->name('payment-webhook');
 
 	// Watch Material
 	Route::get('/watch/{id}', [WatchController::class, 'index'])->name('watch');
@@ -74,10 +84,23 @@ Route::middleware(['auth'])->group(function ()
 	// Logout
 	Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-	// Dashboard Student
-	// Route::get('/dashboard-student', [DashboardController::class, 'dashboardUser'])->name('dashboard.user');
+	// Download pdf
+	Route::get('download/invoice/{id}', [PdfController::class, 'downloadInvoice'])->name('invoice');
+	Route::get('download/receipt/{id}', [PdfController::class, 'downloadReceipt'])->name('receipt');
 
-	Route::prefix('admin')->group(function () {
+    // Send Invoice & Receipt To Mail
+	Route::post('download/invorec-to-mail', [StudentController::class, 'invorecToMail'])->name('invorecToMail');
+
+	// Page Invoice & Receipt
+	Route::get('/invoice/{id}', [InvoiceController::class, 'invoice'])->name('page-invoice');
+	Route::get('/receipt/{id}', [InvoiceController::class, 'receipt'])->name('page-receipt');
+
+    // Export Excel
+    Route::get('invoice/export/excel/{id}', [InvoiceController::class, 'invoiceExcelExport'])->name('export.excel.invoice');
+    Route::post('invoice/import/excel/{id}', [InvoiceController::class, 'invoiceExcelImport'])->name('import.excel.invoice');
+    Route::get('invoice/export/template/excel', [InvoiceController::class, 'invoiceExcelTemplate'])->name('template.excel.invoice');
+
+	Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
 		// Dashboard
 		Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('admin');
@@ -91,23 +114,32 @@ Route::middleware(['auth'])->group(function ()
 		Route::post('moota/create', [MootaController::class, 'store'])->name('moota.store');
 		Route::get('/moota/get-bank', [MootaController::class, 'getListBank'])->name('moota.get-bank');
 
-
 		Route::prefix('user')->group(function () {
-				Route::get('/all', [UserController::class, 'index'])->name('user.all');
-				Route::get('/create', [UserController::class, 'create'])->name('user.create');
-				Route::post('/create', [UserController::class, 'store'])->name('user.store');
-				Route::get('/show/{id}', [UserController::class, 'show'])->name('user.show');
-				Route::get('/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
-				Route::post('/edit/{id}', [UserController::class, 'update'])->name('user.update');
-				Route::delete('/delete/{id}', [UserController::class, 'destroy'])->name('user.delete');
-				Route::get('template-user', [UserController::class, 'template'])->name('template.user');
-				Route::post('file-import-user', [UserController::class, 'fileImport'])->name('file-import-user');
-				Route::get('/reset', [UserController::class, 'filterReset'])->name('user.reset');
-				Route::get('/enroll/{id}', [LevelUserController::class, 'enroll'])->name('user.enroll');
-				Route::post('/enroll/store', [LevelUserController::class, 'store'])->name('enroll.store');
-				Route::post('/enroll/delete', [LevelUserController::class, 'delete'])->name('enroll.delete');
-				Route::get('/manyEnroll', [LevelUserController::class, 'manyEnroll'])->name('manyEnroll');
-				Route::post('/manyEnroll/store', [LevelUserController::class, 'manyEnrollStore'])->name('manyEnroll.store');
+			Route::get('/all', [UserController::class, 'index'])->name('user.all');
+			Route::get('/create', [UserController::class, 'create'])->name('user.create');
+			Route::post('/create', [UserController::class, 'store'])->name('user.store');
+			Route::get('/show/{id}', [UserController::class, 'show'])->name('user.show');
+			Route::get('/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
+			Route::post('/edit/{id}', [UserController::class, 'update'])->name('user.update');
+			Route::delete('/delete/{id}', [UserController::class, 'destroy'])->name('user.delete');
+			Route::get('template-user', [UserController::class, 'template'])->name('template.user');
+			Route::post('file-import-user', [UserController::class, 'fileImport'])->name('file-import-user');
+			Route::get('/reset', [UserController::class, 'filterReset'])->name('user.reset');
+			Route::get('/enroll/{id}', [LevelUserController::class, 'enroll'])->name('user.enroll');
+			Route::post('/enroll/store', [LevelUserController::class, 'store'])->name('enroll.store');
+			Route::post('/enroll/delete', [LevelUserController::class, 'delete'])->name('enroll.delete');
+			Route::get('/manyEnroll', [LevelUserController::class, 'manyEnroll'])->name('manyEnroll');
+			Route::post('/manyEnroll/store', [LevelUserController::class, 'manyEnrollStore'])->name('manyEnroll.store');
+		});
+
+		Route::prefix('student')->group(function () {
+			Route::get('/all', [StudentController::class, 'index'])->name('student.all');
+			Route::get('/send-to-mail/{id}', [StudentController::class, 'sendToMailPage'])->name('send-to-mail-page');
+			Route::post('/store', [StudentController::class, 'store'])->name('student.store');
+			Route::get('/show/{id}', [StudentController::class, 'show'])->name('student.show');
+			Route::get('/show/student/{id}', [StudentController::class, 'sppStudent'])->name('student.show-spp');
+			Route::get('/reset/{id}', [StudentController::class, 'filterReset'])->name('student.reset');
+			Route::get('/reset/search/{id}', [StudentController::class, 'filterStudentReset'])->name('student.search-reset');
 		});
 
 		Route::prefix('program')->group(function () {

@@ -3,6 +3,8 @@
 namespace App\Console;
 
 use App\Models\SppMonth;
+use App\Models\Student;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -34,6 +36,15 @@ class Kernel extends ConsoleKernel
         //         ->where('date', '<', today()->subDays(1))
         //         ->update(['status' => 'unpaid']);
         // })->daily();
+        $schedule->call(function () {
+            Student::where('status', 'pending')
+                ->whereDate('dateEnd', '<', now())
+                ->update([
+                    'status' => 'unpaid',
+                    'date' => null,
+                    'dateEnd' => null,
+                ]);
+        })->everyMinute();
     }
 
     /**
@@ -43,7 +54,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

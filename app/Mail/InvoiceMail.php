@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\DetailUser;
 use App\Models\Level;
 use App\Models\Program;
 use App\Models\SppMonth;
@@ -25,9 +26,10 @@ class InvoiceMail extends Mailable
      *
      * @return void
      */
-    public function __construct(User $user, SppMonth $sppMonth, Program $program, Level $level)
+    public function __construct(User $user, DetailUser $detailUser, SppMonth $sppMonth, Program $program, Level $level)
     {
         $this->user = $user;
+        $this->detailUser = $detailUser;
         $this->sppMonth = $sppMonth;
         $this->program = $program;
         $this->level = $level;

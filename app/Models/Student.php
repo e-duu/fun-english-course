@@ -2,21 +2,22 @@
 
 namespace App\Models;
 
-use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SppMonth extends Model
+class Student extends Model
 {
     use HasFactory;
 
-    protected $table = 'spp_months';
+    protected $table = 'students';
 
     protected $dates = ['date', 'dateEnd'];
 
     protected $fillable = [
         'month',
+        'year',
         'price',
+        'currency',
         'status',
         'code',
         'date',
@@ -37,11 +38,16 @@ class SppMonth extends Model
 
     public function sppPayment()
     {
-        return $this->belongsTo(SppPayment::class, 'id', 'spp_month_id');
+        return $this->belongsTo(SppPayment::class, 'id', 'student_id');
     }
 
     public function sppPaymentBank()
     {
         return $this->belongsTo(SppPaymentBank::class);
+    }
+
+    public function invoice()
+    {
+        return $this->hasOne(Invoice::class, 'student_id');
     }
 }

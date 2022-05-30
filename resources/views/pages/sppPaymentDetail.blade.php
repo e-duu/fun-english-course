@@ -12,7 +12,10 @@
       <div class="flex-col mx-10">
         <div class="flex-col">
           <p class="font-semibold text-xl text-gray-700">
-            #EDGE{{ $data->date->format('Ymd').$data->code }}
+            @php
+                $num = (str_pad((int)$data->invoice->numberInv , 8, '0', STR_PAD_LEFT));
+            @endphp
+            INV-{{ $data->invoice->dateCode.$num }}
           </p>
           {{-- <p class="text-lg text-gray-500">
             {{ $data->created_at }} WIB
@@ -36,11 +39,22 @@
             <div class="flex-col">
               <img src="{{ asset('images/mandiri.png') }}" class="max-h-8 mb-2">
               <p class="font-semibold text-lg text-gray-700">
-                Edukasi Diversitas Global Excelsia 
+                PT Edukasi Diversitas Global Excelsia 
               </p>
               <input id="copyText" class="border-0 bg-transparent text-xl font-bold text-gray-800 -ml-3" type="text" value="0700010372956" disabled>
             </div>
             <button id="copyBtn" class="text-blue-600 font-semibold text-lg">Copy</button>
+          </div>
+          <div class="border-b-[3px] border-gray-400 my-3"></div>
+          <div class="flex justify-between items-center">
+            <div class="flex-col">
+              <img src="{{ asset('images/bca.png') }}" class="max-h-8 mb-2">
+              <p class="font-semibold text-lg text-gray-700">
+                PT Edukasi Diversitas Global Excelsia 
+              </p>
+              <input id="copyText1" class="border-0 bg-transparent text-xl font-bold text-gray-800 -ml-3" type="text" value="5865408754" disabled>
+            </div>
+            <button id="copyBtn1" class="text-blue-600 font-semibold text-lg">Copy</button>
           </div>
           @endforelse
         </div>
@@ -107,10 +121,10 @@
 
       </div>
       <div class='pt-10'>
-        {{-- <a href="{{ route('spp-payment-cancel', $data->id) }}" class='block w-full border-2 border-blue-600 hover:bg-blue-700 hover:text-white mb-2 shadow-xl font-bold text-md sm:text-xl text-blue-600 transition-colors duration-100 py-3 sm:py-5 text-center'>Cancel transaction</a>
-        <a href="{{ route('spp-payment', $data->id) }}" class='block w-full bg-blue-600 hover:bg-blue-700 rounded-b-lg shadow-xl font-bold text-md sm:text-xl text-white transition-colors duration-100 py-3 sm:py-5 text-center'>Back</a> --}}
+        <a href="{{ route('spp-payment-cancel', $data->id) }}" class='block w-full border-2 border-blue-600 hover:bg-blue-700 hover:text-white mb-2 shadow-xl font-bold text-md sm:text-xl text-blue-600 transition-colors duration-100 py-3 sm:py-5 text-center'>Cancel transaction</a>
+        <a href="{{ route('spp-payment', $data->id) }}" class='block w-full bg-blue-600 hover:bg-blue-700 rounded-b-lg shadow-xl font-bold text-md sm:text-xl text-white transition-colors duration-100 py-3 sm:py-5 text-center'>Back</a>
         
-        <a href="{{ route('payment-webhook') }}" class='w-full bg-blue-600 hover:bg-blue-700 rounded-b-lg shadow-xl font-bold text-md sm:text-xl text-white transition-colors duration-100 py-3 sm:py-5 text-center'>Done</a>
+        {{-- <a href="{{ route('payment-webhook') }}" class='w-full bg-blue-600 hover:bg-blue-700 rounded-b-lg shadow-xl font-bold text-md sm:text-xl text-white transition-colors duration-100 py-3 sm:py-5 text-center'>Done</a> --}}
       </div>
     </div>
   </div>
@@ -157,7 +171,9 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
   const copyBtn = document.getElementById('copyBtn');
+  const copyBtn1 = document.getElementById('copyBtn1');
   const copyText = document.getElementById("copyText");
+  const copyText1 = document.getElementById("copyText1");
   const copyBtnPrice = document.getElementById('copyBtnPrice')
   const copyTextPrice = document.getElementById('copyTextPrice')
   
@@ -177,6 +193,17 @@
   copyBtnPrice.onclick = () => {
     copyTextPrice.select();    // Selects the text inside the input
     navigator.clipboard.writeText(copyTextPrice.value);
+      Swal.fire({         //displays a pop up with sweetalert
+        icon: 'success',
+        title: 'Text copied to clipboard',
+        showConfirmButton: false,
+        timer: 1000
+    });
+  }
+
+  copyBtn1.onclick = () => {
+    copyText1.select();    // Selects the text inside the input
+    navigator.clipboard.writeText(copyText1.value);
       Swal.fire({         //displays a pop up with sweetalert
         icon: 'success',
         title: 'Text copied to clipboard',

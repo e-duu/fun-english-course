@@ -6,28 +6,6 @@
   Pay Spp Manually
 @endsection
 @section('content')
-    @php
-        // Convertion IDR to USD
-        try {
-            $req_url = "https://v6.exchangerate-api.com/v6/4de7938f23bbd34918b9c82c/latest/IDR";
-            $response_json = file_get_contents($req_url);
-            if(false !== $response_json) {
-                try {
-                    $response = json_decode($response_json);
-                        if('success' === $response->result) {
-                            $base_price = $data->price;
-                            $result = round(($base_price * $response->conversion_rates->USD), 2);
-                        }
-                    }
-                catch(Exception $e) {
-                    dd('Convertion Failed!');
-                }
-            }
-        } catch (\Throwable $th) {
-            $result = null;
-            echo 'an error occurred on the server';
-        }
-    @endphp
     <div class="container-fluid w-full mt-5">
         <div class="w-full md:w-9/12 mx-auto">
             <div class="grid bg-gray-50 rounded-lg shadow-xl w-full mx-auto">
@@ -46,21 +24,9 @@
                 </div>
 
                 <div class="flex-col mx-10">
-                    <form id="currency" method="POST" action="{{ route('spp.pay-manually.prosses', $data->id) }}">
+                    <form id="currency" method="POST" action="{{ route('pay.manually.prosses', $data->id) }}">
                         @csrf
                         @method('POST')
-                        <input type="hidden" value="{{$data->price}}" name="IDR">
-                        <input type="hidden" value="{{$result}}" name="USD">
-                        <label class="block mt-4 text-sm">
-                            <span class="text-gray-700 dark:text-gray-400">
-                            Select Currecy
-                            </span>
-                            <select onchange="getVal(this)" name="currency" class="block w-full mt-1 text-sm rounded-md border-gray-400  dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
-                            <option>Select Currency</option>
-                            <option value="IDR" >IDR</option>
-                            <option value="USD" >USD</option>
-                            </select>
-                        </label>
                     </form>
                     <div class="grid grid-cols-2 my-4 items-center">
                         <p class="text-md text-gray-700">Student Name</p>
@@ -124,29 +90,18 @@
                         @endif
                     </p>
                     </div>
-                    <div class="grid grid-cols-2 my-4 items-center" id="printUsd" style="display: none">
-                        <p class="text-md text-gray-700">Price Amount (USD)</p>
-                        <p class="font-semibold text-lg text-gray-700 text-right -mt-6">
-                            {{'$'.$result }}
-                        </p>
-                    </div>
-                    <div class="grid grid-cols-2 my-4 items-center" id="printIdr" style="display: none">
+                    <div class="grid grid-cols-2 my-4 items-center">
                         <p class="text-md text-gray-700">Price Amount (IDR)</p>
                         <p class="font-semibold text-lg text-gray-700 text-right -mt-6">
-                            {{'Rp. '.number_format($data->price) }}
+                            {{ $data->currency == 'USD' ? '$'.$data->price: 'Rp.'.number_format($data->price, 0, ',', ',') }}
                         </p>
                     </div>
                 </div>
                 <div class='w-full bg-blue-600 rounded-b-lg shadow-xl font-bold text-md text-white transition-colors duration-100 py-3 sm:py-5 grid grid-cols-2 px-10 mt-10 items-center'>
                     <div class=''>Total<br>Payment</div>
                     {{-- IDR --}}
-                    <div id="totalIdr" class='font-semibold text-xl text-white text-right' style="display: none">
-                        {{'Rp. '.number_format($data->price)}}
-                    </div>
-
-                    {{-- USD --}}
-                    <div id="totalUsd" class='font-semibold text-xl text-white text-right' style="display: none">
-                        {{'$'.$result}}
+                    <div class='font-semibold text-xl text-white text-right'>
+                        {{ $data->currency == 'USD' ? '$'.$data->price: 'Rp.'.number_format($data->price, 0, ',', ',') }}
                     </div>
                 </div>
             </div>
@@ -162,23 +117,3 @@
         </div>
     </div>
 @endsection
-
-@push('after-script')
-    <script>
-        function getVal(sel) {
-            if (sel.value == 'IDR') {
-                document.getElementById('printIdr').style.display = 'inline';
-                document.getElementById('totalIdr').style.display = 'inline';
-
-                document.getElementById('printUsd').style.display = 'none';
-                document.getElementById('totalUsd').style.display = 'none';
-            } else if (sel.value == 'USD') {
-                document.getElementById('printIdr').style.display = 'none';
-                document.getElementById('totalIdr').style.display = 'none';
-
-                document.getElementById('printUsd').style.display = 'inline';
-                document.getElementById('totalUsd').style.display = 'inline';
-            }
-        }
-    </script>
-@endpush

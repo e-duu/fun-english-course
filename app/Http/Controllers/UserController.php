@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\UsersTemplate;
 use App\Imports\UsersImport;
+use App\Models\DetailUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -18,13 +19,13 @@ class UserController extends Controller
     public function index()
     {
         $data = new User();
-        
+
         if (request()->get('role') && request()->get('role') != null) {
             $data = $data->where('role', '=', request()->get('role'));
         }
 
         $data = $data->paginate(5);
-        
+
         return view('pages.admin.users.index', compact('data'));
     }
 
@@ -46,24 +47,41 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|min:3|max:255',
-            'username' => 'required',
-            'email' => 'required|email|unique:users,email',
-            'role' => 'required',
-            'password' => 'required|min:6|max:16',
-            'photo_file' => 'required'
-        ],
-        [
-            'name.required' => 'please input user name',
-            'username.required' => 'username has been already exist',
-            'email.required' => 'please input user email',
-            'email.unique' => 'email has been already exist',
-            'role.required' => 'please select the role',
-            'photo_file.required' => 'please insert your profile photo',
-            'password.required' => 'password must be at least 6 characters',
+        if (substr_replace("$request->number","",1) == 0) {
+            return back()->with('error', 'characters cannot start with 0')->withInput();
+        }
 
-        ]);
+        $request->validate(
+            [
+                'name' => 'required|min:3|max:255',
+                'number' => 'required|unique:users,number|min:1',
+                'username' => 'required',
+                'email' => 'required|email|unique:users,email',
+                'role' => 'required',
+                'password' => 'required|min:6|max:16',
+                'photo_file' => 'required',
+                'parent' => 'required',
+                'city' => 'required',
+                'country' => 'required',
+                'status' => 'required',
+            ],
+            [
+                'name.required' => 'please input user name',
+                'number.required' => 'please input user number',
+                'number.unique' => 'student number already exists',
+                'username.required' => 'please input username',
+                'email.required' => 'please input user email',
+                'email.unique' => 'email has been already exist',
+                'role.required' => 'please select the role',
+                'photo_file.required' => 'please insert your profile photo',
+                'password.required' => 'password must be at least 6 characters',
+                'parent.required' => 'please input user parent',
+                'city.required' => 'please input user city',
+                'country.required' => 'please input user country',
+                'status.required' => 'please input user status',
+
+            ]
+        );
 
         $image = $request->file('photo_file');
         $new_name_image = time() . '.' .  $image->getClientOriginalExtension();
@@ -71,7 +89,7 @@ class UserController extends Controller
         $request->merge([
             'photo' => $new_name_image
         ]);
-        User::create($request->all());
+        $user = User::create($request->all());
         return redirect()->route('user.all');
     }
 
@@ -111,9 +129,14 @@ class UserController extends Controller
     {
         $rules = [
             'name' => 'required',
+            'number' => 'required|unique:users,number,' . $id,
             'username' => 'required',
             'email' => 'required|email|unique:users,email,' . $id,
             'role' => 'required',
+            'parent' => 'required',
+            'city' => 'required',
+            'country' => 'required',
+            'status' => 'required',
         ];
 
         $data = User::find($id);
@@ -125,7 +148,7 @@ class UserController extends Controller
             $request->merge([
                 'photo' => $new_name_image
             ]);
-            
+
             $img_path = public_path('users/' . $data->photo);
             if (file_exists($img_path)) {
                 unlink($img_path);
@@ -146,7 +169,6 @@ class UserController extends Controller
         User::find($id)->update($data);
 
         return redirect()->route('user.all');
-
     }
 
     /**

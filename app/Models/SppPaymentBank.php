@@ -10,7 +10,7 @@ class SppPaymentBank extends Model
     use HasFactory;
 
     protected $fillable = [
-        'spp_month_id',
+        'student_id',
         'bank_id',
         'account_number',
         'bank_type',

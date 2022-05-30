@@ -16,7 +16,7 @@ class CreateSppPaymentBanksTable extends Migration
         Schema::create('spp_payment_banks', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('spp_month_id');
+            $table->foreignId('student_id');
             $table->string('bank_id');
             $table->string('account_number');
             $table->string('bank_type');
@@ -28,7 +28,7 @@ class CreateSppPaymentBanksTable extends Migration
             $table->string('code');
             $table->string('recipient_name')->nullable();
             $table->string('send_name')->nullable();
-            
+
             $table->timestamps();
         });
     }

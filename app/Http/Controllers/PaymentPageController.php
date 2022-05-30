@@ -3,69 +3,33 @@
 namespace App\Http\Controllers;
 
 use App\Models\AccountBank;
-use App\Models\Level;
-use App\Models\Payment;
-use App\Models\Program;
-use App\Models\Recipient;
-use App\Models\SppMonth;
+use App\Models\Student;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PaymentPageController extends Controller
 {
     public function index()
     {
-        $recipients = Recipient::all();
-        $programs = Program::all();
-        $levels = Level::all();
-
-        return view('pages.payment', compact('recipients', 'programs', 'levels'));
-    }
-
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $image = $request->file('photo_file');
-        $new_name_image = time() . '.' .  $image->getClientOriginalExtension();
-        $image->move(public_path('payments'), $new_name_image);
-        $request->merge([
-            'evidence' => $new_name_image
-        ]);
-        Payment::create($request->all());
-        return redirect()->route('resource');
+        $auth = Auth::user()->id;
+        $data = Student::where('user_id', $auth)->where('month', '<=', Carbon::now()->month)->latest()->paginate(12);
+        $needPay = Student::where('user_id', $auth)->where('month', Carbon::now()->month)->first();
+        return view('pages.payment', compact('data', 'needPay'));
     }
 
     public function sppPayment($id)
     {
-        $data = SppMonth::findOrFail($id);
+        $data = Student::findOrFail($id);
         return view('pages.sppPayment', compact('data'));
     }
 
-    // /**
-    //  * Store a newly created resource in storage.
-    //  *
-    //  * @param  \Illuminate\Http\Request  $request
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function sppPaymentStore(Request $request)
-    // {
-    //     SppMonth::create($request->all());
-    //     return redirect()->route('resource');
-    // }
-
     public function sppPaymentDetail($id)
     {
-        $data = SppMonth::findOrFail($id);
+        $data = Student::findOrFail($id);
         $account_banks = AccountBank::get();
 
 
-        if($data->status == 'unpaid'){
+        if ($data->status == 'unpaid') {
             $data->update([
                 'date' => Carbon::now(),
                 'dateEnd' => Carbon::now()->addDay(),
@@ -73,7 +37,7 @@ class PaymentPageController extends Controller
             ]);
         }
 
-        if($data->status == 'pending' && Carbon::now() >= $data->dateEnd){
+        if ($data->status == 'pending' && $data->dateEnd < Carbon::now()) {
             $data->update([
                 'status' => 'unpaid',
                 'date' => null,
@@ -81,16 +45,14 @@ class PaymentPageController extends Controller
             ]);
 
             return back()->with('failed', 'the transaction is canceled because it exceeds the transfer time limit !');
-        }else{
+        } else {
             return view('pages.sppPaymentDetail', compact('data', 'account_banks'));
         }
-        
-
     }
 
     public function sppPaymentCancel($id)
     {
-        $data = SppMonth::findOrFail($id);
+        $data = Student::findOrFail($id);
 
         $data->update([
             'status' => 'unpaid',
@@ -103,8 +65,7 @@ class PaymentPageController extends Controller
 
     public function sppPaymentSuccess()
     {
-        // $data = SppMonth::findOrFail($id);
+        // $data = Student::findOrFail($id);
         return view('pages.paymentSuccess');
     }
-
 }

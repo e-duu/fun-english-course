@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Lesson;
 use App\Models\Level;
 use App\Models\Program;
+use App\Models\SppMonth;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class ResourceController extends Controller
@@ -14,7 +16,8 @@ class ResourceController extends Controller
         $programs = Program::get();
         $levels = Level::get();
         $lessons = Lesson::get();
-        return view('pages.home', compact('programs', 'levels', 'lessons'));
+        $spp = Student::where('user_id', auth()->user()->id)->latest()->first();
+        return view('pages.home', compact('programs', 'levels', 'lessons', 'spp'));
     }
 
     public function detail(Request $request, $slug)

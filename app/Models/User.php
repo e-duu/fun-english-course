@@ -18,13 +18,18 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'number',
         'username',
         'password',
         'role',
         'email',
         'photo',
+        'parent',
+        'city',
+        'country',
+        'status',
     ];
-    
+
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);
@@ -37,7 +42,7 @@ class User extends Authenticatable
 
     public function levels()
     {
-        return $this->belongsToMany(Level::class);  
+        return $this->belongsToMany(Level::class);
     }
 
     public function scores()
@@ -57,5 +62,4 @@ class User extends Authenticatable
             });
         });
     }
-
 }

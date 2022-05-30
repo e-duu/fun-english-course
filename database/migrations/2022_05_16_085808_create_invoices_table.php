@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSppPaymentsTable extends Migration
+class CreateInvoicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateSppPaymentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('spp_payments', function (Blueprint $table) {
+        Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->string('amount');
-            $table->string('currency');
-            $table->string('orderId')->unique()->nullable();
-            $table->foreignId('user_id');
+            $table->string('dateCode');
+            $table->string('numberInv');
             $table->foreignId('student_id');
             $table->timestamps();
         });
@@ -31,6 +29,6 @@ class CreateSppPaymentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('spp_payments');
+        Schema::dropIfExists('invoices');
     }
 }

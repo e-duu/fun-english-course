@@ -24,9 +24,36 @@
 
       <div class="flex-col mx-10">
         <div class="grid grid-cols-2 my-4 items-center">
+          <p class="text-md text-gray-700">Invoice Number</p>
+          <p class="font-semibold text-lg text-gray-700 text-right">
+            @php
+                $num = (str_pad((int)$data->invoice->numberInv , 8, '0', STR_PAD_LEFT));
+            @endphp
+            INV-{{ $data->invoice->dateCode.$num }}
+          </p>
+        </div>
+        <div class="grid grid-cols-2 my-4 items-center">
           <p class="text-md text-gray-700">Student Name</p>
           <p class="font-semibold text-lg text-gray-700 text-right">
             {{ Auth::user()->name }}
+          </p>
+        </div>
+        <div class="grid grid-cols-2 my-4 items-center">
+          <p class="text-md text-gray-700">Parent Name</p>
+          <p class="font-semibold text-lg text-gray-700 text-right">
+            {{ Auth::user()->parent }}
+          </p>
+        </div>
+        <div class="grid grid-cols-2 my-4 items-center">
+          <p class="text-md text-gray-700">City</p>
+          <p class="font-semibold text-lg text-gray-700 text-right">
+            {{ Auth::user()->city }}
+          </p>
+        </div>
+        <div class="grid grid-cols-2 my-4 items-center">
+          <p class="text-md text-gray-700">Country</p>
+          <p class="font-semibold text-lg text-gray-700 text-right">
+            {{ Auth::user()->country }}
           </p>
         </div>
         <div class="grid grid-cols-2 my-4 items-center">
@@ -60,6 +87,12 @@
           </p>
         </div>
         <div class="grid grid-cols-2 my-4 items-center">
+          <p class="text-md text-gray-700">Year</p>
+          <p class="font-semibold text-lg text-gray-700 text-right">
+            {{ $data->year }}
+          </p>
+        </div>
+        <div class="grid grid-cols-2 my-4 items-center">
           <p class="text-md text-gray-700">Program</p>
           <p class="font-semibold text-lg text-gray-700 text-right">
             {{ $data->level->program->name }}
@@ -88,14 +121,14 @@
         <div class="grid grid-cols-2 my-4 items-center">
           <p class="text-md text-gray-700">Price Amount</p>
           <p class="font-semibold text-lg text-gray-700 text-right">
-            {{'Rp. '.number_format($data->price) }}
+            {{ $data->currency == 'USD' ? '$ '.$data->price: 'Rp '.number_format($data->price, 0, ',', ',') }}
           </p>
         </div>
       </div>
       <div class='w-full bg-blue-600 rounded-b-lg shadow-xl font-bold text-md text-white transition-colors duration-100 py-3 sm:py-5 grid grid-cols-2 px-10 mt-10 items-center'>
         <div class=''>Total<br>Payment</div>
         <div class='font-semibold text-xl text-white text-right'>
-          {{'Rp. '.number_format($data->price) }}
+            {{ $data->currency == 'USD' ? '$ '.$data->price: 'Rp '.number_format($data->price, 0, ',', ',') }}
         </div>
       </div>
     </div>
@@ -103,27 +136,29 @@
     @if ($data->status != 'paid')
         @if ($data->status != 'paid_manually')
             <div class="rounded-lg mx-auto w-11/12 md:w-9/12 lg:w-1/2 mt-12">
-                {{-- NOTE : PAYMENT BY MOOTA --}}
-                <a href="{{ route('spp-payment-detail', $data->id) }}">
-                    <div class="rounded-full py-4 bg-blue-600 text-white font-bold text-xl text-center">
-                      <i class="fas fa-money-check"></i>
-                      @if ($data->status == 'pending')
-                        Continue Payment
-                      @else
-                        Pay with Bank
-                      @endif
-                    </div>
-                </a>
-
-                @if ($data->status != 'pending')
-                  <p class="text-center text-lg font-bold my-3">Or</p>
-                  {{-- NOTE : PAYMENT BY PAYPAL --}}
-                  <div id="smart-button-container">
-                    <div style="text-align: center;">
-                    <div id="paypal-button-container"></div>
-                    </div>
-                  </div>
+                @if ($data->currency != 'USD')
+                    {{-- NOTE : PAYMENT BY MOOTA --}}
+                    <a href="{{ route('spp-payment-detail', $data->id) }}">
+                        <div class="rounded-full py-4 bg-blue-600 text-white font-bold text-xl text-center">
+                        <i class="fas fa-money-check"></i>
+                        @if ($data->status == 'pending')
+                            Continue Payment
+                        @else
+                            Pay with Bank
+                        @endif
+                        </div>
+                    </a>
+                @else
+                    @if ($data->status != 'pending')
+                      {{-- NOTE : PAYMENT BY PAYPAL --}}
+                      <div id="smart-button-container">
+                        <div style="text-align: center;">
+                        <div id="paypal-button-container"></div>
+                        </div>
+                      </div>
+                    @endif
                 @endif
+
             </div>
         @endif
     @endif
@@ -131,7 +166,7 @@
 @endsection
 
 @push('after-script')
-<script src="https://www.paypal.com/sdk/js?client-id=AVGe_Clbw8MyQC-AyvivdfBtQoeXKWEXdRbakt9dCGD6av_HLW8_wjxTs6MARf1mBQ-rVyvSF7AhHDnt&currency=USD" data-sdk-integration-source="button-factory"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=AQyuDo4zlYjzWRDR9Qml4fd9xqx36ytYwAJ3DGSgQsR7mjN4vnX0QhDHqbHppR2xCZW56SFyIcPmMpjK&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
 <script>
   function initPayPalButton() {
     paypal.Buttons({

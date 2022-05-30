@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSppMonthsTable extends Migration
+class CreateStudentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateSppMonthsTable extends Migration
      */
     public function up()
     {
-        Schema::create('spp_months', function (Blueprint $table) {
+        Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->integer('month');
-            $table->enum('status', ['paid', 'unpaid', 'paid_manually', 'pending','failed'])->default('unpaid');
+            $table->integer('year');
+            $table->enum('status', ['paid', 'unpaid', 'paid_manually', 'pending', 'failed'])->default('unpaid');
             $table->bigInteger('price');
+            $table->string('currency');
             $table->dateTime('date')->nullable();
             $table->dateTime('dateEnd')->nullable();
             $table->integer('code')->nullable();
@@ -34,6 +36,6 @@ class CreateSppMonthsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('spp_months');
+        Schema::dropIfExists('students');
     }
 }

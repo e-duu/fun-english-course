@@ -16,11 +16,16 @@ class SppPayment extends Model
         'currency',
         'orderId',
         'user_id',
-        'spp_month_id',
+        'student_id',
     ];
 
     public function user()
     {
         $this->belongsTo(User::class, 'id', 'user_id');
+    }
+
+    public function student()
+    {
+        $this->belongsTo(Student::class, 'id', 'student_id');
     }
 }
