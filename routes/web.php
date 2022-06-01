@@ -69,7 +69,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('/spp-payment-cancel/{id}', [PaymentPageController::class, 'sppPaymentCancel'])->name('spp-payment-cancel');
 
 	// api notif push webhoox
-	Route::get('/payment/webhook', [SppPaymentBankController::class, 'index'])->name('payment-webhook');
+	Route::post('/payment/webhook', [SppPaymentBankController::class, 'index'])->name('payment-webhook');
 
 	// Watch Material
 	Route::get('/watch/{id}', [WatchController::class, 'index'])->name('watch');
