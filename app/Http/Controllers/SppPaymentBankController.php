@@ -31,7 +31,6 @@ class SppPaymentBankController extends Controller
         //     ]';
 
         //konversi ke string
-        dd($request->all());
         $notif = json_encode($request->all());
 
         $notifications = json_decode($notif, true);
