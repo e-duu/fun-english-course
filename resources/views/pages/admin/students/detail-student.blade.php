@@ -148,6 +148,7 @@
             <th class="px-4 py-3">Level</th>
             <th class="px-4 py-3">Currency</th>
             <th class="px-4 py-3">Price</th>
+            <th class="px-4 py-3">Code</th>
             <th class="px-4 py-3">Month</th>
             <th class="px-4 py-3">Year</th>
             <th class="px-4 py-3">Status Payment</th>
@@ -203,6 +204,9 @@
             </td>
             <td class="px-4 py-3 text-sm">
               {{ $item->currency == 'USD' ? '$'.$item->price: 'Rp. '.number_format($item->price, 0, ',', ',') }}
+            </td>
+            <td class="px-4 py-3 text-sm">
+              {{ $item->code != null ? $item->code : '-' }}
             </td>
             <td class="px-4 py-3 text-sm">
               @if ($item->month == 1)

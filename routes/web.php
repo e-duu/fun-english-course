@@ -36,19 +36,17 @@ use App\Http\Controllers\StudentController;
 |
 */
 
-Route::middleware(['guest'])->group(function ()
-{
-    Route::get('/login', [AuthController::class, 'login'])->name('login');
-    Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
+Route::middleware(['guest'])->group(function () {
+	Route::get('/login', [AuthController::class, 'login'])->name('login');
+	Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
 });
 
-Route::get('tes', function(){
-    return view('pages.test');
+Route::get('tes', function () {
+	return view('pages.test');
 })->name('test');
 
 
-Route::middleware(['auth'])->group(function ()
-{
+Route::middleware(['auth'])->group(function () {
 
 	// Home
 	Route::get('/', [ResourceController::class, 'index'])->name('resource');
@@ -63,7 +61,7 @@ Route::middleware(['auth'])->group(function ()
 	Route::get('/spp-payment-manually/{id}', [SppPaymentController::class, 'payManually'])->name('pay.manually');
 	Route::post('/spp-payment-manually-prosses/{id}', [SppPaymentController::class, 'payManuallyProsses'])->name('pay.manually.prosses');
 
-    // Spp Payment Page
+	// Spp Payment Page
 	Route::get('/spp-payment/{id}', [PaymentPageController::class, 'sppPayment'])->name('spp-payment');
 	Route::post('/payment/store', [PaymentPageController::class, 'sppPaymentStore'])->name('spp-payment.store');
 	Route::get('/spp-payment-detail/{id}', [PaymentPageController::class, 'sppPaymentDetail'])->name('spp-payment-detail');
@@ -71,7 +69,7 @@ Route::middleware(['auth'])->group(function ()
 	Route::get('/spp-payment-cancel/{id}', [PaymentPageController::class, 'sppPaymentCancel'])->name('spp-payment-cancel');
 
 	// api notif push webhoox
-	Route::get('/payment/webhook', [SppPaymentBankController::class, 'index'])->name('payment-webhook');
+	Route::post('webhook', [SppPaymentBankController::class, 'index'])->name('payment-webhook');
 
 	// Watch Material
 	Route::get('/watch/{id}', [WatchController::class, 'index'])->name('watch');
@@ -88,17 +86,17 @@ Route::middleware(['auth'])->group(function ()
 	Route::get('download/invoice/{id}', [PdfController::class, 'downloadInvoice'])->name('invoice');
 	Route::get('download/receipt/{id}', [PdfController::class, 'downloadReceipt'])->name('receipt');
 
-    // Send Invoice & Receipt To Mail
+	// Send Invoice & Receipt To Mail
 	Route::post('download/invorec-to-mail', [StudentController::class, 'invorecToMail'])->name('invorecToMail');
 
 	// Page Invoice & Receipt
 	Route::get('/invoice/{id}', [InvoiceController::class, 'invoice'])->name('page-invoice');
 	Route::get('/receipt/{id}', [InvoiceController::class, 'receipt'])->name('page-receipt');
 
-    // Export Excel
-    Route::get('invoice/export/excel/{id}', [InvoiceController::class, 'invoiceExcelExport'])->name('export.excel.invoice');
-    Route::post('invoice/import/excel/{id}', [InvoiceController::class, 'invoiceExcelImport'])->name('import.excel.invoice');
-    Route::get('invoice/export/template/excel', [InvoiceController::class, 'invoiceExcelTemplate'])->name('template.excel.invoice');
+	// Export Excel
+	Route::get('invoice/export/excel/{id}', [InvoiceController::class, 'invoiceExcelExport'])->name('export.excel.invoice');
+	Route::post('invoice/import/excel/{id}', [InvoiceController::class, 'invoiceExcelImport'])->name('import.excel.invoice');
+	Route::get('invoice/export/template/excel', [InvoiceController::class, 'invoiceExcelTemplate'])->name('template.excel.invoice');
 
 	Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
@@ -143,89 +141,89 @@ Route::middleware(['auth'])->group(function ()
 		});
 
 		Route::prefix('program')->group(function () {
-				Route::get('/all', [ProgramController::class, 'index'])->name('program.all');
-				Route::get('/create', [ProgramController::class, 'create'])->name('program.create');
-				Route::post('/create', [ProgramController::class, 'store'])->name('program.store');
-				Route::get('/show/{id}', [ProgramController::class, 'show'])->name('program.show');
-				Route::get('/edit/{id}', [ProgramController::class, 'edit'])->name('program.edit');
-				Route::post('/edit/{id}', [ProgramController::class, 'update'])->name('program.update');
-				Route::delete('/delete/{id}', [ProgramController::class, 'destroy'])->name('program.delete');
+			Route::get('/all', [ProgramController::class, 'index'])->name('program.all');
+			Route::get('/create', [ProgramController::class, 'create'])->name('program.create');
+			Route::post('/create', [ProgramController::class, 'store'])->name('program.store');
+			Route::get('/show/{id}', [ProgramController::class, 'show'])->name('program.show');
+			Route::get('/edit/{id}', [ProgramController::class, 'edit'])->name('program.edit');
+			Route::post('/edit/{id}', [ProgramController::class, 'update'])->name('program.update');
+			Route::delete('/delete/{id}', [ProgramController::class, 'destroy'])->name('program.delete');
 		});
 
 		Route::prefix('level')->group(function () {
-				Route::get('/create/{id}', [LevelController::class, 'create'])->name('level.create');
-				Route::post('/create', [LevelController::class, 'store'])->name('level.store');
-				Route::get('/show/{id}', [LevelController::class, 'show'])->name('level.show');
-				Route::get('/edit/{id}', [LevelController::class, 'edit'])->name('level.edit');
-				Route::post('/edit/{id}', [LevelController::class, 'update'])->name('level.update');
-				Route::delete('/delete/{id}', [LevelController::class, 'destroy'])->name('level.delete');
+			Route::get('/create/{id}', [LevelController::class, 'create'])->name('level.create');
+			Route::post('/create', [LevelController::class, 'store'])->name('level.store');
+			Route::get('/show/{id}', [LevelController::class, 'show'])->name('level.show');
+			Route::get('/edit/{id}', [LevelController::class, 'edit'])->name('level.edit');
+			Route::post('/edit/{id}', [LevelController::class, 'update'])->name('level.update');
+			Route::delete('/delete/{id}', [LevelController::class, 'destroy'])->name('level.delete');
 		});
 
 		Route::prefix('lesson')->group(function () {
-				Route::get('/create/{id}', [LessonController::class, 'create'])->name('lesson.create');
-				Route::post('/create', [LessonController::class, 'store'])->name('lesson.store');
-				Route::get('/show/{id}', [LessonController::class, 'show'])->name('lesson.show');
-				Route::get('/edit/{id}', [LessonController::class, 'edit'])->name('lesson.edit');
-				Route::post('/edit/{id}', [LessonController::class, 'update'])->name('lesson.update');
-				Route::delete('/delete/{id}', [LessonController::class, 'destroy'])->name('lesson.delete');
+			Route::get('/create/{id}', [LessonController::class, 'create'])->name('lesson.create');
+			Route::post('/create', [LessonController::class, 'store'])->name('lesson.store');
+			Route::get('/show/{id}', [LessonController::class, 'show'])->name('lesson.show');
+			Route::get('/edit/{id}', [LessonController::class, 'edit'])->name('lesson.edit');
+			Route::post('/edit/{id}', [LessonController::class, 'update'])->name('lesson.update');
+			Route::delete('/delete/{id}', [LessonController::class, 'destroy'])->name('lesson.delete');
 		});
 
 		Route::prefix('material')->group(function () {
-				Route::get('/create/{id}', [MaterialController::class, 'create'])->name('material.create');
-				Route::post('/create', [MaterialController::class, 'store'])->name('material.store');
-				Route::get('/show/{id}', [MaterialController::class, 'show'])->name('material.show');
-				Route::get('/edit/{id}', [MaterialController::class, 'edit'])->name('material.edit');
-				Route::post('/edit/{id}', [MaterialController::class, 'update'])->name('material.update');
-				Route::delete('/delete/{id}', [MaterialController::class, 'destroy'])->name('material.delete');
+			Route::get('/create/{id}', [MaterialController::class, 'create'])->name('material.create');
+			Route::post('/create', [MaterialController::class, 'store'])->name('material.store');
+			Route::get('/show/{id}', [MaterialController::class, 'show'])->name('material.show');
+			Route::get('/edit/{id}', [MaterialController::class, 'edit'])->name('material.edit');
+			Route::post('/edit/{id}', [MaterialController::class, 'update'])->name('material.update');
+			Route::delete('/delete/{id}', [MaterialController::class, 'destroy'])->name('material.delete');
 		});
 
 		Route::prefix('payment')->group(function () {
-				Route::get('/all', [PaymentController::class, 'index'])->name('payment.all');
-				Route::get('/create', [PaymentController::class, 'create'])->name('payment.create');
-				Route::post('/create', [PaymentController::class, 'store'])->name('payment.store');
-				Route::get('/show/{id}', [PaymentController::class, 'show'])->name('payment.show');
-				Route::get('/edit/{id}', [PaymentController::class, 'edit'])->name('payment.edit');
-				Route::post('/edit/{id}', [PaymentController::class, 'update'])->name('payment.update');
-				Route::delete('/delete/{id}', [PaymentController::class, 'destroy'])->name('payment.delete');
+			Route::get('/all', [PaymentController::class, 'index'])->name('payment.all');
+			Route::get('/create', [PaymentController::class, 'create'])->name('payment.create');
+			Route::post('/create', [PaymentController::class, 'store'])->name('payment.store');
+			Route::get('/show/{id}', [PaymentController::class, 'show'])->name('payment.show');
+			Route::get('/edit/{id}', [PaymentController::class, 'edit'])->name('payment.edit');
+			Route::post('/edit/{id}', [PaymentController::class, 'update'])->name('payment.update');
+			Route::delete('/delete/{id}', [PaymentController::class, 'destroy'])->name('payment.delete');
 		});
 
 		Route::prefix('recipient')->group(function () {
-				Route::get('/all', [RecipientController::class, 'index'])->name('recipient.all');
-				Route::get('/create', [RecipientController::class, 'create'])->name('recipient.create');
-				Route::post('/create', [RecipientController::class, 'store'])->name('recipient.store');
-				Route::get('/edit/{id}', [RecipientController::class, 'edit'])->name('recipient.edit');
-				Route::post('/edit/{id}', [RecipientController::class, 'update'])->name('recipient.update');
-				Route::delete('/delete/{id}', [RecipientController::class, 'destroy'])->name('recipient.delete');
+			Route::get('/all', [RecipientController::class, 'index'])->name('recipient.all');
+			Route::get('/create', [RecipientController::class, 'create'])->name('recipient.create');
+			Route::post('/create', [RecipientController::class, 'store'])->name('recipient.store');
+			Route::get('/edit/{id}', [RecipientController::class, 'edit'])->name('recipient.edit');
+			Route::post('/edit/{id}', [RecipientController::class, 'update'])->name('recipient.update');
+			Route::delete('/delete/{id}', [RecipientController::class, 'destroy'])->name('recipient.delete');
 		});
 
 		Route::prefix('downloadable')->group(function () {
-				Route::get('/all', [DownloadableController::class, 'index'])->name('downloadable.all');
-				Route::get('/create{id}', [DownloadableController::class, 'create'])->name('downloadable.create');
-				Route::post('/create', [DownloadableController::class, 'store'])->name('downloadable.store');
-				Route::get('/show/{id}', [DownloadableController::class, 'show'])->name('downloadable.show');
-				Route::get('/edit/{id}', [DownloadableController::class, 'edit'])->name('downloadable.edit');
-				Route::post('/edit/{id}', [DownloadableController::class, 'update'])->name('downloadable.update');
-				Route::delete('/delete/{id}', [DownloadableController::class, 'destroy'])->name('downloadable.delete');
+			Route::get('/all', [DownloadableController::class, 'index'])->name('downloadable.all');
+			Route::get('/create{id}', [DownloadableController::class, 'create'])->name('downloadable.create');
+			Route::post('/create', [DownloadableController::class, 'store'])->name('downloadable.store');
+			Route::get('/show/{id}', [DownloadableController::class, 'show'])->name('downloadable.show');
+			Route::get('/edit/{id}', [DownloadableController::class, 'edit'])->name('downloadable.edit');
+			Route::post('/edit/{id}', [DownloadableController::class, 'update'])->name('downloadable.update');
+			Route::delete('/delete/{id}', [DownloadableController::class, 'destroy'])->name('downloadable.delete');
 		});
 
 		Route::prefix('exercise')->group(function () {
-				Route::get('/all', [ExerciseController::class, 'index'])->name('exercise.all');
-				Route::get('/create{id}', [ExerciseController::class, 'create'])->name('exercise.create');
-				Route::post('/create', [ExerciseController::class, 'store'])->name('exercise.store');
-				Route::get('/show/{id}', [ExerciseController::class, 'show'])->name('exercise.show');
-				Route::get('/edit/{id}', [ExerciseController::class, 'edit'])->name('exercise.edit');
-				Route::post('/edit/{id}', [ExerciseController::class, 'update'])->name('exercise.update');
-				Route::delete('/delete/{id}', [ExerciseController::class, 'destroy'])->name('exercise.delete');
-				Route::post('/score/{id}', [ExerciseController::class, 'score'])->name('score.store');
+			Route::get('/all', [ExerciseController::class, 'index'])->name('exercise.all');
+			Route::get('/create{id}', [ExerciseController::class, 'create'])->name('exercise.create');
+			Route::post('/create', [ExerciseController::class, 'store'])->name('exercise.store');
+			Route::get('/show/{id}', [ExerciseController::class, 'show'])->name('exercise.show');
+			Route::get('/edit/{id}', [ExerciseController::class, 'edit'])->name('exercise.edit');
+			Route::post('/edit/{id}', [ExerciseController::class, 'update'])->name('exercise.update');
+			Route::delete('/delete/{id}', [ExerciseController::class, 'destroy'])->name('exercise.delete');
+			Route::post('/score/{id}', [ExerciseController::class, 'score'])->name('score.store');
 		});
 
 		Route::prefix('question')->group(function () {
-				Route::get('/create/{id}', [QuestionController::class, 'create'])->name('question.create');
-				Route::post('/create', [QuestionController::class, 'store'])->name('question.store');
-				Route::get('/show/{id}', [QuestionController::class, 'show'])->name('question.show');
-				Route::get('/edit/{id}', [QuestionController::class, 'edit'])->name('question.edit');
-				Route::post('/edit/{id}', [QuestionController::class, 'update'])->name('question.update');
-				Route::delete('/delete/{id}', [QuestionController::class, 'destroy'])->name('question.delete');
+			Route::get('/create/{id}', [QuestionController::class, 'create'])->name('question.create');
+			Route::post('/create', [QuestionController::class, 'store'])->name('question.store');
+			Route::get('/show/{id}', [QuestionController::class, 'show'])->name('question.show');
+			Route::get('/edit/{id}', [QuestionController::class, 'edit'])->name('question.edit');
+			Route::post('/edit/{id}', [QuestionController::class, 'update'])->name('question.update');
+			Route::delete('/delete/{id}', [QuestionController::class, 'destroy'])->name('question.delete');
 		});
 
 		// Route::prefix('spp')->group(function () {
@@ -242,5 +240,4 @@ Route::middleware(['auth'])->group(function ()
 		// });
 
 	});
-
 });
