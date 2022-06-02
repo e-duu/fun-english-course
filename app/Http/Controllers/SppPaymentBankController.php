@@ -11,6 +11,13 @@ use Illuminate\Http\Request;
 
 class SppPaymentBankController extends Controller
 {
+    public function test()
+    {
+        $bank = SppPaymentBank::get();
+
+        return view('pages.admin.mootas.test', compact('bank'));
+    }
+
     public function index(Request $request)
     {
         // $notif = '[

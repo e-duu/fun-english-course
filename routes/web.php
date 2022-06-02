@@ -46,6 +46,7 @@ Route::get('tes', function () {
 })->name('test');
 
 // api notif push webhook
+Route::get('webhook/test', [SppPaymentBankController::class, 'test'])->name('test-webhook');
 Route::post('webhook', [SppPaymentBankController::class, 'index'])->name('payment-webhook');
 
 Route::middleware(['auth'])->group(function () {

@@ -8,6 +8,8 @@
 
 @section('content')
   <div class="container">
-    {{ $notif }}
+    @foreach ($bank as $item)
+        {{ $item }}
+    @endforeach
   </div>
 @endsection
