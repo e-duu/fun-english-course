@@ -45,10 +45,10 @@ Route::get('tes', function () {
 	return view('pages.test');
 })->name('test');
 
-// api notif push webhook
-Route::post('webhook', [SppPaymentBankController::class, 'index'])->name('payment-webhook');
 
 Route::middleware(['auth'])->group(function () {
+	// api notif push webhook
+	Route::post('webhook', [SppPaymentBankController::class, 'index'])->name('payment-webhook');
 
 	// Home
 	Route::get('/', [ResourceController::class, 'index'])->name('resource');
