@@ -31,55 +31,43 @@ class SppPaymentController extends Controller
         // Purchase Units
         $description = '$' . $price . ' total spp price';
 
-        // $item = $provider->createOrder([
-        //     'intent' => 'CAPTURE',
-        //     'purchase_units' => [
-        //         [
-        //             "description" => "Pembayaran SPP",
-        //             "custom_id" => "CUST-".Str::random(7),
-        //             "soft_descriptor" => "Pembayaran SPP",
-        //             "amount" => [
-        //                 "currency_code" => "USD",
-        //                 "value" => $price,
-        //                 "breakdown" => [
-        //                     "item_total" => [
-        //                         "currency_code" => "USD",
-        //                         "value" => $price
-        //                     ],
-        //                 ]
-        //             ],
-        //             "items" => [
-        //                 [
-        //                     "name" => "Pembayaran SPP",
-        //                     "sku" => "sku".Str::random(7),
-        //                     "description" => "SPP Month".$data->month."-".$data->year,
-        //                     "unit_amount" => [
-        //                         "currency_code" => "USD",
-        //                         "value" => $price
-        //                     ],
-        //                     "tax" => [
-        //                         "currency_code" => "USD",
-        //                         "value" => "00"
-        //                     ],
-        //                     "quantity" => "1",
-        //                 ],
-        //             ],
-        //         ],
-        //     ],
-        // ]);
-
         $item = $provider->createOrder([
             'intent' => 'CAPTURE',
             'purchase_units' => [
                 [
-                    'amount' => [
-                        'currency_code' => 'USD',
-                        'value' => $price,
+                    "description" => "Pembayaran SPP",
+                    "custom_id" => "CUST-".Str::random(7),
+                    "soft_descriptor" => "Pembayaran SPP",
+                    "amount" => [
+                        "currency_code" => "USD",
+                        "value" => $price,
+                        "breakdown" => [
+                            "item_total" => [
+                                "currency_code" => "USD",
+                                "value" => $price
+                            ],
+                        ]
                     ],
-                    'description' => $description,
+                    "items" => [
+                        [
+                            "name" => "Pembayaran SPP",
+                            "sku" => "sku".Str::random(7),
+                            "description" => "SPP Month".$data->month."-".$data->year,
+                            "unit_amount" => [
+                                "currency_code" => "USD",
+                                "value" => $price
+                            ],
+                            "tax" => [
+                                "currency_code" => "USD",
+                                "value" => "00"
+                            ],
+                            "quantity" => "1",
+                        ],
+                    ],
                 ],
             ],
         ]);
+
 
         // database movement
         $data->update([
