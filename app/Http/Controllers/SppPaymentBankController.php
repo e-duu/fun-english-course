@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 
 class SppPaymentBankController extends Controller
 {
-    public function index(Request $request)
+    public function store(Request $request)
     {
         // $notif = '[
         //         {
