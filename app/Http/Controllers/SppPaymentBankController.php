@@ -70,6 +70,8 @@ class SppPaymentBankController extends Controller
                 return response()->json(['success' => 'success'], 200);
             }
         }
+
+        return view('pages.admin.mootas.test', compact('notif'));
     }
 
     public function jGetDataOrder($data)
