@@ -361,7 +361,7 @@
         </div>
 
         <!-- Moota Setting -->
-        <div>
+        {{-- <div>
           <!-- active & hover classes 'bg-primary-100 dark:bg-primary' -->
           <a href="{{ route('moota') }}" class="flex items-center py-2 px-3 text-gray-500 transition-colors rounded-md dark:text-light hover:bg-primary-100 dark:hover:bg-primary" role="button">
             <span>
@@ -369,13 +369,7 @@
             </span>
             <span class="ml-2 text-sm"> Setting Moota </span>
           </a>
-          <a href="{{ route('test-webhook') }}" class="flex items-center py-2 px-3 text-gray-500 transition-colors rounded-md dark:text-light hover:bg-primary-100 dark:hover:bg-primary" role="button">
-            <span>
-              <i class="fas fa-cog"></i>
-            </span>
-            <span class="ml-2 text-sm"> Test Moota </span>
-          </a>
-        </div>
+        </div> --}}
       {{-- @endif --}}
     </nav>
   </div>

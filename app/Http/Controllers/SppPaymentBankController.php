@@ -11,14 +11,7 @@ use Illuminate\Http\Request;
 
 class SppPaymentBankController extends Controller
 {
-    public function test()
-    {
-        $bank = SppPaymentBank::get();
-
-        return view('pages.admin.mootas.test', compact('bank'));
-    }
-
-    public function index(Request $request)
+    public function store(Request $request)
     {
         // $notif = '[
         //         {
@@ -77,8 +70,6 @@ class SppPaymentBankController extends Controller
                 return response()->json(['success' => 'success'], 200);
             }
         }
-
-        return view('pages.admin.mootas.test', compact('notif'));
     }
 
     public function jGetDataOrder($data)
