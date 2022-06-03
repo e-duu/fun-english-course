@@ -46,6 +46,8 @@ Route::get('tes', function () {
 	return view('pages.test');
 })->name('test');
 
+// api notif push webhook
+Route::post('webhook', [SppPaymentBankController::class, 'store'])->name('payment-webhook');
 
 Route::middleware(['auth'])->group(function () {
 
@@ -68,9 +70,6 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('/spp-payment-detail/{id}', [PaymentPageController::class, 'sppPaymentDetail'])->name('spp-payment-detail');
 	Route::get('/spp-payment-success', [PaymentPageController::class, 'sppPaymentSuccess'])->name('spp-payment-success');
 	Route::get('/spp-payment-cancel/{id}', [PaymentPageController::class, 'sppPaymentCancel'])->name('spp-payment-cancel');
-
-	// api notif push webhoox
-	Route::post('webhook', [SppPaymentBankController::class, 'index'])->name('payment-webhook');
 
 	// Watch Material
 	Route::get('/watch/{id}', [WatchController::class, 'index'])->name('watch');

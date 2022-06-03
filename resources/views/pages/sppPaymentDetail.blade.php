@@ -39,7 +39,7 @@
             <div class="flex-col">
               <img src="{{ asset('images/mandiri.png') }}" class="max-h-8 mb-2">
               <p class="font-semibold text-lg text-gray-700">
-                PT Edukasi Diversitas Global Excelsia 
+                Edukasi Diversitas Global Excelsia 
               </p>
               <input id="copyText" class="border-0 bg-transparent text-xl font-bold text-gray-800 -ml-3" type="text" value="0700010372956" disabled>
             </div>

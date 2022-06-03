@@ -62,12 +62,12 @@ class SppPaymentController extends Controller
                                 "value" => "00"
                             ],
                             "quantity" => "1",
-                            "category" => "PHYSICAL_GOODS"
                         ],
                     ],
                 ],
             ],
         ]);
+
 
         // database movement
         $data->update([
