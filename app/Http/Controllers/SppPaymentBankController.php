@@ -88,20 +88,20 @@ class SppPaymentBankController extends Controller
                 $spp = Student::where('date', '>=', date('Y-m-d 00:00:00'))->where('status', 'pending')->where('code', $unique_code)->first();
                 // dd($spp);
 
-                $store = SppPaymentBank::create([
-                    'spp_month_id' => $spp->id,
-                    'bank_id'   => $data['bank_id'],
-                    'account_number'   => $data['account_number'],
-                    'bank_type'   => $data['bank_type'],
-                    'date'   => date('Y-m-d H:i:s'),
-                    'amount'   => $data['amount'],
-                    'description'   => $data['description'],
-                    'type'   => $data['type'],
-                    'balance'   => $data['balance'],
-                    'code'   => $unique_code,
-                    // 'recipient_name' => 'muji',
-                    // 'send_name' => 'kuwat',
-                ]);
+                // $store = SppPaymentBank::create([
+                //     'spp_month_id' => $spp->id,
+                //     'bank_id'   => $data['bank_id'],
+                //     'account_number'   => $data['account_number'],
+                //     'bank_type'   => $data['bank_type'],
+                //     'date'   => date('Y-m-d H:i:s'),
+                //     'amount'   => $data['amount'],
+                //     'description'   => $data['description'],
+                //     'type'   => $data['type'],
+                //     'balance'   => $data['balance'],
+                //     'code'   => $unique_code,
+                //     // 'recipient_name' => 'muji',
+                //     // 'send_name' => 'kuwat',
+                // ]);
 
                 $spp->update([
                     'status' => 'paid',
@@ -112,6 +112,7 @@ class SppPaymentBankController extends Controller
             }
         }
     }
+
 
     public function jGetDataOrder($data)
     {
