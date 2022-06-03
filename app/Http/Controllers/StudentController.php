@@ -62,18 +62,19 @@ class StudentController extends Controller
                 'status' => 'unpaid',
             ]);
 
-            $inv = Invoice::count();
 
             $yymm = Carbon::now()->format('ym');
 
-            if ($inv) {
-                $number = $inv + 1;
-            } else if (Carbon::now() == date('Y-01-01')) {
+            if (date('Y-m-d') == date('Y-01-01')) {
                 $number = 1;
             } else {
-                $number = 1;
+                $inv = Invoice::pluck('numberInv')->last();
+                if ($inv) {
+                    $number = $inv + 1;
+                } else {
+                    $number = 1;
+                }
             }
-
 
             Invoice::create([
                 'dateCode' => $yymm,
@@ -272,7 +273,7 @@ class StudentController extends Controller
 
 
         $student = Student::findOrFail($id);
-        
+
         $student->update([
             'month' => $request->month,
             'year' => $request->year,

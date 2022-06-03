@@ -13,7 +13,7 @@ class PaymentPageController extends Controller
     {
         $auth = Auth::user()->id;
         $data = Student::where('user_id', $auth)->where('month', '<=', Carbon::now()->month)->latest()->paginate(12);
-        $needPay = Student::where('user_id', $auth)->where('month', Carbon::now()->month)->where('year', Carbon::now()->year)->get();
+        $needPay = Student::where('user_id', $auth)->where('month', Carbon::now()->month)->where('year', Carbon::now()->year)->first();
         return view('pages.payment', compact('data', 'needPay'));
     }
 
