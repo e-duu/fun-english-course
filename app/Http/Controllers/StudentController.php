@@ -222,4 +222,79 @@ class StudentController extends Controller
 
         return back()->with('success', 'send mail successfully');
     }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $data = Student::find($id);
+        $this->data = $data;
+        $users = User::where('role', 'student')->get();
+        $levelUsers = LevelUser::whereHas('level', function ($query) {
+            $query->where('program_id', $this->data->level->program_id);
+        })->with(['level'])->get();
+        $getLevels = Level::where('program_id', $data->level->program_id)->get();
+        $levelsFt = Level::where('program_id', $data->level->program_id)->get();
+        return view('pages.admin.students.edit', compact('data', 'users', 'levelUsers', 'getLevels', 'levelsFt'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $request->validate(
+            [
+                'months' => 'required|max:255',
+                'year' => 'required',
+                'price' => 'required',
+                'user_id' => 'required',
+                'level_id' => 'required',
+                'currency' => 'required',
+            ],
+            [
+                'months.required' => 'please input recipient month',
+                'months.required' => 'please input recipient year',
+                'price.required' => 'please input recipient price',
+                'user_id.required' => 'please input recipient student',
+                'level_id.required' => 'please input recipient level',
+                'currency.required' => 'please input recipient currency',
+            ]
+        );
+
+
+        $student = Student::findOrFail($id);
+        
+        $student->update([
+            'month' => $request->month,
+            'year' => $request->year,
+            'price' => $request->price,
+            'user_id' => $request->user_id,
+            'level_id' => $request->level_id,
+            'currency' => $request->currency,
+        ]);
+
+        return redirect()->route('program.show', $request->program_id);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $data = Student::find($id);
+        $data->delete();
+        return back();
+    }
 }

@@ -260,6 +260,18 @@
                     <i class="fas fa-money-check"></i>
                     <p>Pay</p>
                 </a>
+                <a href="{{ route('student.edit', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                  <i class=" fas fa-edit"></i>
+                  <p>Edit</p>
+                </a>
+                <form action="{{ route('student.delete', $item->id) }}" method="POST" class="d-inline">
+                  @csrf
+                  @method('DELETE')
+                  <button class="flex-col px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                    <i class="fas fa-trash"></i>
+                    <p>Delete</p>
+                  </button>
+                </form>
               </div>
             </td>
 
