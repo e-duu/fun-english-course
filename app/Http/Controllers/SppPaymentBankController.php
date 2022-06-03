@@ -13,6 +13,47 @@ class SppPaymentBankController extends Controller
 {
     public function store(Request $request)
     {
+        // $notif = '[{
+        //     "account_number":"0700010372956",
+        //     "date":"2022-05-31 06:14:54",
+        //     "description":"Bunga 07000",
+        //     "note":"",
+        //     "amount":30501.22,
+        //     "type":"CR",
+        //     "balance":74951302.52,
+        //     "updated_at":"2022-06-01 06:14:54",
+        //     "created_at":"2022-06-01 06:14:54",
+        //     "mutation_id":"EpWoyYV6OzJ",
+        //     "token":"EpWoyYV6OzJ",
+        //     "bank_id":"n3ykVR4ykNR",
+        //     "taggings":[],
+        //     "bank":{
+        //         "corporate_id":"GA00710",
+        //         "username":"edge0001",
+        //         "atas_nama":"Edukasi Diversitas Global Excelsia",
+        //         "balance":"74945202.28",
+        //         "account_number":"0700010372956",
+        //         "bank_type":"mandiriMcm2V2",
+        //         "pkg":null,
+        //         "login_retry":0,
+        //         "date_from":"2022-06-01 00:00:00",
+        //         "date_to":"2022-06-01 00:00:00",
+        //         "meta":{
+        //             "session_id":"6bf29455-cf99-48f2-b32e-85898e5bbecc",             "activity_summary":"Ditemukan 8 mutasi dalam 18.31 detik"},"interval_refresh":15,
+        //             "next_queue":"2022-06-01 06:29:01",
+        //             "is_active":true,"in_queue":0,
+        //             "in_progress":0,
+        //             "is_crawling":1,
+        //             "recurred_at":"2022-06-01 23:25:05",
+        //             "created_at":"2022-04-10 13:33:35",
+        //             "token":"n3ykVR4ykNR",
+        //             "bank_id":"n3ykVR4ykNR",
+        //             "label":"Mandiri MCM 2",
+        //             "last_update":"2022-05-31T23:14:01.000000Z",
+        //             "icon":"https:\/\/app.moota.co\/images\/icon-bank-mandiriMcm2V2.png"}
+        //         }
+        //     ]';
+
         // $notif = '[
         //         {
         //             "bank_id" : "3245234",
