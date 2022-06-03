@@ -151,11 +151,15 @@
         </div>
       </div>
     </label>
-    
+
     <button class="mt-4 bg-blue-600 py-2 px-7 rounded-md text-white">Submit</button>
 
   </form>
 @endsection
+
+@push('after-style')
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
+@endpush
 
 @push('after-script')
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -178,7 +182,8 @@
       console.log(levelUsers)
 
       function setUsers(){
-        var options = "<option disabled>Select One</option>";
+        var options = "";
+        document.getElementById('selectLevel').innerHTML = options;
         var value = document.getElementById('select-search').value;
         let selectedLevel = levelUsers.filter(levelUser => levelUser.user_id == value);
         console.log(selectedLevel)

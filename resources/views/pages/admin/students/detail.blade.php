@@ -69,8 +69,8 @@
                               <span class="text-gray-700 dark:text-gray-400">
                                   Student
                               </span>
-                              <select id="select-search" onchange="setUsers()" v-model="users_id" name="user_id" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border rounded-md border-gray-400 -gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
-                                <option value="" disabled selected>Please Select One...</option>
+                              <select id="select-search" onchange="setUsers()" name="user_id" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border rounded-md border-gray-400 -gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
+                                <option disabled selected>Please Select One...</option>
                                   @foreach ($users as $user)
                                     <option value="{{ $user->id }}">{{ $user->name }}</option>
                                   @endforeach
@@ -87,11 +87,11 @@
                                 Level
                             </span>
                             <select id="selectLevel" name="level_id" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border rounded-md border-gray-400 -gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray"></select>
-                            @error('level_id')
-                                <div class="mt-1 text-sm text-[red]">
-                                    <i class="fas fa-dot-circle text-xs"></i> {{ $message }}
-                                </div>
-                            @enderror
+                                @error('level_id')
+                                    <div class="mt-1 text-sm text-[red]">
+                                        <i class="fas fa-dot-circle text-xs"></i> {{ $message }}
+                                    </div>
+                                @enderror
                           </label>
 
                           <label class="block mt-2 text-sm">
@@ -299,7 +299,8 @@
       console.log(levelUsers)
 
       function setUsers(){
-        var options = "<option disabled>Select One</option>";
+        var options = "";
+        document.getElementById('selectLevel').innerHTML = options;
         var value = document.getElementById('select-search').value;
         let selectedLevel = levelUsers.filter(levelUser => levelUser.user_id == value);
         console.log(selectedLevel)
