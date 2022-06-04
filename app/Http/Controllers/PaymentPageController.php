@@ -46,7 +46,7 @@ class PaymentPageController extends Controller
 
             return back()->with('failed', 'the transaction is canceled because it exceeds the transfer time limit !');
         } else if ($data->status == 'paid') {
-            return view('pages.sppPayment', compact('data'));
+            return view('pages.paymentSuccess');
         } else {
             return view('pages.sppPaymentDetail', compact('data', 'account_banks'));
         }
