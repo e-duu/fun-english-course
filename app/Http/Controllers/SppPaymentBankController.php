@@ -115,10 +115,19 @@ class SppPaymentBankController extends Controller
 
                 // send email to company
                 Mail::send('pages.emails.SuccessMail', ['data' => $student], function ($message) use ($dataEmail, $pdf) {
-                    $message->to('edge.edukasi@gmail.com', 'Payment Success To Fun English Course')
+                    $message
+                        ->to('edge.edukasi@gmail.com', 'Payment Success To Fun English Course')
                         ->subject('Payment Success To Fun English Course')
                         ->attachData($pdf->output(), $this->namePdf);
+
+                    $message
+                        ->from($dataEmail["email"], 'Success Payment To Fun English Course');
                 });
+
+                // Mail::send('pages.emails.ReceiptMail', ['data' => $student], function ($message) use ($dataEmail) {
+                //     $message->to('edge.edukasi@gmail.com', 'Success Payment To Fun English Course')->subject('Success Payment Spp');
+                //     $message->from($dataEmail["email"], 'Success Payment To Fun English Course');
+                // });
 
                 // $store = SppPaymentBank::create([
                 //     'spp_month_id' => $spp->id,
