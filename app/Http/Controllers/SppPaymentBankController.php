@@ -97,7 +97,7 @@ class SppPaymentBankController extends Controller
                     'code' => null,
                 ]);
 
-
+                //send mail
                 $student = Student::findOrFail($spp->id);
 
                 $dataEmail["email"] = $student->student->email;
