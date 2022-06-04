@@ -106,9 +106,17 @@ class SppPaymentBankController extends Controller
                 $this->namePdf = 'receipt.pdf';
                 $pdf = PDF::loadView('pages.admin.receipt-pdf', ['data' => $student]);
 
+                // send email to student
                 Mail::send('pages.emails.ReceiptMail', ['data' => $student], function ($message) use ($dataEmail, $pdf) {
                     $message->to($dataEmail["email"], $dataEmail["email"])
                         ->subject($dataEmail["title"])
+                        ->attachData($pdf->output(), $this->namePdf);
+                });
+
+                // send email to company
+                Mail::send('pages.emails.SuccessMail', ['data' => $student], function ($message) use ($dataEmail, $pdf) {
+                    $message->to('edge.edukasi@gmail.com', 'Payment Success To Fun English Course')
+                        ->subject('Payment Success To Fun English Course')
                         ->attachData($pdf->output(), $this->namePdf);
                 });
 
