@@ -1,6 +1,6 @@
 @php
   // $orderDetails = App\Models\Student::where('status', 'paid')->where('updated_at', Carbon\Carbon::today())->get();
-  $orderDetails = App\Models\Student::where('status', 'pending')->latest()->take(20)->get();
+  $orderDetails = App\Models\Student::where('status', 'success')->latest()->take(20)->get();
   // dd($orderDetails);
 @endphp
 
