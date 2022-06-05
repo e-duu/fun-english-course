@@ -1,8 +1,7 @@
-@php
+{{-- @php
   $orderDetails = App\Models\Student::where('status', 'paid')->where('updated_at', Carbon\Carbon::now())->latest()->take(20)->get();
 @endphp
 
-{{-- notification --}}
 @if ($orderDetails)
 <div  class="fixed" style="right: 12px; bottom: 4px; z-index: 9000" style="direction: none">
   <div id="notification" class="bg-green-500 shadow-lg w-96 max-w-full text-sm pointer-events-auto bg-clip-padding rounded-lg block mb-3" id="static-example" role="alert" aria-live="assertive" aria-atomic="true" data-mdb-autohide="false">
@@ -70,7 +69,7 @@
               myElement.style["display"]="none";
           }
     },10000);
-</script>
+</script> --}}
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
