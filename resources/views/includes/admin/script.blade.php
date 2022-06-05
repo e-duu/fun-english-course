@@ -1,13 +1,11 @@
 @php
-  // $orderDetails = App\Models\Student::where('status', 'paid')->where('updated_at', Carbon\Carbon::today())->get();
-  $orderDetails = App\Models\Student::where('status', 'paid')->latest()->take(20)->get();
-  // dd($orderDetails);
+  $orderDetails = App\Models\Student::where('status', 'paid')->where('updated_at', Carbon\Carbon::now())->latest()->take(20)->get();
 @endphp
 
 {{-- notification --}}
 @if ($orderDetails)
-<div id="notification" class="fixed" style="right: 12px; bottom: 4px; z-index: 9000">
-  <div class="bg-green-500 shadow-lg w-96 max-w-full text-sm pointer-events-auto bg-clip-padding rounded-lg block mb-3" id="static-example" role="alert" aria-live="assertive" aria-atomic="true" data-mdb-autohide="false">
+<div  class="fixed" style="right: 12px; bottom: 4px; z-index: 9000" style="direction: none">
+  <div id="notification" class="bg-green-500 shadow-lg w-96 max-w-full text-sm pointer-events-auto bg-clip-padding rounded-lg block mb-3" id="static-example" role="alert" aria-live="assertive" aria-atomic="true" data-mdb-autohide="false">
     <div class="bg-green-500 flex justify-between items-center py-2 px-3 bg-clip-padding border-b border-green-400 rounded-t-lg">
       <p class="font-bold text-white flex items-center">
         <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check-circle" class="w-4 h-4 mr-2 fill-current" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -16,8 +14,6 @@
         <span id="order-name"></span>, Success Payment
       </p>
       <div class="flex items-center">
-        {{-- <p class="text-white opacity-90 text-xs">11 mins ago</p> --}}
-        {{-- <button type="button" class="btn-close btn-close-white box-content w-4 h-4 ml-2 text-white border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-white hover:opacity-75 hover:no-underline" data-mdb-dismiss="toast" aria-label="Close"></button> --}}
         <button onclick="closeOrder()" class="position-absolute btn text-secondary" style="right: 0px; top: 0px">
           <i class="fas fa-times"></i>
         </button>
@@ -53,27 +49,27 @@
 
       var myElement = document.getElementById('notification');
       
-      function closeOrder()
-      {
-            return myElement.style["display"]="none";   
-      }
+    function closeOrder()
+    {
+          return myElement.style["display"]="none";   
+    }
 
-      setInterval(function(){
-            var randIndex = random_item(orders)
-            console.log(randIndex)
+    setInterval(function(){
+          var randIndex = random_item(orders)
+          console.log(randIndex)
 
-            document.getElementById('order-name').innerHTML = randIndex.user;
-            document.getElementById('order-item').innerHTML = randIndex.item;
-            document.getElementById('order-date').innerHTML = randIndex.date;
+          document.getElementById('order-name').innerHTML = randIndex.user;
+          document.getElementById('order-item').innerHTML = randIndex.item;
+          document.getElementById('order-date').innerHTML = randIndex.date;
 
-            if(myElement.style["display"]=="none"){
-                myElement.style["display"]="block";
-            }
-            else
-            {
-                myElement.style["display"]="none";
-            }
-      },10000);
+          if(myElement.style["display"]=="none"){
+              myElement.style["display"]="block";
+          }
+          else
+          {
+              myElement.style["display"]="none";
+          }
+    },10000);
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.bundle.min.js"></script>
