@@ -104,15 +104,17 @@
                 Total Payment
               </p>
                 @php
-                    // $price = substr($data->price, 0, -3);
                     $price = $data->price + $data->code;
                 @endphp
-              <p class="text-3xl font-bold text-gray-800">
+                <p class="text-3xl text-gray-800 font-bold">
+                  Rp. {{ number_format(substr($price,0, -3)) }},<span class="text-3xl text-red-500 font-bold">{{ substr($price, -3) }}</span>
+                </p>
+              {{-- <p class="text-3xl font-bold text-yellow-500">
                 Rp. {{ number_format($price) }}
-              </p>
+              </p> --}}
               <input id="copyTextPrice" class="border-0 bg-transparent text-3xl font-bold text-gray-800 -ml-3" type="hidden" value="{{ $price }}" disabled>
               <p class="text-red-500 font-semibold">
-                *Transfer up to the last 3 digits
+                *Transfer up to the last 3 digits (unique code)
               </p>
             </div>
             <button id="copyBtnPrice" class="text-blue-600 font-semibold text-lg -ml-10">Copy</button>

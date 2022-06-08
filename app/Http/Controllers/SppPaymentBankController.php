@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SppPaymentBank;
-use App\Models\Student;
-use Carbon\Carbon;
 use DateTime;
-use Hamcrest\Core\HasToString;
+use Carbon\Carbon;
+use App\Models\User;
+use App\Models\Student;
+use App\Mail\InvoiceMail;
 use Illuminate\Http\Request;
+use App\Models\SppPaymentBank;
+use Hamcrest\Core\HasToString;
+use Illuminate\Support\Facades\Mail;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class SppPaymentBankController extends Controller
 {
@@ -88,6 +92,37 @@ class SppPaymentBankController extends Controller
                 $spp = Student::where('date', '>=', date('Y-m-d 00:00:00'))->where('status', 'pending')->where('code', $unique_code)->first();
                 // dd($spp);
 
+                $spp->update([
+                    'status' => 'paid',
+                    'code' => null,
+                ]);
+
+                //send mail
+                $student = Student::findOrFail($spp->id);
+
+                $dataEmail["email"] = $student->student->email;
+                $dataEmail["title"] = "From Fun English Course";
+
+                $this->namePdf = 'receipt.pdf';
+                $pdf = PDF::loadView('pages.admin.receipt-pdf', ['data' => $student]);
+
+                // send email to student
+                Mail::send('pages.emails.ReceiptMail', ['data' => $student], function ($message) use ($dataEmail, $pdf) {
+                    $message->to($dataEmail["email"], $dataEmail["email"])
+                        ->subject($dataEmail["title"])
+                        ->attachData($pdf->output(), $this->namePdf);
+                });
+
+                // send email to company
+                // Mail::send('pages.emails.SuccessMail', ['data' => $student], function ($message) use ($dataEmail, $pdf) {
+                //     $message
+                //         ->from($dataEmail["email"], 'Success Payment To Fun English Course');
+                //     $message->to('edge.edukasi@gmail.com', 'Payment Success To Fun English Course')
+                //         ->subject('Payment Success To Fun English Course')
+                //         ->attachData($pdf->output(), $this->namePdf);
+                // });
+
+
                 // $store = SppPaymentBank::create([
                 //     'spp_month_id' => $spp->id,
                 //     'bank_id'   => $data['bank_id'],
@@ -102,11 +137,6 @@ class SppPaymentBankController extends Controller
                 //     // 'recipient_name' => 'muji',
                 //     // 'send_name' => 'kuwat',
                 // ]);
-
-                $spp->update([
-                    'status' => 'paid',
-                    'code' => null,
-                ]);
 
                 return response()->json(['success' => 'success'], 200);
             }
