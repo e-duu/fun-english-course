@@ -34,7 +34,7 @@ class SppPaymentController extends Controller
         $item = $provider->createOrder([
             'intent' => 'CAPTURE',
             'purchase_units' => [
-                [
+                0 => [
                     "description" => "Pembayaran SPP",
                     "custom_id" => "CUST-".Str::random(7),
                     "soft_descriptor" => "Pembayaran SPP",
@@ -67,7 +67,6 @@ class SppPaymentController extends Controller
                 ],
             ],
         ]);
-
 
         // database movement
         $data->update([
