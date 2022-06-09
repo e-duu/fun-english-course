@@ -295,7 +295,11 @@ class StudentController extends Controller
     public function destroy($id)
     {
         $data = Student::find($id);
+
+        $data->invoice()->delete();
+
         $data->delete();
+
         return back();
     }
 }
