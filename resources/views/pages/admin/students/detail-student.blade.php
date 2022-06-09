@@ -148,6 +148,7 @@
             <th class="px-4 py-3">Level</th>
             <th class="px-4 py-3">Currency</th>
             <th class="px-4 py-3">Price</th>
+            {{-- <th class="px-4 py-3">Code</th> --}}
             <th class="px-4 py-3">Month</th>
             <th class="px-4 py-3">Year</th>
             <th class="px-4 py-3">Status Payment</th>
@@ -204,6 +205,9 @@
             <td class="px-4 py-3 text-sm">
               {{ $item->currency == 'USD' ? '$'.$item->price: 'Rp. '.number_format($item->price, 0, ',', ',') }}
             </td>
+            {{-- <td class="px-4 py-3 text-sm">
+              {{ $item->code != null ? $item->code : '-' }}
+            </td> --}}
             <td class="px-4 py-3 text-sm">
               @if ($item->month == 1)
                   January
@@ -256,6 +260,18 @@
                     <i class="fas fa-money-check"></i>
                     <p>Pay</p>
                 </a>
+                <a href="{{ route('student.edit', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                  <i class=" fas fa-edit"></i>
+                  <p>Edit</p>
+                </a>
+                <form action="{{ route('student.delete', $item->id) }}" method="POST" class="d-inline">
+                  @csrf
+                  @method('DELETE')
+                  <button class="flex-col px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                    <i class="fas fa-trash"></i>
+                    <p>Delete</p>
+                  </button>
+                </form>
               </div>
             </td>
 
