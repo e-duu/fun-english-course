@@ -166,6 +166,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        Srmklive\PayPal\Providers\PayPalServiceProvider::class,
 
         /*
          * Package Service Providers...
