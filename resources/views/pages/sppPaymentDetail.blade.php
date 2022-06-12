@@ -23,42 +23,27 @@
         </div>
         <div class="border-b-[3px] border-gray-400 my-3"></div>
         <div class="grid grid-cols-1 my-4 items-center">
-          @forelse ($account_banks as $bank)
-          <div class="flex justify-between items-center">
-            <div class="flex-col">
-              <img src="{{ asset('images/mandiri.png') }}" class="max-h-8 mb-2">
-              <p class="font-semibold text-lg text-gray-700">
-                {{ $bank->account_name }}
-              </p>
-              <input id="copyText" class="border-0 bg-transparent text-xl font-bold text-gray-800 -ml-3" type="text" value="{{ $bank->account_number }}" disabled>
+          @foreach ($dataBanks['data'] as $index => $bank)
+            <div class="flex justify-between items-center">
+              <div class="flex items-center">
+                <img src="{{ $bank['icon'] }}" class="w-16 h-12">
+                <div class="flex-col">
+                  <p class="font-semibold text-lg text-gray-700">
+                    {{ $bank['atas_nama'] }}
+                  </p>
+                  <p class="font-semibold italic text-sm text-gray-700">
+                    {{ $bank['label'] }}
+                  </p>
+                  <input class="border-0 bg-transparent text-xl font-bold text-gray-800 -ml-3" type="text" id="copy_{{ $index }}" value="{{ $bank['account_number'] }}">
+                </div>
+              </div>
+              <button onclick="copyToClipboard('copy_{{ $index }}')" class="text-blue-600 font-semibold text-lg">Copy</button>
             </div>
-            <button id="copyBtn" class="text-blue-600 font-semibold text-lg">Copy</button>
-          </div>
-          @empty
-          <div class="flex justify-between items-center">
-            <div class="flex-col">
-              <img src="{{ asset('images/mandiri.png') }}" class="max-h-8 mb-2">
-              <p class="font-semibold text-lg text-gray-700">
-                Edukasi Diversitas Global Excelsia 
-              </p>
-              <input id="copyText" class="border-0 bg-transparent text-xl font-bold text-gray-800 -ml-3" type="text" value="0700010372956" disabled>
-            </div>
-            <button id="copyBtn" class="text-blue-600 font-semibold text-lg">Copy</button>
-          </div>
-          <div class="border-b-[3px] border-gray-400 my-3"></div>
-          <div class="flex justify-between items-center">
-            <div class="flex-col">
-              <img src="{{ asset('images/bca.png') }}" class="max-h-8 mb-2">
-              <p class="font-semibold text-lg text-gray-700">
-                PT Edukasi Diversitas Global Excelsia 
-              </p>
-              <input id="copyText1" class="border-0 bg-transparent text-xl font-bold text-gray-800 -ml-3" type="text" value="5865408754" disabled>
-            </div>
-            <button id="copyBtn1" class="text-blue-600 font-semibold text-lg">Copy</button>
-          </div>
-          @endforelse
+            <div class="border-b-[3px] border-gray-400 my-3"></div>
+          @endforeach
+
         </div>
-        <div class="border-b-[3px] border-gray-400 my-3"></div>
+        {{-- <div class="border-b-[3px] border-gray-400 my-3"></div> --}}
         <div class="grid grid-cols-1 my-4 items-center">
           <div class="flex justify-between items-center">
             <div class="flex-col">
@@ -107,7 +92,7 @@
                     $price = $data->price + $data->code;
                 @endphp
                 <p class="text-3xl text-gray-800 font-bold">
-                  Rp. {{ number_format(substr($price,0, -3)) }},<span class="text-3xl text-red-500 font-bold">{{ substr($price, -3) }}</span>
+                  Rp {{ number_format(substr($price,0, -3), 0, '.', '.') }}.<span class="text-3xl text-red-500 font-bold">{{ substr($price, -3) }}</span>
                 </p>
               {{-- <p class="text-3xl font-bold text-yellow-500">
                 Rp. {{ number_format($price) }}
@@ -171,26 +156,24 @@
   initPayPalButton();
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
 <script>
-  const copyBtn = document.getElementById('copyBtn');
-  const copyBtn1 = document.getElementById('copyBtn1');
-  const copyText = document.getElementById("copyText");
-  const copyText1 = document.getElementById("copyText1");
+    function copyToClipboard(id) {
+        document.getElementById(id).select();
+        document.execCommand('copy');
+        Swal.fire({         //displays a pop up with sweetalert
+          icon: 'success',
+          title: 'Text copied to clipboard',
+          showConfirmButton: false,
+          timer: 1000
+      });
+    }
+</script>
+
+<script>
   const copyBtnPrice = document.getElementById('copyBtnPrice')
   const copyTextPrice = document.getElementById('copyTextPrice')
   
-  // NOTE : COPY TO CLIPBOARD
-  copyBtn.onclick = () => {
-    copyText.select();    // Selects the text inside the input
-    navigator.clipboard.writeText(copyText.value);
-      Swal.fire({         //displays a pop up with sweetalert
-        icon: 'success',
-        title: 'Text copied to clipboard',
-        showConfirmButton: false,
-        timer: 1000
-    });
-  }
-
   // NOTE : COPY TO CLIPBOARD PRICE
   copyBtnPrice.onclick = () => {
     copyTextPrice.select();    // Selects the text inside the input
@@ -203,16 +186,6 @@
     });
   }
 
-  copyBtn1.onclick = () => {
-    copyText1.select();    // Selects the text inside the input
-    navigator.clipboard.writeText(copyText1.value);
-      Swal.fire({         //displays a pop up with sweetalert
-        icon: 'success',
-        title: 'Text copied to clipboard',
-        showConfirmButton: false,
-        timer: 1000
-    });
-  }
 </script>
 
 <script>
