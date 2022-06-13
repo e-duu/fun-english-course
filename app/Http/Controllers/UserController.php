@@ -129,14 +129,14 @@ class UserController extends Controller
     {
         $rules = [
             'name' => 'required',
-            'number' => 'required|unique:users,number,' . $id,
+            'number' => 'nullable|unique:users,number,' . $id,
             'username' => 'required',
             'email' => 'required|email|unique:users,email,' . $id,
             'role' => 'required',
-            'parent' => 'required',
-            'city' => 'required',
-            'country' => 'required',
-            'status' => 'required',
+            'parent' => 'nullable',
+            'city' => 'nullable',
+            'country' => 'nullable',
+            'status' => 'nullable',
         ];
 
         $data = User::find($id);
