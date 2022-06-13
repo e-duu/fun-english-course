@@ -6,54 +6,54 @@
     <div class="container-fluid px-7 sm:px-20 mt-10 sm:mt-16">
     <div class="grid bg-gray-50 rounded-lg mx-auto shadow-xl w-11/12 md:w-9/12 lg:w-1/2">
       <div class="bg-blue-600 rounded-t-lg py-3 sm:py-6 sm:mb-5">
-        <h1 class="text-white text-center font-bold text-lg sm:text-2xl">Payment Confirmation</h1>
+        <h1 class="text-white text-center font-bold text-xl sm:text-3xl">Payment Confirmation</h1>
       </div>
       
-      <div class="flex-col mx-10">
+      <div class="flex-col mx-5 sm:mx-10 mt-5">
         <div class="flex-col">
-          <p class="font-semibold text-xl text-gray-700">
+          <p class="font-semibold text-sm sm:text-xl text-gray-700">
             @php
                 $num = (str_pad((int)$data->invoice->numberInv , 8, '0', STR_PAD_LEFT));
             @endphp
-            INV-{{ $data->invoice->dateCode.$num }}
+            #INV-{{ $data->invoice->dateCode.$num }}
           </p>
           {{-- <p class="text-lg text-gray-500">
             {{ $data->created_at }} WIB
           </p> --}}
         </div>
-        <div class="border-b-[3px] border-gray-400 my-3"></div>
+        <div class="border-b-[3px] border-gray-400 my-1 sm:my-3"></div>
         <div class="grid grid-cols-1 my-4 items-center">
           @foreach ($dataBanks['data'] as $index => $bank)
             <div class="flex justify-between items-center">
               <div class="flex items-center">
-                <img src="{{ $bank['icon'] }}" class="w-16 h-12">
+                <img src="{{ $bank['icon'] }}" class="w-14 sm:w-16 h-6 sm:h-12">
                 <div class="flex-col">
-                  <p class="font-semibold text-lg text-gray-700">
+                  <p class="font-semibold text-[13px] sm:text-lg text-gray-700">
                     {{ $bank['atas_nama'] }}
                   </p>
-                  <p class="font-semibold italic text-sm text-gray-700">
+                  <p class="font-semibold italic text-[11px] sm:text-sm text-gray-700">
                     {{ $bank['label'] }}
                   </p>
-                  <input class="border-0 bg-transparent text-xl font-bold text-gray-800 -ml-3" type="text" id="copy_{{ $index }}" value="{{ $bank['account_number'] }}">
+                  <input class="border-0 bg-transparent text-sm sm:text-xl font-bold text-gray-800 -ml-3" type="text" id="copy_{{ $index }}" value="{{ $bank['account_number'] }}">
                 </div>
               </div>
-              <button onclick="copyToClipboard('copy_{{ $index }}')" class="text-blue-600 font-semibold text-lg">Copy</button>
+              <button onclick="copyToClipboard('copy_{{ $index }}')" class="text-blue-600 font-semibold text-sm sm:text-lg">Copy</button>
             </div>
-            <div class="border-b-[3px] border-gray-400 my-3"></div>
+            <div class="border-b-[3px] border-gray-400 my-1 sm:my-3"></div>
           @endforeach
 
         </div>
-        {{-- <div class="border-b-[3px] border-gray-400 my-3"></div> --}}
+        {{-- <div class="border-b-[3px] border-gray-400 my-1 sm:my-3"></div> --}}
         <div class="grid grid-cols-1 my-4 items-center">
           <div class="flex justify-between items-center">
             <div class="flex-col">
-              <p class="font-bold text-lg text-gray-500">
+              <p class="font-bold text-sm sm:text-lg text-gray-500">
                 Transfer Deadline
               </p>
               @php
                 $date = date('Y-m-d H:i:s', strtotime($data->date)); 
               @endphp
-              <p class="text-lg font-bold text-gray-800">
+              <p class="text-sm sm:text-lg font-bold text-gray-800">
                 {{-- {{ date('Y-m-d H:i:s A', strtotime($date . ' +1 day')); }}  --}}
                 {{ $data->dateEnd->format('d M Y H:i A') }}
               </p>
@@ -62,15 +62,15 @@
                   <p id="days" class="mr-2">00</p>
                   <span>Days</span>
                 </div> --}}
-                <div class="flex text-md font-bold text-gray-800 mr-2">
+                <div class="flex text-xs sm:text-md font-bold text-gray-800 mr-2">
                   <p id="hours" class="mr-2">00</p>
                   <span>hours</span>
                 </div>
-                <div class="flex text-md font-bold text-gray-800 mr-2">
+                <div class="flex text-xs sm:text-md font-bold text-gray-800 mr-2">
                   <p id="mins" class="mr-2">00</p>
                   <span>minutes</span>
                 </div>
-                <div class="flex text-md font-bold text-gray-800 mr-2">
+                <div class="flex text-xs sm:text-md font-bold text-gray-800 mr-2">
                   <p id="secs" class="mr-2">00</p>
                   <span>seconds</span>
                   <p class="ml-2">left</p>
@@ -78,36 +78,36 @@
               </div>
             </div>
 
-            <a href="#" class="text-blue-600 font-semibold text-lg transition duration-150 ease-in-out" data-bs-toggle="tooltip" data-bs-placement="left" title="The transaction will be automatically canceled if it exceeds the transfer time limit"><i class="fas fa-exclamation-circle text-xl text-red-500"></i></a>
+            <a href="#" class="text-blue-600 font-semibold text-sm sm:text-lg transition duration-150 ease-in-out" data-bs-toggle="tooltip" data-bs-placement="left" title="The transaction will be automatically canceled if it exceeds the transfer time limit"><i class="fas fa-exclamation-circle text-lg sm:text-xl text-red-500"></i></a>
           </div>
         </div>
-        <div class="border-b-[3px] border-gray-400 my-3"></div>
+        <div class="border-b-[3px] border-gray-400 my-1 sm:my-3"></div>
         <div class="grid grid-cols-1 my-4 items-center">
           <div class="flex justify-between items-center">
             <div class="flex-col">
-              <p class="font-semibold text-gray-500">
+              <p class="font-semibold text-sm sm:text-lg text-gray-500">
                 Total Payment
               </p>
                 @php
                     $price = $data->price + $data->code;
                 @endphp
-                <p class="text-3xl text-gray-800 font-bold">
-                  Rp {{ number_format(substr($price,0, -3), 0, '.', '.') }}.<span class="text-3xl text-red-500 font-bold">{{ substr($price, -3) }}</span>
+                <p class="text-xl sm:text-3xl text-gray-800 font-bold">
+                  Rp {{ number_format(substr($price,0, -3), 0, '.', '.') }}.<span class="text-xl sm:text-3xl text-red-500 font-bold">{{ substr($price, -3) }}</span>
                 </p>
               {{-- <p class="text-3xl font-bold text-yellow-500">
                 Rp. {{ number_format($price) }}
               </p> --}}
-              <input id="copyTextPrice" class="border-0 bg-transparent text-3xl font-bold text-gray-800 -ml-3" type="hidden" value="{{ $price }}" disabled>
-              <p class="text-red-500 font-semibold">
+              <input id="copyTextPrice" class="border-0 bg-transparent font-bold text-gray-800 -ml-3" type="hidden" value="{{ $price }}" disabled>
+              <p class="text-red-500 text-xs sm:text-lg font-semibold">
                 *Transfer up to the last 3 digits (unique code)
               </p>
             </div>
-            <button id="copyBtnPrice" class="text-blue-600 font-semibold text-lg -ml-10">Copy</button>
+            <button id="copyBtnPrice" class="text-blue-600 font-semibold text-sm sm:text-lg -ml-10">Copy</button>
           </div>
         </div>
 
       </div>
-      <div class='pt-10'>
+      <div class='pt-2 sm:pt-10'>
         <a href="{{ route('spp-payment-cancel', $data->id) }}" class='block w-full border-2 border-blue-600 hover:bg-blue-700 hover:text-white mb-2 shadow-xl font-bold text-md sm:text-xl text-blue-600 transition-colors duration-100 py-3 sm:py-5 text-center'>Cancel transaction</a>
         <a href="{{ route('spp-payment', $data->id) }}" class='block w-full bg-blue-600 hover:bg-blue-700 rounded-b-lg shadow-xl font-bold text-md sm:text-xl text-white transition-colors duration-100 py-3 sm:py-5 text-center'>Back</a>
         
