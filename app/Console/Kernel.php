@@ -44,7 +44,7 @@ class Kernel extends ConsoleKernel
                     'date' => null,
                     'dateEnd' => null,
                 ]);
-        })->everyMinute();
+        })->everyTwoHours();
     }
 
     /**
