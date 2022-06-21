@@ -39,12 +39,14 @@ class PaymentPageController extends Controller
             'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJucWllNHN3OGxsdyIsImp0aSI6IjI5ZWY0NWU1ODU2NzlkNzJmZGI0OTFjNjEyNTU0YmYyNDY2ZDc2MDI2NmU1MjJhZWU4YTU4NWRmYzJkOTc1YjhlYTA1YTJjM2FlNGVmOTZjIiwiaWF0IjoxNjQ5NTgzMDA3Ljg3NjI3OSwibmJmIjoxNjQ5NTgzMDA3Ljg3NjI4MywiZXhwIjoxNjgxMTE5MDA3Ljg3NDQwOSwic3ViIjoiMjMzMzgiLCJzY29wZXMiOlsiYXBpIl19.31c7PhlQbtkgrQ8RgVeRRuu13nMXrdweW4o6ZRr1njqrqzmbJ9ptHzxaLPNuRfSKEhNqr0CBVmPN2HZO1ZA8Nud0fc2RWp9OEiVOM1BFQs2QbAi64Fdmq7HgUfZ-9R-pXuJ8ykaFTAPOOGarpoccDyvfgLANWpcP_KsSIpt8My5h5lgZiEAvE8VPa_VebdmLsPrB1dqZ1eEBTlz0hDKNznWB4Wa6W-SzxXnXbeeG6VJaPcU_eQH-iFf2QmdmzpMF8lG9pGbxVe9Bit3SOFghPCZ3ZBSV8PoLPoW287xm_jygn-epRsmobECYV4Z0o1BY2yVrhLJVSBMTlbpnOB-PccesjYz1UdCWfnWnFrinL12ChE_37wD3F8NfdQ92eSwj1alq7blo4maOVY_V2x9gCQDaVaFerGGEGAFMito8DOHAo_RAGVT4SzHlqbl_73YcZREMiNTqnAjAmqokSutAa5Rbk7tZWyZ1YS-88aNXSitlZ_Gwkjc3fQ5eKxRAZ6tLZpfTJGhDk8866cMJlg883hgQhPJcQ5wsOuLN_Fa9iR6QXE9e0vShr2R6wUilTpwhZjAAiq3TiQNDX8Is4LcQSDuE9cndZZ72oO6jlHG6dC5LsXy9zpliCdWAydPhSKdh7e7XGePss_34uwjteJ_qBMism0ELJgcmboncFKBTVfY'
         ]);
         $response = curl_exec($curl);
-        $dataBanks = json_decode($response, true);
+        $dataBanks = json_decode($response);
 
-        // dd($dataBanks['data']);
-        
-        // return $data;
-        // return $data['data'][0]['atas_nama'];
+        // take data bank where is_active = 1
+        $dataBanks = $dataBanks->data;
+        $dataBanks = array_filter($dataBanks, function ($item) {
+            return $item->is_active == 1;
+        });
+        $dataBanks = array_values($dataBanks);
 
         // dd($data);
         // foreach ($data['data'] as $item) {

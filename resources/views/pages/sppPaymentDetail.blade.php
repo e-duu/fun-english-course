@@ -23,18 +23,18 @@
         </div>
         <div class="border-b-[3px] border-gray-400 my-1 sm:my-3"></div>
         <div class="grid grid-cols-1 my-4 items-center">
-          @foreach ($dataBanks['data'] as $index => $bank)
+          @foreach ($dataBanks as $index => $bank)
             <div class="flex justify-between items-center">
               <div class="flex items-center">
-                <img src="{{ $bank['icon'] }}" class="w-14 sm:w-28 h-6 sm:h-12">
+                <img src="{{ $bank->icon }}" class="w-14 sm:w-28 h-6 sm:h-12">
                 <div class="flex-col">
                   <p class="font-semibold text-[12px] sm:text-lg text-gray-700">
-                    {{ $bank['atas_nama'] }}
+                    {{ $bank->atas_nama }}
                   </p>
                   <p class="font-semibold italic text-[10px] sm:text-sm text-gray-700">
-                    {{ $bank['label'] }}
+                    {{ $bank->label }}
                   </p>
-                  <input class="border-0 bg-transparent text-sm sm:text-xl font-bold text-gray-800 -ml-3" type="text" id="copy_{{ $index }}" value="{{ $bank['account_number'] }}">
+                  <input class="border-0 bg-transparent text-sm sm:text-xl font-bold text-gray-800 -ml-3" type="text" id="copy_{{ $index }}" value="{{ $bank->account_number }}">
                 </div>
               </div>
               <button onclick="copyToClipboard('copy_{{ $index }}')" class="text-blue-600 font-semibold text-sm sm:text-lg">Copy</button>
