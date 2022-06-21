@@ -218,7 +218,7 @@ class StudentController extends Controller
                 });
             }
         } catch (\Throwable $th) {
-            dd('Send To Mail Failed, come back to check your network again');
+          dd('Send To Mail Failed, come back to check your network again');
         }
 
         return back()->with('success', 'send mail successfully');

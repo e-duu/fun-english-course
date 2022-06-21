@@ -135,7 +135,7 @@
 
     @if ($data->status != 'paid')
         @if ($data->status != 'paid_manually')
-            <div class="rounded-lg mx-auto w-11/12 md:w-9/12 lg:w-1/2 mt-12">
+            <div class="rounded-lg mx-auto w-11/12 md:w-9/12 lg:w-1/2 mt-10 sm:mt-12">
                 @if ($data->currency != 'USD')
                     {{-- NOTE : PAYMENT BY MOOTA --}}
                     <a href="{{ route('spp-payment-detail', $data->id) }}">
