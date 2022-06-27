@@ -208,6 +208,18 @@
 @endsection
 
 @push('after-script')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    @if (session()->get('success'))
+        <script>
+            // NOTE : IF SUCCESSFULLY SEND TO MAIL
+            Swal.fire({
+                icon: 'success',
+                title: 'Send To Mail Successfully',
+                showConfirmButton: false,
+                timer: 1000
+            });
+        </script>
+    @endif
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script language="javascript">
         $("#checkAll").click(function () {
