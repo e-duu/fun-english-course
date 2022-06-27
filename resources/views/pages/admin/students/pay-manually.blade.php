@@ -3,7 +3,7 @@
   Fun English Course | Spp Pay Manually
 @endsection
 @section('sub-title')
-  Pay Spp Manually
+  Pay Invoice manually
 @endsection
 @section('content')
     <div class="container-fluid w-full mt-5">
@@ -62,6 +62,12 @@
                             @elseif ($data->month == 12)
                                 December
                             @endif
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-2 my-4 items-center">
+                        <p class="text-md text-gray-700">Year</p>
+                        <p class="font-semibold text-lg text-gray-700 text-right">
+                            {{ $data->student->name }}
                         </p>
                     </div>
                     <div class="grid grid-cols-2 my-4 items-center">

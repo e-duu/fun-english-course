@@ -52,7 +52,7 @@
       {{-- Modal Create --}}
       <div x-data="{ showModal : false }">
           <!-- Button -->
-          <button @click="showModal = !showModal" class="px-4 py-2 text-sm bg-blue-600 rounded-md transition-colors duration-150 ease-linear text-white focus:outline-none focus:ring-0 font-semibold hover:bg-blue-700">Add Spp</button>
+          <button @click="showModal = !showModal" class="px-4 py-2 text-sm bg-blue-600 rounded-md transition-colors duration-150 ease-linear text-white focus:outline-none focus:ring-0 font-semibold hover:bg-blue-700">Create Invoice</button>
 
           <!-- Modal Background -->
           <div x-show="showModal" class="fixed text-gray-500 flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0" x-transition:enter="transition ease duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
@@ -114,7 +114,7 @@
                                 Price
                             </span>
                             <input name="price" type="number" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border rounded-md border-gray-400 -gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
-                            <span class="text-gray-700 dark:text-gray-400">if the currency is IDR the last number must be 000</span>
+                            <span class="text-gray-700 dark:text-gray-400">If the currency is IDR the last digits must be 000</span>
                                 @error('price')
                                     <div class="mt-1 text-sm text-[red]">
                                         <i class="fas fa-dot-circle text-xs"></i> {{ $message }}

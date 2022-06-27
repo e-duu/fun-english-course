@@ -1,9 +1,9 @@
 @extends('layouts.dash')
 @section('title')
-  Fun English Course | Program Pages
+  Fun English Course | Programs Pages
 @endsection
 @section('sub-title')
-  List Programs
+  List of Programs
 @endsection
 @section('content')
   <div class="w-full overflow-hidden rounded-lg shadow-xs mt-4">

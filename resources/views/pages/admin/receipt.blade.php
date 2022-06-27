@@ -15,7 +15,7 @@
         <span class="text-white">|</span>
         <a href="{{ URL::previous() }}" class="text-white">Back</a>
       </div>
-      <h1 class="text-white font-bold text-right text-3xl uppercase">Receipt</h1>
+      <h1 class="text-white font-bold text-right text-4xl uppercase">Receipt</h1>
     </div>
     <div class="container-fluid px-32">
       <div class="flex-col mt-10">
@@ -38,7 +38,7 @@
           </div>
           <div class="flex justify-between items-center">
             <p class="text-blue-700 font-bold">City of Residence : {{  $data->student->city }}</p>
-            {{-- <p class="text-blue-700 font-bold">Due Date : -</p> --}}
+            <p class="text-blue-700 font-bold">Billing Period : {{ $data->created_at->addDay()->format('m-Y') }}</p>
           </div>
           <p class="text-blue-700 font-bold">Country of Residence : {{  $data->student->country }}</p>
           <p class="text-blue-700 font-bold">Email Address : {{  $data->student->email }}</p>
@@ -46,7 +46,7 @@
             <div class="w-full overflow-x-auto">
               <table class="w-full whitespace-no-wrap">
                 <thead>
-                  <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                  <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800 h-12">
                     <th class="px-4 py-3 bg-blue-800 text-white">Program</th>
                     <th class="px-4 py-3 bg-blue-800 text-white">Description</th>
                     <th class="px-4 py-3 bg-blue-800 text-white">Unit Price</th>
@@ -55,41 +55,53 @@
                   </tr>
                 </thead>
                 <tbody class="bg-blue-100 divide-y-2 divide-white dark:divide-gray-700 dark:bg-darker">
-
-                  {{-- @forelse ($data as $data) --}}
-                    <tr class="text-black dark:text-gray-400">
-                      <td class="px-4 py-3 text-sm">
-                        {{ $data->level->program->name.' - '.$data->level->name }}
-                      </td>
-                      <td class="px-4 py-3 text-sm">
-                        -
-                      </td>
-                      <td class="px-4 py-3 text-sm">
-                        {{ $data->currency == 'USD' ? '$'.$data->price: 'Rp.'.number_format($data->price, 0, ',', ',') }}
-                      </td>
-                      <td class="px-4 py-3 text-sm">
-                        1
-                      </td>
-                      <td class="px-4 py-3 text-sm">
-                        {{ $data->currency == 'USD' ? '$'.$data->price: 'Rp.'.number_format($data->price, 0, ',', ',') }}
-                      </td>
-                    </tr>
-                  {{-- @empty --}}
-                    {{-- <tr>
-                      <td colspan="7" class="text-center text-gray-500 px-4 py-3">
-                        <p>
-                          Data is empty..
-                        </p>
-                      </td>
-                    </tr>
-                  @endforelse --}}
-
+                  <tr class="text-black dark:text-gray-400 h-12">
+                    <td class="px-4 py-3 text-sm">
+                      {{ $data->level->program->name }}
+                    </td>
+                    <td class="px-4 py-3 text-sm">
+                      {{ $data->level->name }}
+                    </td>
+                    <td class="px-4 py-3 text-sm">
+                      {{ $data->currency == 'USD' ? '$'.$data->price: 'Rp. '.number_format($data->price, 0, ',', ',') }}
+                    </td>
+                    <td class="px-4 py-3 text-sm">
+                      1
+                    </td>
+                    <td class="px-4 py-3 text-sm">
+                      {{ $data->currency == 'USD' ? '$'.$data->price: 'Rp. '.number_format($data->price, 0, ',', ',') }}
+                    </td>
+                  </tr>
+                  <tr class="text-black dark:text-gray-400 h-10">
+                    <td class="px-4 py-3 text-sm">
+                    </td>
+                    <td class="px-4 py-3 text-sm">
+                    </td>
+                    <td class="px-4 py-3 text-sm">
+                    </td>
+                    <td class="px-4 py-3 text-sm">
+                    </td>
+                    <td class="px-4 py-3 text-sm">
+                    </td>
+                  </tr>
+                  <tr class="text-black dark:text-gray-400 h-10">
+                    <td class="px-4 py-3 text-sm">
+                    </td>
+                    <td class="px-4 py-3 text-sm">
+                    </td>
+                    <td class="px-4 py-3 text-sm">
+                    </td>
+                    <td class="px-4 py-3 text-sm">
+                    </td>
+                    <td class="px-4 py-3 text-sm">
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </div>
             <div class="grid px-4 py-3 text-xs font-semibold tracking-wide text-white uppercase border-t dark:border-gray-700 bg-blue-800 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
               <div class="col-span-7"></div>
-              <div class="flex items-center justify-between">
+              <div class="flex items-center justify-between space-x-1">
                 <p>Total</p>
                 <p class="text-lg">
                     {{ $data->currency == 'USD' ? '$'.$data->price: number_format($data->price, 0, ',', ',') }}

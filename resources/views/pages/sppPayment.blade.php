@@ -33,13 +33,13 @@
           </p>
         </div>
         <div class="grid grid-cols-2 my-4 items-center">
-          <p class="text-xs sm:text-lg text-gray-700">Student Name</p>
+          <p class="text-xs sm:text-lg text-gray-700">Student's Name</p>
           <p class="font-semibold text-xs sm:text-lg text-gray-700 text-right">
             {{ Auth::user()->name }}
           </p>
         </div>
         <div class="grid grid-cols-2 my-4 items-center">
-          <p class="text-xs sm:text-lg text-gray-700">Parent Name</p>
+          <p class="text-xs sm:text-lg text-gray-700">Parent's Name</p>
           <p class="font-semibold text-xs sm:text-lg text-gray-700 text-right">
             {{ Auth::user()->parent }}
           </p>

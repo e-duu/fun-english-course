@@ -140,6 +140,7 @@
         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
             <th class="px-4 py-3">Name</th>
             <th class="px-4 py-3">Parent</th>
+            <th class="px-4 py-3">Teacher</th>
             <th class="px-4 py-3">City</th>
             <th class="px-4 py-3">Country</th>
             <th class="px-4 py-3">Student Number</th>
@@ -148,10 +149,9 @@
             <th class="px-4 py-3">Level</th>
             <th class="px-4 py-3">Currency</th>
             <th class="px-4 py-3">Price</th>
-            {{-- <th class="px-4 py-3">Code</th> --}}
             <th class="px-4 py-3">Month</th>
             <th class="px-4 py-3">Year</th>
-            <th class="px-4 py-3">Status Payment</th>
+            <th class="px-4 py-3">Payment Status</th>
             <th class="px-4 py-3">Action</th>
         </tr>
       </thead>
