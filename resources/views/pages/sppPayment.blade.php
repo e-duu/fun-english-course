@@ -19,13 +19,13 @@
   @endif
   <div class="grid bg-gray-50 rounded-lg mx-auto shadow-xl w-11/12 md:w-9/12 lg:w-1/2">
       <div class="bg-blue-600 rounded-t-lg py-3 sm:py-6 sm:mb-5">
-        <h1 class="text-white text-center font-bold text-lg sm:text-2xl">Payment Confirmation</h1>
+        <h1 class="text-white text-center font-bold text-xl sm:text-3xl">Payment Confirmation</h1>
       </div>
 
-      <div class="flex-col mx-10">
+      <div class="flex-col mx-5 sm:mx-10 ">
         <div class="grid grid-cols-2 my-4 items-center">
-          <p class="text-md text-gray-700">Invoice Number</p>
-          <p class="font-semibold text-lg text-gray-700 text-right">
+          <p class="text-xs sm:text-lg text-gray-700">Invoice Number</p>
+          <p class="font-semibold text-xs sm:text-lg text-gray-700 text-right">
             @php
                 $num = (str_pad((int)$data->invoice->numberInv , 8, '0', STR_PAD_LEFT));
             @endphp
@@ -33,32 +33,32 @@
           </p>
         </div>
         <div class="grid grid-cols-2 my-4 items-center">
-          <p class="text-md text-gray-700">Student Name</p>
-          <p class="font-semibold text-lg text-gray-700 text-right">
+          <p class="text-xs sm:text-lg text-gray-700">Student Name</p>
+          <p class="font-semibold text-xs sm:text-lg text-gray-700 text-right">
             {{ Auth::user()->name }}
           </p>
         </div>
         <div class="grid grid-cols-2 my-4 items-center">
-          <p class="text-md text-gray-700">Parent Name</p>
-          <p class="font-semibold text-lg text-gray-700 text-right">
+          <p class="text-xs sm:text-lg text-gray-700">Parent Name</p>
+          <p class="font-semibold text-xs sm:text-lg text-gray-700 text-right">
             {{ Auth::user()->parent }}
           </p>
         </div>
         <div class="grid grid-cols-2 my-4 items-center">
-          <p class="text-md text-gray-700">City</p>
-          <p class="font-semibold text-lg text-gray-700 text-right">
+          <p class="text-xs sm:text-lg text-gray-700">City</p>
+          <p class="font-semibold text-xs sm:text-lg text-gray-700 text-right">
             {{ Auth::user()->city }}
           </p>
         </div>
         <div class="grid grid-cols-2 my-4 items-center">
-          <p class="text-md text-gray-700">Country</p>
-          <p class="font-semibold text-lg text-gray-700 text-right">
+          <p class="text-xs sm:text-lg text-gray-700">Country</p>
+          <p class="font-semibold text-xs sm:text-lg text-gray-700 text-right">
             {{ Auth::user()->country }}
           </p>
         </div>
         <div class="grid grid-cols-2 my-4 items-center">
-          <p class="text-md text-gray-700">Month</p>
-          <p class="font-semibold text-lg text-gray-700 text-right">
+          <p class="text-xs sm:text-lg text-gray-700">Month</p>
+          <p class="font-semibold text-xs sm:text-lg text-gray-700 text-right">
             @if ($data->month == 1)
                 January
             @elseif ($data->month == 2)
@@ -87,26 +87,26 @@
           </p>
         </div>
         <div class="grid grid-cols-2 my-4 items-center">
-          <p class="text-md text-gray-700">Year</p>
-          <p class="font-semibold text-lg text-gray-700 text-right">
+          <p class="text-xs sm:text-lg text-gray-700">Year</p>
+          <p class="font-semibold text-xs sm:text-lg text-gray-700 text-right">
             {{ $data->year }}
           </p>
         </div>
         <div class="grid grid-cols-2 my-4 items-center">
-          <p class="text-md text-gray-700">Program</p>
-          <p class="font-semibold text-lg text-gray-700 text-right">
+          <p class="text-xs sm:text-lg text-gray-700">Program</p>
+          <p class="font-semibold text-xs sm:text-lg text-gray-700 text-right">
             {{ $data->level->program->name }}
           </p>
         </div>
         <div class="grid grid-cols-2 my-4 items-center">
-          <p class="text-md text-gray-700">Level</p>
-          <p class="font-semibold text-lg text-gray-700 text-right">
+          <p class="text-xs sm:text-lg text-gray-700">Level</p>
+          <p class="font-semibold text-xs sm:text-lg text-gray-700 text-right">
             {{ $data->level->name }}
           </p>
         </div>
         <div class="grid grid-cols-2 my-4 items-center">
-          <p class="text-md text-gray-700">Status</p>
-          <p class="font-semibold text-lg uppercase @if($data->status == 'paid' || $data->status == 'paid_manually') text-green-500 @else text-red-500 @endif text-right">
+          <p class="text-xs sm:text-lg text-gray-700">Status</p>
+          <p class="font-semibold text-xs sm:text-lg uppercase @if($data->status == 'paid' || $data->status == 'paid_manually') text-green-500 @else text-red-500 @endif text-right">
             @if ($data->status == 'paid')
               PAID
             @elseif ($data->status == 'paid_manually')
@@ -119,15 +119,15 @@
           </p>
         </div>
         <div class="grid grid-cols-2 my-4 items-center">
-          <p class="text-md text-gray-700">Price Amount</p>
-          <p class="font-semibold text-lg text-gray-700 text-right">
+          <p class="text-xs sm:text-lg text-gray-700">Price Amount</p>
+          <p class="font-semibold text-xs sm:text-lg text-gray-700 text-right">
             {{ $data->currency == 'USD' ? '$ '.$data->price: 'Rp '.number_format($data->price, 0, ',', ',') }}
           </p>
         </div>
       </div>
-      <div class='w-full bg-blue-600 rounded-b-lg shadow-xl font-bold text-md text-white transition-colors duration-100 py-3 sm:py-5 grid grid-cols-2 px-10 mt-10 items-center'>
+      <div class='w-full bg-blue-600 rounded-b-lg shadow-xl font-bold text-xs sm:text-lg text-white transition-colors duration-100 py-3 sm:py-5 grid grid-cols-2 px-5 sm:px-10 mt-5 sm:mt-10 items-center'>
         <div class=''>Total<br>Payment</div>
-        <div class='font-semibold text-xl text-white text-right'>
+        <div class='font-semibold text-sm sm:text-xl text-white text-right'>
             {{ $data->currency == 'USD' ? '$ '.$data->price: 'Rp '.number_format($data->price, 0, ',', ',') }}
         </div>
       </div>
@@ -135,11 +135,11 @@
 
     @if ($data->status != 'paid')
         @if ($data->status != 'paid_manually')
-            <div class="rounded-lg mx-auto w-11/12 md:w-9/12 lg:w-1/2 mt-12">
+            <div class="rounded-lg mx-auto w-11/12 md:w-9/12 lg:w-1/2 mt-10 sm:mt-12">
                 @if ($data->currency != 'USD')
                     {{-- NOTE : PAYMENT BY MOOTA --}}
                     <a href="{{ route('spp-payment-detail', $data->id) }}">
-                        <div class="rounded-full py-4 bg-blue-600 text-white font-bold text-xl text-center">
+                        <div class="rounded-full py-3 sm:py-4 bg-blue-600 text-white font-bold text-sm sm:text-xl text-center">
                         <i class="fas fa-money-check"></i>
                         @if ($data->status == 'pending')
                             Continue Payment
