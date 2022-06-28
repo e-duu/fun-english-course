@@ -166,6 +166,9 @@
               {{ $item->student->parent == null ? '-' : $item->student->parent }}
             </td>
             <td class="px-4 py-3 text-sm">
+              {{ $item->teacher == null ? '-' : $item->teacher }}
+            </td>
+            <td class="px-4 py-3 text-sm">
               {{ $item->student->city == null ? '-' : $item->student->city }}
             </td>
             <td class="px-4 py-3 text-sm">

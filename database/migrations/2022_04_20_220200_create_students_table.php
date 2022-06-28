@@ -23,6 +23,7 @@ class CreateStudentsTable extends Migration
             $table->dateTime('date')->nullable();
             $table->dateTime('dateEnd')->nullable();
             $table->integer('code')->nullable();
+            $table->string('teacher');
             $table->foreignId('user_id');
             $table->foreignId('level_id');
             $table->timestamps();
