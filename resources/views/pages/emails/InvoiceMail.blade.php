@@ -30,7 +30,7 @@
     </head>
     <body yahoo>
         <h1>
-            Invoice Spp
+            INVOICE SPP
         </h1>
 
         <table>
@@ -39,6 +39,7 @@
                     <div class="column-text">
                         <p class="text-bold">Student Name </p>
                         <p class="text-bold">Month</p>
+                        <p class="text-bold">Year</p>
                         <p class="text-bold">Program </p>
                         <p class="text-bold">Level </p>
                         <p class="text-bold">Status </p>
@@ -75,6 +76,7 @@
                                 December
                             @endif
                         </p>
+                        <p class="">: {{$data->year}}</p>
                         <p class="">: {{$data->level->program->name}}</p>
                         <p class="">: {{$data->level->name}}</p>
                         <p class="">: {{$data->status}}</p>
