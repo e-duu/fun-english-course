@@ -75,6 +75,10 @@
       color: white;
     }
 
+    h1 {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
     #table2 {
       font-family: Arial, Helvetica, sans-serif;
       width: 100%;
@@ -90,16 +94,16 @@
 </head>
 <body>
   <div>
-    <h1>INVOICE</h1>
+    <h1 style="padding-right: 64px; font-size: 40px;">INVOICE</h1>
   </div>
   <div class="content">
     <table style="width: 100%">
       <tr>
         <td>
-          <img src="{{ public_path('/images/edge-logo.png') }}" style="height: 80px">
+          <img src="{{ public_path('/images/logo.png') }}" style="height: 80px">
         </td>
         <td style="text-align: right">
-          <img src="{{ public_path('/images/logo.png') }}" style="height: 80px">
+          <img src="{{ public_path('/images/edge-logo.png') }}" style="height: 80px">
         </td>
       </tr>
     </table>
@@ -131,7 +135,7 @@
             <td>{{ $data->created_at->format('d-m-Y') }}</td>
           </tr>
           <tr>
-            <td>City of Residence</td>
+            <td style="text-transform: none">City of Residence</td>
             <td>:</td>
             <td>{{  $data->student->city }}</td>
             <td></td>
@@ -140,7 +144,7 @@
             <td>{{ $data->created_at->addDay()->format('m-Y') }}</td>
           </tr>
           <tr>
-            <td>Country of Residence</td>
+            <td style="text-transform: none">Country of Residence</td>
             <td>:</td>
             <td colspan="4">{{  $data->student->country }}</td>
           </tr>
@@ -156,7 +160,7 @@
       <thead>
         <tr>
           <th>Program</th>
-          <th>Description</th>
+          <th>Level</th>
           <th>Unit Price</th>
           <th>Quantity</th>
           <th>Amount</th>
@@ -174,7 +178,14 @@
               {{ $data->currency == 'USD' ? '$'.$data->price: 'Rp. '.number_format($data->price, 0, ',', ',') }}
           </td>
         </tr>
-        <tr style="height: 60px;">
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
           <td></td>
           <td></td>
           <td></td>

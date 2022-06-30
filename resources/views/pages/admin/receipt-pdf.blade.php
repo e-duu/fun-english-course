@@ -75,6 +75,10 @@
       color: white;
     }
 
+    h1 {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
     #table2 {
       font-family: Arial, Helvetica, sans-serif;
       width: 100%;
@@ -90,7 +94,7 @@
 </head>
 <body>
   <div>
-    <h1>RECEIPT</h1>
+    <h1 style="padding-right: 64px; font-size: 40px">RECEIPT</h1>
   </div>
   <div class="content">
     <table style="width: 100%">

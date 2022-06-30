@@ -20,8 +20,8 @@
     <div class="container-fluid px-32">
       <div class="flex-col mt-10">
         <div class="flex justify-between items-center mb-12">
-          <img src="{{ asset('images/edge-logo.png') }}" class="max-h-28">
           <img src="{{ asset('images/logo.png') }}" class="max-h-16">
+          <img src="{{ asset('images/edge-logo.png') }}" class="max-h-28">
         </div>
         <div class="flex-col">
           <p class="text-blue-700 font-bold text-lg mb-5">BILLED TO : </p>
