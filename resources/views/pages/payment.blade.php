@@ -6,13 +6,13 @@
     <div class="container-fluid px-7 sm:px-20 mt-10 sm:mt-16">
 
       <div class="w-full overflow-hidden rounded-lg shadow-xs mt-5">
-        <h2 class="text-white rounded-md font-bold text-center text-xl sm:text-3xl py-5 bg-blue-500">Need Payment This Month</h2>
+        <h2 class="text-white rounded-md font-bold text-center text-xl sm:text-3xl py-5 bg-blue-500">Payment Due</h2>
         <div class="w-full overflow-x-auto">
         <table class="w-full whitespace-no-wrap">
           <thead>
           <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-            <th class="px-4 py-3 text-xs sm:text-sm">Parent Name</th>
-            <th class="px-4 py-3 text-xs sm:text-sm">Student Name</th>
+            <th class="px-4 py-3 text-xs sm:text-sm">Parent's Name</th>
+            <th class="px-4 py-3 text-xs sm:text-sm">Student's Name</th>
             <th class="px-4 py-3 text-xs sm:text-sm">Program</th>
             <th class="px-4 py-3 text-xs sm:text-sm">Level</th>
             <th class="px-4 py-3 text-xs sm:text-sm">Month</th>
@@ -129,7 +129,7 @@
       </div>
 
       <div class="w-full overflow-hidden rounded-lg shadow-xs mt-5">
-        <h2 class="text-white rounded-md font-bold text-center text-xl sm:text-3xl py-5 bg-blue-500">History Payment</h2>
+        <h2 class="text-white rounded-md font-bold text-center text-xl sm:text-3xl py-5 bg-blue-500">Payment History</h2>
         <div class="w-full overflow-x-auto">
         <table class="w-full whitespace-no-wrap">
           <thead>

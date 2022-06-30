@@ -40,7 +40,7 @@
             <span aria-hidden="true">
               <i class="fas fa-comments-dollar"></i>
             </span>
-            <span class="ml-2 text-sm"> Students </span>
+            <span class="ml-2 text-sm"> Billing </span>
             <span aria-hidden="true" class="ml-auto">
               <!-- active class 'rotate-180' -->
               <svg
@@ -63,7 +63,7 @@
               role="menuitem"
               class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
             >
-              List Students
+              List Program & Student
             </a>
             {{-- <a
               href="{{  }}"

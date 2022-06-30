@@ -18,6 +18,7 @@ class Student extends Model
         'year',
         'price',
         'currency',
+        'teacher',
         'status',
         'code',
         'date',
