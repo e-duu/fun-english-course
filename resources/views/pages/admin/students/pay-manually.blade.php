@@ -3,7 +3,7 @@
   Fun English Course | Spp Pay Manually
 @endsection
 @section('sub-title')
-  Pay Invoice manually
+  Pay Invoice Manually
 @endsection
 @section('content')
     <div class="container-fluid w-full mt-5">
@@ -29,7 +29,7 @@
                         @method('POST')
                     </form>
                     <div class="grid grid-cols-2 my-4 items-center">
-                        <p class="text-md text-gray-700">Student Name</p>
+                        <p class="text-md text-gray-700">Student's Name</p>
                         <p class="font-semibold text-lg text-gray-700 text-right">
                             {{ $data->student->name }}
                         </p>
