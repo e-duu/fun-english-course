@@ -59,7 +59,7 @@
                   <!-- Modal -->
               <div x-show="showModal" class="bg-white rounded-xl shadow-2xl p-6 w-80 sm:w-3/6 mx-10" @click.away="showModal = false" x-transition:enter="transition ease duration-100 transform" x-transition:enter-start="opacity-0 scale-90 translate-y-1" x-transition:enter-end="opacity-100 scale-100 translate-y-0" x-transition:leave="transition ease duration-100 transform" x-transition:leave-start="opacity-100 scale-100 translate-y-0" x-transition:leave-end="opacity-0 scale-90 translate-y-1">
                   <!-- Title -->
-                  <span class="font-bold block text-2xl mb-3 mt-44">Create Spp </span>
+                  <span class="font-bold block text-2xl mb-3 mt-44">Create Invoice </span>
                   <div class="border-b border-gray-500 mb-5"></div>
                       <!-- Some beer 🍺 -->
                       <form id="payments" action="{{ route('student.store') }}" method="POST">
