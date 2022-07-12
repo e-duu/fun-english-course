@@ -18,13 +18,13 @@ class Student extends Model
         'year',
         'price',
         'currency',
-        'teacher',
         'status',
         'code',
         'date',
         'dateEnd',
         'user_id',
         'level_id',
+        'teacher_id',
     ];
 
     public function student()
@@ -35,6 +35,11 @@ class Student extends Model
     public function level()
     {
         return $this->belongsTo(Level::class, 'level_id', 'id');
+    }
+
+    public function teacher()
+    {
+        return $this->belongsTo(User::class, 'teacher_id', 'id');
     }
 
     public function sppPayment()

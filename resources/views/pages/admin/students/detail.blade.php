@@ -59,7 +59,7 @@
                   <!-- Modal -->
               <div x-show="showModal" class="bg-white rounded-xl shadow-2xl p-6 w-80 sm:w-3/6 mx-10" @click.away="showModal = false" x-transition:enter="transition ease duration-100 transform" x-transition:enter-start="opacity-0 scale-90 translate-y-1" x-transition:enter-end="opacity-100 scale-100 translate-y-0" x-transition:leave="transition ease duration-100 transform" x-transition:leave-start="opacity-100 scale-100 translate-y-0" x-transition:leave-end="opacity-0 scale-90 translate-y-1">
                   <!-- Title -->
-                  <span class="font-bold block text-2xl mb-3 mt-44">Create Invoice </span>
+                  <span class="font-bold block text-2xl mb-3 mt-44">Create Invoice</span>
                   <div class="border-b border-gray-500 mb-5"></div>
                       <!-- Some beer 🍺 -->
                       <form id="payments" action="{{ route('student.store') }}" method="POST">
@@ -94,12 +94,21 @@
                                 @enderror
                           </label>
 
+                          @php
+                              $teachers = App\Models\User::where('role', 'teacher')->get();
+                          @endphp
+                          
                           <label class="block mt-2 text-sm">
                             <span class="text-gray-700 dark:text-gray-400">
                                 Teacher
                             </span>
-                            <input name="teacher" type="text" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border rounded-md border-gray-400 -gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
-                                @error('teacher')
+                            <select name="teacher_id" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border rounded-md border-gray-400 -gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
+                              <option disabled selected>Please Select One...</option>
+                                @foreach ($teachers as $teacher)
+                                  <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
+                                @endforeach
+                            </select>
+                                @error('teacher_id')
                                     <div class="mt-1 text-sm text-[red]">
                                         <i class="fas fa-dot-circle text-xs"></i> {{ $message }}
                                     </div>

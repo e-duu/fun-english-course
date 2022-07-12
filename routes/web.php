@@ -24,6 +24,7 @@ use App\Http\Controllers\SppController;
 use App\Http\Controllers\SppPaymentBankController;
 use App\Http\Controllers\SppPaymentController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TeacherController;
 use App\Models\Student;
 
 /*
@@ -228,19 +229,6 @@ Route::middleware(['auth'])->group(function () {
 			Route::post('/edit/{id}', [QuestionController::class, 'update'])->name('question.update');
 			Route::delete('/delete/{id}', [QuestionController::class, 'destroy'])->name('question.delete');
 		});
-
-		// Route::prefix('spp')->group(function () {
-		// 	Route::get('/all', [SppController::class, 'index'])->name('spp.all');
-		// 	Route::get('/create', [SppController::class, 'create'])->name('spp.create');
-		// 	Route::post('/store', [SppController::class, 'store'])->name('spp.store');
-		// 	Route::get('/show/{id}', [SppController::class, 'show'])->name('spp.show');
-		// 	Route::get('/edit/{id}', [SppController::class, 'edit'])->name('spp.edit');
-		// 	Route::post('/update/{id}', [SppController::class, 'update'])->name('spp.update');
-		// 	Route::delete('/delete/{id}', [SppController::class, 'destroy'])->name('spp.delete');
-		// 	Route::get('/pay-manually/{id}', [SppController::class, 'payManually'])->name('spp.pay-manually');
-		// 	Route::post('/pay-manually/prosses/{id}', [SppController::class, 'payManuallyProsses'])->name('spp.pay-manually.prosses');
-		// 	Route::get('/invoice/mail/{userId}/{sppMonthId?}', [SppController::class, 'sppInvoiceMail'])->name('spp.invoice.mail');
-		// });
 
 	});
 });
