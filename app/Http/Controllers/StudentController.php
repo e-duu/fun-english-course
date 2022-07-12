@@ -32,8 +32,8 @@ class StudentController extends Controller
                 'price' => 'required',
                 'user_id' => 'required',
                 'level_id' => 'required',
+                'teacher_id' => 'required',
                 'currency' => 'required',
-                'teacher' => 'required',
                 'code' => 'nullable',
                 'date' => 'nullable',
                 'dateEnd' => 'nullable',
@@ -44,6 +44,7 @@ class StudentController extends Controller
                 'price.required' => 'please input invoice price',
                 'user_id.required' => 'please input invoice student',
                 'level_id.required' => 'please input invoice level',
+                'teacher_id.required' => 'please input invoice teacher',
                 'currency.required' => 'please input invoice currency',
                 'teacher.required' => 'please input invoice teacher',
             ]
@@ -60,8 +61,8 @@ class StudentController extends Controller
                 'code' => $code,
                 'user_id' => $request->user_id,
                 'level_id' => $request->level_id,
+                'teacher_id' => $request->teacher_id,
                 'currency' => $request->currency,
-                'teacher' => $request->teacher,
                 'status' => 'unpaid',
             ]);
 
