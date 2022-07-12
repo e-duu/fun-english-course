@@ -23,7 +23,7 @@
         </div>
         <div class="border-b-[3px] border-gray-400 my-1 sm:my-3"></div>
         <div class="grid grid-cols-1 my-4 items-center">
-          @foreach ($dataBanks as $index => $bank)
+          @forelse ($dataBanks as $index => $bank)
             <div class="flex justify-between items-center">
               <div class="flex items-center">
                 <img src="{{ $bank->icon }}" class="w-14 sm:w-28 h-6 sm:h-12">
@@ -40,7 +40,15 @@
               <button onclick="copyToClipboard('copy_{{ $index }}')" class="text-blue-600 font-semibold text-sm sm:text-lg">Copy</button>
             </div>
             <div class="border-b-[3px] border-gray-400 my-1 sm:my-3"></div>
-          @endforeach
+          @empty
+            <div class="text-center">
+              <i class="fas fa-exclamation text-lg sm:text-xl text-red-500"> Warning...</i>
+              <p class="text-red-500 font-semibold text-sm sm:text-lg">If there are problems when making payments or the account number does not appear, please contact the following Whatsapp number.</p>
+              <div class="mt-6 my-2 ">
+                <a href="https://api.whatsapp.com/send?phone=6281288882780" target="_blank" class='bg-blue-600 hover:bg-blue-700 rounded-lg shadow-xl font-bold text-md sm:text-xl text-white transition-colors duration-100 py-2 px-4 text-center'>0812 8888 2780</a>
+              </div>
+            </div>
+          @endforelse
 
         </div>
         {{-- <div class="border-b-[3px] border-gray-400 my-1 sm:my-3"></div> --}}
