@@ -102,7 +102,7 @@
                             <span class="text-gray-700 dark:text-gray-400">
                                 Teacher
                             </span>
-                            <select name="teacher_id" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border rounded-md border-gray-400 -gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
+                            <select id="select-teacher" name="teacher_id" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border rounded-md border-gray-400 -gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
                               <option disabled selected>Please Select One...</option>
                                 @foreach ($teachers as $teacher)
                                   <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
@@ -306,6 +306,12 @@
   <script>
     $(document).ready(function () {
         $('#select-search').selectize({
+            sortField: 'text'
+        });
+    });
+
+    $(document).ready(function () {
+        $('#select-teacher').selectize({
             sortField: 'text'
         });
     });
