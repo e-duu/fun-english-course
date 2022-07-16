@@ -3,18 +3,6 @@
     <!-- Sidebar links -->
     <nav aria-label="Main" class="flex-1 px-2 py-4 space-y-2 overflow-y-hidden hover:overflow-y-auto">
 
-      {{-- @if (Auth::user()->role == 'student')
-        <!-- Dashboard -->
-        <div>
-          <!-- active & hover classes 'bg-primary-100 dark:bg-primary' -->
-          <a href="{{ route('dashboard.user') }}" class="flex items-center p-2 text-gray-500 transition-colors rounded-md dark:text-light hover:bg-primary-100 dark:hover:bg-primary" role="button">
-            <span>
-              <i class="fas fa-paw"></i>
-            </span>
-            <span class="ml-2 text-sm"> Dashboard </span>
-          </a>
-        </div>
-      @else --}}
         <!-- Dashboard -->
         <div>
           <!-- active & hover classes 'bg-primary-100 dark:bg-primary' -->
@@ -40,7 +28,7 @@
             <span aria-hidden="true">
               <i class="fas fa-comments-dollar"></i>
             </span>
-            <span class="ml-2 text-sm"> Students </span>
+            <span class="ml-2 text-sm"> Billing </span>
             <span aria-hidden="true" class="ml-auto">
               <!-- active class 'rotate-180' -->
               <svg
@@ -63,15 +51,8 @@
               role="menuitem"
               class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
             >
-              List Students
+              List Program & Student
             </a>
-            {{-- <a
-              href="{{  }}"
-              role="menuitem"
-              class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
-            >
-              Create Spp
-            </a> --}}
           </div>
         </div>
         {{-- <!-- Spp Payment -->

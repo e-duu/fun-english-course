@@ -32,18 +32,21 @@ class StudentController extends Controller
                 'price' => 'required',
                 'user_id' => 'required',
                 'level_id' => 'required',
+                'teacher_id' => 'required',
                 'currency' => 'required',
                 'code' => 'nullable',
                 'date' => 'nullable',
                 'dateEnd' => 'nullable',
             ],
             [
-                'months.required' => 'please input recipient month',
-                'months.required' => 'please input recipient year',
-                'price.required' => 'please input recipient price',
-                'user_id.required' => 'please input recipient student',
-                'level_id.required' => 'please input recipient level',
-                'currency.required' => 'please input recipient currency',
+                'months.required' => 'please input invoice month',
+                'months.required' => 'please input invoice year',
+                'price.required' => 'please input invoice price',
+                'user_id.required' => 'please input invoice student',
+                'level_id.required' => 'please input invoice level',
+                'teacher_id.required' => 'please input invoice teacher',
+                'currency.required' => 'please input invoice currency',
+                'teacher.required' => 'please input invoice teacher',
             ]
         );
 
@@ -58,6 +61,7 @@ class StudentController extends Controller
                 'code' => $code,
                 'user_id' => $request->user_id,
                 'level_id' => $request->level_id,
+                'teacher_id' => $request->teacher_id,
                 'currency' => $request->currency,
                 'status' => 'unpaid',
             ]);
@@ -254,19 +258,11 @@ class StudentController extends Controller
     {
         $request->validate(
             [
-                'months' => 'required|max:255',
-                'year' => 'required',
                 'price' => 'required',
-                'user_id' => 'required',
-                'level_id' => 'required',
                 'currency' => 'required',
             ],
             [
-                'months.required' => 'please input recipient month',
-                'months.required' => 'please input recipient year',
                 'price.required' => 'please input recipient price',
-                'user_id.required' => 'please input recipient student',
-                'level_id.required' => 'please input recipient level',
                 'currency.required' => 'please input recipient currency',
             ]
         );
@@ -275,15 +271,11 @@ class StudentController extends Controller
         $student = Student::findOrFail($id);
 
         $student->update([
-            'month' => $request->month,
-            'year' => $request->year,
             'price' => $request->price,
-            'user_id' => $request->user_id,
-            'level_id' => $request->level_id,
             'currency' => $request->currency,
         ]);
 
-        return redirect()->route('program.show', $request->program_id);
+        return redirect()->route('student.show-spp', $student->level->program_id);
     }
 
     /**

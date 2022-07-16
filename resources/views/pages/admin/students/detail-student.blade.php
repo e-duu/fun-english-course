@@ -140,6 +140,7 @@
         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
             <th class="px-4 py-3">Name</th>
             <th class="px-4 py-3">Parent</th>
+            <th class="px-4 py-3">Teacher</th>
             <th class="px-4 py-3">City</th>
             <th class="px-4 py-3">Country</th>
             <th class="px-4 py-3">Student Number</th>
@@ -148,10 +149,9 @@
             <th class="px-4 py-3">Level</th>
             <th class="px-4 py-3">Currency</th>
             <th class="px-4 py-3">Price</th>
-            {{-- <th class="px-4 py-3">Code</th> --}}
             <th class="px-4 py-3">Month</th>
             <th class="px-4 py-3">Year</th>
-            <th class="px-4 py-3">Status Payment</th>
+            <th class="px-4 py-3">Payment Status</th>
             <th class="px-4 py-3">Action</th>
         </tr>
       </thead>
@@ -164,6 +164,9 @@
             </td>
             <td class="px-4 py-3 text-sm">
               {{ $item->student->parent == null ? '-' : $item->student->parent }}
+            </td>
+            <td class="px-4 py-3 text-sm">
+              {{ $item->teacher->name }}
             </td>
             <td class="px-4 py-3 text-sm">
               {{ $item->student->city == null ? '-' : $item->student->city }}
@@ -260,10 +263,12 @@
                     <i class="fas fa-money-check"></i>
                     <p>Pay</p>
                 </a>
-                <a href="{{ route('student.edit', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
-                  <i class=" fas fa-edit"></i>
-                  <p>Edit</p>
-                </a>
+                @if ($item->status == 'unpaid' or $item->status == 'pending')
+                    <a href="{{ route('student.edit', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                        <i class=" fas fa-edit"></i>
+                        <p>Edit</p>
+                    </a>
+                @endif
                 <form action="{{ route('student.delete', $item->id) }}" method="POST" class="d-inline">
                   @csrf
                   @method('DELETE')

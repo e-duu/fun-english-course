@@ -25,6 +25,7 @@ class CreateStudentsTable extends Migration
             $table->integer('code')->nullable();
             $table->foreignId('user_id');
             $table->foreignId('level_id');
+            $table->foreignId('teacher_id');
             $table->timestamps();
         });
     }

@@ -1,9 +1,9 @@
 @extends('layouts.dash')
 @section('title')
-  Fun English Course | Program Pages
+  Fun English Course | Programs Pages
 @endsection
 @section('sub-title')
-  List Programs
+  List of Programs
 @endsection
 @section('content')
   <div class="w-full overflow-hidden rounded-lg shadow-xs mt-4">
@@ -51,45 +51,3 @@
     </div>
   </div>
 @endsection
-
-{{-- @push('after-style')
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
-@endpush --}}
-
-@push('after-script')
-  {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
-
-  <script>
-    $(document).ready(function () {
-        $('select').selectize({
-            sortField: 'text'
-        });
-    });
-  </script> --}}
-  
-
-  {{-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
-  <script>
-      var payments = new Vue({
-          el: "#payments",
-          mounted() {
-
-          },
-          data: {
-              users: @json($users ),
-              levels: @json($levels),
-              levelUsers: @json($levelUsers),
-              selectedLevels: null,
-              users_id: null,
-          },
-          methods: {
-              setUsers(id) {
-                  let selectedLevel = this.levelUsers.filter(e => e.user_id == id)
-                  this.selectedLevels = selectedLevel
-                  console.log(selectedLevel)
-              }
-          },
-      });
-  </script> --}}
-@endpush
