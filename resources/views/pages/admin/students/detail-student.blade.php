@@ -80,7 +80,7 @@
       </div>
 
         {{-- Modal import --}}
-        <div x-data="{ showModal : false }">
+        {{-- <div x-data="{ showModal : false }">
             <!-- Button -->
             <button @click="showModal = !showModal" class="px-4 py-2 text-sm bg-blue-600 rounded-md transition-colors duration-150 ease-linear text-white focus:outline-none focus:ring-0 font-semibold hover:bg-blue-700">Import </button>
 
@@ -122,7 +122,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <form method="GET" action="{{route('export.excel.invoice', $data->id)}}">
             <button class="px-4 py-2 text-sm bg-blue-600 rounded-md transition-colors duration-150 ease-linear text-white focus:outline-none focus:ring-0 font-semibold hover:bg-blue-700">Export</button>
         </form>
