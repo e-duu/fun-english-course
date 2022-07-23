@@ -39,6 +39,13 @@ class CommandUpdatePayment extends Command
     public function handle()
     {
         // return Command::SUCCESS;
-        $jobs = Student::where('status', 'pending')->whereDate('dateEnd', '<', now())->update(['status' => 'unpaid', 'date' => null, 'dateEnd' => null]);
+        $jobs = Student::query()
+        ->where('status', 'pending')
+        ->whereDate('dateEnd', '<', now())
+        ->update([
+            'status' => 'unpaid', 
+            'date' => null, 
+            'dateEnd' => null]
+        );
     }
 }
