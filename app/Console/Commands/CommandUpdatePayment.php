@@ -48,6 +48,7 @@ class CommandUpdatePayment extends Command
             'dateEnd' => null]
         );
 
-        // print_r($jobs);
+        $this->info('Hourly Update has been send successfully');
     }
+
 }
