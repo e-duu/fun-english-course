@@ -39,14 +39,13 @@ class CommandUpdatePayment extends Command
     public function handle()
     {
         // return Command::SUCCESS;
-        $jobs = Student::query()
-        ->where('status', 'pending')
+        $jobs = Student::where('status', 'pending')
         ->whereDate('dateEnd', '<', now())
         ->update([
             'status' => 'unpaid', 
             'date' => null, 
-            'dateEnd' => null]
-        );
+            'dateEnd' => null
+        ]);
 
         $this->info('Hourly Update has been send successfully');
     }
