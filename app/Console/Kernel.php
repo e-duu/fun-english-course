@@ -38,7 +38,7 @@ class Kernel extends ConsoleKernel
         //             'dateEnd' => null,
         //         ]);
         // })->everyMinute();
-        $schedule->command('update:payment')->everyMinute();
+        $schedule->command('update:payment')->hourly()->runInBackground();
     }
 
     /**

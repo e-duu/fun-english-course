@@ -47,5 +47,7 @@ class CommandUpdatePayment extends Command
             'date' => null, 
             'dateEnd' => null]
         );
+
+        // print_r($jobs);
     }
 }
