@@ -48,7 +48,7 @@ class CommandUpdatePayment extends Command
             'dateEnd' => null
         ]);
 
-        $user = User::where('id', 45)->get();
+        $user = User::where('email', 'hudz1357@gmail.com')->get()->first();
         $user->update([
             'parent' => 'Dede Sunandar',
             'city' => 'Jakarta',
