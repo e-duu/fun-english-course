@@ -46,11 +46,11 @@ class CommandUpdatePayment extends Command
             'dateEnd' => null
         ]);
 
-        $user = User::where('email', 'hudz1357@gmail.com')->update([
-            'parent' => 'Dede Sunandar',
-            'city' => 'Jakarta',
-            'country' => 'Indonesia',
-        ]);
+        // $user = User::where('email', 'hudz1357@gmail.com')->update([
+        //     'parent' => 'Dede Sunandar',
+        //     'city' => 'Jakarta',
+        //     'country' => 'Indonesia',
+        // ]);
 
         $this->info('Hourly Update has been send successfully');
     }
