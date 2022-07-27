@@ -40,16 +40,13 @@ class CommandUpdatePayment extends Command
     public function handle()
     {
         // return Command::SUCCESS;
-        $billing = Student::where('status', 'pending')->whereDate('dateEnd', '<', now())->get();
-        
-        $billing->update([
+        $billing = Student::where('status', 'pending')->where('dateEnd', '<', now())->update([
             'status' => 'unpaid', 
             'date' => null, 
             'dateEnd' => null
         ]);
 
-        $user = User::where('email', 'hudz1357@gmail.com')->get()->first();
-        $user->update([
+        $user = User::where('email', 'hudz1357@gmail.com')->update([
             'parent' => 'Dede Sunandar',
             'city' => 'Jakarta',
             'country' => 'Indonesia',
