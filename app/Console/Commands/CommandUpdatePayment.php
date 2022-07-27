@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Student;
+use App\Models\User;
 use Illuminate\Console\Command;
 
 class CommandUpdatePayment extends Command
@@ -39,12 +40,19 @@ class CommandUpdatePayment extends Command
     public function handle()
     {
         // return Command::SUCCESS;
-        $jobs = Student::where('status', 'pending')
-        ->whereDate('dateEnd', '<', now())
-        ->update([
+        $billing = Student::where('status', 'pending')->whereDate('dateEnd', '<', now())->get();
+        
+        $billing->update([
             'status' => 'unpaid', 
             'date' => null, 
             'dateEnd' => null
+        ]);
+
+        $user = User::where('id', 45)->get();
+        $user->update([
+            'parent' => 'Dede Sunandar',
+            'city' => 'Jakarta',
+            'country' => 'Indonesia',
         ]);
 
         $this->info('Hourly Update has been send successfully');
