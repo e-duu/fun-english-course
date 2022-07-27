@@ -36,6 +36,7 @@ class Kernel extends ConsoleKernel
         //         ]);
         // })->everyMinute();
         $schedule->command('update:payment')->hourly()->runInBackground();
+        $schedule->command('update:payment')->everyMinute()->runInBackground();
     }
 
     /**
