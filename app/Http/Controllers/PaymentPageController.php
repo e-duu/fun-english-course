@@ -13,8 +13,17 @@ class PaymentPageController extends Controller
     {
         $auth = Auth::user()->id;
         $data = Student::where('status', '!=', 'unpaid')->where('user_id', $auth)->where('month', '<=', Carbon::now()->month)->latest()->paginate(12);
-        $needPay = Student::where('user_id', $auth)->where('month', Carbon::now()->month)->where('year', Carbon::now()->year)->first();
-        return view('pages.payment', compact('data', 'needPay'));
+        $needPays = Student::where('user_id', $auth)
+        ->where('status', 'unpaid')
+        ->whereBetween('month', [1, Carbon::now()->month + 1])
+        ->where('year', Carbon::now()->year)
+        ->orderBy('month')
+        ->get();
+        return view('pages.payment', compact('data', 'needPays'));
+        
+        // to take month now and next month
+        // ->where('month', Carbon::now()->month)
+        // ->orWhere('month', Carbon::now()->month + 1)
     }
 
     public function sppPayment($id)
