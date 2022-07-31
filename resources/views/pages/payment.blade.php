@@ -23,8 +23,7 @@
           </tr>
           </thead>
           <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-darker">
-            @if ($needPay)
-
+            @forelse ($needPays as $needPay)
               <tr class="text-gray-700 dark:text-gray-400">
                 <td class="px-4 py-3 text-xs sm:text-sm text-sm">
                   {{ $needPay->student->parent }}
@@ -108,7 +107,7 @@
                   </div>
                 </td>
               </tr>
-            @else
+            @empty
               <tr>
                 <td colspan="9" class="text-center text-gray-500 px-4 py-3 text-xs sm:text-sm">
                   <p>
@@ -116,7 +115,7 @@
                   </p>
                 </td>
               </tr>
-            @endif
+            @endforelse
 
           </tbody>
         </table>
