@@ -38,7 +38,34 @@
           </div>
           <div class="flex justify-between items-center">
             <p class="text-blue-700 font-bold">City of Residence : {{  $data->student->city }}</p>
-            <p class="text-blue-700 font-bold">Billing Period : {{ $data->created_at->addDay()->format('m-Y') }}</p>
+            <p class="text-blue-700 font-bold">Billing Period : 
+              @if ($data->month == 1)
+                  January
+              @elseif ($data->month == 2)
+                  February
+              @elseif ($data->month == 3)
+                  March
+              @elseif ($data->month == 4)
+                  April
+              @elseif ($data->month == 5)
+                  May
+              @elseif ($data->month == 6)
+                  June
+              @elseif ($data->month == 7)
+                  July
+              @elseif ($data->month == 8)
+                  August
+              @elseif ($data->month == 9)
+                  September
+              @elseif ($data->month == 10)
+                  October
+              @elseif ($data->month == 11)
+                  November
+              @elseif ($data->month == 12)
+                  December
+              @endif
+              {{'- '.$data->year}}
+            </p>
           </div>
           <p class="text-blue-700 font-bold">Country of Residence : {{  $data->student->country }}</p>
           <p class="text-blue-700 font-bold">Email Address : {{  $data->student->email }}</p>

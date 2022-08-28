@@ -139,9 +139,36 @@
             <td>:</td>
             <td>{{  $data->student->city }}</td>
             <td></td>
-            {{-- <td>Due Date</td>
+            <td>Billing Period</td>
             <td>:</td>
-            <td>-</td> --}}
+            <td>
+              @if ($data->month == 1)
+                  January
+              @elseif ($data->month == 2)
+                  February
+              @elseif ($data->month == 3)
+                  March
+              @elseif ($data->month == 4)
+                  April
+              @elseif ($data->month == 5)
+                  May
+              @elseif ($data->month == 6)
+                  June
+              @elseif ($data->month == 7)
+                  July
+              @elseif ($data->month == 8)
+                  August
+              @elseif ($data->month == 9)
+                  September
+              @elseif ($data->month == 10)
+                  October
+              @elseif ($data->month == 11)
+                  November
+              @elseif ($data->month == 12)
+                  December
+              @endif
+              {{'- '.$data->year}}
+            </td>
           </tr>
           <tr>
             <td>Country of Residence</td>
