@@ -85,7 +85,7 @@
     }
 
     #table2 td {
-      text-transform: capitalize;
+      /* text-transform: capitalize; */
       color: #1E3E97;
       font-weight: bold;
     }
@@ -100,10 +100,10 @@
     <table style="width: 100%">
       <tr>
         <td>
-          <img src="{{ public_path('/images/edge-logo.png') }}" style="height: 80px">
+          <img src="{{ public_path('/images/logo.png') }}" style="height: 80px">
         </td>
         <td style="text-align: right">
-          <img src="{{ public_path('/images/logo.png') }}" style="height: 80px">
+          <img src="{{ public_path('/images/edge-logo.png') }}" style="height: 80px">
         </td>
       </tr>
     </table>
@@ -187,7 +187,7 @@
       <thead>
         <tr>
           <th>Program</th>
-          <th>Description</th>
+          <th>Level</th>
           <th>Unit Price</th>
           <th>Quantity</th>
           <th>Amount</th>
@@ -195,8 +195,8 @@
       </thead>
       <tbody>
         <tr>
-          <td>{{ $data->level->program->name.' - '.$data->level->name }}</td>
-          <td>-</td>
+          <td>{{ $data->level->program->name }}</td>
+          <td>{{$data->level->name}}</td>
           <td>
             {{ $data->currency == 'USD' ? '$'.$data->price: 'Rp. '.number_format($data->price, 0, ',', ',') }}
           </td>
@@ -204,6 +204,20 @@
           <td>
             {{ $data->currency == 'USD' ? '$'.$data->price: 'Rp. '.number_format($data->price, 0, ',', ',') }}
           </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
         </tr>
       </tbody>
       <tfoot>
