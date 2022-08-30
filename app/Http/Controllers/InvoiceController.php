@@ -31,7 +31,7 @@ class InvoiceController extends Controller
     {
         $date = date('dmY');
 
-        return Excel::download(new StudentTemplate, 'template-student-'.$date.'.xlsx');
+        return Excel::download(new StudentTemplate, 'template-student-' . $date . '.xlsx');
     }
 
     // Export Excel Invoice
@@ -41,7 +41,7 @@ class InvoiceController extends Controller
 
         $level = Level::findOrFail($id);
 
-        return Excel::download(new StudentExport($id), $level->name.'-'.$date.'.xlsx');
+        return Excel::download(new StudentExport($id), $level->name . '-' . $date . '.xlsx');
     }
 
     // Import Excel Invoice
@@ -51,6 +51,6 @@ class InvoiceController extends Controller
 
         Excel::import(new StudentImport($id), $file);
 
-        return back();
+        return back()->with('success', 'Import successfully');
     }
 }

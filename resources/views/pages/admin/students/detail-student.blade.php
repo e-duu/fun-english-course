@@ -7,6 +7,14 @@
 @endsection
 @section('content')
 
+@if (session()->has('success'))
+<div class="flex justify-between w-full py-4 px-5 bg-green-200 dark:bg-green-500 overflow-hidden rounded-sm shadow-xs items-center shadow-lg mb-5 sm:mb-7">
+  <div class="flex items-center tex-xs sm:text-lg">
+      {{session()->get('success')}}
+    </div>
+  </div>
+@endif
+
 <div class="flex item-center justify-between space-x-2">
     <div class="flex space-x-2 items-center">
         {{-- button Send To Mail --}}
@@ -80,7 +88,7 @@
       </div>
 
         {{-- Modal import --}}
-        {{-- <div x-data="{ showModal : false }">
+        <div x-data="{ showModal : false }">
             <!-- Button -->
             <button @click="showModal = !showModal" class="px-4 py-2 text-sm bg-blue-600 rounded-md transition-colors duration-150 ease-linear text-white focus:outline-none focus:ring-0 font-semibold hover:bg-blue-700">Import </button>
 
@@ -100,8 +108,8 @@
                                         <div class='flex flex-col items-center justify-center pt-7'>
                                             <svg class="w-10 h-10 text-blue-400 group-hover:text-blue-600 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                                             <p class='lowercase text-sm text-gray-400 group-hover:text-blue-600 pt-1 tracking-wider'>Select the file</p>
+                                            <input name="file" type='file' class="" />
                                         </div>
-                                    <input name="file" type='file' class="hidden" />
                                 </label>
                             </div>
                             <div class="border-b border-gray-500 my-5"></div>
@@ -122,7 +130,7 @@
                     </div>
                 </div>
             </div>
-        </div> --}}
+        </div>
         <form method="GET" action="{{route('export.excel.invoice', $data->id)}}">
             <button class="px-4 py-2 text-sm bg-blue-600 rounded-md transition-colors duration-150 ease-linear text-white focus:outline-none focus:ring-0 font-semibold hover:bg-blue-700">Export</button>
         </form>
@@ -131,7 +139,6 @@
         <a href="{{ route('student.show', $data->program_id) }}" class="px-5 py-1 bg-yellow-400 rounded-md font-semibold text-white">Back to Level</a>
     </div>
 </div>
-
 
 <div class="w-full overflow-hidden rounded-lg shadow-xs mt-4">
   <div class="w-full overflow-x-auto">

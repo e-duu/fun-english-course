@@ -46,7 +46,9 @@ class StudentTemplate implements FromArray, WithHeadings, WithEvents, WithStyles
     {
         return [
             'No',
-            'Student Number',
+            'Student ID/Number',
+            'Student Name',
+            'Teacher ID/Number',
             'Price',
             'Currency(IDR/USD)',
             'Month(number)',
@@ -57,7 +59,7 @@ class StudentTemplate implements FromArray, WithHeadings, WithEvents, WithStyles
     public function registerEvents(): array
     {
         return [
-            AfterSheet::class => function(AfterSheet $event) {
+            AfterSheet::class => function (AfterSheet $event) {
 
                 $event->sheet->getDelegate()->getStyle(1)
                     ->getAlignment()

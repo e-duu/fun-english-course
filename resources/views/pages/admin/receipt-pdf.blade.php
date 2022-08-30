@@ -85,7 +85,7 @@
     }
 
     #table2 td {
-      text-transform: capitalize;
+      /* text-transform: capitalize; */
       color: #1E3E97;
       font-weight: bold;
     }
@@ -100,10 +100,10 @@
     <table style="width: 100%">
       <tr>
         <td>
-          <img src="{{ public_path('/images/edge-logo.png') }}" style="height: 80px">
+          <img src="{{ public_path('/images/logo.png') }}" style="height: 80px">
         </td>
         <td style="text-align: right">
-          <img src="{{ public_path('/images/logo.png') }}" style="height: 80px">
+          <img src="{{ public_path('/images/edge-logo.png') }}" style="height: 80px">
         </td>
       </tr>
     </table>
@@ -139,9 +139,36 @@
             <td>:</td>
             <td>{{  $data->student->city }}</td>
             <td></td>
-            {{-- <td>Due Date</td>
+            <td>Billing Period</td>
             <td>:</td>
-            <td>-</td> --}}
+            <td>
+              @if ($data->month == 1)
+                  January
+              @elseif ($data->month == 2)
+                  February
+              @elseif ($data->month == 3)
+                  March
+              @elseif ($data->month == 4)
+                  April
+              @elseif ($data->month == 5)
+                  May
+              @elseif ($data->month == 6)
+                  June
+              @elseif ($data->month == 7)
+                  July
+              @elseif ($data->month == 8)
+                  August
+              @elseif ($data->month == 9)
+                  September
+              @elseif ($data->month == 10)
+                  October
+              @elseif ($data->month == 11)
+                  November
+              @elseif ($data->month == 12)
+                  December
+              @endif
+              {{'- '.$data->year}}
+            </td>
           </tr>
           <tr>
             <td>Country of Residence</td>
@@ -160,7 +187,7 @@
       <thead>
         <tr>
           <th>Program</th>
-          <th>Description</th>
+          <th>Level</th>
           <th>Unit Price</th>
           <th>Quantity</th>
           <th>Amount</th>
@@ -168,8 +195,8 @@
       </thead>
       <tbody>
         <tr>
-          <td>{{ $data->level->program->name.' - '.$data->level->name }}</td>
-          <td>-</td>
+          <td>{{ $data->level->program->name }}</td>
+          <td>{{$data->level->name}}</td>
           <td>
             {{ $data->currency == 'USD' ? '$'.$data->price: 'Rp. '.number_format($data->price, 0, ',', ',') }}
           </td>
@@ -177,6 +204,20 @@
           <td>
             {{ $data->currency == 'USD' ? '$'.$data->price: 'Rp. '.number_format($data->price, 0, ',', ',') }}
           </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
         </tr>
       </tbody>
       <tfoot>
