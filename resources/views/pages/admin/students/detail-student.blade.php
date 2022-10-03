@@ -206,14 +206,14 @@
               {{ $item->level->name }}
             </td>
             <td class="px-4 py-3 text-sm">
-                @if ($item->currency == 'USD')
+                @if ($item->currency == 'USD' || $item->currency == 'usd')
                   USD
-                @elseif ($item->currency == 'IDR')
+                @elseif ($item->currency == 'IDR' || $item->currency == 'idr')
                   IDR
                 @endif
             </td>
             <td class="px-4 py-3 text-sm">
-              {{ $item->currency == 'USD' ? '$'.$item->price: 'Rp. '.number_format($item->price, 0, ',', ',') }}
+              {{ $item->currency == 'USD' || $item->currency == 'usd' ? '$'.$item->price: 'Rp. '.number_format($item->price, 0, ',', ',') }}
             </td>
             {{-- <td class="px-4 py-3 text-sm">
               {{ $item->code != null ? $item->code : '-' }}
