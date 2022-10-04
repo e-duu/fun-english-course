@@ -3,7 +3,6 @@
 namespace App\Imports;
 
 use App\Models\Invoice;
-use App\Models\Level;
 use App\Models\Student;
 use App\Models\User;
 use Carbon\Carbon;
@@ -45,7 +44,8 @@ class StudentImport implements ToModel, WithStartRow
             foreach ($user->levels as $level) {
                 if ($this->id == $level->id) {
                     $student = Student::create([
-                        'price' => $row[4],
+                        'status' => 'paid_manually',
+                        'price' =>  $row[4],
                         'currency' => $row[5],
                         'month' => $row[6],
                         'code' => $code,

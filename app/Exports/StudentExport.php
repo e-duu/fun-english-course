@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Student;
+use DateTime;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithEvents;
@@ -30,6 +31,8 @@ class StudentExport implements FromCollection, WithHeadings, ShouldAutoSize, Wit
     {
         $i = 1;
 
+        // conver number to month
+        $dateObj = DateTime::createFromFormat('!m', $student->month);
         return [
             $i++,
             $student->student->parent == null ? '-' : $student->student->parent,
@@ -44,6 +47,8 @@ class StudentExport implements FromCollection, WithHeadings, ShouldAutoSize, Wit
             $student->price,
             $student->currency,
             $student->status,
+            $monthName = $dateObj->format('F'), // March
+            $student->year,
             $student->invoice->created_at = date('Y-m-d'),
         ];
     }
@@ -64,6 +69,8 @@ class StudentExport implements FromCollection, WithHeadings, ShouldAutoSize, Wit
             'Price',
             'Currency',
             'Status',
+            'Month',
+            'Year',
             'Invoice Date',
         ];
     }
