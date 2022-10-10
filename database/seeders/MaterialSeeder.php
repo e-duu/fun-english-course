@@ -56,7 +56,61 @@ class MaterialSeeder extends Seeder
                 'is_accessible_by_student' => 0,
             ],
             
-            
+            [
+                'title' => 'Lesson 1 Greetings – Multiple Choice Exercise',
+                'content' => 'this is a dummy link for content',
+                'photo' => '1638542390.jpg',
+                'lesson_id' => '1',
+                'is_accessible_by_student' => 0,
+            ],
+
+            [
+                'title' => 'Lesson 1 Greetings – Multiple Choice Exercise',
+                'content' => 'this is a dummy link for content',
+                'photo' => '1638542390.jpg',
+                'lesson_id' => '1',
+                'is_accessible_by_student' => 0,
+            ],
+
+            [
+                'title' => 'Lesson 1 Greetings – Multiple Choice Exercise',
+                'content' => 'this is a dummy link for content',
+                'photo' => '1638542390.jpg',
+                'lesson_id' => '1',
+                'is_accessible_by_student' => 0,
+            ],
+
+            [
+                'title' => 'Lesson 1 Greetings – Multiple Choice Exercise',
+                'content' => 'this is a dummy link for content',
+                'photo' => '1638542390.jpg',
+                'lesson_id' => '1',
+                'is_accessible_by_student' => 0,
+            ],
+
+            [
+                'title' => 'Lesson 1 Greetings – Multiple Choice Exercise',
+                'content' => 'this is a dummy link for content',
+                'photo' => '1638542390.jpg',
+                'lesson_id' => '1',
+                'is_accessible_by_student' => 0,
+            ],
+
+            [
+                'title' => 'Lesson 1 Greetings – Multiple Choice Exercise',
+                'content' => 'this is a dummy link for content',
+                'photo' => '1638542390.jpg',
+                'lesson_id' => '1',
+                'is_accessible_by_student' => 0,
+            ],
+
+            [
+                'title' => 'Lesson 1 Greetings – Multiple Choice Exercise',
+                'content' => 'this is a dummy link for content',
+                'photo' => '1638542390.jpg',
+                'lesson_id' => '1',
+                'is_accessible_by_student' => 0,
+            ],
         ];
 
         foreach ($materials as $material) {

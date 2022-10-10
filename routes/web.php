@@ -25,6 +25,8 @@ use App\Http\Controllers\SppPaymentBankController;
 use App\Http\Controllers\SppPaymentController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Livewire\DetailStudentTable;
+use App\Http\Livewire\StudentTable;
 use App\Models\Student;
 
 /*
@@ -121,6 +123,7 @@ Route::middleware(['auth'])->group(function () {
 			Route::get('/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
 			Route::post('/edit/{id}', [UserController::class, 'update'])->name('user.update');
 			Route::delete('/delete/{id}', [UserController::class, 'destroy'])->name('user.delete');
+			Route::get('export/', [UserController::class, 'export'])->name('user.export');
 			Route::get('template-user', [UserController::class, 'template'])->name('template.user');
 			Route::post('file-import-user', [UserController::class, 'fileImport'])->name('file-import-user');
 			Route::get('/reset', [UserController::class, 'filterReset'])->name('user.reset');
@@ -137,6 +140,7 @@ Route::middleware(['auth'])->group(function () {
 			Route::post('/store', [StudentController::class, 'store'])->name('student.store');
 			Route::get('/show/{id}', [StudentController::class, 'show'])->name('student.show');
 			Route::get('/show/student/{id}', [StudentController::class, 'sppStudent'])->name('student.show-spp');
+			// Route::get('/show/student/{id}', [StudentTable::class, 'render'])->name('student.show-spp');
 			Route::get('/edit/{id}', [StudentController::class, 'edit'])->name('student.edit');
 			Route::post('/edit/{id}', [StudentController::class, 'update'])->name('student.update');
 			Route::get('/reset/{id}', [StudentController::class, 'filterReset'])->name('student.reset');

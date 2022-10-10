@@ -46,7 +46,7 @@ class LessonController extends Controller
         
         $data = $request->all();
         Lesson::create($data);
-        return redirect()->route('level.show', $request->level_id);
+        return redirect()->back()->with('success', 'Berhasil menambah data!');
     }
 
     /**

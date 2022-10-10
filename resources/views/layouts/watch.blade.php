@@ -7,6 +7,11 @@
   @stack('before-style')
   @include('includes.style')
   @stack('after-style')
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
   <title>@yield('title')</title>
 </head>
 <body class="overflow-x-hidden">

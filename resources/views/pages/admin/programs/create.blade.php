@@ -6,6 +6,13 @@
   Create Programs
 @endsection
 @section('content')
+@if (session()->has('success'))
+  <div class="flex justify-between w-full py-4 px-5 bg-green-200 dark:bg-green-500 overflow-hidden rounded-sm shadow-xs items-center shadow-lg mb-5 sm:mb-7">
+      <div class="flex items-center tex-xs sm:text-lg">
+          {{session()->get('success')}}
+      </div>
+  </div>
+@endif
   <form action="{{ route('program.store') }}" method="POST" class="px-4 py-3 bg-white rounded-lg shadow-md dark:bg-gray-800">
     @csrf
 

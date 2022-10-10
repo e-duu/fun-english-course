@@ -45,7 +45,7 @@ class ProgramController extends Controller
         
         $data = $request->all();
         Program::create($data);
-        return redirect()->route('program.all');
+        return redirect()->back()->with('success', 'Berhasil menambah data!');
     }
 
     /**

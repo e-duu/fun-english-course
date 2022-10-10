@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\UsersExport;
 use App\Exports\UsersTemplate;
 use App\Imports\UsersImport;
 use App\Models\DetailUser;
@@ -204,6 +205,11 @@ class UserController extends Controller
     public function template()
     {
         return Excel::download(new UsersTemplate, 'input-users.xlsx');
+    }
+
+    public function export() 
+    {
+        return Excel::download(new UsersExport, 'users.xlsx');
     }
 
     public function filterReset()
