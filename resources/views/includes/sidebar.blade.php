@@ -1,3 +1,4 @@
+
 <nav x-data="{ open: false }" class="fixed sm:hidden z-50">
   <button class="text-gray-500 w-10 h-10 relative focus:outline-none bg-white rounded" @click="open = !open" onclick="toggleSidebar()">
       <span class="sr-only">Open main menu</span>
