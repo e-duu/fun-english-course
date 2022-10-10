@@ -29,12 +29,9 @@ class StudentExport implements FromCollection, WithHeadings, ShouldAutoSize, Wit
 
     public function map($student) : array
     {
-        $i = 1;
-
         // conver number to month
         $dateObj = DateTime::createFromFormat('!m', $student->month);
         return [
-            $i++,
             $student->student->parent == null ? '-' : $student->student->parent,
             $student->student->city == null ? '-' : $student->student->city,
             $student->student->country == null ? '-' : $student->student->country,
@@ -56,7 +53,6 @@ class StudentExport implements FromCollection, WithHeadings, ShouldAutoSize, Wit
     public function headings() : array
     {
         return [
-            'No',
             'Parent Name',
             'City',
             'Country',
