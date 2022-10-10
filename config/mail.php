@@ -36,7 +36,7 @@ return [
     'mailers' => [
         'smtp' => [
             'transport' => env('MAIL_MAILER', 'smtp'),
-            'host' => env('MAIL_HOST', 'smtp.gmail.com'),
+            'host' => env('MAIL_HOST', 'edge.edukasi@gmail.com'),
             'port' => env('MAIL_PORT', 587),
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
             'username' => env('MAIL_USERNAME', 'edge.edukasi@gmail.com'),
