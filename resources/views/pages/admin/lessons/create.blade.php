@@ -13,6 +13,9 @@
         </div>
     </div>
   @endif
+  <div class="w-full flex justify-end">
+    <a href="{{ route('level.show', $data->id) }}" class="my-2 bg-yellow-400 px-4 py-2 text-sm rounded-md transition-colors duration-150 ease-linear text-white focus:outline-none focus:ring-0 font-semibold hover:bg-yellow-700">Back to Level</a>
+  </div>
   <form action="{{ route('lesson.store') }}" method="POST" class="px-4 py-3 bg-white rounded-lg shadow-md dark:bg-gray-800">
     @csrf
 
