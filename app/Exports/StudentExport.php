@@ -46,7 +46,7 @@ class StudentExport implements FromCollection, WithHeadings, ShouldAutoSize, Wit
             $student->status,
             $monthName = $dateObj->format('F'), // March
             $student->year,
-            $student->invoice->created_at = date('Y-m-d'),
+            $student->invoice->created_at->format('d-m-Y'),
         ];
     }
 
@@ -67,7 +67,7 @@ class StudentExport implements FromCollection, WithHeadings, ShouldAutoSize, Wit
             'Status',
             'Month',
             'Year',
-            'Invoice Date',
+            'Receipt Date',
         ];
     }
 

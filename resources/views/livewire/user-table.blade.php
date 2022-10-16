@@ -60,7 +60,7 @@
 			</select>
 		</div>
 		<div>
-			<input type="text" name="search" wire:model="search" class="w-full mt-1 text-sm rounded-md border-gray-400 dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray form-input" placeholder="Cari nama atau nomor user..."/>
+			<input type="text" name="search" wire:model="search" class="w-full mt-1 text-sm rounded-md border-gray-400 dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray form-input" placeholder="Search..."/>
 		</div>
 	</div>
 
