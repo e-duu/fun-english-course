@@ -44,7 +44,7 @@ class StudentImport implements ToModel, WithStartRow
             foreach ($user->levels as $level) {
                 if ($this->id == $level->id) {
                     $student = Student::create([
-                        'status' => 'paid_manually',
+                        'status' => 'unpaid',
                         'price' =>  $row[4],
                         'currency' => $row[5],
                         'month' => $row[6],

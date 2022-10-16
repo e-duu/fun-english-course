@@ -96,7 +96,7 @@
         </select>
       </div>
       <div>
-        <input type="text" name="search" wire:model="search" class="text-sm rounded-md border-gray-400 dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray form-input" placeholder="Cari nama.."/>
+        <input type="text" name="search" wire:model="search" class="text-sm rounded-md border-gray-400 dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray form-input" placeholder="Search..."/>
       </div>
     </div>
       <div class="w-full overflow-hidden rounded-lg shadow-xs mt-4">
