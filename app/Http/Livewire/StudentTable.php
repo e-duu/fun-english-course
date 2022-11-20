@@ -21,8 +21,8 @@ class StudentTable extends Component
     public function render()
     {
         // $student = Student::where('users.name','like','%'.$this->search.'%');
-        $student = Student::join('users', 'users.id', '=', 'students.user_id')
-        ->select('students.*', 'users.name')->where('users.name','like','%'.$this->search.'%');
+        $student = Student::join('accounts', 'accounts.id', '=', 'students.user_id')
+        ->select('students.*', 'accounts.name')->where('accounts.name','like','%'.$this->search.'%');
         return view('livewire.student-table', [
             'data' => Level::find($this->data->id),
             'spps' => $student->when($this->status, function($query, $status){

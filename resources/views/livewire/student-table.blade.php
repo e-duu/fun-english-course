@@ -123,10 +123,10 @@
             </thead>
             <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-darker">
     
-              @forelse ($students as $item)
+              @forelse ($spps as $item)
                 <tr class="text-gray-700 dark:text-gray-400">
                   <td class="px-4 py-3 text-sm">
-                    {{ $item->student->name }}
+                    {{ $item->name }}
                   </td>
                   <td class="px-4 py-3 text-sm">
                     {{ $item->student->parent == null ? '-' : $item->student->parent }}
