@@ -25,12 +25,13 @@ class UsersExport implements FromCollection, WithHeadings, ShouldAutoSize, WithM
         return [
             $user->name,
             $user->number,
-            $user->status,
-            $user->email,
+            $user->username,
             $user->role,
             $user->parent,
             $user->city,
             $user->country,
+            $user->status,
+            $user->email,
         ];
     }
 
@@ -38,13 +39,14 @@ class UsersExport implements FromCollection, WithHeadings, ShouldAutoSize, WithM
     {
         return [
             'Name',
-            'User Number',
-            'Status',
-            'Email',
+            'Number',
+            'Username',
             'Role',
             'Parent Name',
             'City',
             'Country',
+            'Status',
+            'Email',
         ];
     }
 

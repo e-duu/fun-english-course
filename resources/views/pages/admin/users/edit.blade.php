@@ -8,9 +8,14 @@
 @section('content')
 
   @php
-    $admin = [
-      'value' => 'admin',
-      'name' => 'Admin',
+    $admin_head = [
+      'value' => 'admin_head',
+      'name' => 'Admin_head',
+    ];
+
+    $admin_staff = [
+      'value' => 'admin_staff',
+      'name' => 'Admin_staff',
     ];
 
     $teacher = [
@@ -33,7 +38,7 @@
       'name' => 'Non-active',
     ];
 
-    $roles = [$admin, $teacher, $student];
+    $roles = [$admin_head, $admin_staff, $teacher, $student];
     $statuses = [$active, $nonActive];
   @endphp
 

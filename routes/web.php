@@ -104,7 +104,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
 		// Dashboard
-		Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('admin');
+		Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 		// Score
 		Route::get('/score/all', [ExerciseController::class, 'score_all'])->name('score.all');
@@ -134,13 +134,12 @@ Route::middleware(['auth'])->group(function () {
 			Route::post('/manyEnroll/store', [LevelUserController::class, 'manyEnrollStore'])->name('manyEnroll.store');
 		});
 
-		Route::prefix('student')->group(function () {
+		Route::group(['prefix' => 'student', 'middleware' => ['adminhead']], function () {
 			Route::get('/all', [StudentController::class, 'index'])->name('student.all');
 			Route::get('/send-to-mail/{id}', [StudentController::class, 'sendToMailPage'])->name('send-to-mail-page');
 			Route::post('/store', [StudentController::class, 'store'])->name('student.store');
 			Route::get('/show/{id}', [StudentController::class, 'show'])->name('student.show');
 			Route::get('/show/student/{id}', [StudentController::class, 'sppStudent'])->name('student.show-spp');
-			// Route::get('/show/student/{id}', [StudentTable::class, 'render'])->name('student.show-spp');
 			Route::get('/edit/{id}', [StudentController::class, 'edit'])->name('student.edit');
 			Route::post('/edit/{id}', [StudentController::class, 'update'])->name('student.update');
 			Route::get('/reset/{id}', [StudentController::class, 'filterReset'])->name('student.reset');
@@ -148,7 +147,7 @@ Route::middleware(['auth'])->group(function () {
 			Route::delete('/delete/{id}', [StudentController::class, 'destroy'])->name('student.delete');
 		});
 
-		Route::prefix('program')->group(function () {
+		Route::group(['prefix' => 'program', 'middleware' => ['adminhead']], function () {
 			Route::get('/all', [ProgramController::class, 'index'])->name('program.all');
 			Route::get('/create', [ProgramController::class, 'create'])->name('program.create');
 			Route::post('/create', [ProgramController::class, 'store'])->name('program.store');

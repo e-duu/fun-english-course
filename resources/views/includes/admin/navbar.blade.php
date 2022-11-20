@@ -300,24 +300,27 @@
             </svg>
           </span>
         </a>
-        <div x-show="open" class="mt-2 space-y-2 px-7" role="menu" aria-label="Authentication">
-          <!-- active & hover classes 'text-gray-700 dark:text-light' -->
-          <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
-          <a
-            href="{{ route('program.all') }}"
-            role="menuitem"
-            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
-          >
-            List Program
-          </a>
-          <a
-            href="{{ route('program.create') }}"
-            role="menuitem"
-            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
-          >
-            Create Program
-          </a>
-        </div>
+        
+        @if (Auth::user()->role == 'admin_head')
+          <div x-show="open" class="mt-2 space-y-2 px-7" role="menu" aria-label="Authentication">
+            <!-- active & hover classes 'text-gray-700 dark:text-light' -->
+            <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
+            <a
+              href="{{ route('program.all') }}"
+              role="menuitem"
+              class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
+            >
+              List Program
+            </a>
+            <a
+              href="{{ route('program.create') }}"
+              role="menuitem"
+              class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
+            >
+              Create Program
+            </a>
+          </div>
+        @endif
       </div>
 
       <!-- Authentication links -->

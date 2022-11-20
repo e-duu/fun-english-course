@@ -35,7 +35,7 @@ class Level extends Model
         return $this->belongsTo(Program::class);
     }
 
-    public function users()
+    public function accounts()
     {
         return $this->belongsToMany(User::class);
     }

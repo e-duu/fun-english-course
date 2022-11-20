@@ -21,7 +21,7 @@
         </div>
         @endif
         @else
-        @if ($program->levels->count() != null && $program->levels()->whereHas('users', fn ($q) => $q->where('users.id', auth()->user()->id))->count() != null)
+        @if ($program->levels->count() != null && $program->levels()->whereHas('accounts', fn ($q) => $q->where('accounts.id', auth()->user()->id))->count() != null)
               <div class="px-6 my-8">
                 <div class="shadow-lg">
                   <h2 class="bg-[rgb(1,131,215)] pl-4 py-3 text-white text-2xl rounded-t-sm font-bold">{{ $program->name }}</h2>
@@ -80,7 +80,7 @@
                 </div>
               @endif
             @else
-              @if ($program->levels->count() != null && $program->levels()->whereHas('users', fn ($q) => $q->where('users.id', auth()->user()->id))->count() != null)
+              @if ($program->levels->count() != null && $program->levels()->whereHas('accounts', fn ($q) => $q->where('accounts.id', auth()->user()->id))->count() != null)
                 <div class="mt-5 sm:mt-10">
                   <div class="shadow-lg">
                     <h2 class="bg-[rgb(1,131,215)] pl-2 sm:pl-4 py-2 sm:py-3 text-white text-lg sm:text-2xl rounded-t-sm font-bold">{{ $program->name }}</h2>
