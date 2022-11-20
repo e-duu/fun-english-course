@@ -95,7 +95,7 @@
                           </a>
                         @endforeach
                       @else
-                        @foreach ($program->levels()->whereHas('users', fn ($q) => $q->where('users.id', auth()->user()->id))->get() as $programLevel)
+                        @foreach ($program->levels()->whereHas('accounts', fn ($q) => $q->where('accounts.id', auth()->user()->id))->get() as $programLevel)
                           <a href="{{ route('resource.detail', $programLevel->slug) }}">
                             <li class="pl-4 sm:pl-14 py-1 sm:py-3 text-sm sm:text-xl my-1 items-center hover:text-white hover:bg-blue-400 transition-colors duration-100">
                               {{ $programLevel->name }}
