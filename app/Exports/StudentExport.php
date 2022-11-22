@@ -32,13 +32,13 @@ class StudentExport implements FromCollection, WithHeadings, ShouldAutoSize, Wit
         // conver number to month
         $dateObj = DateTime::createFromFormat('!m', $student->month);
         return [
-            // $student->student->parent == null ? '-' : $student->student->parent,
-            // $student->student->city == null ? '-' : $student->student->city,
-            // $student->student->country == null ? '-' : $student->student->country,
-            // $student->student->number == null ? '-' : $student->student->number,
-            // $student->student->status == null ? '-' : $student->student->status,
-            // $student->teacher->name,
-            // $student->student->name,
+            $student->student->parent == null ? '-' : $student->student->parent,
+            $student->student->city == null ? '-' : $student->student->city,
+            $student->student->country == null ? '-' : $student->student->country,
+            $student->student->number == null ? '-' : $student->student->number,
+            $student->student->status == null ? '-' : $student->student->status,
+            $student->teacher->name,
+            $student->student->name,
             $student->level->program->name,
             $student->level->name,
             $student->price,
@@ -47,7 +47,6 @@ class StudentExport implements FromCollection, WithHeadings, ShouldAutoSize, Wit
             $monthName = $dateObj->format('F'), // March
             $student->year,
             $student->invoice->created_at->format('d-m-Y'),
-            $student->user_id,
         ];
     }
 

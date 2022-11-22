@@ -134,7 +134,7 @@ Route::middleware(['auth'])->group(function () {
 			Route::post('/manyEnroll/store', [LevelUserController::class, 'manyEnrollStore'])->name('manyEnroll.store');
 		});
 
-		Route::group(['prefix' => 'student'], function () {
+		Route::group(['prefix' => 'student', 'middleware' => ['adminhead']], function () {
 			Route::get('/all', [StudentController::class, 'index'])->name('student.all');
 			Route::get('/send-to-mail/{id}', [StudentController::class, 'sendToMailPage'])->name('send-to-mail-page');
 			Route::post('/store', [StudentController::class, 'store'])->name('student.store');
