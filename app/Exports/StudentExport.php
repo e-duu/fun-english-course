@@ -24,7 +24,7 @@ class StudentExport implements FromCollection, WithHeadings, ShouldAutoSize, Wit
 
     public function collection()
     {
-        return Student::where('level_id', $this->id)->with(['student','teacher'])->get();
+        return Student::where('level_id', $this->id)->with(['student'])->get();
     }
 
     public function map($student) : array
@@ -37,7 +37,7 @@ class StudentExport implements FromCollection, WithHeadings, ShouldAutoSize, Wit
             $student->student->country == null ? '-' : $student->student->country,
             $student->student->number == null ? '-' : $student->student->number,
             $student->student->status == null ? '-' : $student->student->status,
-            $student->teacher->name,
+            // $student->teacher->name,
             $student->student->name,
             $student->level->program->name,
             $student->level->name,
@@ -58,7 +58,7 @@ class StudentExport implements FromCollection, WithHeadings, ShouldAutoSize, Wit
             'Country',
             'Number',
             'Student Status',
-            'Teacher',
+            // 'Teacher',
             'Student Name',
             'Program',
             'Level',
