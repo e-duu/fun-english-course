@@ -9,7 +9,7 @@
   <form class="mb-5 relative h-5">
     <button formaction="{{ route('user.all') }}" class="px-5 py-1 bg-yellow-400 rounded-md font-semibold text-white sm:absolute sm:right-0 w-full sm:w-auto">Back to User</button>
   </form>
-  <div class="bg-white shadow-md p-6 text-left rounded-lg">
+  <div class="bg-white shadow-md p-6 text-left rounded-lg dark:divide-gray-700 dark:bg-darker">
     <div class="sm:flex space-x-8">
       <img src="{{ asset('/users/' . $data->photo) }}" alt="user profile photo" class="w-60 sm:w-96 rounded-md">
       <div class="flex-col space-y-3">
@@ -30,16 +30,16 @@
       <div class="w-full overflow-x-auto">
         <table class="w-full whitespace-no-wrap">
           <thead>
-            <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+            <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-gray-800">
                 <th class="px-4 py-3">Program Name</th>
                 <th class="px-4 py-3">Level Name</th>
                 <th class="px-4 py-3">Actions</th>
             </tr>
           </thead>
-          <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-darker">
+          <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-darker dark:border-gray-400">
     
             @forelse ($data->levels as $level)
-              <tr class="text-gray-700 dark:text-gray-400">
+              <tr class="text-gray-700 dark:text-white">
                 <td class="px-4 py-3 text-sm">
                   {{ $level->program->name  }}
                 </td>
@@ -53,7 +53,7 @@
                       @method('POST')
                       <input type="hidden" name="user_id" value="{{ request('id') }}">
                       <input type="hidden" name="level_id" value="{{ $level->id }}">
-                      <button class="flex-col px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                      <button class="flex-col px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-white focus:outline-none focus:shadow-outline-gray">
                         <i class="fas fa-trash"></i>
                         <p>Un - Enroll</p>
                       </button>

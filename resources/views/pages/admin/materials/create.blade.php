@@ -10,7 +10,7 @@
     @csrf
     
     <label class="block text-sm mt-4">
-      <span class="text-gray-700 dark:text-gray-400">Title</span>
+      <span class="text-gray-700 dark:text-white">Title</span>
       <input type="text" value="{{ old('title') }}" name="title" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md border-gray-400" placeholder="Lesson 1 Greetings - Presentation"/>
       @error('title')
         <div class="mt-2 text-red-600">
@@ -21,7 +21,7 @@
 
     <label class="block text-sm mt-4">
       <div class="flex justify-between">
-        <span class="text-gray-700 dark:text-gray-400">Content</span>
+        <span class="text-gray-700 dark:text-white">Content</span>
         <span class="text-sm">Optional, must be fill with link</span>
       </div>
       <input type="text" name="content" value="{{ old('content') }}" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md border-gray-400" placeholder="https://docs.google.com/presentation"/>
@@ -29,14 +29,14 @@
 
     <label class="block text-sm mt-4 prose max-w-full">
       <div class="flex justify-between">
-        <span class="text-gray-700 dark:text-gray-400">Description</span>
+        <span class="text-gray-700 dark:text-white">Description</span>
         <span class="text-sm">Optional</span>
       </div>
       <textarea name="description" id="editor" rows="40"></textarea>
     </label>
 
     <label class="block text-sm mt-4">
-      <span class="text-gray-700 dark:text-gray-400">Photo</span>
+      <span class="text-gray-700 dark:text-white">Photo</span>
       <input name="photo_file" value="{{ old('photo') }}" type="file" class="border w-full mt-1 text-sm rounded-md border-gray-400 py-1 px-2 dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray" />
       @error('photo_file')
         <div class="mt-2 text-red-600">
@@ -46,15 +46,15 @@
     </label>
 
     <div class="mt-4 text-sm">
-      <span class="text-gray-700 dark:text-gray-400">
+      <span class="text-gray-700 dark:text-white">
         Accesible By Student
       </span>
       <div class="mt-2">
-        <label class="inline-flex items-center text-gray-600 dark:text-gray-400">
+        <label class="inline-flex items-center text-gray-600 dark:text-white">
           <input type="radio" class="text-blue-600 form-radio focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray" name="is_accessible_by_student" value="1" />
           <span class="ml-2">Yes</span>
         </label>
-        <label class="inline-flex items-center ml-6 text-gray-600 dark:text-gray-400">
+        <label class="inline-flex items-center ml-6 text-gray-600 dark:text-white">
           <input type="radio" class="text-blue-600 form-radio focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray" name="is_accessible_by_student" value="0"/>
           <span class="ml-2">No</span>
         </label>

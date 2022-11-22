@@ -10,7 +10,7 @@
     @csrf
 
     <label class="block mt-4 text-sm">
-      <span class="text-gray-700 dark:text-gray-400">
+      <span class="text-gray-700 dark:text-white">
         Student Name
       </span>
       <select name="user_id" class="block w-full mt-1 text-sm rounded-md border-gray-400  dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
@@ -26,7 +26,7 @@
     </label>
 
     <label class="block mt-4 text-sm">
-        <span class="text-gray-700 dark:text-gray-400">
+        <span class="text-gray-700 dark:text-white">
           Level
         </span>
         <select name="level_id" class="block w-full mt-1 text-sm rounded-md border-gray-400  dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
@@ -42,7 +42,7 @@
     </label>
 
     <label class="block mt-4 text-sm">
-      <span class="text-gray-700 dark:text-gray-400">
+      <span class="text-gray-700 dark:text-white">
         Month
       </span>
       <select name="month" class="block w-full mt-1 text-sm rounded-md border-gray-400  dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
@@ -67,7 +67,7 @@
     </label>
 
     <label class="block mt-4 text-sm">
-        <span class="text-gray-700 dark:text-gray-400">
+        <span class="text-gray-700 dark:text-white">
           Status
         </span>
         <select name="status" class="block w-full mt-1 text-sm rounded-md border-gray-400  dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
@@ -84,7 +84,7 @@
     </label>
 
     <label class="block text-sm mt-4">
-      <span class="text-gray-700 dark:text-gray-400">Price</span>
+      <span class="text-gray-700 dark:text-white">Price</span>
       <input type="number" name="price" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md border-gray-400" placeholder="30000" value="{{ $data->price }}"/>
       @error('price')
         <div class="mt-1 text-sm text-[red]">

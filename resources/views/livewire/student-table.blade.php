@@ -32,7 +32,7 @@
                                   <label class='flex flex-col border-4 border-dashed rounded-md w-full h-32 hover:bg-gray-100 hover:border-blue-300 group transition-colors duration-200'>
                                           <div class='flex flex-col items-center justify-center pt-7'>
                                               <svg class="w-10 h-10 text-blue-400 group-hover:text-blue-600 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                                              <p class='lowercase text-sm text-gray-400 group-hover:text-blue-600 pt-1 tracking-wider'>Select the file</p>
+                                              <p class='lowercase text-sm text-white group-hover:text-blue-600 pt-1 tracking-wider'>Select the file</p>
                                               <input name="file" type='file' class="" />
                                           </div>
                                   </label>
@@ -103,7 +103,7 @@
         <div class="w-full overflow-x-auto">
           <table class="w-full whitespace-no-wrap">
             <thead>
-              <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+              <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-gray-800">
                   <th class="px-4 py-3">Name</th>
                   <th class="px-4 py-3">Parent</th>
                   <th class="px-4 py-3">Teacher</th>
@@ -124,7 +124,7 @@
             <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-darker">
     
               @forelse ($spps as $item)
-                <tr class="text-gray-700 dark:text-gray-400">
+                <tr class="text-gray-700 dark:text-white">
                   <td class="px-4 py-3 text-sm">
                     {{ $item->name }}
                   </td>
@@ -215,22 +215,22 @@
                   <td class="px-4 py-3">
                     <div class="flex items-center space-x-4 text-sm">
                       @if ($item->status == 'paid' or $item->status == 'paid_manually')
-                          <a href="{{ route('page-receipt', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                          <a href="{{ route('page-receipt', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-white focus:outline-none focus:shadow-outline-gray">
                               <i class="fas fa-print"></i>
                               <p>Receipt</p>
                           </a>
                       @elseif ($item->status == 'unpaid' or $item->status == 'pending')
-                          <a href="{{ route('page-invoice', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                          <a href="{{ route('page-invoice', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-white focus:outline-none focus:shadow-outline-gray">
                               <i class="fas fa-print"></i>
                               <p>Invoice</p>
                           </a>
                       @endif
-                      <a href="{{ route('pay.manually', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                      <a href="{{ route('pay.manually', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-white focus:outline-none focus:shadow-outline-gray">
                           <i class="fas fa-money-check"></i>
                           <p>Pay</p>
                       </a>
                       @if ($item->status == 'unpaid' or $item->status == 'pending')
-                          <a href="{{ route('student.edit', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                          <a href="{{ route('student.edit', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-white focus:outline-none focus:shadow-outline-gray">
                               <i class=" fas fa-edit"></i>
                               <p>Edit</p>
                           </a>
@@ -238,7 +238,7 @@
                       <form action="{{ route('student.delete', $item->id) }}" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
-                        <button class="flex-col px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                        <button class="flex-col px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-white focus:outline-none focus:shadow-outline-gray">
                           <i class="fas fa-trash"></i>
                           <p>Delete</p>
                         </button>
@@ -260,7 +260,7 @@
             </tbody>
           </table>
         </div>
-        <div class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
+        <div class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-white dark:bg-gray-800">
           <div class="text-center w-auto sm:w-[565px] md:w-[980px] 2xl:w-[1335px] ">
             {{ $spps->links() }}
           </div>

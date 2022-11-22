@@ -10,7 +10,7 @@
     @csrf
 
     <label class="block text-sm mt-4">
-      <span class="text-gray-700 dark:text-gray-400">Bank Name</span>
+      <span class="text-gray-700 dark:text-white">Bank Name</span>
       <input value="{{ $data->name }}" type="text" name="name" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md border-gray-400" placeholder="Bank Name"/>
       @error('name')
         <div class="mt-2" style="color: rgb(255, 35, 35);">
@@ -20,7 +20,7 @@
     </label>
     
     <label class="block text-sm mt-4">
-      <span class="text-gray-700 dark:text-gray-400">Code</span>
+      <span class="text-gray-700 dark:text-white">Code</span>
       <input value="{{ $data->code }}" type="number" name="code" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md border-gray-400" placeholder="Jane Doe"/>
       @error('code')
         <div class="mt-2" style="color: rgb(255, 35, 35);">

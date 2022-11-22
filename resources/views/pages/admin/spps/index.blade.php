@@ -26,7 +26,7 @@
                         <div class='flex items-center justify-center w-full'>
                             <table class="w-full whitespace-no-wrap">
                                 <thead>
-                                    <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                                    <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-gray-800">
                                         <th class="px-4 py-3">Student Name</th>
                                         <th class="px-4 py-3">Price</th>
                                         <th class="px-4 py-3"><input id="checkAll" type="checkbox"></th>
@@ -35,7 +35,7 @@
                                 <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-darker">
 
                                     @forelse ($students as $item)
-                                        <tr class="text-gray-700 dark:text-gray-400">
+                                        <tr class="text-gray-700 dark:text-white">
                                             <td class="px-4 py-3 text-sm">
                                                 {{ $item->student->name }}
                                             </td>
@@ -86,7 +86,7 @@
 				<!-- Some beer 🍺 -->
 				<form action="{{ route('spp.all') }}" method="GET">
 					<label class="block mt-4 text-sm">
-						<span class="text-gray-700 dark:text-gray-400">
+						<span class="text-gray-700 dark:text-white">
 							Level
 						</span>
 						<select name="level" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border rounded-md border-gray-400 -gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
@@ -116,7 +116,7 @@
     <div class="w-full overflow-x-auto">
         <table class="w-full whitespace-no-wrap">
             <thead>
-                <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-gray-800">
                     <th class="px-4 py-3">Student Name</th>
                     <th class="px-4 py-3">Program</th>
                     <th class="px-4 py-3">Level</th>
@@ -129,7 +129,7 @@
             <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-darker">
 
                 @forelse ($data as $item)
-                <tr class="text-gray-700 dark:text-gray-400">
+                <tr class="text-gray-700 dark:text-white">
                     <td class="px-4 py-3 text-sm">
                     {{ $item->student->name }}
                     </td>
@@ -186,24 +186,24 @@
                     </td>
                     <td class="px-4 py-3">
                     <div class="flex items-center space-x-4 text-sm">
-                        <a href="{{ route('spp.invoice.mail', $item->user_id.'/'.$item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                        <a href="{{ route('spp.invoice.mail', $item->user_id.'/'.$item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-white focus:outline-none focus:shadow-outline-gray">
                             <i class=" fas fa-print"></i>
                             <p>Invoice</p>
                         </a>
                         @if ($item->status != 'pending')
-                        <a href="{{ route('spp.pay-manually', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                        <a href="{{ route('spp.pay-manually', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-white focus:outline-none focus:shadow-outline-gray">
                             <i class="fas fa-money-check"></i>
                             <p>Pay</p>
                         </a>
                         @endif
-                        <a href="{{ route('spp.edit', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                        <a href="{{ route('spp.edit', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-white focus:outline-none focus:shadow-outline-gray">
                         <i class=" fas fa-edit"></i>
                         <p>Edit</p>
                         </a>
                         <form action="{{ route('spp.delete', $item->id) }}" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
-                        <button class="flex-col px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                        <button class="flex-col px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-white focus:outline-none focus:shadow-outline-gray">
                             <i class="fas fa-trash"></i>
                             <p>Delete</p>
                         </button>
@@ -224,7 +224,7 @@
             </tbody>
         </table>
     </div>
-    <div class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
+    <div class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-white dark:bg-gray-800">
       <div class="text-center w-auto sm:w-[565px] md:w-[860px] xl:w-[980px] 2xl:w-[1325px]">
         {{ $data->links() }}
       </div>

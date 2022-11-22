@@ -11,7 +11,7 @@
     @csrf
 
     <label class="block text-sm mt-4">
-      <span class="text-gray-700 dark:text-gray-400">Level Name</span>
+      <span class="text-gray-700 dark:text-white">Level Name</span>
       <input type="text" name="name" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md border-gray-400" value="{{ $data->name }}" placeholder="EFC Beginner - Level 1"/>
       @error('name')
         <div class="mt-2" style="color: rgb(255, 35, 35);">

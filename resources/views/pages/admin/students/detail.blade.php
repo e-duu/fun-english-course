@@ -23,7 +23,7 @@
                   <!-- Some beer 🍺 -->
                   <form action="{{route('student.show', $data->id)}}" method="GET">
                       <label class="block mt-4 text-sm">
-                          <span class="text-gray-700 dark:text-gray-400">
+                          <span class="text-gray-700 dark:text-white">
                               Level
                           </span>
                           <select name="level" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border rounded-md border-gray-400 -gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
@@ -66,7 +66,7 @@
                           @csrf
                           @method('POST')
                           <label class="block mt-4 text-sm">
-                              <span class="text-gray-700 dark:text-gray-400">
+                              <span class="text-gray-700 dark:text-white">
                                   Student
                               </span>
                               <select id="select-search" onchange="setUsers()" name="user_id" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border rounded-md border-gray-400 -gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
@@ -83,7 +83,7 @@
                           </label>
 
                           <label class="block mt-2 text-sm">
-                            <span class="text-gray-700 dark:text-gray-400">
+                            <span class="text-gray-700 dark:text-white">
                                 Level
                             </span>
                             <select id="selectLevel" name="level_id" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border rounded-md border-gray-400 -gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray"></select>
@@ -99,7 +99,7 @@
                           @endphp
                           
                           <label class="block mt-2 text-sm">
-                            <span class="text-gray-700 dark:text-gray-400">
+                            <span class="text-gray-700 dark:text-white">
                                 Teacher
                             </span>
                             <select id="select-teacher" name="teacher_id" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border rounded-md border-gray-400 -gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
@@ -116,7 +116,7 @@
                           </label>
 
                           <label class="block mt-2 text-sm">
-                              <span class="text-gray-700 dark:text-gray-400">
+                              <span class="text-gray-700 dark:text-white">
                                   Currency
                               </span>
                               <select name="currency" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border rounded-md border-gray-400 -gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
@@ -131,11 +131,11 @@
                           </label>
 
                           <label class="block mt-2 text-sm">
-                            <span class="text-gray-700 dark:text-gray-400">
+                            <span class="text-gray-700 dark:text-white">
                                 Price
                             </span>
                             <input name="price" type="number" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border rounded-md border-gray-400 -gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
-                            <span class="text-gray-700 dark:text-gray-400">If the currency is IDR the last digits must be 000</span>
+                            <span class="text-gray-700 dark:text-white">If the currency is IDR the last digits must be 000</span>
                                 @error('price')
                                     <div class="mt-1 text-sm text-[red]">
                                         <i class="fas fa-dot-circle text-xs"></i> {{ $message }}
@@ -144,7 +144,7 @@
                           </label>
 
                           <label class="block mt-2 text-sm">
-                            <span class="text-gray-700 dark:text-gray-400">
+                            <span class="text-gray-700 dark:text-white">
                                 Year
                             </span>
                             <select name="year" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border rounded-md border-gray-400 -gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
@@ -160,7 +160,7 @@
                           </label>
 
                           <label class="flex-col text-sm">
-                            <div class="text-gray-700 mt-2 dark:text-gray-400">
+                            <div class="text-gray-700 mt-2 dark:text-white">
                                 Month
                             </div>
                             <div class="flex space-x-10 items-center w-full">
@@ -253,7 +253,7 @@
   <div class="w-full overflow-x-auto">
     <table class="w-full whitespace-no-wrap">
       <thead>
-        <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+        <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-gray-800">
             <th class="px-4 py-3">Level Name</th>
             <th class="px-4 py-3">Actions</th>
         </tr>
@@ -261,13 +261,13 @@
       <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-darker">
 
         @forelse ($levels as $item)
-          <tr class="text-gray-700 dark:text-gray-400">
+          <tr class="text-gray-700 dark:text-white">
             <td class="px-4 py-3 text-sm">
               {{ $item->name }}
             </td>
             <td class="px-4 py-3">
               <div class="flex items-center space-x-4 text-sm">
-                <a href="{{ route('student.show-spp', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray">
+                <a href="{{ route('student.show-spp', $item->id) }}" class="flex-col text-center px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-white focus:outline-none focus:shadow-outline-gray">
                   <i class=" fas fa-eye"></i>
                   <p>Detail</p>
                 </a>
@@ -287,7 +287,7 @@
       </tbody>
     </table>
   </div>
-  <div class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
+  <div class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-white dark:bg-gray-800">
 		<div class="text-center w-auto sm:w-[565px] md:w-[980px] 2xl:w-[1335px] ">
 			{{ $levels->links() }}
 		</div>

@@ -8,7 +8,7 @@
 
 @section('content')
   <label class="block text-sm mt-4">
-    <span class="text-gray-700 dark:text-gray-400">Webhook URL</span>
+    <span class="text-gray-700 dark:text-white">Webhook URL</span>
     <div class="flex justify-between items-center bg-blue-400 rounded py-2 px-5">
       <div class="bg-blue-400 rounded">
         <p class="font-semibold text-lg text-white">
@@ -30,7 +30,7 @@
   @endphp
   
   <div class="block text-sm mt-4">
-    <div class="text-gray-700 dark:text-gray-400">Nomor rekening yg di gunakan:</div>
+    <div class="text-gray-700 dark:text-white">Nomor rekening yg di gunakan:</div>
       <div class="d-flex justify-between">
         <div>
           @foreach ($banks as $bank)

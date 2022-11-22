@@ -14,7 +14,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
       <div class="grid grid-cols-1">
         <label class="block mt-4 text-sm">
-          <span class="text-gray-700 dark:text-gray-400">
+          <span class="text-gray-700 dark:text-white">
             Program
           </span>
           <select @change="setPrograms(programs_id)" v-model="programs_id" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray rounded-md border-gray-400 -600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
@@ -32,7 +32,7 @@
 
       <div class="grid grid-cols-1">
         <label class="block mt-4 text-sm">
-          <span class="text-gray-700 dark:text-gray-400">
+          <span class="text-gray-700 dark:text-white">
             Level
           </span>
           <select name="level_id" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray rounded-md border-gray-400 -600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">

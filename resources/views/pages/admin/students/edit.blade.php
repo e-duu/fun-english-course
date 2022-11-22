@@ -11,7 +11,7 @@
     @method('POST')
 
     <label class="block mt-2 text-sm">
-        <span class="text-gray-700 dark:text-gray-400">
+        <span class="text-gray-700 dark:text-white">
             Currency
         </span>
         <select name="currency" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border rounded-md border-gray-400 -gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
@@ -26,11 +26,11 @@
     </label>
 
     <label class="block mt-2 text-sm">
-      <span class="text-gray-700 dark:text-gray-400">
+      <span class="text-gray-700 dark:text-white">
           Price
       </span>
       <input value="{{ $data->price }}" name="price" type="number" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border rounded-md border-gray-400 -gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
-      <span class="text-gray-700 dark:text-gray-400">if the currency is IDR the last number must be 000</span>
+      <span class="text-gray-700 dark:text-white">if the currency is IDR the last number must be 000</span>
           @error('price')
               <div class="mt-1 text-sm text-[red]">
                   <i class="fas fa-dot-circle text-xs"></i> {{ $message }}
