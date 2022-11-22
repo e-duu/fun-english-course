@@ -136,19 +136,21 @@
       @enderror
     </label>
 
-    <div class="mt-4 text-sm">
-      <span class="text-gray-700 dark:text-white">
-        Role
-      </span>
-      <div class="mt-2">
-        @foreach ($roles as $role)
-          <label class="inline-flex items-center text-gray-600 dark:text-white mr-4">
-            <input type="radio" class="text-blue-600 form-radio focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray" name="role" value="{{ $role['value'] }}" {{ ($data->role == $role['value'] ? 'checked' : '') }} />
-            <span class="ml-2">{{ $role['name'] }}</span>
-          </label>
-        @endforeach
+    @if(Auth::user()->role == 'admin_head')
+      <div class="mt-4 text-sm">
+        <span class="text-gray-700 dark:text-white">
+          Role
+        </span>
+        <div class="mt-2">
+          @foreach ($roles as $role)
+            <label class="inline-flex items-center text-gray-600 dark:text-white mr-4">
+              <input type="radio" class="text-blue-600 form-radio focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray" name="role" value="{{ $role['value'] }}" {{ ($data->role == $role['value'] ? 'checked' : '') }} />
+              <span class="ml-2">{{ $role['name'] }}</span>
+            </label>
+          @endforeach
+        </div>
       </div>
-    </div>
+    @endif
     
     <label class="block text-sm mt-4">
       <span class="text-gray-700 dark:text-white">Email</span>
