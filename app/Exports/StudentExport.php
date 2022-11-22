@@ -24,7 +24,7 @@ class StudentExport implements FromCollection, WithHeadings, ShouldAutoSize, Wit
 
     public function collection()
     {
-        return Student::where('level_id', $this->id)->with(['student'])->get();
+        return Student::where('level_id', $this->id)->with(['student','teacher'])->get();
     }
 
     public function map($student) : array
