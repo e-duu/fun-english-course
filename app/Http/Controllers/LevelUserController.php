@@ -42,7 +42,7 @@ class LevelUserController extends Controller
     public function manyEnrollStore(Request $request)
     {
         foreach ($request->levels as $levelId) {
-            Level::find($levelId)->accounts()->syncWithoutDetaching($request->users);
+            Level::find($levelId)->users()->syncWithoutDetaching($request->users);
         }
         
         return redirect()->route('user.all');

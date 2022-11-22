@@ -12,7 +12,7 @@
         </div>
         <h2 class="bg-[rgb(244,182,1)] mt-14 mb-10 pl-6 py-3 text-2xl font-bold">LEARNING RESOURCES</h2>
         @foreach ($programs as $program)
-        @if (auth()->user()->role === 'admin')
+        @if (auth()->user()->role === 'admin_head' || auth()->user()->role === 'admin_staff')
         @if ($program->levels->count() != null)
         <div class="px-6 my-8">
           <div class="shadow-lg">
@@ -21,7 +21,7 @@
         </div>
         @endif
         @else
-        @if ($program->levels->count() != null && $program->levels()->whereHas('accounts', fn ($q) => $q->where('accounts.id', auth()->user()->id))->count() != null)
+        @if ($program->levels->count() != null && $program->levels()->whereHas('users', fn ($q) => $q->where('users.id', auth()->user()->id))->count() != null)
               <div class="px-6 my-8">
                 <div class="shadow-lg">
                   <h2 class="bg-[rgb(1,131,215)] pl-4 py-3 text-white text-2xl rounded-t-sm font-bold">{{ $program->name }}</h2>
@@ -52,13 +52,13 @@
         </header>
         <main>
           @foreach ($programs as $program)
-            @if (auth()->user()->role === 'admin')
+            @if (auth()->user()->role === 'admin_head' || auth()->user()->role === 'admin_staff')
               @if ($program->levels->count() != null)
                 <div class="mt-5 sm:mt-10">
                   <div class="shadow-lg">
                     <h2 class="bg-[rgb(1,131,215)] pl-2 sm:pl-4 py-2 sm:py-3 text-white text-lg sm:text-2xl rounded-t-sm font-bold">{{ $program->name }}</h2>
                     <div class="bg-blue-100 py-2 sm:py-3 flex-col rounded-b-sm">
-                      @if (auth()->user()->role === 'admin')
+                      @if (auth()->user()->role === 'admin_head' || auth()->user()->role === 'admin_staff')
                         @foreach ($program->levels()->get() as $programLevel)
                           <a href="{{ route('resource.detail', $programLevel->slug) }}">
                             <li class="pl-4 sm:pl-14 py-1 sm:py-3 text-sm sm:text-xl my-1 items-center hover:text-white hover:bg-blue-400 transition-colors duration-100">
@@ -80,13 +80,13 @@
                 </div>
               @endif
             @else
-              @if ($program->levels->count() != null && $program->levels()->whereHas('accounts', fn ($q) => $q->where('accounts.id', auth()->user()->id))->count() != null)
+              @if ($program->levels->count() != null && $program->levels()->whereHas('users', fn ($q) => $q->where('users.id', auth()->user()->id))->count() != null)
                 <div class="mt-5 sm:mt-10">
                   <div class="shadow-lg">
                     <h2 class="bg-[rgb(1,131,215)] pl-2 sm:pl-4 py-2 sm:py-3 text-white text-lg sm:text-2xl rounded-t-sm font-bold">{{ $program->name }}</h2>
                     <div class="bg-blue-100 py-2 sm:py-3 flex-col rounded-b-sm
                     ">
-                      @if (auth()->user()->role === 'admin')
+                      @if (auth()->user()->role === 'admin_head' || auth()->user()->role === 'admin_staff')
                         @foreach ($program->levels()->get() as $programLevel)
                           <a href="{{ route('resource.detail', $programLevel->slug) }}">
                             <li class="pl-4 sm:pl-14 py-1 sm:py-3 text-sm sm:text-xl my-1 items-center hover:text-white hover:bg-blue-400 transition-colors duration-100">
@@ -95,7 +95,7 @@
                           </a>
                         @endforeach
                       @else
-                        @foreach ($program->levels()->whereHas('accounts', fn ($q) => $q->where('accounts.id', auth()->user()->id))->get() as $programLevel)
+                        @foreach ($program->levels()->whereHas('users', fn ($q) => $q->where('users.id', auth()->user()->id))->get() as $programLevel)
                           <a href="{{ route('resource.detail', $programLevel->slug) }}">
                             <li class="pl-4 sm:pl-14 py-1 sm:py-3 text-sm sm:text-xl my-1 items-center hover:text-white hover:bg-blue-400 transition-colors duration-100">
                               {{ $programLevel->name }}

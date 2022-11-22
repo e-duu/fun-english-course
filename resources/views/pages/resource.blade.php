@@ -17,7 +17,7 @@
               <div class="shadow-lg">
                 <h2 class="bg-[rgb(1,131,215)] pl-4 py-3 text-white text-2xl rounded-t-sm font-bold">{{ $program->name }}</h2>
                 <div class="bg-blue-100 py-3 rounded-b-sm">
-                  @if (auth()->user()->role === 'admin')
+                  @if (auth()->user()->role === 'admin_head' || auth()->user()->role === 'admin_staff')
                     @foreach ($program->levels()->get() as $programLevel)
                       <a href="{{ route('resource.detail', $programLevel->slug) }}">
                         <li class="pl-4 py-3 text-xl my-1 items-center hover:text-white hover:bg-blue-400 transition-colors duration-100">
@@ -26,7 +26,7 @@
                       </a>
                     @endforeach
                   @else
-                    @foreach ($program->levels()->whereHas('accounts', fn ($q) => $q->where('accounts.id', auth()->user()->id))->get() as $programLevel)
+                    @foreach ($program->levels()->whereHas('users', fn ($q) => $q->where('users.id', auth()->user()->id))->get() as $programLevel)
                       <a href="{{ route('resource.detail', $programLevel->slug) }}">
                         <li class="pl-4 py-3 text-xl my-1 items-center hover:text-white hover:bg-blue-400 transition-colors duration-100">
                         {{ $programLevel->name }}
@@ -51,7 +51,7 @@
         </header>
         <main>
           @foreach ($lessons as $lesson)
-            @if (auth()->user()->role === 'admin')
+            @if (auth()->user()->role === 'admin_head' || auth()->user()->role === 'admin_staff')
               @if ($lesson->exercises->count() || $lesson->materials->count() != null || $lesson->downloadables->count() != null)
                 <div class="mt-5 sm:mt-10">
                   <div class="shadow-lg">

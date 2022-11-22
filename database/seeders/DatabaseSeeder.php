@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
         // \App\Models\Order::factory(10)->create();
         $this->call ([
             UserSeeder::class,
-            AccountSeeder::class,
+            // AccountSeeder::class,
             ProgramSeeder::class,
             LevelSeeder::class,
             LessonSeeder::class,
