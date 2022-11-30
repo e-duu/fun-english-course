@@ -37,7 +37,7 @@ class StudentExport implements FromCollection, WithHeadings, ShouldAutoSize, Wit
             $student->student->country == null ? '-' : $student->student->country,
             $student->student->number == null ? '-' : $student->student->number,
             $student->student->status == null ? '-' : $student->student->status,
-            $student->teacher->name == null ? '-' : $student->teacher->name,
+            // $student->teacher->name == null ? '-' : $student->teacher->name,
             $student->student->name == null ? '-' : $student->student->name,
             $student->level->program->name == null ? '-' : $student->level->program->name,
             $student->level->name == null ? '-' : $student->level->name,
