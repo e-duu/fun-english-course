@@ -129,11 +129,15 @@ class StudentController extends Controller
         // Filter spp by payment status
         if (request()->get('status') != null) {
             $spps = Student::where('status', request()->get('status'))->where('level_id', $id)->paginate(5);
+        } else {
+            $spps = Student::where('level_id', $id)->paginate(5);
         }
 
         // Filter spp by month
         if (request()->get('month') != null) {
             $spps = Student::where('month', request()->get('month'))->where('level_id', $id)->paginate(5);
+        } else {
+            $spps = Student::where('level_id', $id)->paginate(5);
         }
 
         return view('pages.admin.students.detail-student', compact('data', 'spps', 'students'));
