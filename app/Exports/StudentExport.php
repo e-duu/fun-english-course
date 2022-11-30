@@ -32,7 +32,6 @@ class StudentExport implements FromCollection, WithHeadings, ShouldAutoSize, Wit
         // convert number to month
         $dateObj = DateTime::createFromFormat('!m', $student->month);
         return [
-            dd($student->student->parent),
             $student->student->parent == null ? '-' : $student->student->parent,
             $student->student->city == null ? '-' : $student->student->city,
             $student->student->country == null ? '-' : $student->student->country,

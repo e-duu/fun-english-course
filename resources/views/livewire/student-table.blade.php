@@ -132,7 +132,7 @@
                     {{ $item->student->parent == null ? '-' : $item->student->parent }}
                   </td>
                   <td class="px-4 py-3 text-sm">
-                    {{ $item->teacher->name }}
+                    {{ $item->teacher->name == null ? '-' : $item->teacher->name}}
                   </td>
                   <td class="px-4 py-3 text-sm">
                     {{ $item->student->city == null ? '-' : $item->student->city }}
@@ -159,10 +159,10 @@
                     </div>
                   </td>
                   <td class="px-4 py-3 text-sm">
-                    {{ $item->level->program->name }}
+                    {{ $item->level->program->name == null ? '-' : $item->level->program->name }}
                   </td>
                   <td class="px-4 py-3 text-sm">
-                    {{ $item->level->name }}
+                    {{ $item->level->name == null ? '-' : $item->level->name }}
                   </td>
                   <td class="px-4 py-3 text-sm">
                       @if ($item->currency == 'USD' || $item->currency == 'usd')
