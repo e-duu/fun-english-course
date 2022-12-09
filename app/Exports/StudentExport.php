@@ -24,7 +24,7 @@ class StudentExport implements FromCollection, WithHeadings, ShouldAutoSize, Wit
 
     public function collection()
     {
-        return Student::where('level_id', $this->id)->get();
+        return Student::where('level_id', $this->id)->with(['student'])->get();
     }
 
     public function map($student) : array
@@ -32,15 +32,15 @@ class StudentExport implements FromCollection, WithHeadings, ShouldAutoSize, Wit
         // convert number to month
         $dateObj = DateTime::createFromFormat('!m', $student->month);
         return [
-            $student->student->parent == null ? '-' : $student->student->parent,
-            $student->student->city == null ? '-' : $student->student->city,
-            $student->student->country == null ? '-' : $student->student->country,
-            $student->student->number == null ? '-' : $student->student->number,
-            $student->student->status == null ? '-' : $student->student->status,
-            $student->teacher->name == null ? '-' : $student->teacher->name,
-            $student->student->name == null ? '-' : $student->student->name,
-            $student->level->program->name == null ? '-' : $student->level->program->name,
-            $student->level->name == null ? '-' : $student->level->name,
+            $student->student->parent ?? '-',
+            $student->student->city ?? '-',
+            $student->student->country ?? '-',
+            $student->student->number ?? '-',
+            $student->student->status ?? '-',
+            $student->teacher->name ?? '-',
+            $student->student->name ?? '-',
+            $student->level->program->name ?? '-',
+            $student->level->name ?? '-',
             $student->price,
             $student->currency,
             $student->status,
