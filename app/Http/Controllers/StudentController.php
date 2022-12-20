@@ -95,7 +95,7 @@ class StudentController extends Controller
     {
         $this->id = $id;
         $data = Program::findorfail($id);
-        $users = User::where('role', 'student')->get();
+        $users = User::where([['role', 'student'],['status', 'active']])->get();
         $levelUsers = LevelUser::whereHas('level', function ($query) {
             $query->where('program_id', $this->id);
         })->with(['level'])->get();

@@ -129,19 +129,19 @@
                     {{ $item->name }}
                   </td>
                   <td class="px-4 py-3 text-sm">
-                    {{ $item->student->parent == null ? '-' : $item->student->parent }}
+                    {{ $item->student->parent ?? '-' }}
                   </td>
                   <td class="px-4 py-3 text-sm">
-                    {{ $item->teacher->name == null ? '-' : $item->teacher->name}}
+                    {{ $item->teacher->name ?? '-'}}
                   </td>
                   <td class="px-4 py-3 text-sm">
-                    {{ $item->student->city == null ? '-' : $item->student->city }}
+                    {{ $item->student->city ?? '-' }}
                   </td>
                   <td class="px-4 py-3 text-sm">
-                    {{ $item->student->country == null ? '-' : $item->student->country }}
+                    {{ $item->student->country ?? '-' }}
                   </td>
                   <td class="px-4 py-3 text-sm">
-                    {{ $item->student->number == null ? '-' : $item->student->number }}
+                    {{ $item->student->number ?? '-' }}
                   </td>
                   <td class="px-4 py-3 text-sm">
                     <div class="font-semibold uppercase rounded py-[2px] px-2 bold @if($item->student->status == 'paid') bg-green-500 @elseif ($item->student->status == 'active') bg-green-500 @elseif ($item->student->status == 'non-active') bg-red-500 @endif">
@@ -159,10 +159,10 @@
                     </div>
                   </td>
                   <td class="px-4 py-3 text-sm">
-                    {{ $item->level->program->name == null ? '-' : $item->level->program->name }}
+                    {{ $item->level->program->name ?? '-'->name }}
                   </td>
                   <td class="px-4 py-3 text-sm">
-                    {{ $item->level->name == null ? '-' : $item->level->name }}
+                    {{ $item->level->name ?? '-' }}
                   </td>
                   <td class="px-4 py-3 text-sm">
                       @if ($item->currency == 'USD' || $item->currency == 'usd')
