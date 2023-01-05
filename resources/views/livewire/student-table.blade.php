@@ -159,7 +159,7 @@
                     </div>
                   </td>
                   <td class="px-4 py-3 text-sm">
-                    {{ $item->level->program->name ?? '-'->name }}
+                    {{ $item->level->program->name ?? '-' }}
                   </td>
                   <td class="px-4 py-3 text-sm">
                     {{ $item->level->name ?? '-' }}

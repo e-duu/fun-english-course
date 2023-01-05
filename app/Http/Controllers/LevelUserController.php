@@ -33,7 +33,7 @@ class LevelUserController extends Controller
 
     public function manyEnroll()
     {
-        $users = User::where('role', '!=', 'admin' )->get();
+        $users = User::where('role', '!=', 'admin')->get();
         $levels = Level::all();
 
         return view('pages.admin.enroll ', compact('users', 'levels'));
