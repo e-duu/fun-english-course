@@ -44,7 +44,7 @@
 
   <form action="{{ route('user.store') }}" method="POST" class="px-4 py-3 bg-white rounded-lg shadow-md dark:bg-gray-800" enctype="multipart/form-data">
     @csrf
-
+    @method('POST')
     <label class="block text-sm" style="margin-top: 20px">
       <span class="text-gray-700 dark:text-white">Name</span>
       <input type="text" name="name" class="border w-full mt-1 text-sm border-gray-400  dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md" value="{{ old('name') }}" placeholder="John Doe"/>
