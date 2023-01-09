@@ -148,9 +148,16 @@
                                 Year
                             </span>
                             <select name="year" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border rounded-md border-gray-400 -gray-600 dark:bg-gray-700 form-select focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
+                                <option value="{{date('Y') - 1}}">{{date('Y') - 1}}</option>
                                 <option value="{{date('Y')}}">{{date('Y')}}</option>
                                 <option value="{{date('Y') + 1}}">{{date('Y') + 1}}</option>
                                 <option value="{{date('Y') + 2}}">{{date('Y') + 2}}</option>
+                                <option value="{{date('Y') + 3}}">{{date('Y') + 3}}</option>
+                                <option value="{{date('Y') + 4}}">{{date('Y') + 4}}</option>
+                                <option value="{{date('Y') + 5}}">{{date('Y') + 5}}</option>
+                                <option value="{{date('Y') + 6}}">{{date('Y') + 6}}</option>
+                                <option value="{{date('Y') + 7}}">{{date('Y') + 7}}</option>
+                                <option value="{{date('Y') + 8}}">{{date('Y') + 8}}</option>
                             </select>
                             @error('year')
                                 <div class="mt-1 text-sm text-[red]">
