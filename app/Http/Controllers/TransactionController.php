@@ -196,75 +196,6 @@ class TransactionController extends Controller
 
         $external_id = Str::random(10);
 
-        // $params = [
-        //     'external_id' => $inv,
-        //     'payer_email' => auth()->user()->email,
-        //     'description' => $desc,
-        //     'amount' => $amount,
-        //     'invoice_duration' => 86400,
-        //     'customer' => [
-        //         'given_names' => 'John',
-        //         'surname' => 'Doe',
-        //         'email' => 'johndoe@example.com',
-        //         'mobile_number' => '+6287774441111',
-        //         'addresses' => [
-        //             [
-        //                 'city' => 'Jakarta Selatan',
-        //                 'country' => 'Indonesia',
-        //                 'postal_code' => '12345',
-        //                 'state' => 'Daerah Khusus Ibukota Jakarta',
-        //                 'street_line1' => 'Jalan Makan',
-        //                 'street_line2' => 'Kecamatan Kebayoran Baru'
-        //             ]
-        //         ]
-        //     ],
-        //     'customer_notification_preference' => [
-        //         'invoice_created' => [
-        //             'whatsapp',
-        //             'sms',
-        //             'email',
-        //             'viber'
-        //         ],
-        //         'invoice_reminder' => [
-        //             'whatsapp',
-        //             'sms',
-        //             'email',
-        //             'viber'
-        //         ],
-        //         'invoice_paid' => [
-        //             'whatsapp',
-        //             'sms',
-        //             'email',
-        //             'viber'
-        //         ],
-        //         'invoice_expired' => [
-        //             'whatsapp',
-        //             'sms',
-        //             'email',
-        //             'viber'
-        //         ]
-        //     ],
-        //     'success_redirect_url' => 'https=>//www.google.com',
-        //     'failure_redirect_url' => 'https=>//www.google.com',
-        //     'currency' => 'IDR',
-        //     // 'items' => [
-        //     //     [
-        //     //         'name' => 'Air Conditioner',
-        //     //         'quantity' => 1,
-        //     //         'price' => 100000,
-        //     //         'category' => 'Electronic',
-        //     //         'url' => 'https=>//yourcompany.com/example_item'
-        //     //     ]
-        //     // ],
-        //     // 'fees' => [
-        //     //     [
-        //     //         'type' => 'ADMIN',
-        //     //         'value' => 5000
-        //     //     ]
-        //     // ]
-        // ];
-
-
         $params = [
             'external_id' => $inv,
             'payer_email' => auth()->user()->email,
@@ -312,7 +243,7 @@ class TransactionController extends Controller
         $currentYear = Carbon::now()->year;
 
         $transaction = Transaction::where('trx_id', $external_id)
-            ->where('created_at', $currentYear)
+            ->whereYear('created_at', $currentYear)
             ->first();
         $student = Student::find($transaction->student_id);
 
