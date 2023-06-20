@@ -25,6 +25,7 @@ use App\Http\Controllers\SppPaymentBankController;
 use App\Http\Controllers\SppPaymentController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Livewire\DetailStudentTable;
 use App\Http\Livewire\StudentTable;
 use App\Models\Student;
@@ -50,7 +51,11 @@ Route::get('tes', function () {
 })->name('test');
 
 // api notif push webhook
-Route::post('webhook', [SppPaymentBankController::class, 'store'])->name('payment-webhook');
+Route::post('/webhook', [SppPaymentBankController::class, 'store'])->name('payment-webhook');
+
+//transaction by ipaymu
+Route::get('/transactions/{student_id}', [TransactionController::class, 'createInvoice'])->name('createInvoice');
+Route::post('/transactions/callback', [TransactionController::class, 'callbackXendit'])->name('callbackXendit');
 
 Route::middleware(['auth'])->group(function () {
 
@@ -72,6 +77,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::post('/payment/store', [PaymentPageController::class, 'sppPaymentStore'])->name('spp-payment.store');
 	Route::get('/spp-payment-detail/{id}', [PaymentPageController::class, 'sppPaymentDetail'])->name('spp-payment-detail');
 	Route::get('/spp-payment-success', [PaymentPageController::class, 'sppPaymentSuccess'])->name('spp-payment-success');
+	Route::get('/spp-payment-failed', [PaymentPageController::class, 'sppPaymentFail'])->name('spp-payment-fail');
 	Route::get('/spp-payment-cancel/{id}', [PaymentPageController::class, 'sppPaymentCancel'])->name('spp-payment-cancel');
 
 	// Watch Material
@@ -232,6 +238,5 @@ Route::middleware(['auth'])->group(function () {
 			Route::post('/edit/{id}', [QuestionController::class, 'update'])->name('question.update');
 			Route::delete('/delete/{id}', [QuestionController::class, 'destroy'])->name('question.delete');
 		});
-
 	});
 });
