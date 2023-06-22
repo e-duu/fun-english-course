@@ -18,6 +18,9 @@
         <div class="flex justify-center">
           <a href="{{ route('resource') }}" class="mt-10 mx-auto px-10 py-2 bg-blue-600 hover:bg-blue-700 transition-colors duration-150 rounded-md text-white text-lg">Back To Home</a>
         </div>
+        <div class="flex justify-center">
+          <a href="{{ route('resource') }}" class="mt-10 mx-auto px-10 py-2 bg-blue-600 hover:bg-blue-700 transition-colors duration-150 rounded-md text-white text-lg">Try Again To Payment  </a>
+        </div>
       </div>
     </div>
   </div>

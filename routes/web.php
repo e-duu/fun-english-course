@@ -56,6 +56,7 @@ Route::post('/webhook', [SppPaymentBankController::class, 'store'])->name('payme
 //transaction by ipaymu
 Route::get('/transactions/{student_id}', [TransactionController::class, 'createInvoice'])->name('createInvoice');
 Route::post('/transactions/callback', [TransactionController::class, 'callbackXendit'])->name('callbackXendit');
+Route::post('/transactions/reset/{student_id}', [TransactionController::class, 'resetPay'])->name('resetPay');
 
 Route::middleware(['auth'])->group(function () {
 
@@ -77,7 +78,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::post('/payment/store', [PaymentPageController::class, 'sppPaymentStore'])->name('spp-payment.store');
 	Route::get('/spp-payment-detail/{id}', [PaymentPageController::class, 'sppPaymentDetail'])->name('spp-payment-detail');
 	Route::get('/spp-payment-success', [PaymentPageController::class, 'sppPaymentSuccess'])->name('spp-payment-success');
-	Route::get('/spp-payment-failed', [PaymentPageController::class, 'sppPaymentFail'])->name('spp-payment-fail');
+	Route::get('/spp-payment-failed/{student_id}', [PaymentPageController::class, 'sppPaymentFail'])->name('spp-payment-fail');
 	Route::get('/spp-payment-cancel/{id}', [PaymentPageController::class, 'sppPaymentCancel'])->name('spp-payment-cancel');
 
 	// Watch Material

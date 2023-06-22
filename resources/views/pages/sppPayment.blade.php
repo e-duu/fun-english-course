@@ -177,14 +177,14 @@
               Continue Payment
           @else
           @endif --}}
-            Pay
+            Payment
           </div>
         </a>
       @else
         <a href="{{$transaction->payment_link}}">
           <div class="rounded-full py-3 sm:py-4 sm:mt-10 bg-blue-600 text-white font-bold text-sm sm:text-xl text-center">
           <i class="fas fa-money-check"></i>
-              Continue Payment
+            Continue Payment
           </div>
         </a>
       @endif

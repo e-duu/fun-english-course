@@ -113,8 +113,10 @@ class PaymentPageController extends Controller
         return view('pages.paymentSuccess');
     }
 
-    public function sppPaymentFail()
+    public function sppPaymentFail($student_id)
     {
-        return view('pages.paymentFail');
+        $student = Student::findOrFail($student_id);
+
+        return view('pages.paymentFail', compact('student'));
     }
 }

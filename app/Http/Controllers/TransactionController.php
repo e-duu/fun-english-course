@@ -203,7 +203,7 @@ class TransactionController extends Controller
             'amount' => $amount,
             'fees'  => $fees,
             'success_redirect_url' => route('spp-payment-success'),
-            'failure_redirect_url' => route('spp-payment-fail')
+            'failure_redirect_url' => route('spp-payment-fail', $student->id)
             // 'for-user-id' => '5c2323c67d6d305ac433ba20'
         ];
         // dd($params);
@@ -297,5 +297,16 @@ class TransactionController extends Controller
         if (!$transaction) {
             return redirect()->route('spp-payment-fail');
         }
+    }
+
+    public function resetPay($student_id)
+    {
+        Transaction::where('student_id', $student_id)->delete();
+        Student::find($student_id)->update(['status', 'unpaid']);
+
+        $transactionController = new TransactionController;
+        $request = new Request;
+
+        $transactionController->createInvoice($request, $student_id);
     }
 }
