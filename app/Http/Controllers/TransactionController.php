@@ -307,6 +307,8 @@ class TransactionController extends Controller
         $transactionController = new TransactionController;
         $request = new Request;
 
-        $transactionController->createInvoice($request, $student_id);
+        $invoice = $transactionController->createInvoice($request, $student_id);
+
+        return $invoice;
     }
 }
