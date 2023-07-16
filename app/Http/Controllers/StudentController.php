@@ -121,17 +121,23 @@ class StudentController extends Controller
         if (request()->get('name') != null) {
             $spps = Student::whereHas('student', function ($query) {
                 $query->where('name', 'like', '%' . request()->get('name') . '%');
-            })->where('level_id', $id)->orderBy('created_at', 'desc')->paginate(5);
-        }
-        // Filter spp by payment status
-        else if (request()->get('status') != null) {
-            $spps = Student::where('status', request()->get('status'))->where('level_id', $id)->orderBy('created_at', 'desc')->paginate(5);
-        }
-        // Filter spp by month
-        else if (request()->get('month') != null) {
-            $spps = Student::where('month', request()->get('month'))->where('level_id', $id)->orderBy('created_at', 'desc')->paginate(5);
+            })->where('level_id', $id)->paginate(5);
         } else {
-            $spps = Student::where('level_id', $id)->orderBy('created_at', 'desc')->paginate(5);
+            $spps = Student::where('level_id', $id)->paginate(5);
+        }
+
+        // Filter spp by payment status
+        if (request()->get('status') != null) {
+            $spps = Student::where('status', request()->get('status'))->where('level_id', $id)->paginate(5);
+        } else {
+            $spps = Student::where('level_id', $id)->paginate(5);
+        }
+
+        // Filter spp by month
+        if (request()->get('month') != null) {
+            $spps = Student::where('month', request()->get('month'))->where('level_id', $id)->paginate(5);
+        } else {
+            $spps = Student::where('level_id', $id)->paginate(5);
         }
 
         return view('pages.admin.students.detail-student', compact('data', 'spps', 'students'));
