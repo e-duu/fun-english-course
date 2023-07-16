@@ -169,6 +169,18 @@ class TransactionController extends Controller
                     $student->update([
                         'status' => 'paid'
                     ]);
+
+                    $dataEmail["email"] = $student->student->email;
+                    $dataEmail["title"] = "From Fun English Course";
+
+                    $pdf = PDF::loadView('pages.admin.receipt-pdf', ['data' => $student]);
+
+                    // send email to student
+                    Mail::send('pages.emails.ReceiptMail', ['data' => $student], function ($message) use ($dataEmail, $pdf) {
+                        $message->to($dataEmail["email"], 'Payment Success To Fun English Course')
+                            ->subject($dataEmail["title"])
+                            ->attachData($pdf->output(), 'receipt.pdf');
+                    });
                 }
 
                 if ($status === 'expired') {
@@ -180,6 +192,18 @@ class TransactionController extends Controller
                     $student->update([
                         'status' => 'unpaid'
                     ]);
+
+                    $dataEmail["email"] = $student->student->email;
+                    $dataEmail["title"] = "From Fun English Course";
+
+                    $pdf = PDF::loadView('pages.admin.invoice-pdf', ['data' => $student]);
+
+                    // send email to student
+                    Mail::send('pages.emails.InvoiceMail', ['data' => $student], function ($message) use ($dataEmail, $pdf) {
+                        $message->to($dataEmail["email"], 'Payment Expired To Fun English Course')
+                            ->subject($dataEmail["title"])
+                            ->attachData($pdf->output(), 'invoice.pdf');
+                    });
                 }
 
                 return $transaction;
