@@ -54,9 +54,14 @@ Route::get('tes', function () {
 Route::post('/webhook', [SppPaymentBankController::class, 'store'])->name('payment-webhook');
 
 //transaction by ipaymu
-Route::get('/transactions/{student_id}', [TransactionController::class, 'createInvoice'])->name('createInvoice');
-Route::post('/transactions/callback', [TransactionController::class, 'callbackXendit'])->name('callbackXendit');
+Route::get('/transactions/{student_id}', [TransactionController::class, 'createInvoiceI'])->name('createInvoiceI');
+Route::post('/transactions/callback', [TransactionController::class, 'callbackIpaymu'])->name('callbackIpaymu');
 Route::post('/transactions/reset/{student_id}', [TransactionController::class, 'resetPay'])->name('resetPay');
+
+//transaction by xendit
+// Route::get('/transactions/{student_id}', [TransactionController::class, 'createInvoiceX'])->name('createInvoiceX');
+// Route::post('/transactions/callback', [TransactionController::class, 'callbackXendit'])->name('callbackXendit');
+// Route::post('/transactions/reset/{student_id}', [TransactionController::class, 'resetPay'])->name('resetPay');
 
 Route::middleware(['auth'])->group(function () {
 

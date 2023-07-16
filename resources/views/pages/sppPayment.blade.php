@@ -134,7 +134,8 @@
     </div>
 
     @php
-        $transaction = App\Models\Transaction::where('student_id', $data->id)->first();
+        $transaction = App\Models\Transaction::where('student_id', $data->id)->latest()->first();
+        // dd($transaction);
     @endphp
 
       {{-- @if (!$transaction && $data->status != 'paid' && $data->status != 'paid_manually')
@@ -169,8 +170,8 @@
 
     
     <div class="rounded-lg mx-auto w-11/12 md:w-9/12 lg:w-1/2 mt-10 sm:mt-12">
-      @if (!$transaction || $transaction->status != 'success' && $data->status == 'unpaid')
-        <a href="{{ route('createInvoice', $data->id) }}">
+      @if ($data->status == 'unpaid')
+        <a href="{{ route('createInvoiceI', $data->id) }}">
           <div class="rounded-full py-3 sm:py-4 sm:mt-10 bg-blue-600 text-white font-bold text-sm sm:text-xl text-center">
           <i class="fas fa-money-check"></i>
           {{-- @if ($data->status == 'pending')
@@ -180,7 +181,8 @@
             Payment
           </div>
         </a>
-      @else
+      @endif
+      @if($data->status == 'pending')
         <a href="{{$transaction->payment_link}}">
           <div class="rounded-full py-3 sm:py-4 sm:mt-10 bg-blue-600 text-white font-bold text-sm sm:text-xl text-center">
           <i class="fas fa-money-check"></i>

@@ -11,153 +11,187 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Log;
 
 class TransactionController extends Controller
 {
-    // public function createInvoice1(Request $request, $student_id)
-    // {
-    //     // SAMPLE HIT API iPaymu v2 PHP //
 
-    //     $va           = '0000005747245474'; //get on iPaymu dashboard
-    //     $apiKey       = 'SANDBOX63A5AE9A-66D0-42A7-B9BD-69EEB2A2085D'; //get on iPaymu dashboard
+    public function createInvoiceI(Request $request, $student_id)
+    {
+        $is_login = auth()->check();
+        if (!$is_login) return abort(403);
+        //student spp
+        $student = Student::findOrFail($student_id);
+        if ($student->month == 1) {
+            $month = 'January';
+        } else if ($student->month == 2) {
+            $month = 'February';
+        } elseif ($student->month == 3) {
+            $month = 'March';
+        } elseif ($student->month == 4) {
+            $month = 'April';
+        } elseif ($student->month == 5) {
+            $month = 'May';
+        } elseif ($student->month == 6) {
+            $month = 'June';
+        } elseif ($student->month == 7) {
+            $month = 'July';
+        } elseif ($student->month == 8) {
+            $month = 'August';
+        } elseif ($student->month == 9) {
+            $month = 'September';
+        } elseif ($student->month == 10) {
+            $month = 'October';
+        } elseif ($student->month == 11) {
+            $month = 'November';
+        } elseif ($student->month == 12) {
+            $month = 'December';
+        }
 
-    //     $url          = 'https://sandbox.ipaymu.com/api/v2/payment'; // for development mode
-    //     // $url          = 'https://my.ipaymu.com/api/v2/payment'; // for production mode
+        try {
+            $student->update([
+                'status' => 'pending'
+            ]);
 
-    //     $method       = 'POST'; //method
+            $transaction = Transaction::create([
+                'trx_id' => 'TRX-' . uniqid() . date('dmYHis'),
+                'payment_link' => '-',
+                'student_id' => $student->id,
+                'amount' => $student->price,
+                'desc' => 'Pay to ' . $student->level->program->name . ' | ' . $student->level->name . ' | ' . $month . ' | ' . $student->year . '.',
+                'payment_status' => 'pending',
+            ]);
 
-    //     //student spp
-    //     $student = Student::findOrFail($student_id);
-    //     if ($student->month == 1) {
-    //         $month = 'January';
-    //     } else if ($student->month == 2) {
-    //         $month = 'February';
-    //     } elseif ($student->month == 3) {
-    //         $month = 'March';
-    //     } elseif ($student->month == 4) {
-    //         $month = 'April';
-    //     } elseif ($student->month == 5) {
-    //         $month = 'May';
-    //     } elseif ($student->month == 6) {
-    //         $month = 'June';
-    //     } elseif ($student->month == 7) {
-    //         $month = 'July';
-    //     } elseif ($student->month == 8) {
-    //         $month = 'August';
-    //     } elseif ($student->month == 9) {
-    //         $month = 'September';
-    //     } elseif ($student->month == 10) {
-    //         $month = 'October';
-    //     } elseif ($student->month == 11) {
-    //         $month = 'November';
-    //     } elseif ($student->month == 12) {
-    //         $month = 'December';
-    //     }
+            // SAMPLE HIT API iPaymu v2 PHP //
 
-    //     //Request Body//
-    //     $body['product']    = array($student->level->program->name . ' | ' . $student->level->name);
-    //     $body['qty']        = array('1');
-    //     $body['price']      = array($student->price);
-    //     $body['description'] = array($month . ' ' . $student->year);
-    //     $body['returnUrl']  = route('spp-payment', $student->id);
-    //     $body['cancelUrl']  = route('spp-payment', $student->id);
-    //     $body['notifyUrl']  = route('callbackIpaymu');
-    //     $body['referenceId'] = '1234'; //your reference id
-    //     //End Request Body//
+            $va           = '0000005747245474'; //get on iPaymu dashboard
+            $apiKey       = 'SANDBOX63A5AE9A-66D0-42A7-B9BD-69EEB2A2085D'; //get on iPaymu dashboard
 
-    //     //Generate Signature
-    //     // *Don't change this
-    //     $jsonBody     = json_encode($body, JSON_UNESCAPED_SLASHES);
-    //     $requestBody  = strtolower(hash('sha256', $jsonBody));
-    //     $stringToSign = strtoupper($method) . ':' . $va . ':' . $requestBody . ':' . $apiKey;
-    //     $signature    = hash_hmac('sha256', $stringToSign, $apiKey);
-    //     $timestamp    = Date('YmdHis');
-    //     //End Generate Signature
+            // $va           = '0000005725249265'; //get on iPaymu dashboard
+            // $apiKey       = 'SANDBOXA4C06591-3721-4F8F-A55C-ED166AA057DB';
+
+            $url          = 'https://sandbox.ipaymu.com/api/v2/payment'; // for development mode
+            // $url          = 'https://my.ipaymu.com/api/v2/payment'; // for production mode
+
+            $method       = 'POST'; //method
+
+            //Request Body//
+            $body['product']    = array($student->level->program->name . ' | ' . $student->level->name);
+            $body['qty']        = array('1');
+            $body['price']      = array($student->price);
+            $body['description'] = array('Pay to ' . $student->level->program->name . ' | ' . $student->level->name . ' | ' . $month . ' | ' . $student->year . '.');
+            $body['returnUrl']  = route('spp-payment-success');
+            $body['cancelUrl']  = route('spp-payment-fail', $student->id);
+            $body['notifyUrl']  = route('callbackIpaymu');
+            $body['referenceId'] = $transaction->trx_id; //your reference id
+            //End Request Body//
+
+            //Generate Signature
+            // *Don't change this
+            $jsonBody     = json_encode($body, JSON_UNESCAPED_SLASHES);
+            $requestBody  = strtolower(hash('sha256', $jsonBody));
+            $stringToSign = strtoupper($method) . ':' . $va . ':' . $requestBody . ':' . $apiKey;
+            $signature    = hash_hmac('sha256', $stringToSign, $apiKey);
+            $timestamp    = Date('YmdHis');
+            //End Generate Signature
 
 
-    //     $ch = curl_init($url);
+            $ch = curl_init($url);
 
-    //     $headers = array(
-    //         'Accept: application/json',
-    //         'Content-Type: application/json',
-    //         'va: ' . $va,
-    //         'signature: ' . $signature,
-    //         'timestamp: ' . $timestamp
-    //     );
+            $headers = array(
+                'Accept: application/json',
+                'Content-Type: application/json',
+                'va: ' . $va,
+                'signature: ' . $signature,
+                'timestamp: ' . $timestamp
+            );
 
-    //     curl_setopt($ch, CURLOPT_HEADER, false);
-    //     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+            curl_setopt($ch, CURLOPT_HEADER, false);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
-    //     curl_setopt($ch, CURLOPT_POST, count($body));
-    //     curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonBody);
+            curl_setopt($ch, CURLOPT_POST, count($body));
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonBody);
 
-    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    //     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-    //     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-    //     $err = curl_error($ch);
-    //     $ret = curl_exec($ch);
-    //     curl_close($ch);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+            $err = curl_error($ch);
+            $ret = curl_exec($ch);
+            curl_close($ch);
 
-    //     // dd($ret);
+            // dd($ret);
 
-    //     if ($err) {
-    //         echo $err;
-    //     } else {
+            if ($err) {
+                echo $err;
+            } else {
+                //Response
+                $ret = json_decode($ret);
+                if ($ret->Status == 200) {
+                    $sessionId  = $ret->Data->SessionID;
+                    $url        =  $ret->Data->Url;
 
-    //         //Response
-    //         $ret = json_decode($ret);
-    //         if ($ret->Status == 200) {
-    //             $sessionId  = $ret->Data->SessionID;
-    //             $url        =  $ret->Data->Url;
-    //             header('Location:' . $url);
+                    $transaction->update([
+                        'payment_link' => $url
+                    ]);
+                    header('Location:' . $url);
 
-    //             $student->update([
-    //                 'status' => 'pending'
-    //             ]);
+                    return redirect($ret->Data->Url);
+                } else {
+                    echo $ret;
+                }
+                //End Response
+            }
+        } catch (\Throwable $e) {
+            dd($e->getMessage());
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
 
-    //             $transaction = Transaction::create([
-    //                 'session_id' => $sessionId,
-    //                 'url' => $url,
-    //                 'student_id' => $student->id
-    //             ]);
+    public function callbackIpaymu(Request $request)
+    {
+        try {
+            $trx  = $request->reference_id;
+            $status  = $request->status;
+            $transaction = Transaction::where('trx_id', $trx)->first();
 
-    //             return redirect($ret->Data->Url);
-    //         } else {
-    //             echo $ret;
-    //         }
-    //         //End Response
-    //     }
-    // }
+            if ($trx === $transaction->trx_id) {
+                $dateString = Carbon::now();
+                $dateNew = new DateTime($dateString);
+                $date = $dateNew->format('Y-m-d H:i:s');
 
-    // public function callbackIpaymu(Request $request)
-    // {
-    //     $sid  = $request->sid;
-    //     $transaction = Transaction::where('session_id', $sid)->first();
+                if ($status === 'berhasil') {
+                    $transaction->update([
+                        'payment_status' => 'success',
+                    ]);
 
-    //     if ($transaction) {
-    //         $dateString = Carbon::now();
-    //         $dateNew = new DateTime($dateString);
-    //         $date = $dateNew->format('Y-m-d H:i:s');
+                    $student = Student::findOrFail($transaction->student_id);
+                    $student->update([
+                        'status' => 'paid'
+                    ]);
+                }
 
-    //         $transaction->update([
-    //             'status' => $request->sid,
-    //             'trx_id' => $request->trx_id,
-    //             'payment_method' => $request->via,
-    //             'pay_on' => $date,
-    //         ]);
+                if ($status === 'expired') {
+                    $transaction->update([
+                        'payment_status' => 'failed',
+                    ]);
 
-    //         $student = Student::findOrFail($transaction->student_id);
-    //         $student->update([
-    //             'status' => 'paid'
-    //         ]);
+                    $student = Student::findOrFail($transaction->student_id);
+                    $student->update([
+                        'status' => 'unpaid'
+                    ]);
+                }
 
-    //         return $transaction;
-    //     } else {
-    //         return 'tidak ada transaksi yang sesuai';
-    //     }
-    // }
+                return $transaction;
+            } else {
+                return 'tidak ada transaksi yang sesuai';
+            }
+        } catch (\Throwable $e) {
+            Log::error($e->getMessage());
+        }
+    }
 
-    public function createInvoice(Request $request, $student_id)
+    public function createInvoiceX(Request $request, $student_id)
     {
         //student spp
         $student = Student::findOrFail($student_id);

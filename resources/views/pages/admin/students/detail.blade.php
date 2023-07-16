@@ -325,19 +325,26 @@
   </script>
 
   <script>
-      const users = JSON.parse('{{$users}}'.replace(/&quot;/g,'"'));
-      const levelUsers = JSON.parse('{{$levelUsers}}'.replace(/&quot;/g,'"'));
+      // const users = JSON.parse('{{$users}}'.replace(/&quot;/g,'"'));
+      // const levelUsers = JSON.parse('{{$levelUsers}}'.replace(/&quot;/g,'"'));
+
+      const users =  {!! json_encode($users) !!};
+      const levelUsers = {!! json_encode($levelUsers) !!};
+
       var users_id = null
       var selectedLevels = null
 
-      console.log(levelUsers)
+      console.log(users);
+      console.log(levelUsers);
+
 
       function setUsers(){
         var options = "";
         document.getElementById('selectLevel').innerHTML = options;
         var value = document.getElementById('select-search').value;
         let selectedLevel = levelUsers.filter(levelUser => levelUser.user_id == value);
-        console.log(selectedLevel)
+        
+        console.log(selectedLevel);
 
         selectedLevel.forEach(element => {
           options += "<option value='"+element.level.id+"'>"+element.level.name+"</option>";
