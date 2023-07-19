@@ -65,11 +65,11 @@ class TransactionController extends Controller
 
             // SAMPLE HIT API iPaymu v2 PHP //
 
-            $va           = '0000005747245474'; //get on iPaymu dashboard
-            $apiKey       = 'SANDBOX63A5AE9A-66D0-42A7-B9BD-69EEB2A2085D'; //get on iPaymu dashboard
+            // $va           = '0000005747245474'; //get on iPaymu dashboard
+            // $apiKey       = 'SANDBOX63A5AE9A-66D0-42A7-B9BD-69EEB2A2085D'; //get on iPaymu dashboard
 
-            // $va           = '0000005725249265'; //get on iPaymu dashboard
-            // $apiKey       = 'SANDBOXA4C06591-3721-4F8F-A55C-ED166AA057DB';
+            $va           = '0000005725249265'; //get on iPaymu dashboard
+            $apiKey       = 'SANDBOXA4C06591-3721-4F8F-A55C-ED166AA057DB';
 
             $url          = 'https://sandbox.ipaymu.com/api/v2/payment'; // for development mode
             // $url          = 'https://my.ipaymu.com/api/v2/payment'; // for production mode
