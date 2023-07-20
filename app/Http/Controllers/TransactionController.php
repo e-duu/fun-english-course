@@ -81,10 +81,10 @@ class TransactionController extends Controller
             $method       = 'POST'; //method
 
             //Request Body//
-            $body['product']    = array($student->level->program->name . ' | ' . $student->level->name);
-            $body['qty']        = array('1');
-            $body['price']      = array($student->price);
-            $body['description'] = array('Pay to ' . $student->level->program->name . ' | ' . $student->level->name . ' | ' . $month . ' | ' . $student->year . '.');
+            $body['product']    = array([$student->level->program->name . ' | ' . $student->level->name]);
+            $body['qty']        = array(['1']);
+            $body['price']      = array([$student->price]);
+            $body['description'] = array(['Pay to ' . $student->level->program->name . ' | ' . $student->level->name . ' | ' . $month . ' | ' . $student->year . '.']);
             $body['returnUrl']  = route('spp-payment-success');
             $body['cancelUrl']  = route('spp-payment-fail', $student->id);
             $body['notifyUrl']  = route('callbackIpaymu');
