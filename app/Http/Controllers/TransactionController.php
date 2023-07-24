@@ -63,6 +63,9 @@ class TransactionController extends Controller
                 'payment_status' => 'pending',
             ]);
 
+            $title = $student->level->program->name . ' | ' . $student->level->name;
+            $desc  = 'Pay to ' . $student->level->program->name . ' | ' . $student->level->name . ' | ' . $month . ' | ' . $student->year . '.';
+
             // SAMPLE HIT API iPaymu v2 PHP //
 
             // $va           = '0000005747245474'; //get on iPaymu dashboard
@@ -81,10 +84,10 @@ class TransactionController extends Controller
             $method       = 'POST'; //method
 
             //Request Body//
-            $body['product']    = array([$student->level->program->name . ' | ' . $student->level->name]);
-            $body['qty']        = array(['1']);
-            $body['price']      = array([$student->price]);
-            $body['description'] = array(['Pay to ' . $student->level->program->name . ' | ' . $student->level->name . ' | ' . $month . ' | ' . $student->year . '.']);
+            $body['product']    = array($title);
+            $body['qty']        = array('1');
+            $body['price']      = array($student->price);
+            $body['description'] = array($desc);
             $body['returnUrl']  = route('spp-payment-success');
             $body['cancelUrl']  = route('spp-payment-fail', $student->id);
             $body['notifyUrl']  = route('callbackIpaymu');
@@ -127,13 +130,14 @@ class TransactionController extends Controller
             // dd($ret);
 
             if ($err) {
-                echo $err;
+                dd($err);
             } else {
                 //Response
                 $ret = json_decode($ret);
                 if ($ret->Status == 200) {
                     $sessionId  = $ret->Data->SessionID;
                     $url        =  $ret->Data->Url;
+                    header('Location:' . $url);
 
                     $transaction->update([
                         'payment_link' => $url
@@ -142,7 +146,10 @@ class TransactionController extends Controller
 
                     return redirect($ret->Data->Url);
                 } else {
-                    echo $ret;
+                    $student->update(['status' => 'unpaid']);
+                    $transaction->delete();
+
+                    dd($ret, 'fail');
                 }
                 //End Response
             }
