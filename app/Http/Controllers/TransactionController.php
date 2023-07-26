@@ -92,6 +92,10 @@ class TransactionController extends Controller
             $body['cancelUrl']  = route('spp-payment-fail', $student->id);
             $body['notifyUrl']  = route('callbackIpaymu');
             $body['referenceId'] = $transaction->trx_id; //your reference id
+            $body['buyerName'] = $student->student->name; //your reference id
+            $body['buyerEmail'] = $student->student->email; //your reference id
+            $body['feeDirection'] = 'BUYER'; //your reference id
+            // $body['buyerPhone'] = ''; //your reference id
             //End Request Body//
 
             //Generate Signature
