@@ -16,6 +16,7 @@
         <p class="text-sm sm:text-lg"><b> Name :</b> &nbsp;&nbsp; {{ $data->name }}</p>
         <p class="text-sm sm:text-lg"><b> Number :</b> &nbsp;&nbsp; {{ $data->number }}</p>
         <p class="text-sm sm:text-lg"><b> Username :</b> &nbsp;&nbsp; {{ $data->username }}</p>
+        <p class="text-sm sm:text-lg"><b> Phone :</b> &nbsp;&nbsp; {{ $data->phone }}</p>
         <p class="text-sm sm:text-lg"><b> Parent :</b> &nbsp;&nbsp; {{ $data->parent }}</p>
         <p class="text-sm sm:text-lg"><b> City :</b> &nbsp;&nbsp; {{ $data->city }}</p>
         <p class="text-sm sm:text-lg"><b> Country :</b> &nbsp;&nbsp; {{ $data->country }}</p>

@@ -126,6 +126,16 @@
     </label>
 
     <label class="block text-sm" style="margin-top: 20px">
+      <span class="text-gray-700 dark:text-white">Phone</span>
+      <input type="number" name="phone" class="border w-full mt-1 text-sm border-gray-400  dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md" value="{{ old('phone') }}" placeholder="6285"/>
+      @error('phone')
+        <div class="mt-2 text-[red]">
+          <i class="fas fa-dot-circle"></i> {{ $message }}
+        </div>
+      @enderror
+    </label>
+
+    <label class="block text-sm" style="margin-top: 20px">
       <span class="text-gray-700 dark:text-white">Password</span>
       <input type="password" name="password" class="border w-full mt-1 text-sm border-gray-400  dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray rounded-md" value="{{ old('password') }}" placeholder="********"/>
       <span class="text-gray-500 dark:text-gray-200">Password combination of at least 6 characters</span>

@@ -126,6 +126,16 @@
     </label>
 
     <label class="block text-sm mt-4">
+      <span class="text-gray-700 dark:text-white">Phone</span>
+      <input type="number" name="phone" value="{{ $data->phone }}" class="block w-full mt-1 text-sm rounded-md border-gray-400 dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray form-input" placeholder="6285"/>
+      @error('phone')
+        <div class="mt-2 text-[red]">
+          <i class="fas fa-dot-circle"></i> {{ $message }}
+        </div>
+      @enderror
+    </label>
+
+    <label class="block text-sm mt-4">
       <span class="text-gray-700 dark:text-white">Password</span>
       <input type="password" name="password" class="block w-full mt-1 text-sm rounded-md border-gray-400 dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray form-input" placeholder="*******"/>
       <span class="text-gray-500 dark:text-gray-200">Let this field blank to keep the password unchanged</span>

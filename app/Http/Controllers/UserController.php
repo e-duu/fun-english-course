@@ -48,7 +48,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        if (substr_replace("$request->number","",1) == 0) {
+        if (substr_replace("$request->number", "", 1) == 0) {
             return back()->with('error', 'characters cannot start with 0')->withInput();
         }
 
@@ -59,6 +59,7 @@ class UserController extends Controller
                 'username' => 'required',
                 'email' => 'required|email|unique:users,email',
                 'role' => 'required',
+                'phone' => 'required',
                 'password' => 'required|min:6|max:16',
                 // 'photo_file' => 'required',
                 // 'parent' => 'required',
@@ -74,22 +75,26 @@ class UserController extends Controller
                 'email.required' => 'please input user email',
                 'email.unique' => 'email has been already exist',
                 'role.required' => 'please select the role',
-                // 'photo_file.required' => 'please insert your profile photo',
                 'password.required' => 'password must be at least 6 characters',
-                // 'parent.required' => 'please input user parent',
+                'phone.required' => 'please input user phone',
+                'parent.required' => 'please input user parent',
+                'status.required' => 'please input user status',
+                // 'photo_file.required' => 'please insert your profile photo',
                 // 'city.required' => 'please input user city',
                 // 'country.required' => 'please input user country',
-                'status.required' => 'please input user status',
 
             ]
         );
 
-        $image = $request->file('photo_file');
-        $new_name_image = time() . '.' .  $image->getClientOriginalExtension();
-        $image->move(public_path('users'), $new_name_image);
-        $request->merge([
-            'photo' => $new_name_image
-        ]);
+        if ($request->photo_file) {
+            $image = $request->file('photo_file');
+            $new_name_image = time() . '.' .  $image->getClientOriginalExtension();
+            $image->move(public_path('users'), $new_name_image);
+            $request->merge([
+                'photo' => $new_name_image
+            ]);
+        }
+
         $user = User::create($request->all());
         return redirect()->route('user.all');
     }
@@ -134,6 +139,7 @@ class UserController extends Controller
             'username' => 'required',
             'email' => 'required|email|unique:users,email,' . $id,
             'role' => 'required',
+            'phone' => 'required',
             'parent' => 'nullable',
             'city' => 'nullable',
             'country' => 'nullable',
@@ -207,7 +213,7 @@ class UserController extends Controller
         return Excel::download(new UsersTemplate, 'input-users.xlsx');
     }
 
-    public function export() 
+    public function export()
     {
         return Excel::download(new UsersExport, 'users.xlsx');
     }

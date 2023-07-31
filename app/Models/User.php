@@ -16,7 +16,7 @@ class User extends Authenticatable
      *
      * @var string[]
      */
-        protected $fillable = [
+    protected $fillable = [
         'name',
         'number',
         'username',
@@ -28,6 +28,7 @@ class User extends Authenticatable
         'city',
         'country',
         'status',
+        'phone',
     ];
 
     public function setPasswordAttribute($value)
