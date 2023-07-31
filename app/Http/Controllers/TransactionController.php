@@ -94,7 +94,7 @@ class TransactionController extends Controller
             $body['referenceId'] = $transaction->trx_id; //your reference id
             $body['buyerName'] = $student->student->name; //your reference id
             $body['buyerEmail'] = $student->student->email; //your reference id
-            $body['buyerPhone'] = $student->student->phone ?? '085'; //your reference id
+            $body['buyerPhone'] = $student->student->phone != '' ? $student->student->phone : '085'; //your reference id
             // $body['feeDirection'] = 'BUYER'; //your reference id
             //End Request Body//
 
