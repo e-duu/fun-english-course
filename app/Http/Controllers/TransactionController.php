@@ -68,18 +68,18 @@ class TransactionController extends Controller
 
             // SAMPLE HIT API iPaymu v2 PHP //
 
-            // $va           = '0000005747245474'; //get on iPaymu dashboard
-            // $apiKey       = 'SANDBOX63A5AE9A-66D0-42A7-B9BD-69EEB2A2085D'; //get on iPaymu dashboard
+            $va           = '0000005747245474'; //get on iPaymu dashboard
+            $apiKey       = 'SANDBOX63A5AE9A-66D0-42A7-B9BD-69EEB2A2085D'; //get on iPaymu dashboard
 
             // $va           = '0000005725249265'; //get on iPaymu dashboard
             // $apiKey       = 'SANDBOXA4C06591-3721-4F8F-A55C-ED166AA057DB';
 
             //production
-            $va           = '1179008118606759'; //get on iPaymu dashboard
-            $apiKey       = 'C5F29392-0D73-4556-BCD6-38F22648A5DD';
+            // $va           = '1179008118606759'; //get on iPaymu dashboard
+            // $apiKey       = 'C5F29392-0D73-4556-BCD6-38F22648A5DD';
 
-            // $url          = 'https://sandbox.ipaymu.com/api/v2/payment'; // for development mode
-            $url          = 'https://my.ipaymu.com/api/v2/payment'; // for production mode
+            $url          = 'https://sandbox.ipaymu.com/api/v2/payment'; // for development mode
+            // $url          = 'https://my.ipaymu.com/api/v2/payment'; // for production mode
 
             $method       = 'POST'; //method
 
@@ -94,7 +94,7 @@ class TransactionController extends Controller
             $body['referenceId'] = $transaction->trx_id; //your reference id
             $body['buyerName'] = $student->student->name; //your reference id
             $body['buyerEmail'] = $student->student->email; //your reference id
-            $body['buyerPhone'] = $student->student->phone; //your reference id
+            $body['buyerPhone'] = $student->student->phone ?? '085'; //your reference id
             // $body['feeDirection'] = 'BUYER'; //your reference id
             //End Request Body//
 
