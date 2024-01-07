@@ -128,7 +128,33 @@
       </div>
 
       <div class="w-full overflow-hidden rounded-lg shadow-xs mt-5">
-        <h2 class="text-white rounded-md font-bold text-center text-xl sm:text-3xl py-5 bg-blue-500">Payment History</h2>
+        <h2 class="text-white rounded-md font-bold text-center text-xl sm:text-3xl py-5 bg-blue-500">
+          Payment History
+        </h2>
+        
+        <div class="float-right">
+          <form action="{{ route('payment') }}" method="GET">
+            <div class="inline-block my-2 ml-auto w-48">
+              <select name="status" onchange="this.form.submit()" class="w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded leading-tight focus:outline-none focus:border-gray-500">
+                <option class="text-black" value="">All Status</option>
+                <option class="text-black" {{ request('status') == 'paid' ? 'selected' : '' }} value="paid">Paid</option>
+                <option class="text-black" {{ request('status') == 'pending' ? 'selected' : '' }} value="pending">Pending</option>
+                <option class="text-black" {{ request('status') == 'unpaid' ? 'selected' : '' }} value="unpaid">Unpaid</option>
+  
+              </select>
+            </div>
+            <div class="inline-block my-2 ml-auto w-48">
+              <select name="year" onchange="this.form.submit()" class="w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded leading-tight focus:outline-none focus:border-gray-500">
+                <option class="text-black" value="">All Years</option>
+                @foreach ($years as $year)
+                  <option class="text-black" {{ request('year') == $year ? 'selected' : '' }}>{{$year}}</option>
+                @endforeach
+              </select>
+            </div>
+          </form>
+        </div>
+               
+        
         <div class="w-full overflow-x-auto">
         <table class="w-full whitespace-no-wrap">
           <thead>

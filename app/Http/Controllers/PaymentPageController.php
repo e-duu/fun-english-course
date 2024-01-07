@@ -12,18 +12,56 @@ class PaymentPageController extends Controller
     public function index()
     {
         $auth = Auth::user()->id;
-        $data = Student::where('status', '!=', 'unpaid')->where('user_id', $auth)->where('month', '<=', Carbon::now()->month)->latest()->paginate(12);
-        $needPays = Student::where('user_id', $auth)
-            ->where('status', 'unpaid')
-            ->whereBetween('month', [1, Carbon::now()->month + 1])
-            ->where('year', Carbon::now()->year)
-            ->orderBy('month')
-            ->get();
-        return view('pages.payment', compact('data', 'needPays'));
 
-        // to take month now and next month
-        // ->where('month', Carbon::now()->month)
-        // ->orWhere('month', Carbon::now()->month + 1)
+        $years = Student::where('user_id', $auth)
+            ->selectRaw('DISTINCT year as year')
+            ->pluck('year');
+        // dd($years, $auth);
+
+        $data = Student::where('user_id', $auth);
+        if (!empty(request('year')) && request('year') != '') {
+            $data->where('year', request('year'));
+        }
+        if (!empty(request('status')) && request('status') != '') {
+            $data->where('status', request('status'));
+        }
+        $data = $data->latest()->paginate(12);
+
+        // dd($data);
+
+        $needPays = Student::where('user_id', $auth)
+        ->where('status', 'unpaid')
+        ->where(function ($query) {
+            $query->where(function ($subquery) {
+                $subquery->where('year', Carbon::now()->year)
+                        ->whereBetween('month', [1, Carbon::now()->month + 1]);
+            })
+            ->orWhere(function ($subquery) {
+                $subquery->where('year', Carbon::now()->subYear()->year)
+                        ->whereBetween('month', [1, 12]);
+            });
+        })
+        ->orderBy('year')
+        ->orderBy('month')
+        ->get();
+
+        // filter lama
+        // $data = Student::where('status', '!=', 'unpaid')
+        //     ->where('user_id', $auth)
+        //     ->where('month', '<=', Carbon::now()->month)
+        //     ->latest()->paginate(12);
+
+        // aktifkan komen jika perlu
+        // $needPays = Student::where('user_id', $auth)
+        //     ->where('status', 'unpaid')
+        //     ->whereBetween('month', [1, Carbon::now()->month + 1])
+        //     ->where('year', Carbon::now()->year)
+        //     ->orderBy('month')
+        //     ->get();
+        
+        // dd($needPays);
+        
+        return view('pages.payment', compact('data', 'needPays', 'years'));
     }
 
     public function sppPayment($id)
